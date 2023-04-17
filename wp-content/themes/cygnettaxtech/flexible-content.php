@@ -1022,6 +1022,120 @@
 		    <?php endif; 
 			/* Our Solution Section End */
 			
+			/* Tab Section With Click Start */
+			if (get_row_layout() == 'tab_section_with_click') : ?> 
+			<section class="tab-section <?php echo the_sub_field('tab_section_with_click_custom_class'); ?>" <?php echo $slugid; ?>>
+				<div class="container">
+					<div class="tab-section-main">
+						<div class="title-heading">
+							<?php if (get_sub_field('tab_section_with_click_title')){ ?>
+								<h2><?php echo the_sub_field('tab_section_with_click_title'); ?>
+									<span class="heading-border"></span>
+								</h2>
+							<?php } ?>
+							<?php if (get_sub_field('tab_section_with_click_sub_title')){ ?>
+								<h3><?php echo the_sub_field('tab_section_with_click_sub_title'); ?></h3>
+							<?php } ?>
+						</div>	
+						<?php if (have_rows('tab_section_with_click_content')) : ?>	
+								<ul class="nav nav-tabs" id="click-tab-section">
+								<div class="slider-nav"></div>
+								<?php $j = 0;
+									$tab_section_with_click_tab_title = '';
+									while (have_rows('tab_section_with_click_content')) : the_row();	
+									$tab_section_with_click_tab_title = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '_', get_sub_field('tab_section_with_click_tab_title')));
+									?>	
+									  <li class="nav-item ">
+										<a class="nav-link <?php if($j == 0){ ?> active <?php } ?>" href="#<?php echo $tab_section_with_click_tab_title; ?>"><?php echo the_sub_field('tab_section_with_click_tab_title'); ?></a>
+									  </li>
+									<?php $j++;
+									endwhile; ?>
+								</ul>
+								<div class="tab-content">
+								<?php $x = 0;
+									$tab_section_with_click_tab_title = '';
+									while (have_rows('tab_section_with_click_content')) : the_row();	
+									$tab_section_with_click_tab_title = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '_', get_sub_field('tab_section_with_click_tab_title')));
+									?>	
+										<div class="tab-inner-content" id="<?php echo $tab_section_with_click_tab_title; ?>">
+											<div class="in-content">
+												<div class="col-img">
+													<!-- <div class="img-content" style="background-image:url('<?php echo the_sub_field('tab_section_with_click_content_image'); ?>')"> -->
+														<img src="<?php echo the_sub_field('tab_section_with_click_content_image'); ?>" alt="<?php echo the_sub_field('title'); ?>">
+													<!-- </div> -->
+												</div>
+												<div class="col-text">
+													<div class="text-content">									
+														<?php if (get_sub_field('tab_section_with_click_content_desc')){ ?>
+															<p><?php echo the_sub_field('tab_section_with_click_content_desc'); ?></p>
+														<?php } ?>
+													</div>
+												</div>
+											</div>
+										</div>									  
+									<?php $x++;
+									endwhile; ?>
+								</div>
+						<?php endif; ?>								
+					</div>
+				</div>
+				<script>
+				jQuery( document ).ready(function() {					
+					var actWidth = jQuery("#click-tab-section").find(".active").parent("li").width();
+					var actPosition = jQuery("#click-tab-section li a.active").position();
+					jQuery("#click-tab-section .slider-nav").css({"left":+ actPosition.left,"width": actWidth});				
+				});	
+				var sectionIds = jQuery('#click-tab-section li a');
+					jQuery(document).scroll(function(){
+					  sectionIds.each(function(){
+						  var container = jQuery(this).attr('href');
+						  var containerOffset = jQuery(container).offset().top;
+						  var containerHeight = jQuery(container).outerHeight();
+						  var containerBottom = containerOffset + containerHeight;
+						  var scrollPosition = jQuery(document).scrollTop() + 180;
+
+						  if(scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20){
+							  jQuery(this).addClass('active');
+							  var position = jQuery(this).position();
+							  var width = jQuery(this).width();
+								jQuery("#click-tab-section .slider-nav").css({"left":+ position.left,"width":width});
+						  } else{
+							  jQuery(this).removeClass('active');
+						  }
+					  });
+					}); 
+				
+				jQuery(function() {
+					jQuery('a[href*=\\#]:not([href=\\#])').click(function() {
+					if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+				&& location.hostname == this.hostname) {
+				
+						var target = jQuery(this.hash);
+						target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
+						if (target.length) {
+						jQuery('html,body').animate({
+							scrollTop: target.offset().top - 185 //offsets for fixed header
+						}, 300);
+						return false;
+						}
+					}
+					});
+					//Executed on page load with URL containing an anchor tag.
+					if(jQuery(location.href.split("#")[1])) {
+						var target = jQuery('#'+location.href.split("#")[1]);
+						if (target.length) {
+						jQuery('html,body').animate({
+							scrollTop: target.offset().top - 185 //offset height of header here too.
+						},300 );
+						return false;
+						}
+					}
+				});
+				</script>
+			</section>
+			<?php endif;  
+			/* Tab Section With Click End */
+			
 			$logo_slider_cnt++;
 		endwhile;
 	endif; 	
