@@ -11,18 +11,19 @@
 						<div class="banner-inner-content w-100" style="background-image:url('<?php echo the_sub_field('background_image'); ?>')">  
 							<div class="container">
 							 <div class="row" >
-								<div class="col-lg-7">
+								<div class="col-lg-12">
 									<div class="d-flex align-items-center h-100">
 										<div class="text-content ">
 											<div class="banner-text-heading-content">
-										   <?php if (get_sub_field('title')) :  ?>
-												<h1 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('title'); ?></h1>												
-											<?php endif; ?>
-											<?php if (get_sub_field('sub_title')) :  ?>
+												<?php if (get_sub_field('sub_title')) :  ?>
 												<h3 class="text-white wow fadeInUp" data-wow-delay="0.6s"><?php echo the_sub_field('sub_title'); ?></h3>
 											<?php endif; ?>
+										    <?php if (get_sub_field('title')) :  ?>
+												<h1 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('title'); ?></h1>												
+											<?php endif; ?>
+											
 											<?php if (get_sub_field('sub_sub_title')) :  ?>
-												<h4 class="text-white wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('sub_sub_title'); ?></h4>
+												<div class="text-white wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('sub_sub_title'); ?></div>
 											<?php endif; ?>
 											</div>
 											<?php if (get_sub_field('primary_button_url') && get_sub_field('primary_button_label')) : ?>
@@ -34,16 +35,16 @@
 											<?php //if( function_exists( 'aioseo_breadcrumbs' ) ) aioseo_breadcrumbs();  ?>
 										</div>
 									</div>
-									<?php if (get_sub_field('left_image')) : ?>
+									<?php /*if (get_sub_field('left_image')) : ?>
 										<div class="banner-left-image" style="background-image: url(<?php echo the_sub_field('left_image'); ?>)"></div>
-									<?php endif; ?>
+									<?php endif; */?>
 								</div>
-								<div class="col-lg-5 d-md-none d-none d-lg-block">
+								<!-- <div class="col-lg-5 d-md-none d-none d-lg-block">
 									<div class="img-content">
 										<div class="inner-img-content mask1">
-											<?php if(get_sub_field('video_url')){ 
+											<?php /* if(get_sub_field('video_url')){ 
 												?>
-												<!--<iframe class="banner-video" src="<?php echo the_sub_field('video_url'); ?>?autoplay=1&amp;modestbranding=1&amp;showinfo=0" allowfullscreen="allowfullscreen"></iframe>-->
+												<iframe class="banner-video" src="<?php echo the_sub_field('video_url'); ?>?autoplay=1&amp;modestbranding=1&amp;showinfo=0" allowfullscreen="allowfullscreen"></iframe>
 												<video class="banner-video animate__animated wow fadeIn " data-wow-duration="3s" data-wow-delay="1s" loop="true" autoplay="autoplay" muted/> 										  
 													<source src="<?php echo the_sub_field('video_url'); ?>" type="video/mp4"> 
 												</video>
@@ -54,18 +55,18 @@
 													<div class="bg-animation" style="background-image: url(<?php echo the_sub_field('image'); ?>)"></div>
 												  <?php
 												endif;
-											} ?>
+											}*/ ?>
 											<?php /* if (get_sub_field('image')) : ?>
 												<img src="<?php echo the_sub_field('image'); ?>" class="w-100" alt="<?php echo the_sub_field('title'); ?>">
-											<?php endif; */ ?>
+											<?php endif */ ?>
 										</div>
 									</div>
-									<?php if (get_sub_field('right_content')) : ?>
+									<?php /* if (get_sub_field('right_content')) : */ ?>
 									<div class="banner-right-content">
-										<?php echo the_sub_field('right_content'); ?>
+										<?php /* echo the_sub_field('right_content');*/ ?>
 									</div>
-									<?php endif; ?>
-								</div>
+									<?php/* endif;*/ ?>
+								</div> -->
 							</div>
 							</div>
 						</div>    

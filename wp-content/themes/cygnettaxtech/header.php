@@ -20,32 +20,32 @@
 	<meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
 	
 	<link rel="icon" type="image/x-icon" href="<?php echo get_theme_file_uri(); ?>/images/favicons/favicon.ico">
-	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_theme_file_uri(); ?>/images/favicons/16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_theme_file_uri(); ?>/images/favicons/32.png">
-    <link rel="icon" type="image/png" sizes="57x57" href="<?php echo get_theme_file_uri(); ?>/images/favicons/57.png">
-    <link rel="icon" type="image/png" sizes="76x76" href="<?php echo get_theme_file_uri(); ?>/images/favicons/76.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo get_theme_file_uri(); ?>/images/favicons/96.png">
-    <link rel="icon" type="image/png" sizes="120x120" href="<?php echo get_theme_file_uri(); ?>/images/favicons/120.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="<?php echo get_theme_file_uri(); ?>/images/favicons/128.png">
-    <link rel="icon" type="image/png" sizes="144x144" href="<?php echo get_theme_file_uri(); ?>/images/favicons/144.png">
-    <link rel="icon" type="image/png" sizes="152x152" href="<?php echo get_theme_file_uri(); ?>/images/favicons/152.png">
-    <link rel="icon" type="image/png" sizes="167x167" href="<?php echo get_theme_file_uri(); ?>/images/favicons/167.png">
-    <link rel="icon" type="image/png" sizes="180x180" href="<?php echo get_theme_file_uri(); ?>/images/favicons/180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="<?php echo get_theme_file_uri(); ?>/images/favicons/192.png">
-    <link rel="icon" type="image/png" sizes="195x195" href="<?php echo get_theme_file_uri(); ?>/images/favicons/195.png">
-    <link rel="icon" type="image/png" sizes="196x196" href="<?php echo get_theme_file_uri(); ?>/images/favicons/196.png">
-    <link rel="icon" type="image/png" sizes="228x228" href="<?php echo get_theme_file_uri(); ?>/images/favicons/228.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/32.png">
+    <link rel="icon" type="image/png" sizes="57x57" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/57.png">
+    <link rel="icon" type="image/png" sizes="76x76" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/76.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/96.png">
+    <link rel="icon" type="image/png" sizes="120x120" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/120.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/128.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/144.png">
+    <link rel="icon" type="image/png" sizes="152x152" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/152.png">
+    <link rel="icon" type="image/png" sizes="167x167" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/167.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/192.png">
+    <link rel="icon" type="image/png" sizes="195x195" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/195.png">
+    <link rel="icon" type="image/png" sizes="196x196" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/196.png">
+    <link rel="icon" type="image/png" sizes="228x228" href="<?php echo get_theme_file_uri(); ?>/assets/images/favicons/228.png">
 	
-	<link rel="stylesheet" href="<?php echo THEME_PATH; ?>/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 	<!--<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=626a78d085d62e001964c5d1&product=sop' id='share-this-share-buttons-mu-js' async='async'></script>-->
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> -->
-    <link rel="stylesheet" href="<?php echo THEME_PATH; ?>/css/animate.css">	
+    <link rel="stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/animate.css">
+	<link rel="stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/owl.carousel.min.css">
+	<link rel="newest stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/style.css">
 	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6295d7619a09040019f206fd&product=sop' id='share-this-share-buttons-mu-js' async='async'></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
 	<!-- Google Tag Manager -->
 	<!--<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -159,7 +159,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               
                <?php $post_slug = $post->post_name;
 				if($post_slug != '15-days-free-trial' && $post_slug != 'sign-up' && $post_slug != 'thank-you-for-contacting-us' && $post_slug != 'thank-you-for-signing-up' && $post_slug != 'thank-you-for-your-interest' ){?>
-                    <a id="contact_us" href="#contactus" class="btn btn-outline-primary rounded-pill contact-us ms-2 fw-bold">Get In Touch</a>
+                    <a id="contact_us" href="#contactus" class="btn ms-5">Get In Touch</a>
                     <?php } ?>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">

@@ -150,12 +150,11 @@
 	<!-- End Breadcrumb with link section -->
 
    <!-- js -->
-    <script src="<?php echo THEME_PATH; ?>/js/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo THEME_PATH; ?>/js/bootstrap.bundle.js"></script>   
-	<script src="<?php echo THEME_PATH; ?>/js/owl.carousel.min.js"></script>
-	<link rel="stylesheet" href="<?php echo THEME_PATH; ?>/css/owl.carousel.min.css">
-	<script src="<?php echo THEME_PATH; ?>/js/wow.min.js"></script>
-	<script src="<?php echo THEME_PATH; ?>/js/main.js"></script>	
+    <script src="<?php echo THEME_PATH; ?>assets/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo THEME_PATH; ?>assets/dist/js/bootstrap.bundle.js"></script>   
+	<script src="<?php echo THEME_PATH; ?>assets/dist/js/owl.carousel.min.js"></script>	
+	<script src="<?php echo THEME_PATH; ?>assets/dist/js/wow.min.js"></script>
+	<script src="<?php echo THEME_PATH; ?>assets/dist/js/main.js"></script>	
 	<script type='text/javascript' id='cygnet-global-js-extra'>
 	/* <![CDATA[ */
 	//var ajaxPath = {"ajaxurl":"http:\/\/localhost\/cygnet\/wp-admin\/admin-ajax.php"};
@@ -163,7 +162,7 @@
 	var ajaxPath = {"ajaxurl":templateUrl};
 	/* ]]> */
 	</script>
-	<script src="<?php echo THEME_PATH; ?>/js/scripts.js"></script>
+	<script src="<?php echo THEME_PATH; ?>assets/dist/js/scripts.js"></script>
     <!-- End js -->
 	
 	<script>
