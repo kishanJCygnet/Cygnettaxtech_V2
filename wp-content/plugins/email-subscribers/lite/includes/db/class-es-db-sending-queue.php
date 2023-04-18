@@ -55,10 +55,15 @@ class ES_DB_Sending_Queue {
 		$where       = apply_filters( 'ig_es_get_emails_to_be_sent_by_hash_condition', 'AND 1=1' );
 		$subscribers = $wpbd->get_results(
 			$wpbd->prepare(
-				"SELECT * FROM {$wpbd->prefix}ig_sending_queue WHERE status = %s AND mailing_queue_hash = %s $where ORDER BY id LIMIT 0, %d",
+				"SELECT * FROM {$wpbd->prefix}ig_sending_queue WHERE status IN( %s, %s, %s ) AND mailing_queue_hash = %s $where ORDER BY FIELD(`status`, %s, %s, %s) LIMIT 0, %d",
 				array(
-					'In Queue',
+					IG_ES_SENDING_QUEUE_STATUS_QUEUED,
+					IG_ES_SENDING_QUEUE_STATUS_SENDING,
+					IG_ES_SENDING_QUEUE_STATUS_FAILED,
 					$guid,
+					IG_ES_SENDING_QUEUE_STATUS_QUEUED,
+					IG_ES_SENDING_QUEUE_STATUS_SENDING,
+					IG_ES_SENDING_QUEUE_STATUS_FAILED,
 					$limit,
 				)
 			),
@@ -134,16 +139,34 @@ class ES_DB_Sending_Queue {
 	}
 
 	/* count cron email */
-	public static function get_total_emails_to_be_sent_by_hash( $notification_hash = '' ) {
+	public static function get_total_emails_to_be_sent_by_hash( $notification_hash = '', $statuses = array() ) {
 
-		global $wpdb;
+		global $wpbd;
 
 		$result = 0;
 		if ( ! empty( $notification_hash ) ) {
-			$result = $wpdb->get_var(
-				$wpdb->prepare(
-					"SELECT COUNT(*) AS count FROM {$wpdb->prefix}ig_sending_queue WHERE mailing_queue_hash = %s AND status = %s",
-					array( $notification_hash, 'In Queue' )
+
+			
+			$params = array( $notification_hash );
+			
+			if ( empty( $statuses ) ) {
+				$statuses = array(
+					IG_ES_SENDING_QUEUE_STATUS_QUEUED,
+					IG_ES_SENDING_QUEUE_STATUS_SENDING,
+					IG_ES_SENDING_QUEUE_STATUS_FAILED,
+				);
+			}
+
+			
+			$statuses_count        = count( $statuses );
+			$statuses_placeholders = array_fill( 0, $statuses_count, '%s' );
+			
+			$params = array_merge( $params, $statuses );
+			
+			$result = $wpbd->get_var(
+				$wpbd->prepare(
+					"SELECT COUNT(*) AS count FROM {$wpbd->prefix}ig_sending_queue WHERE mailing_queue_hash = %s AND status IN ( " . implode( ',', $statuses_placeholders ) . ' )',
+					$params
 				)
 			);
 		}
@@ -158,8 +181,18 @@ class ES_DB_Sending_Queue {
 
 		$result = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(*) AS count FROM {$wpdb->prefix}ig_sending_queue WHERE status = %s",
-				array( 'In Queue' )
+				"SELECT COUNT(*) AS count FROM {$wpdb->prefix}ig_sending_queue
+					WHERE
+					`mailing_queue_id` IN( SELECT id FROM {$wpdb->prefix}ig_mailing_queue WHERE status IN( %s, %s ) )
+					AND
+					status IN ( %s, %s, %s )",
+				array(
+					IG_ES_MAILING_QUEUE_STATUS_QUEUED,
+					IG_ES_MAILING_QUEUE_STATUS_SENDING,
+					IG_ES_SENDING_QUEUE_STATUS_QUEUED,
+					IG_ES_SENDING_QUEUE_STATUS_SENDING,
+					IG_ES_SENDING_QUEUE_STATUS_FAILED
+				)
 			)
 		);
 
@@ -173,10 +206,11 @@ class ES_DB_Sending_Queue {
 
 		$result = 0;
 		if ( '' != $notification_hash ) {
+			$sent_status = IG_ES_SENDING_QUEUE_STATUS_SENT;
 			$result = $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT COUNT(*) AS count FROM {$wpdb->prefix}ig_sending_queue WHERE mailing_queue_hash = %s AND status = %s",
-					array( $notification_hash, 'Sent' )
+					array( $notification_hash, $sent_status )
 				)
 			);
 		}
@@ -411,10 +445,15 @@ class ES_DB_Sending_Queue {
 		if ( ! empty( $total_contacts_added ) ) {
 			$is_inserted = true;
 		} else {
-
+			ES_DB_Mailing_Queue::delete_notifications( array( $mailing_queue_id ) );
+			
+			if ( empty( $list_ids ) ) {
+				return false;
+			}
+			
 			// If some how above sql query fails then queue emails using old approach.
 			// i.e. Preparing data for insert query in PHP and then doing insert.
-
+			
 			// Converto to an array if already not an array.
 			if ( ! is_array( $list_ids ) ) {
 				$list_ids = explode( ',', $list_ids );

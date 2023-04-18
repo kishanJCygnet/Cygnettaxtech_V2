@@ -17,20 +17,25 @@ class Dashboard extends CommonAdmin\Dashboard {
 	/**
 	 * Whether or not to show the widget.
 	 *
-	 * @since 4.0.0
+	 * @since   4.0.0
+	 * @version 4.2.8
 	 *
-	 * @return boolean True if yes, false otherwise.
+	 * @param  string  $widget The widget to check if can show.
+	 * @return boolean         True if yes, false otherwise.
 	 */
-	protected function canShowWidgets() {
+	protected function canShowWidget( $widget ) {
 		if ( ! aioseo()->license->isActive() ) {
 			return true;
 		}
 
-		// Check if the option is disabled.
-		if ( ! aioseo()->options->advanced->dashboardWidgets ) {
-			return false;
+		// If it's a boolean, return it early.
+		// https://github.com/awesomemotive/aioseo/issues/4280
+		$dashboardWidgets = aioseo()->options->advanced->dashboardWidgets;
+		if ( is_bool( $dashboardWidgets ) ) {
+			return $dashboardWidgets;
 		}
 
-		return true;
+		// Check if the widget is displayable.
+		return in_array( $widget, $dashboardWidgets, true );
 	}
 }

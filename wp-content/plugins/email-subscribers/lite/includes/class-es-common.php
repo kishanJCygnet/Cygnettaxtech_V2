@@ -37,7 +37,7 @@ class ES_Common {
 	 *
 	 * @since 5.3.18
 	 */
-	public static function fetch_admin_email() {
+	public static function get_admin_email() {
 		$admin_email     = get_option( 'ig_es_admin_emails', '' );
 		$all_admin_email = explode(',', $admin_email);
 
@@ -46,7 +46,74 @@ class ES_Common {
 
 
 	/**
+	 * Count sent emails
+	 *
+	 * @return int $total_emails_sent
+	 *
+	 * @since 5.3.18
+	 */
+	public static function count_sent_emails() {
+		$current_date = ig_es_get_current_date();
+		$current_hour = ig_es_get_current_hour();
+
+		// Get total emails sent in this hour
+		$email_sent_data = self::get_ig_option( 'email_sent_data', array() );
+
+		$total_emails_sent = 0;
+		if ( is_array( $email_sent_data ) && ! empty( $email_sent_data[ $current_date ] ) && ! empty( $email_sent_data[ $current_date ][ $current_hour ] ) ) {
+			$total_emails_sent = $email_sent_data[ $current_date ][ $current_hour ];
+		}
+
+		return $total_emails_sent;
+	}
+
+	/**
+	 * Process the email template and get variable fallbacks
+	 *
+	 * @param $template
+	 */
+	public static function get_template_fallbacks( $template ) {
+		preg_match_all( '/{{(.*?)}}/', $template, $matches );
+		$default_keywords = array();
+		if ( 1 < count( $matches ) ) {
+			$fallback_matches = $matches[1];
+			foreach ( $fallback_matches as $keyword ) {
+				if ( strstr( $keyword, '|' ) ) {
+					list( $variable_name, $variable_params ) = explode( '|', $keyword, 2 );
+				} else {
+					$variable_name   = $keyword;
+					$variable_params = '';
+				}
+				$variable_name = trim( $variable_name );
+				$variable      = new IG_ES_Workflow_Variable_Parser();
+				$parameters    = $variable->parse_parameters_from_string( trim( $variable_params ) );
+				if ( is_array( $parameters ) && ! empty( $parameters ) ) {
+					if ( isset( $parameters['fallback'] ) && ! empty( $parameters['fallback'] ) ) {
+						$replace_with_fallback = self::un_quote( $parameters['fallback'] );
+						$is_nested_variable    = strpos( $variable_name, '.' ); // Check if variable has dont(.) in its name
+						if ( $is_nested_variable ) {
+							$variable_parts = explode( '.', $variable_name );
+							$variable_type  = $variable_parts[0];
+							$variable_slug  = $variable_parts[1];
+							/**
+							 * For variables like subscribers.name, we need to pass the fallback data as nested array
+							 * $default_keywords['subscribers']['name'] = fallback_value
+							 **/ 
+							$default_keywords[ $variable_type ][ $variable_slug ] = $replace_with_fallback;
+						} else {
+							$default_keywords[ $variable_name ] = $replace_with_fallback;
+						}
+					}
+				}
+			}
+		}
+		return $default_keywords;
+	}
+
+
+	/**
 	 * Callback to replace keywords
+	 *
 	 * @param $keyword
 	 * @param $search_and_replace
 	 *
@@ -94,6 +161,7 @@ class ES_Common {
 
 	/**
 	 * Decode the html quotes
+	 *
 	 * @param $string
 	 *
 	 * @return string
@@ -183,12 +251,15 @@ class ES_Common {
 		// total contacts
 		$total_contacts = ES()->contacts_db->count_active_contacts_by_list_id();
 		$content        = str_replace( '{{TOTAL-CONTACTS}}', $total_contacts, $content );
+		$content        = str_replace( '{{site.total_contacts}}', $total_contacts, $content );
 		// blog title
 		$blog_name = get_option( 'blogname' );
 		$content   = str_replace( '{{SITENAME}}', $blog_name, $content );
+		$content   = str_replace( '{{site.name}}', $blog_name, $content );
 		// site url
 		$site_url = home_url( '/' );
 		$content  = str_replace( '{{SITEURL}}', $site_url, $content );
+		$content  = str_replace( '{{site.url}}', $site_url, $content );
 
 		/*
 		TODO: Enable it once Pre header issue fix
@@ -631,7 +702,7 @@ class ES_Common {
 		if ( ! is_array( $category_names ) ) {
 			$category_names = array();
 		}
-		$checked_selected = ! array_intersect( array( 'All', 'None' ), $category_names ) ? "checked='checked'" : '';
+		$checked_selected = in_array( 'selected_cat', $category_names, true ) ? "checked='checked'" : '';
 		$category_html    = '<tr><td style="padding-top:4px;padding-bottom:4px;padding-right:10px;" ><span class="block pr-4 text-sm font-normal text-gray-600 pb-1"><input class="es-note-category-parent form-radio text-indigo-600" type="radio" ' . esc_attr( $checked_selected ) . ' value="selected_cat"  name="campaign_data[es_note_cat_parent]">' . __(
 			'Select Categories',
 			'email-subscribers'
@@ -646,7 +717,7 @@ class ES_Common {
 
 			$category_html .= '<tr class="es-note-child-category"><td style="padding-top:4px;padding-bottom:4px;padding-right:10px;"><span class="block pr-4 text-sm font-normal text-gray-600 pb-1"><input type="checkbox" class="form-checkbox" ' . esc_attr( $checked ) . ' value="' . esc_attr( $category->term_id ) . '" id="es_note_cat[]" name="campaign_data[es_note_cat][]">' . esc_html( $category->name ) . '</td></tr>';
 		}
-		$checked_all = in_array( 'All', $category_names ) ? "checked='checked'" : '';
+		$checked_all = ! array_intersect( array( 'selected_cat', 'None' ), $category_names ) ? "checked='checked'" : '';
 		$all_html    = '<tr><td style="padding-top:4px;padding-bottom:4px;padding-right:10px;"><span class="block pr-4 text-sm font-normal text-gray-600 pb-1"><input type="radio" class="form-radio text-indigo-600 es-note-category-parent"  ' . esc_attr( $checked_all ) . ' value="{a}All{a}"  name="campaign_data[es_note_cat_parent]">' . __(
 			'All Categories (Also include all categories which will create later)',
 			'email-subscribers'
@@ -718,7 +789,7 @@ class ES_Common {
 	 * @since 4.0.0
 	 */
 	public static function prepare_custom_post_type_checkbox( $custom_post_types ) {
-		$args  = array(
+		$args       = array(
 			'public'              => true,
 			'exclude_from_search' => false,
 			'_builtin'            => false,
@@ -1534,7 +1605,6 @@ class ES_Common {
 			'ig_es_subscription_success_message',
 			'ig_es_sync_wp_users',
 			'ig_es_unsubscribe_error_message',
-			'ig_es_enable_summary_automation',
 			'ig_es_run_cron_on',
 			'ig_es_run_cron_time',
 			'ig_es_unsubscribe_link',
@@ -1546,6 +1616,7 @@ class ES_Common {
 			'ig_es_welcome_email_content',
 			'ig_es_welcome_email_subject',
 			'ig_es_email_sent_data',
+			'ig_es_remote_gallery_items',
 		);
 
 	}
@@ -1589,27 +1660,46 @@ class ES_Common {
 	 */
 	public static function get_ig_es_meta_info() {
 
-		$total_contacts           = ES()->contacts_db->count();
-		$total_lists              = ES()->lists_db->count_lists();
-		$total_forms              = ES()->forms_db->count_forms();
-		$total_newsletters        = ES()->campaigns_db->get_total_newsletters();
-		$total_post_notifications = ES()->campaigns_db->get_total_post_notifications();
-		$total_sequences          = ES()->campaigns_db->get_total_sequences();
+		$plan 						= ES()->get_plan();
+		$total_contacts             = ES()->contacts_db->count();
+		$total_unconfirmed_contacts = ES()->lists_contacts_db->get_unconfirmed_contacts_count();
+		$total_lists                = ES()->lists_db->count_lists();
+		$total_forms                = ES()->forms_db->count_forms();
+		$total_newsletters          = ES()->campaigns_db->get_total_newsletters();
+		$total_post_notifications   = ES()->campaigns_db->get_total_post_notifications();
+		$total_post_digests 		= ( 'pro' === $plan ) ? ES()->campaigns_db->get_total_post_digests() : 0;
+		$total_sequences            = ( 'pro' === $plan ) ? ES()->campaigns_db->get_total_sequences() : 0;
+		$active_workflows_count     = ES()->workflows_db->get_active_workflows_count();
+		$remote_gallery_items   	= get_option('ig_es_imported_remote_gallery_template_ids', array());
+		$editor_count_by_type		= ES()->campaigns_db->get_count_by_editor_type();
+		$workflows_count_by_type	= ES()->workflows_db->get_workflows_count_by_triggername();
+		$mailer_name 				= ES()->mailer->get_current_mailer_slug();
+		$campaign_sending_frequency = ES_DB_Mailing_Queue::get_campaign_sending_frequency(10);
+
 
 		return array(
 			'version'                  => ES_PLUGIN_VERSION,
 			'installed_on'             => get_option( 'ig_es_installed_on', '' ),
 			'is_premium'               => ES()->is_premium() ? 'yes' : 'no',
-			'plan'                     => ES()->get_plan(),
+			'plan'                     => $plan,
 			'is_trial'                 => ES()->trial->is_trial() ? 'yes' : 'no',
 			'is_trial_expired'         => ES()->trial->is_trial_expired() ? 'yes' : 'no',
 			'trial_start_at'           => ES()->trial->get_trial_start_date(),
 			'total_contacts'           => $total_contacts,
+			'unconfirmed_contacts'	   => $total_unconfirmed_contacts,		// Added in 5.5.7
 			'total_lists'              => $total_lists,
 			'total_forms'              => $total_forms,
 			'total_newsletters'        => $total_newsletters,
 			'total_post_notifications' => $total_post_notifications,
+			'total_post_digests'	   => $total_post_digests,				// Added in 5.5.7
 			'total_sequences'          => $total_sequences,
+			'editor_count_by_type'	   => $editor_count_by_type, 			// Added in 5.5.7
+			'active_workflows_count'   => $active_workflows_count, 			// Added in 5.5.7
+			'campaign_sending_frequency' => $campaign_sending_frequency,	// Added in 5.5.7
+			'workflows_count_by_type'  => $workflows_count_by_type, 		// Added in 5.5.7
+			'mailer'				   => $mailer_name,						// Added in 5.5.7
+			'remote_gallery_items'	   => $remote_gallery_items, 			// Added in 5.5.7
+			'is_rest_api_used'	       => self::is_rest_api_used(),		 	// Added in 5.5.7
 			'settings'                 => self::get_all_settings(),
 		);
 	}
@@ -1741,6 +1831,7 @@ class ES_Common {
 				'custom_fields',
 				'drag_drop_editor',
 				'gallery',
+				'template',
 			);
 
 			return $sub_menus;
@@ -1804,24 +1895,27 @@ class ES_Common {
 
 		if ( $upsell ) {
 
-			$articles_upsell = array(
-				array(
-					'title'       => __( 'Email Subscribers PRO', 'email-subscribers' ),
-					'link'        => 'https://www.icegram.com/er6r',
-					'label'       => __( 'Lifetime', 'email-subscribers' ),
-					'label_class' => 'bg-green-100 text-green-800',
-				),
-				array(
-					'title'       => __( '<b>Email Subscribers Secret Club</b>', 'email-subscribers' ),
-					'link'        => 'https://www.facebook.com/groups/2298909487017349/',
-					'label'       => __( 'Join Now', 'email-subscribers' ),
-					'label_class' => 'bg-green-100 text-green-800',
-				),
+			$pricing_page_url = admin_url( 'admin.php?page=es_pricing' );
+
+			$articles_upsell[] = array(
+				'title'       => __( '<b>Icegram Express</b> Secret Club', 'email-subscribers' ),
+				'link'        => 'https://www.facebook.com/groups/2298909487017349/',
+				'label'       => __( 'Join Now', 'email-subscribers' ),
+				'label_class' => 'bg-green-100 text-green-800',
 			);
+
+			if ( ! ES()->is_premium() ) {
+				$articles_upsell[] = array(
+					'title'       => __( 'Icegram Express MAX', 'email-subscribers' ),
+					'link'        => $pricing_page_url,
+					'label'       => __( 'MAX', 'email-subscribers' ),
+					'label_class' => 'bg-green-100 text-green-800',
+				);
+			}
 		}
 
 		$articles = array_merge( $blog_articles, $articles_upsell );
-
+		
 		return $articles;
 	}
 
@@ -1903,6 +1997,54 @@ class ES_Common {
 		$convert_time_format = get_option( 'time_format' );
 
 		return date_i18n( "$convert_date_format $convert_time_format", strtotime( $date ) );
+	}
+
+	/**
+	 * Get next local midnight time
+	 * 
+	 * @since 5.5.2
+	 * 
+	 * @return string $local_next_midnight_time next local midnight time
+	 */
+	public static function get_next_local_midnight_time() {
+		$next_day_utc_time   = time() + DAY_IN_SECONDS;
+		$offset_in_seconds   = self::get_timezone_offset_in_seconds();
+		$next_day_local_time = $next_day_utc_time + $offset_in_seconds;
+		$next_day_local_date = date_i18n( 'Y-m-d H:i:s', $next_day_local_time );
+	
+		$local_date_obj = new DateTime( $next_day_local_date );
+		$local_date_obj->setTime( 0, 0, 0 );
+	
+		$local_next_midnight_time = $local_date_obj->getTimestamp();
+
+		return $local_next_midnight_time;
+	}
+
+	/**
+	 * Convert UTC time for local midnight time
+	 * 
+	 * @since 5.5.2
+	 * 
+	 * @return string $utc_time_for_local_midnight UTC time local midnight time
+	 */
+	public static function get_utc_time_for_local_midnight_time() {
+		$offset_in_seconds           = self::get_timezone_offset_in_seconds();
+		$next_local_midnight_time    = self::get_next_local_midnight_time();
+		$utc_time_for_local_midnight = $next_local_midnight_time - $offset_in_seconds;
+		return $utc_time_for_local_midnight;
+	}
+
+	/**
+	 * Get site's timezone offset in seconds
+	 * 
+	 * @since 5.5.2
+	 * 
+	 * @return int $offset_in_seconds
+	 */
+	public static function get_timezone_offset_in_seconds() {
+		$offset            = get_option( 'gmt_offset' );
+		$offset_in_seconds = $offset * HOUR_IN_SECONDS;
+		return $offset_in_seconds;
 	}
 
 	/**
@@ -2706,6 +2848,7 @@ class ES_Common {
 		$domain = isset($pieces['host']) ? $pieces['host'] : $pieces['path'];
 		return $domain;
 	}
+	
 	public static function get_engagement_score_html( $engagement_score ) {
 		if ( is_numeric( $engagement_score ) ) {
 			$score_class = 'bad';
@@ -2731,4 +2874,137 @@ class ES_Common {
 		return $engagement_score_html;
 	}
 
+	public static function get_email_verify_mailbox_user() {
+		$username = get_option( 'ig_es_test_mailbox_user', '' );
+		if ( !empty( $username) ) {
+			$username = 'spam_check_' . $username;
+		}
+		return( $username );
+	}
+
+	public static function get_ig_es_mailbox_domain() {
+		$domain = 'box.icegram.com';
+		return( $domain );
+	}
+
+	public static function get_email_verify_test_email() {
+		$username = self::get_email_verify_mailbox_user();
+		$domain   = self::get_ig_es_mailbox_domain();
+
+		if ( !empty( $username) ) {
+			$email = $username . '@' . $domain;
+			return( $email );
+		}
+		return '';
+	}
+
+	public static function download_image_from_url( $image_url ) {
+
+		$attachment_url = '';
+		$upload_dir     = wp_upload_dir();
+		$image_data     = file_get_contents( $image_url );
+		$filename       = basename( $image_url );
+		if ( wp_mkdir_p( $upload_dir['path'] ) ) {
+			$file = $upload_dir['path'] . '/' . $filename;
+		} else {
+			$file = $upload_dir['basedir'] . '/' . $filename;
+		}
+
+		file_put_contents( $file, $image_data );
+
+		$wp_filetype = wp_check_filetype( $filename, null );
+		$attachment  = array(
+			'post_mime_type' => $wp_filetype['type'],
+			'post_title'     => sanitize_file_name( $filename ),
+			'post_content'   => '',
+			'post_status'    => 'inherit',
+		);
+		$attach_id   = wp_insert_attachment( $attachment, $file );
+		if ( ! empty( $attach_id ) ) {
+			$attachment_url = wp_get_attachment_url( $attach_id );
+		}
+		return $attachment_url;
+	}
+
+	/**
+	 * Get list status(subscribed or unconfirmed) based on optin type(single optin or double optin)
+	 * 
+	 * @since 5.4.18
+	 * 
+	 * @return string
+	 */
+	public static function get_list_status_from_optin_type() {
+		$es_optin_type = get_option( 'ig_es_optin_type' );
+			
+		if ( in_array( $es_optin_type, array( 'double_opt_in', 'double_optin' ), true ) ) { 
+			$status = 'unconfirmed';
+		} else {
+			$status = 'subscribed';
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Check if WordPress has REST API support or not
+	 * 
+	 * @since 5.4.18
+	 * 
+	 * @return bool
+	 */
+	public static function is_rest_api_supported() {
+		global $wp_version;
+
+		if ( version_compare( $wp_version, '4.4.0', '<' ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if WordPress User is using Rest API feature
+	 * 
+	 * @since 5.5.7
+	 * 
+	 * @return string yes|no
+	 */
+	public static function is_rest_api_used() {
+		
+		// Check if REST API settings option is enabled
+		$is_api_enabled = get_option('ig_es_allow_api', 'no');
+
+		if ( 'no' === $is_api_enabled ) {
+			return 'no';
+		}
+
+		// Ensure there is atleast one users for whom REST API keys are generated
+		$rest_api_users_ids = get_users( array(
+			'meta_key' => 'ig_es_rest_api_keys',
+			'fields'   => 'ID'
+		) );
+
+		if ( empty( $rest_api_users_ids ) ) {
+			return 'no';
+		}
+		
+		return 'yes';
+
+	}
+
+	public static function is_positive_number( $number ) {
+		return is_numeric( $number ) && $number > 0;
+	}
+
+	/**
+	 * Get the date when plugin was activated for first time
+	 * 
+	 * @return string $installation_date
+	 * 
+	 * @since 5.6.0
+	 */
+	public static function get_plugin_installation_date() {
+		$installation_date = get_option( 'ig_es_installed_on' );
+		return $installation_date;
+	}
 }

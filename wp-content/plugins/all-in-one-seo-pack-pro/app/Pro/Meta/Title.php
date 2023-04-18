@@ -38,17 +38,15 @@ class Title extends CommonMeta\Title {
 		if ( ! empty( $metaData->title ) && ! $default ) {
 			$title = $metaData->title;
 			// Since we might be faking the term, let's replace the title ourselves.
-			if ( ! empty( $term ) ) {
-				$title = aioseo()->helpers->pregReplace( '/#taxonomy_title/', $term->name, $title );
-			}
-			$title = $this->helpers->prepare( $title );
+			$title = aioseo()->helpers->pregReplace( '/#taxonomy_title/', $term->name, $title );
+			$title = $this->helpers->prepare( $title, $term->term_id );
 		}
 
 		$dynamicOptions = aioseo()->dynamicOptions->noConflict();
 		if ( ! $title && $dynamicOptions->searchAppearance->taxonomies->has( $term->taxonomy ) ) {
 			$newTitle = aioseo()->dynamicOptions->searchAppearance->taxonomies->{$term->taxonomy}->title;
 			$newTitle = preg_replace( '/#taxonomy_title/', $term->name, $newTitle );
-			$title    = $this->helpers->prepare( $newTitle, false, $default );
+			$title    = $this->helpers->prepare( $newTitle, $term->term_id, $default );
 		}
 
 		$terms[ $term->term_id ] = $title;

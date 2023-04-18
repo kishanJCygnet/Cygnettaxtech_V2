@@ -23,9 +23,28 @@ class Api extends CommonApi\Api {
 	 */
 	protected $proRoutes = [
 		// phpcs:disable WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
-		'POST' => [
+		'GET'    => [
+			'network-robots/(?P<siteId>[\d]+|network)'     => [ 'callback' => [ 'Network', 'fetchSiteRobots' ], 'access' => 'manage_network' ],
+			'schema/templates'                             => [ 'callback' => [ 'Schema', 'getTemplates' ], 'access' => 'aioseo_page_schema_settings' ],
+			'search-statistics/url/auth'                   => [ 'callback' => [ 'SearchStatistics', 'getAuthUrl' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/url/reauth'                 => [ 'callback' => [ 'SearchStatistics', 'getReauthUrl' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/stats/seo-statistics'       => [ 'callback' => [ 'SearchStatistics', 'getSeoStatistics' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/stats/keywords'             => [ 'callback' => [ 'SearchStatistics', 'getKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/post-detail'                => [ 'callback' => [ 'SearchStatistics', 'getPostDetail' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/post-detail/seo-statistics' => [ 'callback' => [ 'SearchStatistics', 'getPostDetailSeoStatistics' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/post-detail/keywords'       => [ 'callback' => [ 'SearchStatistics', 'getPostDetailKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/post-detail/focus-keyword'  => [ 'callback' => [ 'SearchStatistics', 'getPostDetailFocusKeywordTrend' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/pagespeed'                  => [ 'callback' => [ 'SearchStatistics', 'getPageSpeed' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/seo-analysis'               => [ 'callback' => [ 'SearchStatistics', 'getSeoAnalysis' ], 'access' => 'aioseo_search_statistics_settings' ]
+		],
+		'POST'   => [
+			'ai/generate'                                               => [ 'callback' => [ 'Ai', 'generate' ], 'access' => 'aioseo_page_titles_settings' ],
+			'ai/save-api-key'                                           => [ 'callback' => [ 'Ai', 'saveApiKey' ], 'access' => 'aioseo_page_titles_settings' ],
 			'activate'                                                  => [ 'callback' => [ 'License', 'activateLicense' ], 'access' => 'aioseo_general_settings' ],
 			'deactivate'                                                => [ 'callback' => [ 'License', 'deactivateLicense' ], 'access' => 'aioseo_general_settings' ],
+			'multisite'                                                 => [ 'callback' => [ 'License', 'multisite' ], 'access' => 'aioseo_general_settings' ],
+			'network-sites/(?P<filter>all|activated|deactivated)'       => [ 'callback' => [ 'Network', 'fetchSites' ], 'access' => 'manage_network' ],
+			'network-robots/(?P<siteId>[\d]+|network)'                  => [ 'callback' => [ 'Network', 'saveNetworkRobots' ], 'access' => 'manage_network' ],
 			'notification/local-business-organization-reminder'         => [ 'callback' => [ 'Notifications', 'localBusinessOrganizationReminder' ], 'access' => 'any' ],
 			'notification/news-publication-name-reminder'               => [ 'callback' => [ 'Notifications', 'newsPublicationNameReminder' ], 'access' => 'any' ],
 			'notification/v3-migration-local-business-number-reminder'  => [ 'callback' => [ 'Notifications', 'migrationLocalBusinessNumberReminder' ], 'access' => 'any' ],
@@ -34,7 +53,17 @@ class Api extends CommonApi\Api {
 			'notification/import-local-business-type-reminder'          => [ 'callback' => [ 'Notifications', 'importLocalBusinessTypeReminder' ], 'access' => 'any' ],
 			'notification/import-local-business-number-reminder'        => [ 'callback' => [ 'Notifications', 'importLocalBusinessNumberReminder' ], 'access' => 'any' ],
 			'notification/import-local-business-fax-reminder'           => [ 'callback' => [ 'Notifications', 'importLocalBusinessFaxReminder' ], 'access' => 'any' ],
-			'notification/import-local-business-currencies-reminder'    => [ 'callback' => [ 'Notifications', 'importLocalBusinessCurrenciesReminder' ], 'access' => 'any' ]
+			'notification/import-local-business-currencies-reminder'    => [ 'callback' => [ 'Notifications', 'importLocalBusinessCurrenciesReminder' ], 'access' => 'any' ],
+			'schema/templates'                                          => [ 'callback' => [ 'Schema', 'addTemplate' ], 'access' => 'aioseo_page_schema_settings' ],
+			'schema/validator/output'                                   => [ 'callback' => [ 'Schema', 'getValidatorOutput' ], 'access' => 'aioseo_page_schema_settings' ],
+			'search-statistics/stats/keywords/posts'                    => [ 'callback' => [ 'SearchStatistics', 'getPagesByKeywords' ], 'access' => 'aioseo_search_statistics_settings' ]
+		],
+		'PUT'    => [
+			'schema/templates' => [ 'callback' => [ 'Schema', 'updateTemplate' ], 'access' => 'aioseo_page_schema_settings' ]
+		],
+		'DELETE' => [
+			'schema/templates'       => [ 'callback' => [ 'Schema', 'deleteTemplate' ], 'access' => 'aioseo_page_schema_settings' ],
+			'search-statistics/auth' => [ 'callback' => [ 'SearchStatistics', 'deleteAuth' ], 'access' => 'aioseo_search_statistics_settings' ]
 		]
 		// phpcs:enable WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
 	];

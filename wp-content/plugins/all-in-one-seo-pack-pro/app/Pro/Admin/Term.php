@@ -40,13 +40,10 @@ class Term {
 	 * @return void
 	 */
 	public function saveNewTerm( $termId, $ttid, $slug ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
-		$term                      = Models\Term::getTerm( $termId );
-		$term->term_id             = $termId;
-		$term->priority            = 'default';
-		$term->frequency           = 'default';
-		$term->seo_score           = 0;
-		$term->schema_type         = 'none';
-		$term->schema_type_options = Models\Term::getDefaultSchemaOptions();
+		$term            = Models\Term::getTerm( $termId );
+		$term->term_id   = $termId;
+		$term->priority  = 'default';
+		$term->frequency = 'default';
 		$term->save();
 	}
 

@@ -96,15 +96,14 @@ class Updates {
 		}
 
 		// If the user cannot update plugins, stop processing here.
-		if ( ! current_user_can( 'update_plugins' ) ) {
+		if ( ! current_user_can( 'update_plugins' ) && ! aioseo()->helpers->isDoingWpCli() ) {
 			return;
 		}
 
 		// Load the updater hooks and filters.
 		add_filter( 'pre_set_site_transient_update_plugins', [ $this, 'updatePluginsFilter' ], 1000 );
-		add_filter( 'http_request_args', [ $this, 'httpRequestArgs' ], 10, 2 );
+		add_filter( 'http_request_args', [ $this, 'httpRequestArgs' ] );
 		add_filter( 'plugins_api', [ $this, 'pluginsApi' ], 10, 3 );
-
 	}
 
 	/**
@@ -112,12 +111,12 @@ class Updates {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  object $value The WordPress update object.
+	 * @param  mixed  $value The WordPress update object.
 	 * @return object        Amended WordPress update object on success, default if object is empty.
 	 */
 	public function updatePluginsFilter( $value ) {
-		// If no update object exists, return early.
-		if ( empty( $value ) ) {
+		// If no update object exists, bail to prevent errors.
+		if ( empty( $value ) || ! is_object( $value ) ) {
 			return $value;
 		}
 
@@ -195,7 +194,7 @@ class Updates {
 	 *
 	 * @param  object $api    The original plugins_api object.
 	 * @param  string $action The action sent by plugins_api.
-	 * @param  array  $args   Additional args to send to plugins_api.
+	 * @param  object $args   Additional args to send to plugins_api.
 	 * @return object         New stdClass with plugin information on success, default response on failure.
 	 */
 	public function pluginsApi( $api, $action = '', $args = null ) {
@@ -228,7 +227,8 @@ class Updates {
 				'php_version' => PHP_VERSION,
 				'wp_version'  => get_bloginfo( 'version' )
 			] );
-			if ( ! $response || empty( $response ) || ! empty( $response->error ) ) {
+
+			if ( empty( $response ) || ! empty( $response->error ) ) {
 				$this->info = false;
 
 				return $defaultApi;
@@ -238,7 +238,7 @@ class Updates {
 		}
 
 		// Create a new stdClass object and populate it with our plugin information.
-		$api                        = new \stdClass;
+		$api                        = new \stdClass();
 		$api->name                  = isset( $this->info->name ) ? $this->info->name : '';
 		$api->slug                  = isset( $this->info->slug ) ? $this->info->slug : '';
 		$api->version               = isset( $this->info->version ) ? $this->info->version : '';

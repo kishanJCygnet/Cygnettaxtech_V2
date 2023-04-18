@@ -67,7 +67,7 @@
 							<input
 							  id="es_from_name" name="es_from_name" value="<?php echo esc_attr( $from_name ); ?>" required
 							  class="es_from_name block w-full mt-1 text-sm transition duration-150 ease-in-out rounded-md shadow-sm form-input sm:leading-5"
-							  placeholder="Name"
+							  placeholder="Name" autocomplete="nope"
 							/>
 						  </div>
 
@@ -76,7 +76,7 @@
 							<input type="email"
 							  id="es_from_email" name="es_from_email" value="<?php echo esc_attr( $from_email ); ?>" required
 							  class="es_from_email es_onboard_email block w-full mt-1 text-sm transition duration-150 ease-in-out rounded-md shadow-sm form-input sm:leading-5"
-							  placeholder="name@domain.com"
+							  placeholder="name@domain.com" autocomplete="nope"
 							/>
 						  </div>
 						</div>
@@ -103,14 +103,14 @@
 							  name="es_test_email[]"
 							  required
 							  class="es_email es_onboard_email block w-full text-sm transition duration-150 ease-in-out rounded-md shadow-sm form-input sm:leading-5"
-							  placeholder="name@domain.com"
+							  placeholder="name@domain.com" autocomplete="nope"
 							/>
 						  </div>
 						  <div class="w-full sm:w-1/2">
 							<input type="email"
 							  name="es_test_email[]"
 							  class="es_email es_onboard_email block w-full text-sm transition duration-150 ease-in-out rounded-md shadow-sm form-input sm:leading-5"
-							  placeholder="name@domain.com"
+							  placeholder="name@domain.com" autocomplete="nope"
 							/>
 						  </div>
 						</div>
@@ -133,7 +133,7 @@
 									<label for="es_allow_tracking" class="text-sm">
 									<?php
 										/* translators: %s. Plugin name. */
-										echo sprintf( esc_html__( 'Help us to improve %s by opting in to share non-sensitive plugin usage data. No personal data is tracked or stored.', 'email-subscribers' ), '<strong>Email Subscribers</strong>' );
+										echo sprintf( esc_html__( 'Help us to improve %s by opting in to share non-sensitive plugin usage data. No personal data is tracked or stored.', 'email-subscribers' ), '<strong>Icegram Express</strong>' );
 									?>
 									</label>
 								</div>
@@ -333,63 +333,6 @@
 							);
 							?>
 						  </p>
-						</li>
-
-						<li id="ig-es-onboard-test-email-delivery" class="flex items-start space-x-3 group">
-						  <div
-							class="relative pt-1 flex items-center justify-center flex-shrink-0 w-5 h-5"
-						  >
-							<span
-							  class="block w-2 h-2 transition duration-150 ease-in-out bg-gray-300 rounded-full group-hover:bg-gray-400 group-focus:bg-gray-400"
-							></span>
-						  </div>
-						  <div>
-							<p class="text-sm"><?php echo esc_html__( 'Testing email delivery...', 'email-subscribers' ); ?></p>
-							<ul class="mt-3 space-y-2 font-normal sm:space-y-3" id="ig-es-onboard-test-email-delivery-tasks-list">
-							<li id="ig-es-onboard-queue_default_broadcast_newsletter" class="flex items-start space-x-3 group">
-								<div
-								class="relative pt-1 flex items-center justify-center flex-shrink-0 w-5 h-5"
-								>
-								<span
-									class="block w-2 h-2 transition duration-150 ease-in-out bg-gray-300 rounded-full group-hover:bg-gray-400 group-focus:bg-gray-400"
-								></span>
-								</div>
-								<p class="text-sm"><?php echo esc_html__( 'Queuing up campaign - newsletter broadcast test', 'email-subscribers' ); ?></p>
-							</li>
-							<li id="ig-es-onboard-dispatch_emails_from_server" class="flex items-start space-x-3 group">
-								<div
-								class="relative pt-1 flex items-center justify-center flex-shrink-0 w-5 h-5"
-								>
-								<span
-									class="block w-2 h-2 transition duration-150 ease-in-out bg-gray-300 rounded-full group-hover:bg-gray-400 group-focus:bg-gray-400"
-								></span>
-								</div>
-								<p class="text-sm"><?php echo esc_html__( 'Dispatching emails from your server', 'email-subscribers' ); ?></p>
-							</li>
-							<li id="ig-es-onboard-check_test_email_on_server" class="flex items-start space-x-3 group">
-								<div
-								class="relative pt-1 flex items-center justify-center flex-shrink-0 w-5 h-5"
-								>
-								<span
-									class="block w-2 h-2 transition duration-150 ease-in-out bg-gray-300 rounded-full group-hover:bg-gray-400 group-focus:bg-gray-400"
-								></span>
-								</div>
-								<p class="text-sm">
-								<?php echo esc_html__( 'Waiting for test email to arrive on destination server', 'email-subscribers' ); ?>
-								</p>
-							</li>
-							<li id="ig-es-onboard-evaluate_email_delivery" class="flex items-start space-x-3 group">
-								<div
-								class="relative pt-1 flex items-center justify-center flex-shrink-0 w-5 h-5"
-								>
-								<span
-									class="block w-2 h-2 transition duration-150 ease-in-out bg-gray-300 rounded-full group-hover:bg-gray-400 group-focus:bg-gray-400"
-								></span>
-								</div>
-								<p class="text-sm"><?php echo esc_html__( 'Excellent! Email delivery setup is working well!', 'email-subscribers' ); ?></p>
-							</li>
-							</ul>
-						</div>
 						</li>
 					</ul>
 					</div>

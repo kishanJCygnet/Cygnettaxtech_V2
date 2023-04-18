@@ -47,8 +47,7 @@ class ES_Drag_And_Drop_Editor {
 					}
 				}
 			} else {
-				$is_form_page = 'es_forms' === $current_page;
-				if ( $is_form_page ) {
+				if ( 'es_forms' === $current_page ) {
 					$action 	 = ig_es_get_request_data( 'action' );
 					$is_new_form = 'new' === $action;
 					if ( $is_new_form ) {
@@ -59,6 +58,18 @@ class ES_Drag_And_Drop_Editor {
 							$form_data          = ES()->forms_db->get( $form_id );
 							$settings_data      = maybe_unserialize( $form_data['settings'] );
 							$editor_type        = ! empty( $settings_data['editor_type'] ) ? $settings_data['editor_type'] : '';
+							$is_dnd_editor_page = IG_ES_DRAG_AND_DROP_EDITOR === $editor_type;
+						}
+					}
+				} elseif ( 'es_template' === $current_page ) {
+					$action 	 = ig_es_get_request_data( 'action' );
+					$is_new_template = 'new' === $action;
+					if ( $is_new_template ) {
+						$is_dnd_editor_page = true;
+					} else {
+						$template_id = ig_es_get_request_data( 'id' );
+						if ( ! empty( $template_id ) ) {
+							$editor_type        = get_post_meta( $template_id, 'es_editor_type', true );
 							$is_dnd_editor_page = IG_ES_DRAG_AND_DROP_EDITOR === $editor_type;
 						}
 					}
@@ -75,25 +86,19 @@ class ES_Drag_And_Drop_Editor {
 		if ( ! self::is_dnd_editor_page() ) {
 			return;
 		}
-
 		
 		$current_page = ig_es_get_request_data( 'page' );
 		//Only for development - this branch only
-		//wp_register_script( 'es_editor_js', 'http://localhost:9000/main.js', array(), time(), true );
+		// wp_register_script( 'es_editor_js', 'http://localhost:9000/main.js', array(), time(), true );
 		wp_register_script( 'es_editor_js', ES_PLUGIN_URL . 'lite/admin/js/editor.js', array( ), ES_PLUGIN_VERSION, true );
 		
 		if ( 'es_forms' === $current_page ) {
-			$active_theme_url = get_template_directory_uri();
-			$active_theme_css = $active_theme_url . '/style.css';
 
 			$lists = ES()->lists_db->get_lists();
 
 			$form_editor_data = array(
 				'lists' => $lists,
-				'styles' => array(
-					$active_theme_css
-				),
-				'i18n' => array(
+				'i18n'  => array(
 					'no_list_selected_message' => __( 'Please select list(s) in which contact will be subscribed.', 'email-subscribers' ),
 				),
 			);
@@ -101,6 +106,20 @@ class ES_Drag_And_Drop_Editor {
 			$form_editor_data = apply_filters( 'ig_es_form_editor_data', $form_editor_data );
 
 			wp_localize_script( 'es_editor_js', 'ig_es_form_editor_data', $form_editor_data );
+		} else {
+			$campaign_admin  = ES_Campaign_Admin::get_instance();
+			$campaign_tags   = $campaign_admin->get_dnd_campaign_tags();
+			$subscriber_tags = $campaign_admin->get_dnd_subscriber_tags();
+			$site_tags       = $campaign_admin->get_dnd_site_tags();
+
+			$campaign_editor_data = array(
+				'campaignTags'    => $campaign_tags,
+				'subscriberTags'  => $subscriber_tags,
+				'siteTags'        => $site_tags,
+				'isPro'		      => ES()->is_pro(),
+			);
+
+			wp_localize_script( 'es_editor_js', 'ig_es_campaign_editor_data', $campaign_editor_data );
 		}
 
 		wp_enqueue_script( 'es_editor_js' );
@@ -118,7 +137,7 @@ class ES_Drag_And_Drop_Editor {
 			return;
 		}
 		
-		//wp_enqueue_style( 'es_editor_css', 'http://localhost:9000/main.css', array(), time(), 'all' );
+		// wp_enqueue_style( 'es_editor_css', 'http://localhost:9000/main.css', array(), time(), 'all' );
 		wp_enqueue_style( 'es_editor_css', ES_PLUGIN_URL . 'lite/admin/css/editor.css', array(), ES_PLUGIN_VERSION, 'all' );
 	}
 
