@@ -126,6 +126,28 @@
 		</div>
     </footer>
     <!-- End Footer -->
+	
+	<!-- Start Breadcrumb with link section -->
+	<?php 
+	if ( is_page() && $post->post_parent ) {
+		$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->post_parent . '&echo=0&exclude='.$post->ID );
+	} else {
+		$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->ID . '&echo=0' );
+	}
+	if ( $childpages ) { ?>
+		<div class="sticky-main-cls">
+			<div class="sticky-left-cls">
+				<?php if ( $post->post_parent ) { ?>
+					<a href="<?php echo get_permalink( $post->post_parent ); ?>" ><?php echo get_the_title( $post->post_parent )." / "; ?></a>
+				<?php } ?>
+				<?php echo $post->post_title; ?>
+			</div>
+			<div class="sticky-right-cls">
+				<?php echo $string = '<ul>'. $childpages . '</ul>';	?>
+			</div>
+		</div>
+	<?php } ?>
+	<!-- End Breadcrumb with link section -->
 
    <!-- js -->
     <script src="<?php echo THEME_PATH; ?>assets/dist/js/jquery-3.6.0.min.js"></script>
