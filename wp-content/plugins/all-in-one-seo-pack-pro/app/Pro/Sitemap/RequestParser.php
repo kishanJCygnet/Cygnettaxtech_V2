@@ -23,7 +23,13 @@ class RequestParser extends CommonSitemap\RequestParser {
 	 * @return void
 	 */
 	public function checkRequest( $wp ) {
-		$this->slug = untrailingslashit( strtolower( $wp->request ) );
+		$this->slug = $wp->request
+			? $this->cleanSlug( $wp->request )
+			// We must fallback to the REQUEST URI in case the site uses plain permalinks.
+			: $this->cleanSlug( $_SERVER['REQUEST_URI'] );
+
+		// Check if we need to remove the trailing slash or redirect another sitemap URL like "wp-sitemap.xml".
+		$this->maybeRedirect();
 
 		foreach ( aioseo()->addons->getLoadedAddons() as $loadedAddon ) {
 			if ( ! empty( $loadedAddon->requestParser ) && method_exists( $loadedAddon->requestParser, 'checkRequest' ) ) {
@@ -31,6 +37,7 @@ class RequestParser extends CommonSitemap\RequestParser {
 			}
 		}
 
+		// The addons need to run before Core does, since the Video and News Sitemap will otherwise be mistaken for the regular one.
 		parent::checkRequest( $wp );
 	}
 }

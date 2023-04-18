@@ -36,7 +36,7 @@ class Description extends CommonMeta\Description {
 		$description = '';
 		$metaData    = aioseo()->meta->metaData->getMetaData( $term );
 		if ( ! empty( $metaData->description ) && ! $default ) {
-			$description = $this->helpers->prepare( $metaData->description );
+			$description = $this->helpers->prepare( $metaData->description, $term->term_id );
 		}
 
 		if (
@@ -53,7 +53,7 @@ class Description extends CommonMeta\Description {
 			$description = $this->helpers->prepare( aioseo()->dynamicOptions->searchAppearance->taxonomies->{$term->taxonomy}->metaDescription, false, $default );
 		}
 
-		$terms[ $term->term_id ] = $description ? $description : $this->helpers->prepare( term_description( $term->term_id ), false, $default );
+		$terms[ $term->term_id ] = $description ? $description : $this->helpers->prepare( term_description( $term->term_id ), $term->term_id, $default );
 
 		return $terms[ $term->term_id ];
 	}

@@ -27,6 +27,7 @@ class Updates extends CommonMain\Updates {
 		add_action( 'aioseo_loaded', [ $this, 'runPreAddonUpdates' ], 1 );
 		add_action( 'aioseo_v4_migrate_post_og_image', [ $this, 'migratePostOgImage' ] );
 		add_action( 'aioseo_v4_migrate_term_og_image', [ $this, 'migrateTermOgImage' ] );
+		add_action( 'aioseo_v432_unschedule_objects_scan', [ $this, 'cancelDuplicateObjectsActions' ] );
 	}
 
 	/**
@@ -72,6 +73,26 @@ class Updates extends CommonMain\Updates {
 		if ( version_compare( $lastActiveVersion, '4.1.9', '<' ) ) {
 			// Clear addons cache to fix the PHP warning/error with the version_compare where the minimum version key for the REST API addon didn't exist yet locally.
 			aioseo()->core->cache->delete( 'addons' );
+		}
+
+		if ( version_compare( $lastActiveVersion, '4.2.4', '<' ) ) {
+			$this->migrateImageSeoOptions();
+		}
+
+		if ( version_compare( $lastActiveVersion, '4.3.0', '<' ) ) {
+			$this->addSearchStatisticsTables();
+			aioseo()->access->addCapabilities();
+
+			// Clear addons cache to get the new features array to check for minimum plan levels.
+			aioseo()->core->cache->delete( 'addons' );
+		}
+
+		if ( version_compare( $lastActiveVersion, '4.3.2', '<' ) ) {
+			$this->addOpenAiColumns();
+		}
+
+		if ( version_compare( $lastActiveVersion, '4.3.3', '<' ) ) {
+			aioseo()->actionScheduler->scheduleSingle( 'aioseo_v432_unschedule_objects_scan', 30 );
 		}
 	}
 
@@ -760,5 +781,108 @@ class Updates extends CommonMain\Updates {
 				DROP tabs"
 			);
 		}
+	}
+
+	/**
+	 * Migrates the old Image SEO options to the new structure.
+	 *
+	 * @since 4.2.4
+	 *
+	 * @return void
+	 */
+	public function migrateImageSeoOptions() {
+		$image            = aioseo()->options->image->all();
+		$format           = ! empty( $image['format'] ) ? $image['format'] : '';
+		$stripPunctuation = ! empty( $image['stripPunctuation'] ) ? $image['stripPunctuation'] : '';
+
+		if ( $format ) {
+			foreach ( $format as $attribute => $option ) {
+				aioseo()->options->image->{$attribute}->format = $option;
+			}
+		}
+
+		if ( $stripPunctuation ) {
+			foreach ( $stripPunctuation as $attribute => $option ) {
+				aioseo()->options->image->{$attribute}->stripPunctuation = $option;
+			}
+		}
+
+		// If the user was already actively using the Image SEO addon, disable the upload settings.
+		if ( ! aioseo()->addons->getLoadedAddon( 'imageSeo' ) ) {
+			return;
+		}
+
+		aioseo()->options->image->caption->autogenerate     = false;
+		aioseo()->options->image->description->autogenerate = false;
+	}
+
+	/**
+	 * Adds the tables for Search Statistics.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @return void
+	 */
+	public function addSearchStatisticsTables() {
+		$db             = aioseo()->core->db->db;
+		$charsetCollate = '';
+		if ( ! empty( $db->charset ) ) {
+			$charsetCollate .= "DEFAULT CHARACTER SET {$db->charset}";
+		}
+		if ( ! empty( $db->collate ) ) {
+			$charsetCollate .= " COLLATE {$db->collate}";
+		}
+
+		// Check for search_statistics_objects table.
+		if ( ! aioseo()->core->db->tableExists( 'aioseo_search_statistics_objects' ) ) {
+			$tableName = $db->prefix . 'aioseo_search_statistics_objects';
+
+			aioseo()->core->db->execute(
+				"CREATE TABLE {$tableName} (
+					id bigint(20) unsigned NOT NULL auto_increment,
+					object_id bigint(20) unsigned NOT NULL,
+					object_type varchar(100) NOT NULL,
+					object_subtype varchar(100) NOT NULL,
+					object_path varchar(500) NOT NULL,
+					object_path_hash varchar(40) NOT NULL,
+					seo_score int(11) unsigned NOT NULL,
+					created datetime NOT NULL,
+					updated datetime NOT NULL,
+					PRIMARY KEY (id),
+					KEY ndx_aioseo_object_id1 (object_id),
+					KEY ndx_aioseo_object_path_hash1 (object_path_hash)
+				) {$charsetCollate};"
+			);
+		}
+	}
+
+	/**
+	 * Adds the post column for the OpenAI data.
+	 *
+	 * @since 4.3.2
+	 *
+	 * @return void
+	 */
+	private function addOpenAiColumns() {
+		if ( ! aioseo()->core->db->columnExists( 'aioseo_posts', 'open_ai' ) ) {
+			$tableName = aioseo()->core->db->db->prefix . 'aioseo_posts';
+			aioseo()->core->db->execute(
+				"ALTER TABLE {$tableName}
+				ADD open_ai mediumtext DEFAULT NULL AFTER options"
+			);
+
+			aioseo()->internalOptions->database->installedTables = '';
+		}
+	}
+
+	/**
+	 * Cancels all duplicate aioseo_search_statistics_objects_scan actions.
+	 *
+	 * @since 4.3.3
+	 *
+	 * @return void
+	 */
+	public function cancelDuplicateObjectsActions() {
+		as_unschedule_all_actions( 'aioseo_search_statistics_objects_scan' );
 	}
 }

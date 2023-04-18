@@ -40,7 +40,11 @@ class InternalOptions extends CommonOptions\InternalOptions {
 				'requestError'     => [ 'type' => 'boolean', 'default' => false ],
 				'lastChecked'      => [ 'type' => 'number', 'default' => 0 ],
 				'level'            => [ 'type' => 'string' ],
-				'addons'           => [ 'type' => 'array', 'default' => [] ]
+				'addons'           => [ 'type' => 'string', 'default' => '' ],
+				'features'         => [ 'type' => 'string', 'default' => '' ]
+			],
+			'schema'         => [
+				'templates' => [ 'type' => 'array', 'default' => [] ]
 			]
 		]
 		// phpcs:enable WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound

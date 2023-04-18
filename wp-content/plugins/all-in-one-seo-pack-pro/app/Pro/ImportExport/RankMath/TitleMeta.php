@@ -28,6 +28,15 @@ class TitleMeta {
 	];
 
 	/**
+	 * List of options.
+	 *
+	 * @since 4.2.7
+	 *
+	 * @var array
+	 */
+	private $options = [];
+
+	/**
 	 * Class constructor.
 	 *
 	 * @since 4.0.0
@@ -88,6 +97,11 @@ class TitleMeta {
 								if ( 'index' === $robotsName ) {
 									continue;
 								}
+
+								if ( 'noindex' === $robotsName ) {
+									aioseo()->dynamicOptions->searchAppearance->taxonomies->{$taxonomy}->show = false;
+								}
+
 								aioseo()->dynamicOptions->searchAppearance->taxonomies->$taxonomy->advanced->robotsMeta->$robotsName = true;
 							}
 						}

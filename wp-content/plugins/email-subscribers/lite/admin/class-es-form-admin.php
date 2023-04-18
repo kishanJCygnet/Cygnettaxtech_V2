@@ -15,7 +15,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 	 * @subpackage Email_Subscribers/admin
 	 */
 	class ES_Form_Admin {
-	
+
 		// class instance
 		public static $instance;
 
@@ -28,14 +28,14 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 			if ( ! isset( self::$instance ) ) {
 				self::$instance = new self();
 			}
-	
+
 			return self::$instance;
 		}
 
 		public function init() {
 			$this->register_hooks();
 		}
-	
+
 		public function register_hooks() {
 			add_action( 'wp_ajax_ig_es_get_form_preview', array( $this, 'get_form_preview' ) );
 			add_action( 'ig_es_render_dnd_form', array( $this, 'render_dnd_form' ), 10, 2 );
@@ -45,12 +45,12 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 		public function render_classic_form( $id, $data ) {
 
 			$is_new = empty( $id ) ? 1 : 0;
-	
+
 			$action = 'new';
 			if ( ! $is_new ) {
 				$action = 'edit';
 			}
-	
+
 			$form_data['name']               = ! empty( $data['name'] ) ? sanitize_text_field( $data['name'] ) : '';
 			$form_data['name_visible']       = ! empty( $data['name_visible'] ) ? sanitize_text_field( $data['name_visible'] ) : 'no';
 			$form_data['name_required']      = ! empty( $data['name_required'] ) ? sanitize_text_field( $data['name_required'] ) : 'no';
@@ -69,12 +69,12 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 			$form_data['captcha']            = ES_Common::get_captcha_setting( 0, $data );
 			$form_data['show_in_popup']      = ! empty( $data['show_in_popup'] ) ? $data['show_in_popup'] : 'no';
 			$form_data['popup_headline']     = ! empty( $data['popup_headline'] ) ? $data['popup_headline'] : '';
-	
+
 			$lists = ES()->lists_db->get_list_id_name_map();
 			$nonce = wp_create_nonce( 'es_form' );
-	
+
 			?>
-	
+
 			<div class="max-w-full -mt-3 font-sans">
 				<header class="wp-heading-inline">
 					<nav class="text-gray-400 my-0" aria-label="Breadcrumb">
@@ -98,7 +98,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 								} else {
 									esc_html_e( ' Edit Form', 'email-subscribers' );
 								}
-	
+
 								?>
 							</h2>
 						</div>
@@ -166,11 +166,11 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 															<td class="pr-6 pb-8">
 																<input type="checkbox" class="form-checkbox opacity-0"  name="form_data[email_visible]" value="yes" disabled="disabled" checked="checked" />
 															</td>
-	
-	
+
+
 															<td class="pr-6 pb-8">
 																<input type="checkbox" class="form-checkbox opacity-0" name="form_data[email_required]" value="yes" disabled="disabled" checked="checked"></td>
-	
+
 																<td class="pr-6 pb-8">
 																	<input class="form-input block border-gray-400 w-5/6 pr-12 h-8 shadow-sm  focus:bg-gray-100 sm:text-sm sm:leading-5" name="form_data[email_label]" value="<?php echo esc_attr( $form_data['email_label'] ); ?>">
 																</td>
@@ -180,7 +180,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 															</tr>
 															<tr class="form-field">
 																<td class="pr-6 pb-8"><b class="text-gray-500 text-sm font-normal pb-2"><?php esc_html_e( 'Name', 'email-subscribers' ); ?></b></td>
-	
+
 																<td class="pr-6 pb-8">
 																	<input type="checkbox" class="form-checkbox es_visible" name="form_data[name_visible]" value="yes"
 																	<?php
@@ -221,7 +221,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 																		<td class="pr-6 pb-6"><input type="checkbox" class="form-checkbox" name="form_data[button_required]" value="yes" disabled="disabled" checked="checked"></td>
 																		<td class="pr-6 pb-6"><input class="form-input block border-gray-400 w-5/6 pr-12 h-8 shadow-sm  focus:bg-gray-100 sm:text-sm sm:leading-5" name="form_data[button_label]" value="<?php echo esc_attr( $form_data['button_label'] ); ?>"></td>
 																	</tr>
-	
+
 																</table>
 															</div>
 														</div>
@@ -240,7 +240,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 																if ( count( $lists ) > 0 ) {
 																	$lists_checkboxes = ES_Shortcode::prepare_lists_checkboxes( $lists, array_keys( $lists ), 3, (array) $form_data['lists'] );
 																	echo wp_kses( $lists_checkboxes, $allowedtags );
-	
+
 																} else {
 																	$create_list_link = admin_url( 'admin.php?page=es_lists&action=new' );
 																	?>
@@ -254,7 +254,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 															</div>
 														</div>
 													</div>
-	
+
 													<div class="flex flex-row border-b border-gray-100">
 														<div class="flex w-1/5">
 															<div class="ml-4 pt-4 mb-2">
@@ -271,14 +271,14 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 																		if ( 'yes' === $form_data['list_visible'] ) {
 																			echo 'checked="checked"';
 																		}
-	
+
 																		?>
 																		/>
-	
+
 																		<span class="es-mail-toggle-line"></span>
 																		<span class="es-mail-toggle-dot"></span>
 																	</span>
-	
+
 																</label>
 															</div>
 															<div class="ml-8 mb-4 mr-4 mt-10" id="es_list_label" style="display:none">
@@ -286,11 +286,11 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 															</div>
 														</div>
 													</div>
-	
-	
+
+
 													<?php do_action( 'ig_es_additional_form_options', $form_data, $data ); ?>
-	
-	
+
+
 													<div class="flex flex-row border-b border-gray-100">
 														<div class="flex w-1/5">
 															<div class="ml-4 pt-4 mb-2">
@@ -312,7 +312,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 																					}
 																					?>
 																					/>
-	
+
 																					<span class="es-mail-toggle-line"></span>
 																					<span class="es-mail-toggle-dot"></span>
 																				</span>
@@ -329,7 +329,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 															</div>
 														</div>
 													</div>
-	
+
 													<input type="hidden" name="form_data[af_id]" value="<?php echo esc_attr( $form_data['af_id'] ); ?>"/>
 													<input type="hidden" name="submitted" value="submitted"/>
 													<?php
@@ -354,25 +354,26 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 									</div>
 			</div>
 			<?php
-	
+
 		}
 
 		public function render_dnd_form( $id, $data ) {
 
 			$form_data = $data;
-			
+
 			$form_id     = ! empty( $form_data['form_id'] ) ? $form_data['form_id'] : 0;
 			$form_name   = ! empty( $form_data['name'] ) ? $form_data['name'] : __( 'Untitled Form', 'email-subscribers' );
 			$editor_type = ! empty( $form_data['settings']['editor_type'] ) ? $form_data['settings']['editor_type'] : '';
-	
+			$form_style  = ! empty( $form_data['settings']['form_style'] ) ? $form_data['settings']['form_style'] : '';
+
 			$action = 'new';
 			if ( $form_id ) {
 				$action = 'edit';
 			}
-	
+
 			$nonce = wp_create_nonce( 'es_form' );
 			?>
-			
+
 			<div id="es-edit-form-container" data-editor-type="<?php echo esc_attr( $editor_type ); ?>" class="<?php echo esc_attr( $editor_type ); ?> font-sans pt-1.5 wrap">
 				<?php
 				if ( ! empty( $message_data ) ) {
@@ -384,6 +385,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 				<form  id="es-edit-form" method="POST" action="admin.php?page=es_forms&action=<?php echo esc_attr( $action ); ?>&form=<?php echo esc_attr( $form_id ); ?>&_wpnonce=<?php echo esc_attr( $nonce ); ?>">
 					<input type="hidden" id="form_id" name="form_data[id]" value="<?php echo esc_attr( $form_id ); ?>"/>
 					<input type="hidden" id="editor_type" name="form_data[settings][editor_type]" value="<?php echo esc_attr( $editor_type ); ?>"/>
+					<input type="hidden" id="form_style" name="form_data[settings][form_style]" value="<?php echo esc_attr( $form_style ); ?>"/>
 					<?php wp_nonce_field( 'ig-es-form-nonce', 'ig_es_form_nonce' ); ?>
 					<fieldset class="block es_fieldset">
 						<div class="mx-auto wp-heading-inline max-w-7xl">
@@ -399,7 +401,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 													</li>
 											</ol>
 											</nav>
-											
+
 											<input name="form_data[name]" value="<?php echo esc_html( $form_name ); ?>" id="es-form-name" class="form-heading-label bg-transparent outline-0 -mt-1 text-2xl font-medium text-gray-700 sm:leading-7 sm:truncate inline-block w-1/2" readonly="readonly">
 											<span id="es-toggle-form-name-edit" class="dashicons dashicons-edit cursor-pointer"></span>
 										</div>
@@ -426,14 +428,14 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 												</svg>
 											</button>
 										</div>
-			
+
 										<div id="view_form_content_button" class="es-second-step-buttons-wrapper flex hidden mt-4 md:mt-0">
 											<button type="button"
 													class="inline-flex justify-center w-full py-1.5 text-sm font-medium leading-5 text-indigo-600 transition duration-150 ease-in-out border border-indigo-500 rounded-md cursor-pointer select-none pre_btn md:px-1 lg:px-3 xl:px-4 hover:text-indigo-500 hover:border-indigo-600 hover:shadow-md focus:outline-none focus:shadow-outline-indigo focus:shadow-lg ">
 											<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" viewBox="0 0 20 20" class="w-3 h-3 my-1 mr-1"><path d="M15 19l-7-7 7-7"></path></svg><?php echo esc_html__( 'Previous', 'email-subscribers' ); ?>
 											</button>
 										</div>
-			
+
 										<span id="form_summary_actions_buttons_wrapper" class="es-second-step-buttons-wrapper hidden md:ml-2 xl:ml-2">
 											<input type="hidden" name="submitted" value="submitted"/>
 											<button type="submit" id="ig_es_save_form_btn" name="ig_es_form_action" class="inline-flex justify-center w-24 py-1.5 text-sm font-medium leading-5 text-indigo-600 transition duration-150 ease-in-out border border-indigo-500 rounded-md cursor-pointer select-none pre_btn md:px-1 lg:px-3 xl:px-4 hover:text-indigo-500 hover:border-indigo-600 hover:shadow-md focus:outline-none focus:shadow-outline-indigo focus:shadow-lg" value="save">
@@ -460,17 +462,111 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 									?>
 								</textarea>
 								<script>
-									jQuery(document).ready(function(){
-										let editor_data = jQuery('#form-dnd-editor-data').val().trim();
-										if ( '' !== editor_data ) {
-											let is_valid_json = ig_es_is_valid_json( editor_data );
-											if ( is_valid_json ) {
-												editor_data = JSON.parse( editor_data );
+									jQuery(document).ready(function($){
+										if ( 'undefined' !== typeof wp && 'undefined' !== typeof wp.i18n ) {
+											window.__ = wp.i18n.__;
+										} else {
+											// Create a dummy fallback function incase i18n library isn't available.
+											window.__ = ( text, textDomain ) => {
+												return text;
 											}
-											jQuery(document).on("es_drag_and_drop_editor_loaded",function (event) {
-												window.esVisualEditor.importMjml(editor_data);
-											});
 										}
+
+										let editorData = $('#form-dnd-editor-data').val().trim();
+										$(document).on('es_drag_and_drop_editor_loaded',function (event) {
+											let frontendCSS    = ig_es_js_data.frontend_css;
+											let canvasHeadHTML = esVisualEditor.Canvas.getDocument().head.innerHTML;
+											canvasHeadHTML     += frontendCSS; // Append links/styles tags in Canvas head section
+											esVisualEditor.Canvas.getDocument().head.innerHTML = canvasHeadHTML;
+											if ( '' !== editorData ) {
+												let is_valid_json = ig_es_is_valid_json( editorData );
+												if ( is_valid_json ) {
+													editorData = JSON.parse( editorData );
+													window.esVisualEditor.importMjml(editorData);
+												}
+											}
+
+											let formStyles      = ig_es_js_data.form_styles;
+											let commonCSS       = ig_es_js_data.common_css;
+											let currentStyleId  = $('#form_style').val();
+											currentStyleId      = currentStyleId ? currentStyleId : 'theme-styling'; // Set default styling to theme style.
+											let currentStyle    = formStyles.find( style => currentStyleId === style.id );
+											let currentStyleCSS = '';
+
+											if ( currentStyle ) {
+												currentStyleCSS = currentStyle ? currentStyle.css : '';
+											} else {
+												// Set default style to theme styling.
+												let themeStyle  = formStyles.find( style => style.id === 'theme-styling' );
+												currentStyleCSS = themeStyle.css;
+											}
+											
+											esVisualEditor.setStyle( commonCSS + currentStyleCSS);
+
+											let esPlan             = ig_es_js_data.es_plan;
+											let isPremium          = ig_es_js_data.is_premium;
+											let canUpsellFormStyle = ! isPremium;
+
+											let formStylesHTML = `<div class="es-form-editor-options-sidebar">
+												<div class="pt-2 pb-4 mx-4">
+													<div class="flex w-full border-b border-gray-200 pb-2">
+														<div class="w-1/3 text-sm font-normal text-gray-600 leading-9">${__( 'Form style', 'email-subscribers' )}</div>
+														<div class="w-2/3 text-right">
+															<span class="relative inline-block">
+																<button id="form-style-button" type="button" class="py-1 px-2 ig-es-title-button">
+																	<span>${currentStyle ? currentStyle.name : __( 'Theme style', 'email-subscribers' ) }</span>
+																	<svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
+																		<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+																	</svg>
+																</button>
+																${canUpsellFormStyle ? '<span class="premium-icon ml-1 align-text-bottom"></span>' : ''}
+																<div x-show="open" id="form-styles-options" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
+																		x-transition:leave-end="transform opacity-0 scale-95" class="absolute z-50 right-0 hidden w-56 mt-2 origin-top-right rounded-md shadow-lg text-left">
+																	<div class="bg-white rounded-md shadow-xs">
+																		<div class="py-1">
+																			${formStyles.map( style => `<span data-style-id="${style.id}" class="style-option block px-4 py-2 text-sm leading-5 text-gray-700 cursor-pointer hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">${style.name}</span>`).join("")}
+																		</div>
+																	</div>
+																</div>
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>`;
+		
+											$(formStylesHTML).insertBefore('.es-content');
+											
+											$('form#es-edit-form #form-style-button').on('click',()=>{
+												if ( canUpsellFormStyle ) {
+													window.open('https://www.icegram.com/express/pricing/?utm_source=in_app&utm_medium=form_styles&utm_campaign=es_upsell', '_blank');
+												} else {
+													$('form#es-edit-form #form-styles-options').toggle();
+												}
+											});
+
+											$(document).on("click", function (event) {
+												var $trigger = $("form#es-edit-form #form-style-button");
+												if ($trigger !== event.target && !$trigger.has(event.target).length) {
+													$("form#es-edit-form #form-styles-options").hide();
+												}
+											});
+
+											$('form#es-edit-form .style-option').on('click', (e) => {
+												e.preventDefault();
+												let style_id   = $(e.target).data('style-id');
+												let style_text = $(e.target).text();
+												$('#form_style').val(style_id).trigger('change');
+												$('#form-style-button span').text(style_text);
+												$('#ig-es-styles-options').toggle();
+											});
+											
+											$('form#es-edit-form #form_style').on('change',function(){
+												let selected_style_id  = $(this).val();
+												let selected_style     = formStyles.find(style => style.id === selected_style_id);
+												let selected_style_css = selected_style.css ? selected_style.css : '';
+												esVisualEditor.setStyle( commonCSS + selected_style_css );
+											});
+										});
 									});
 								</script>
 								<div class="bg-white rounded-lg shadow-md">
@@ -489,9 +585,9 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 								</div>
 							</div>
 					</fieldset>
-			
+
 					<fieldset class="es_fieldset">
-			
+
 						<div class="mt-7 hidden mx-auto es_form_second max-w-7xl es-second-step">
 							<div class="max-w-7xl">
 								<div class="bg-white rounded-lg shadow md:flex">
@@ -501,7 +597,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 												<?php echo esc_html__( 'Form Preview', 'email-subscribers' ); ?>
 											</span>
 										</div>
-			
+
 										<div class="block pb-2 mx-4 mt-4 inline_form-popup-preview-container">
 											<div class="block mt-3 form_preview_content"></div>
 										</div>
@@ -524,7 +620,7 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 													<?php
 													$allowedtags = ig_es_allowed_html_tags_in_esc();
 													if ( count( $lists ) > 0 ) {
-														$form_lists = ! empty( $form_data['settings']['lists'] ) ? $form_data['settings']['lists'] : array();
+														$form_lists       = ! empty( $form_data['settings']['lists'] ) ? $form_data['settings']['lists'] : array();
 														$lists_checkboxes = ES_Shortcode::prepare_lists_checkboxes( $lists, array_keys( $lists ), 3, (array) $form_lists, '', '', 'form_data[settings][lists][]' );
 														echo wp_kses( $lists_checkboxes, $allowedtags );
 													} else {
@@ -543,13 +639,13 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 										<?php
 										 do_action( 'ig_es_additional_form_options', $form_data, $data );
 										?>
-										
+
 									</div>
-			
+
 								</div>
 							</div>
 						</div>
-			
+
 					</fieldset>
 				</form>
 			</div>
@@ -564,48 +660,79 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 		 * @since 4.4.7
 		 */
 		public function get_form_preview() {
-	
+
 			check_ajax_referer( 'ig-es-admin-ajax-nonce', 'security' );
-	
+
 			$response = array();
-	
-			$form_data    = ig_es_get_request_data( 'form_data', array(), false );
-	
+
+			$form_data = ig_es_get_request_data( 'form_data', array(), false );
+
 			$template_data            = array();
 			$template_data['content'] = ! empty( $form_data['body'] ) ? $form_data['body'] : '';
 			$template_data['form_id'] = ! empty( $form_data['id'] ) ? $form_data['id'] : 0;
-			$active_theme_url = get_template_directory_uri();
-			wp_register_style( 'es-theme-css', $active_theme_url . '/style.css', array(), time(), 'all' );
-			$es_wp_styles = wp_styles();
+			$editor_css 	          = ! empty( $form_data['settings']['dnd_editor_css'] ) ? $form_data['settings']['dnd_editor_css'] : '';
+			$form_body                = ! empty( $form_data['body'] ) ? do_shortcode( $form_data['body'] ) : '';
 
-			$preview_html = '<!DOCTYPE html>
-				<html lang="en">
-				<head>
-					<meta charset="UTF-8">
-					<meta name="viewport" content="width=device-width, initial-scale=1.0">
-					<meta http-equiv="X-UA-Compatible" content="ie=edge">
-					<title>Document</title>
-					';
-			ob_start();
-			$es_wp_styles->do_item( 'es-theme-css' );
-			$preview_html .= ob_get_clean();
-			$preview_html .= '<style>
-						' . $form_data['settings']['dnd_editor_css'] . ' 
-					</style>
-					</head>
-					<body>
-						<div class="ig-es-form-preview">
-							' . do_shortcode( $form_data['body'] ) . '
-							</div>
-							</body>
-							</html>';
+			$preview_html             = '<style>' . $editor_css . '</style>' . $form_body;
 			$response['preview_html'] = $preview_html;
-	
+
 			if ( ! empty( $response ) ) {
 				wp_send_json_success( $response );
 			} else {
 				wp_send_json_error();
 			}
+		}
+
+		public static function get_styles_path() {
+			$form_styles_path = ES_PLUGIN_DIR . 'lite/admin/css/form-styles/';
+			return $form_styles_path;
+		}
+
+		public static function get_form_styles() {
+			$form_styles_path = self::get_styles_path();
+
+			$form_styles = array(
+				array(
+					'id'   => 'theme-styling',
+					'name' => __( 'Theme styling', 'email-subscribers' ),
+					'css'  => file_get_contents( $form_styles_path . 'theme-styling.css' ),
+				),
+			);
+			$form_styles = apply_filters( 'ig_es_form_styles', $form_styles );
+			return $form_styles;
+		}
+
+		public static function get_frontend_css() {
+			$css_html = '';
+			$response = wp_remote_get(get_home_url());
+			if ( is_wp_error( $response )) {
+				return $css_html;
+			}
+			$content = $response['body'];
+			preg_match_all( '#<link\s+(?:[^>]*?\s+)?href=(\'|")?(https?[^\'"]+)(\'|")?#', $content, $links );
+			$links = $links[2];
+			foreach ( $links as $link) {
+				if (false === strpos( $link, '.css' ) ) {
+					continue;
+				}
+				$css_html .= '<link href="' . $link . '" ';
+				$css_html .= 'rel="stylesheet"/>';
+			}
+	
+			preg_match_all('/[<]style[^>]*[>]([^<]+)[<]\/style[>]/', $content, $matches, PREG_OFFSET_CAPTURE);
+			
+			$count = count($matches[1]);
+			for ( $i = 0; $i < $count; $i++ ) {
+				$css_html .= '<style type="text/css">' . $matches[1][$i][0] . '</style>';
+			}
+	
+			return $css_html;
+		}
+
+		public static function get_common_css() {
+			$form_styles_path = self::get_styles_path();
+			$common_css       = file_get_contents( $form_styles_path . 'common.css' );
+			return $common_css;
 		}
 	}
 

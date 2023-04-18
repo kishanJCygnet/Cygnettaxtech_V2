@@ -68,6 +68,7 @@ class Access extends CommonUtils\Access {
 			'frequency',
 		],
 		'aioseo_page_schema_settings'    => [
+			'schema',
 			'schema_type',
 			'schema_type_options'
 		],
@@ -300,7 +301,6 @@ class Access extends CommonUtils\Access {
 					'edit_others_posts'    => true,
 					'edit_others_pages'    => true,
 					'edit_pages'           => true,
-					'edit_posts'           => true,
 					'edit_posts'           => true,
 					'edit_private_pages'   => true,
 					'edit_private_posts'   => true,

@@ -58,6 +58,8 @@ class DynamicOptions extends CommonOptions\DynamicOptions {
 	 * @return void
 	 */
 	public function sanitizeAndSave( $options ) {
+		$options = $this->maybeRemoveUnfilteredHtmlFields( $options );
+
 		parent::sanitizeAndSave( $options );
 
 		$cachedOptions = aioseo()->core->optionsCache->getOptions( $this->optionsName );
@@ -280,6 +282,7 @@ class DynamicOptions extends CommonOptions\DynamicOptions {
 				'toolsSettings'             => [ 'type' => 'boolean', 'default' => false ],
 				'featureManagerSettings'    => [ 'type' => 'boolean', 'default' => false ],
 				'pageAnalysis'              => [ 'type' => 'boolean', 'default' => false ],
+				'searchStatisticsSettings'  => [ 'type' => 'boolean', 'default' => false ],
 				'pageGeneralSettings'       => [ 'type' => 'boolean', 'default' => false ],
 				'pageAdvancedSettings'      => [ 'type' => 'boolean', 'default' => false ],
 				'pageSchemaSettings'        => [ 'type' => 'boolean', 'default' => false ],
@@ -314,5 +317,74 @@ class DynamicOptions extends CommonOptions\DynamicOptions {
 			$this->setDynamicSocialOptions( 'taxonomies', $taxonomy['name'] );
 			$this->setDynamicSitemapOptions( 'taxonomies', $taxonomy['name'] );
 		}
+	}
+
+	/**
+	 * If the user does not have access to unfiltered HTML, we need to remove them from saving.
+	 *
+	 * @since 4.2.3
+	 *
+	 * @param  array $options An array of options.
+	 * @return array          An array of options.
+	 */
+	private function maybeRemoveUnfilteredHtmlFields( $options ) {
+		if ( current_user_can( 'unfiltered_html' ) ) {
+			return $options;
+		}
+
+		// Post type templates.
+		$postTypes = aioseo()->helpers->getPublicPostTypes();
+		foreach ( $postTypes as $postType ) {
+			if ( 'type' === $postType['name'] ) {
+				$postType['name'] = '_aioseo_type';
+			}
+
+			if ( isset( $options['breadcrumbs']['postTypes'][ $postType['name'] ]['template'] ) ) {
+				unset( $options['breadcrumbs']['postTypes'][ $postType['name'] ]['template'] );
+			}
+
+			if ( isset( $options['breadcrumbs']['postTypes'][ $postType['name'] ]['parentTemplate'] ) ) {
+				unset( $options['breadcrumbs']['postTypes'][ $postType['name'] ]['parentTemplate'] );
+			}
+		}
+
+		// Taxonomy templates.
+		$taxonomies = aioseo()->helpers->getPublicTaxonomies();
+		foreach ( $taxonomies as $taxonomy ) {
+			if ( 'type' === $taxonomy['name'] ) {
+				$taxonomy['name'] = '_aioseo_type';
+			}
+
+			if ( isset( $options['breadcrumbs']['taxonomies'][ $taxonomy['name'] ]['template'] ) ) {
+				unset( $options['breadcrumbs']['taxonomies'][ $taxonomy['name'] ]['template'] );
+			}
+
+			if ( isset( $options['breadcrumbs']['taxonomies'][ $taxonomy['name'] ]['parentTemplate'] ) ) {
+				unset( $options['breadcrumbs']['taxonomies'][ $taxonomy['name'] ]['parentTemplate'] );
+			}
+		}
+
+		// Archive templates.
+		$archives = aioseo()->helpers->getPublicPostTypes( false, true, true );
+		foreach ( $archives as $archive ) {
+			if ( isset( $options['breadcrumbs']['archives']['postTypes'][ $archive['name'] ]['template'] ) ) {
+				unset( $options['breadcrumbs']['archives']['postTypes'][ $archive['name'] ]['template'] );
+			}
+		}
+
+		// Date templates.
+		if ( isset( $options['breadcrumbs']['archives']['date']['template'] ) ) {
+			unset( $options['breadcrumbs']['archives']['date']['template'] );
+		}
+
+		// Additional templates.
+		$breadcrumbTemplates = [ 'search', 'notFound', 'author', 'blog' ];
+		foreach ( $breadcrumbTemplates as $breadcrumbTemplate ) {
+			if ( isset( $options['breadcrumbs']['archives'][ $breadcrumbTemplate ]['template'] ) ) {
+				unset( $options['breadcrumbs']['archives'][ $breadcrumbTemplate ]['template'] );
+			}
+		}
+
+		return $options;
 	}
 }
