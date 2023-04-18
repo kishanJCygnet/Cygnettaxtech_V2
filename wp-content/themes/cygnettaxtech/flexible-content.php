@@ -88,7 +88,7 @@
 				});
 				</script>
 				<!-- Start count section -->				
-				<?php if (have_rows('count_section')) :  ?>
+				<?php /* if (have_rows('count_section')) :  ?>
 					<div class="count-section-main <?php echo the_field('count_section_class'); ?>">
 						<?php if (get_field('count_section_title')){ ?>
 							<div class="count-section-title">
@@ -141,7 +141,7 @@
 							endwhile;	?> 
 						</div>
 					</div>
-				<?php endif; ?>
+				<?php endif; */?>
 				<!-- End count section -->
 			</section>
 		<?php endif;
@@ -1136,6 +1136,60 @@
 			</section>
 			<?php endif;  
 			/* Tab Section With Click End */
+			
+			/* Count Section Start */
+			if (get_row_layout() == 'count_section') :
+			?>
+				<section class="esignature-solution <?php echo the_sub_field('count_section_class'); ?>" <?php echo $slugid; ?>>
+					<div class="container">
+						<div class="title-heading">
+							<?php if (get_sub_field('count_section_title')){ ?>
+								<h2 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('count_section_title'); ?></h2>
+							<?php } ?>
+						</div>
+						<?php if (have_rows('count_section_content')) : ?>
+							<div class="count-section-main-inner">
+								<div class="row">
+								<?php $cnt=1; 
+								while (have_rows('count_section_content')) : the_row();	
+									if($cnt < 11){ ?>								
+										<div class="count-inner">
+											<?php if (get_sub_field('count_section_icon_image')){ ?>
+												<?php $extension = pathinfo(get_sub_field('count_section_icon_image'), PATHINFO_EXTENSION);
+													if($extension == 'svg'){
+														$count_section_icon_image = get_sub_field('count_section_icon_image');
+														$stream_opts = [
+															"ssl" => [
+																"verify_peer"=>false,
+																"verify_peer_name"=>false,
+															]
+														];														 
+														echo file_get_contents($count_section_icon_image, false, stream_context_create($stream_opts));
+													} else { ?>
+														<img src="<?php echo the_sub_field('count_section_icon_image'); ?>" alt="<?php echo the_sub_field('count_section_label'); ?>">
+												<?php } ?>	
+											<?php } ?>
+											<?php //if (get_sub_field('count_section_value')){ ?>
+												<div class="count-label">
+													<?php if (get_sub_field('count_section_value')){ ?><span class="counter" data-count="<?php echo the_sub_field('count_section_value');?>">0</span><?php } ?><?php echo the_sub_field('count_section_sub_value');?>
+												</div>
+											<?php //} ?>
+											<?php if (get_sub_field('count_section_label')){ ?>
+												<div class="count-value">
+													<h2><?php echo the_sub_field('count_section_label'); ?></h2>
+												</div>
+											<?php } ?>
+										</div>						
+									<?php } 
+									$cnt++; 
+								endwhile; ?>
+								</div>
+							</div>
+						<?php endif; ?>
+					</div>
+				</section>
+		    <?php endif; 
+			/* Count Section End */
 			
 			$logo_slider_cnt++;
 		endwhile;

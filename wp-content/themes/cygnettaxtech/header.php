@@ -47,11 +47,11 @@
 	<link rel="newest stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/style.css">
 	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6295d7619a09040019f206fd&product=sop' id='share-this-share-buttons-mu-js' async='async'></script>
 	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	<!--<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-KHZJ6C2');</script>
+	})(window,document,'script','dataLayer','GTM-KHZJ6C2');</script>-->
 	<!-- End Google Tag Manager -->
 	<?php wp_head(); ?>
 </head>
@@ -61,8 +61,8 @@ if(get_field('landing_page')[0] == 'Yes'){$landingpageclass = 'landing-page-cls'
 ?>
 <body <?php body_class($landingpageclass); ?>>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHZJ6C2"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!--<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHZJ6C2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>-->
 <!-- End Google Tag Manager (noscript) -->
 <div class="loader">
     <img src="<?php echo THEME_PATH; ?>/images/Web loader Cygnature.gif" alt="loader" />
