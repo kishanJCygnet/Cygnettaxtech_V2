@@ -648,7 +648,6 @@ body {
 .thankyou-banner.banner-content .banner-inner-content {
   background-position: 0 50px;
 }
-
 .error404 {
   // header{
   //   background-color: #0F3764;
@@ -662,7 +661,6 @@ body {
     display: none;
   }
 }
-
 video {
   @include bp(sm-max) {
     height: auto !important;
@@ -672,10 +670,6 @@ video {
   padding-top: 160px;
   padding-bottom: 120px;
 }
-// .error404 header{
-//   background-color: rgba(12, 54, 97, 0.8);
-// }
-
 .title-white {
   .title-heading {
     h2,
@@ -721,7 +715,6 @@ video {
     border-bottom: 5px solid #c154c1;
   }
 }
-
 #myVideo {
   position: absolute;
   left: 0;
@@ -757,8 +750,6 @@ video {
   display: flex;
   align-items: center;
 }
-
-
 .hide-mobile {
   display: block;
   @include bp(sm-max) {
@@ -771,7 +762,6 @@ video {
     display: block;
   }
 }
-
 .pointer-list {
   padding-left: 0;
   list-style-type: none;
@@ -798,7 +788,6 @@ video {
     }
   }
 }
-
 .error404 {
   header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.148);
@@ -812,4 +801,7 @@ video {
       background-color: transparent;
     }
   }
+}
+p{
+  font-size: 14px;
 }
