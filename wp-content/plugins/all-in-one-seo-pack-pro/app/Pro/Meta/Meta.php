@@ -25,13 +25,14 @@ class Meta extends CommonMeta\Meta {
 		$this->metaData     = new MetaData();
 		$this->title        = new Title();
 		$this->description  = new Description();
-		$this->amp          = new CommonMeta\Amp();
-		$this->links        = new CommonMeta\Links();
 		$this->keywords     = new CommonMeta\Keywords();
 		$this->robots       = new Robots();
 
-		add_action( 'delete_post', [ $this, 'deletePostMeta' ], 1000, 2 );
-		add_filter( 'delete_term', [ $this, 'deleteTermMeta' ], 1000, 2 );
+		new CommonMeta\Amp();
+		new CommonMeta\Links();
+
+		add_action( 'delete_post', [ $this, 'deletePostMeta' ], 1000 );
+		add_action( 'delete_term', [ $this, 'deleteTermMeta' ], 1000 );
 	}
 
 	/**
@@ -39,7 +40,7 @@ class Meta extends CommonMeta\Meta {
 	 *
 	 * @since 4.0.1
 	 *
-	 * @param  integer $termId The ID of the post.
+	 * @param  int  $termId The post ID.
 	 * @return void
 	 */
 	public function deleteTermMeta( $termId ) {

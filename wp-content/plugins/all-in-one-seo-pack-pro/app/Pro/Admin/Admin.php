@@ -21,17 +21,13 @@ class Admin extends CommonAdmin\Admin {
 	 * @since 4.0.0
 	 */
 	public function __construct() {
+		parent::__construct();
+
 		add_action( 'aioseo_unslash_escaped_data_terms', [ $this, 'unslashEscapedDataTerms' ] );
 
 		// This needs to run outside of the early return for ajax / cron requests in order for our updates
 		// to work on bulk update requests.
 		add_action( 'plugins_loaded', [ $this, 'loadUpdates' ] );
-
-		if ( wp_doing_ajax() || wp_doing_cron() ) {
-			return;
-		}
-
-		parent::__construct();
 	}
 
 	/**
@@ -43,7 +39,7 @@ class Admin extends CommonAdmin\Admin {
 	 */
 	protected function addAdminBarMenuItems() {
 		// Add an upsell to Pro.
-		if ( current_user_can( 'update_plugins' ) && ! aioseo()->options->general->licenseKey ) {
+		if ( current_user_can( 'update_plugins' ) && ! aioseo()->license->isActive() ) {
 			$this->adminBarMenuItems['aioseo-pro-license'] = [
 				'parent' => 'aioseo-main',
 				'title'  => '<span class="aioseo-menu-highlight red">' . __( 'Add License Key', 'all-in-one-seo-pack' ) . '</span>',
@@ -82,6 +78,9 @@ class Admin extends CommonAdmin\Admin {
 			case 'aioseo-setup-wizard':
 				$capability = 'aioseo_setup_wizard';
 				break;
+			case 'aioseo-search-statistics':
+				$capability = 'aioseo_search_statistics_settings';
+				break;
 			case 'aioseo-redirects':
 				$capability = current_user_can( 'aioseo_redirects_manage' ) ? 'aioseo_redirects_manage' : 'aioseo_redirects_settings';
 				break;
@@ -108,7 +107,7 @@ class Admin extends CommonAdmin\Admin {
 		parent::addMenu();
 
 		// We use the global submenu, because we are adding an external link here.
-		if ( current_user_can( 'aioseo_manage_seo' ) && ! aioseo()->options->general->licenseKey ) {
+		if ( current_user_can( 'aioseo_manage_seo' ) && ! aioseo()->license->isActive() ) {
 			global $submenu;
 			$submenu[ $this->pageSlug ][] = [
 				'<span class="aioseo-menu-highlight red">' . esc_html__( 'Add License Key', 'all-in-one-seo-pack' ) . '</span>',
@@ -127,7 +126,7 @@ class Admin extends CommonAdmin\Admin {
 	 * @return void
 	 */
 	public function loadUpdates() {
-		$this->updates = new Updates( [
+		new Updates( [
 			'pluginSlug' => 'all-in-one-seo-pack-pro',
 			'pluginPath' => plugin_basename( AIOSEO_FILE ),
 			'version'    => AIOSEO_VERSION,
@@ -149,30 +148,30 @@ class Admin extends CommonAdmin\Admin {
 	}
 
 	/**
-	 * Retreive data to build the admin bar.
-	 * @since 4.0.0
+	 * Adds the current post/term menu items to the admin bar.
 	 *
-	 * @param  WP_Post $post The post object.
-	 * @return array         An array of data to build a menu link.
+	 * @since 4.2.3
+	 *
+	 * @return void
 	 */
-	protected function getAdminBarMenuData( $post ) {
-		// Don't show if we're on the home page and the home page is the latest posts.
-		if ( ! is_home() || ( ! is_front_page() && ! is_home() ) ) {
-			global $wp_the_query;
-			$currentObject = $wp_the_query->get_queried_object();
+	protected function addEditSeoMenuItem() {
+		if ( ! is_category() && ! is_tag() && ! is_tax() ) {
+			parent::addEditSeoMenuItem();
 
-			if ( is_category() || is_tax() || is_tag() ) {
-				// SEO for taxonomies are only available in Pro version.
-				$editTermLink = get_edit_term_link( $currentObject->term_id, $currentObject->taxonomy );
-
-				return [
-					'id'   => $post->ID,
-					'link' => $editTermLink . '#aioseo'
-				];
-			}
+			return;
 		}
 
-		return parent::getAdminBarMenuData( $post );
+		$term = get_queried_object();
+		if ( empty( $term ) ) {
+			return;
+		}
+
+		$this->adminBarMenuItems[] = [
+			'id'     => 'aioseo-edit-' . $term->term_id,
+			'parent' => 'aioseo-main',
+			'title'  => esc_html__( 'Edit SEO', 'all-in-one-seo-pack' ),
+			'href'   => get_edit_term_link( $term->term_id, $term->taxonomy ) . '#aioseo-tabbed',
+		];
 	}
 
 	/**
@@ -208,24 +207,6 @@ class Admin extends CommonAdmin\Admin {
 		if ( ! $addScripts ) {
 			return;
 		}
-
-		$this->checkAdminQueryArgs();
-	}
-
-	/**
-	 * Checks the admin query args to run appropriate tasks.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return void
-	 */
-	protected function checkAdminQueryArgs() {
-		parent::checkAdminQueryArgs();
-
-		// Allow users to force the plugin to rescan the site.
-		if ( isset( $_GET['aioseo-video-rescan'] ) && function_exists( 'aioseoVideoSitemap' ) ) {
-			aioseoVideoSitemap()->query->resetVideos();
-		}
 	}
 
 	/**
@@ -239,7 +220,7 @@ class Admin extends CommonAdmin\Admin {
 		parent::scheduleUnescapeData();
 
 		aioseo()->core->cache->update( 'unslash_escaped_data_terms', time(), WEEK_IN_SECONDS );
-		aioseo()->helpers->scheduleSingleAction( 'aioseo_unslash_escaped_data_terms', 120 );
+		aioseo()->actionScheduler->scheduleSingle( 'aioseo_unslash_escaped_data_terms', 120 );
 	}
 
 	/**
@@ -250,7 +231,7 @@ class Admin extends CommonAdmin\Admin {
 	 * @return void
 	 */
 	public function unslashEscapedDataTerms() {
-		$termsToUnslash = 200;
+		$termsToUnslash = apply_filters( 'aioseo_debug_unslash_escaped_terms', 200 );
 		$timeStarted    = gmdate( 'Y-m-d H:i:s', aioseo()->core->cache->get( 'unslash_escaped_data_terms' ) );
 
 		$terms = aioseo()->core->db->start( 'aioseo_terms' )
@@ -267,7 +248,7 @@ class Admin extends CommonAdmin\Admin {
 			return;
 		}
 
-		aioseo()->helpers->scheduleSingleAction( 'aioseo_unslash_escaped_data_terms', 120, [], true );
+		aioseo()->actionScheduler->scheduleSingle( 'aioseo_unslash_escaped_data_terms', 120, [], true );
 
 		$postExclusiveColumns = [
 			'keyphrases',
@@ -302,4 +283,14 @@ class Admin extends CommonAdmin\Admin {
 		parent::loadTextDomain();
 		aioseo()->helpers->loadTextDomain( 'aioseo-pro' );
 	}
+
+	/**
+	 * Outputs the element we can mount our footer promotion standalone Vue app on.
+	 * In Pro we do nothing.
+	 *
+	 * @since 4.3.4
+	 *
+	 * @return void
+	 */
+	public function addFooterPromotion() {}
 }

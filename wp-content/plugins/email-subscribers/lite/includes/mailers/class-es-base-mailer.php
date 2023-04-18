@@ -121,6 +121,10 @@ if ( ! class_exists( 'ES_Base_Mailer' ) ) {
 
 		}
 
+		public function get_name() {
+			return $this->name;
+		}
+
 		/**
 		 * Send Method
 		 *
@@ -161,6 +165,8 @@ if ( ! class_exists( 'ES_Base_Mailer' ) ) {
 		public function do_response( $status = 'success', $message = '' ) {
 
 			if ( 'success' !== $status ) {
+				ES()->logger->error( 'Error in Email Sending', $this->logger_context );
+				ES()->logger->error( $message, $this->logger_context );
 				return new WP_Error( 'ig_es_email_sending_failed', $message );
 			}
 

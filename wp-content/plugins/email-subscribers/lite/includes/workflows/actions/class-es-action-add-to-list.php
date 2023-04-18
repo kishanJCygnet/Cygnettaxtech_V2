@@ -46,7 +46,7 @@ if ( ! class_exists( 'ES_Action_Add_To_List' ) ) {
 			$list_field->set_options( $lists );
 			$list_field->set_required();
 			$this->add_field( $list_field );
-		
+
 		}
 
 		/**
@@ -60,6 +60,7 @@ if ( ! class_exists( 'ES_Action_Add_To_List' ) ) {
 
 			$user_list_status = $this->get_option( 'ig-es-user-list-status' );
 
+			$user_list_status = empty( $user_list_status ) ? 'subscribed' : $user_list_status;
 
 			if ( ! $list_id ) {
 				return;
@@ -90,7 +91,7 @@ if ( ! class_exists( 'ES_Action_Add_To_List' ) ) {
 		 * @param int   $list_id List id to add the contact's data.
 		 * @param array $data Contact's data.
 		 */
-		public function add_contact( $list_id = 0, $data = array(), $user_list_status ) {
+		public function add_contact( $list_id = 0, $data = array(), $user_list_status = '' ) {
 
 			// Don't know where to add contact? please find it first.
 			if ( empty( $list_id ) ) {

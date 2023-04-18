@@ -54,6 +54,7 @@ class Options extends CommonOptions\Options {
 				'toolsSettings'             => [ 'type' => 'boolean', 'default' => true ],
 				'featureManagerSettings'    => [ 'type' => 'boolean', 'default' => true ],
 				'pageAnalysis'              => [ 'type' => 'boolean', 'default' => true ],
+				'searchStatisticsSettings'  => [ 'type' => 'boolean', 'default' => true ],
 				'pageGeneralSettings'       => [ 'type' => 'boolean', 'default' => true ],
 				'pageAdvancedSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'pageSchemaSettings'        => [ 'type' => 'boolean', 'default' => true ],
@@ -79,6 +80,7 @@ class Options extends CommonOptions\Options {
 				'toolsSettings'             => [ 'type' => 'boolean', 'default' => false ],
 				'featureManagerSettings'    => [ 'type' => 'boolean', 'default' => false ],
 				'pageAnalysis'              => [ 'type' => 'boolean', 'default' => true ],
+				'searchStatisticsSettings'  => [ 'type' => 'boolean', 'default' => false ],
 				'pageGeneralSettings'       => [ 'type' => 'boolean', 'default' => true ],
 				'pageAdvancedSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'pageSchemaSettings'        => [ 'type' => 'boolean', 'default' => true ],
@@ -104,6 +106,7 @@ class Options extends CommonOptions\Options {
 				'toolsSettings'             => [ 'type' => 'boolean', 'default' => false ],
 				'featureManagerSettings'    => [ 'type' => 'boolean', 'default' => false ],
 				'pageAnalysis'              => [ 'type' => 'boolean', 'default' => true ],
+				'searchStatisticsSettings'  => [ 'type' => 'boolean', 'default' => false ],
 				'pageGeneralSettings'       => [ 'type' => 'boolean', 'default' => true ],
 				'pageAdvancedSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'pageSchemaSettings'        => [ 'type' => 'boolean', 'default' => true ],
@@ -129,6 +132,7 @@ class Options extends CommonOptions\Options {
 				'toolsSettings'             => [ 'type' => 'boolean', 'default' => false ],
 				'featureManagerSettings'    => [ 'type' => 'boolean', 'default' => false ],
 				'pageAnalysis'              => [ 'type' => 'boolean', 'default' => true ],
+				'searchStatisticsSettings'  => [ 'type' => 'boolean', 'default' => false ],
 				'pageGeneralSettings'       => [ 'type' => 'boolean', 'default' => true ],
 				'pageAdvancedSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'pageSchemaSettings'        => [ 'type' => 'boolean', 'default' => true ],
@@ -154,6 +158,7 @@ class Options extends CommonOptions\Options {
 				'toolsSettings'             => [ 'type' => 'boolean', 'default' => false ],
 				'featureManagerSettings'    => [ 'type' => 'boolean', 'default' => false ],
 				'pageAnalysis'              => [ 'type' => 'boolean', 'default' => true ],
+				'searchStatisticsSettings'  => [ 'type' => 'boolean', 'default' => true ],
 				'pageGeneralSettings'       => [ 'type' => 'boolean', 'default' => true ],
 				'pageAdvancedSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'pageSchemaSettings'        => [ 'type' => 'boolean', 'default' => true ],
@@ -172,20 +177,21 @@ class Options extends CommonOptions\Options {
 				'searchAppearanceSettings'  => [ 'type' => 'boolean', 'default' => false ],
 				'socialNetworksSettings'    => [ 'type' => 'boolean', 'default' => false ],
 				'sitemapSettings'           => [ 'type' => 'boolean', 'default' => false ],
-				'redirectsManage'           => [ 'type' => 'boolean', 'default' => true ],
+				'redirectsManage'           => [ 'type' => 'boolean', 'default' => false ],
 				'pageRedirectsManage'       => [ 'type' => 'boolean', 'default' => true ],
 				'redirectsSettings'         => [ 'type' => 'boolean', 'default' => false ],
 				'seoAnalysisSettings'       => [ 'type' => 'boolean', 'default' => false ],
 				'toolsSettings'             => [ 'type' => 'boolean', 'default' => false ],
 				'featureManagerSettings'    => [ 'type' => 'boolean', 'default' => false ],
 				'pageAnalysis'              => [ 'type' => 'boolean', 'default' => true ],
+				'searchStatisticsSettings'  => [ 'type' => 'boolean', 'default' => false ],
 				'pageGeneralSettings'       => [ 'type' => 'boolean', 'default' => true ],
 				'pageAdvancedSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'pageSchemaSettings'        => [ 'type' => 'boolean', 'default' => true ],
 				'pageSocialSettings'        => [ 'type' => 'boolean', 'default' => true ],
 				'localSeoSettings'          => [ 'type' => 'boolean', 'default' => false ],
 				'pageLocalSeoSettings'      => [ 'type' => 'boolean', 'default' => true ],
-				'linkAssistantSettings'     => [ 'type' => 'boolean', 'default' => true ],
+				'linkAssistantSettings'     => [ 'type' => 'boolean', 'default' => false ],
 				'pageLinkAssistantSettings' => [ 'type' => 'boolean', 'default' => true ],
 				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ]
 			]
@@ -193,7 +199,8 @@ class Options extends CommonOptions\Options {
 		'advanced'         => [
 			'adminBarMenu'  => [ 'type' => 'boolean', 'default' => true ],
 			'usageTracking' => [ 'type' => 'boolean', 'default' => true ],
-			'autoUpdates'   => [ 'type' => 'string', 'default' => 'all' ]
+			'autoUpdates'   => [ 'type' => 'string', 'default' => 'all' ],
+			'openAiKey'     => [ 'type' => 'string', 'default' => '' ]
 		],
 		'sitemap'          => [
 			'video' => [
@@ -286,6 +293,8 @@ class Options extends CommonOptions\Options {
 			]
 		],
 		'image'            => [
+			// TODO: Remove the "format" and "stripPunctuation" groups in a future update after we've confirmed that the update went well.
+			// Start of options to remove.
 			'format'           => [
 				'title'  => [ 'type' => 'string', 'default' => '#image_title #separator_sa #site_title', 'localized' => true ],
 				'altTag' => [ 'type' => 'string', 'default' => '#alt_tag', 'localized' => true ]
@@ -293,7 +302,107 @@ class Options extends CommonOptions\Options {
 			'stripPunctuation' => [
 				'title'  => [ 'type' => 'boolean', 'default' => false ],
 				'altTag' => [ 'type' => 'boolean', 'default' => false ]
-			]
+			],
+			// End of options to remove.
+			'title'            => [
+				'format'              => [ 'type' => 'string', 'default' => '#image_title #separator_sa #site_title', 'localized' => true ],
+				'stripPunctuation'    => [ 'type' => 'boolean', 'default' => true ],
+				'charactersToKeep'    => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => false ],
+					'underscores' => [ 'type' => 'boolean', 'default' => false ],
+					'numbers'     => [ 'type' => 'boolean', 'default' => true ],
+					'plus'        => [ 'type' => 'boolean', 'default' => true ],
+					'apostrophe'  => [ 'type' => 'boolean', 'default' => false ],
+					'pound'       => [ 'type' => 'boolean', 'default' => false ],
+					'ampersand'   => [ 'type' => 'boolean', 'default' => false ]
+				],
+				'charactersToConvert' => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => false ],
+					'underscores' => [ 'type' => 'boolean', 'default' => false ],
+				],
+				'casing'              => [ 'type' => 'string', 'default' => '' ],
+				'advancedSettings'    => [
+					'excludePosts' => [ 'type' => 'array', 'default' => [] ],
+					'excludeTerms' => [ 'type' => 'array', 'default' => [] ],
+				],
+			],
+			'altTag'           => [
+				'format'              => [ 'type' => 'string', 'default' => '#alt_tag', 'localized' => true ],
+				'stripPunctuation'    => [ 'type' => 'boolean', 'default' => true ],
+				'charactersToKeep'    => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => false ],
+					'underscores' => [ 'type' => 'boolean', 'default' => false ],
+					'numbers'     => [ 'type' => 'boolean', 'default' => true ],
+					'plus'        => [ 'type' => 'boolean', 'default' => true ],
+					'apostrophe'  => [ 'type' => 'boolean', 'default' => false ],
+					'pound'       => [ 'type' => 'boolean', 'default' => false ],
+					'ampersand'   => [ 'type' => 'boolean', 'default' => false ]
+				],
+				'charactersToConvert' => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => true ],
+					'underscores' => [ 'type' => 'boolean', 'default' => true ],
+				],
+				'casing'              => [ 'type' => 'string', 'default' => '' ],
+				'advancedSettings'    => [
+					'excludePosts' => [ 'type' => 'array', 'default' => [] ],
+					'excludeTerms' => [ 'type' => 'array', 'default' => [] ],
+				],
+			],
+			'caption'          => [
+				'autogenerate'        => [ 'type' => 'boolean', 'default' => true ],
+				'format'              => [ 'type' => 'string', 'default' => '#image_title', 'localized' => true ],
+				'stripPunctuation'    => [ 'type' => 'boolean', 'default' => true ],
+				'charactersToKeep'    => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => false ],
+					'underscores' => [ 'type' => 'boolean', 'default' => false ],
+					'numbers'     => [ 'type' => 'boolean', 'default' => true ],
+					'plus'        => [ 'type' => 'boolean', 'default' => true ],
+					'apostrophe'  => [ 'type' => 'boolean', 'default' => false ],
+					'pound'       => [ 'type' => 'boolean', 'default' => false ],
+					'ampersand'   => [ 'type' => 'boolean', 'default' => false ]
+				],
+				'charactersToConvert' => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => true ],
+					'underscores' => [ 'type' => 'boolean', 'default' => true ],
+				],
+				'casing'              => [ 'type' => 'string', 'default' => '' ],
+			],
+			'description'      => [
+				'autogenerate'        => [ 'type' => 'boolean', 'default' => true ],
+				'format'              => [ 'type' => 'string', 'default' => '#image_title', 'localized' => true ],
+				'stripPunctuation'    => [ 'type' => 'boolean', 'default' => true ],
+				'charactersToKeep'    => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => false ],
+					'underscores' => [ 'type' => 'boolean', 'default' => false ],
+					'numbers'     => [ 'type' => 'boolean', 'default' => true ],
+					'plus'        => [ 'type' => 'boolean', 'default' => true ],
+					'apostrophe'  => [ 'type' => 'boolean', 'default' => false ],
+					'pound'       => [ 'type' => 'boolean', 'default' => false ],
+					'ampersand'   => [ 'type' => 'boolean', 'default' => false ]
+				],
+				'charactersToConvert' => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => true ],
+					'underscores' => [ 'type' => 'boolean', 'default' => true ],
+				],
+				'casing'              => [ 'type' => 'string', 'default' => '' ],
+			],
+			'filename'         => [
+				'stripPunctuation' => [ 'type' => 'boolean', 'default' => true ],
+				'charactersToKeep' => [
+					'dashes'      => [ 'type' => 'boolean', 'default' => true ],
+					'underscores' => [ 'type' => 'boolean', 'default' => true ],
+					'numbers'     => [ 'type' => 'boolean', 'default' => true ],
+					'plus'        => [ 'type' => 'boolean', 'default' => true ],
+					'apostrophe'  => [ 'type' => 'boolean', 'default' => false ],
+					'pound'       => [ 'type' => 'boolean', 'default' => false ],
+					'ampersand'   => [ 'type' => 'boolean', 'default' => false ]
+				],
+				'casing'           => [ 'type' => 'string', 'default' => '' ],
+				'wordsToStrip'     => [
+					'type'    => 'html',
+					'default' => ''
+				]
+			],
 		],
 		'localBusiness'    => [
 			'locations'    => [
@@ -458,7 +567,11 @@ class Options extends CommonOptions\Options {
 		// Now that we are initialized, let's run an update routine.
 		$validLicenseKey = aioseo()->internalOptions->internal->validLicenseKey;
 		if ( $validLicenseKey ) {
-			$this->general->licenseKey                           = $validLicenseKey;
+			// Save the key to our settings.
+			$this->general->licenseKey = $validLicenseKey;// @phpstan-ignore-line
+			$this->save( true );
+
+			// Reset the key coming in from lite.
 			aioseo()->internalOptions->internal->validLicenseKey = null;
 		}
 	}
@@ -490,7 +603,6 @@ class Options extends CommonOptions\Options {
 		$deprecatedVideoOptions = ! empty( $options['deprecated']['sitemap']['video'] )
 				? $options['deprecated']['sitemap']['video']
 				: null;
-		$newsOptions        = ! empty( $options['sitemap']['news'] ) ? $options['sitemap']['news'] : null;
 		$oldPhoneOption     = aioseo()->options->localBusiness->locations->business->contact->phone;
 		$phoneNumberOptions = isset( $options['localBusiness']['locations']['business']['contact']['phone'] )
 				? $options['localBusiness']['locations']['business']['contact']['phone']
@@ -499,7 +611,7 @@ class Options extends CommonOptions\Options {
 		$countryOption    = isset( $options['localBusiness']['locations']['business']['address']['country'] )
 				? $options['localBusiness']['locations']['business']['address']['country']
 				: null;
-
+		$imageOptions = ! empty( $options['image'] ) ? $options['image'] : null;
 		// Remove category base.
 		$removeCategoryBase    = isset( $options['searchAppearance']['advanced']['removeCatBase'] ) ? $options['searchAppearance']['advanced']['removeCatBase'] : null;
 		$removeCategoryBaseOld = aioseo()->options->searchAppearance->advanced->removeCatBase;
@@ -525,6 +637,7 @@ class Options extends CommonOptions\Options {
 			'useCustomCategorySlug',
 			'customCategorySlug'
 		];
+
 		foreach ( $requireRewrite as $item ) {
 			if (
 				isset( $options['localBusiness']['locations']['general'][ $item ] ) &&
@@ -539,16 +652,8 @@ class Options extends CommonOptions\Options {
 
 		$cachedOptions = aioseo()->core->optionsCache->getOptions( $this->optionsName );
 
-		if ( $videoOptions ) {
-			$cachedOptions['sitemap']['video']['postTypes']['included']['value']            = $this->sanitizeField( $options['sitemap']['video']['postTypes']['included'], 'array' );
-			$cachedOptions['sitemap']['video']['taxonomies']['included']['value']           = $this->sanitizeField( $options['sitemap']['video']['taxonomies']['included'], 'array' );
-			$cachedOptions['sitemap']['video']['advancedSettings']['excludePosts']['value'] = $this->sanitizeField( $options['sitemap']['video']['advancedSettings']['excludePosts'], 'array' );
-			$cachedOptions['sitemap']['video']['advancedSettings']['excludeTerms']['value'] = $this->sanitizeField( $options['sitemap']['video']['advancedSettings']['excludeTerms'], 'array' );
-		}
-
-		if ( $newsOptions ) {
-			$cachedOptions['sitemap']['news']['postTypes']['included']['value']            = $this->sanitizeField( $options['sitemap']['news']['postTypes']['included'], 'array' );
-			$cachedOptions['sitemap']['news']['advancedSettings']['excludePosts']['value'] = $this->sanitizeField( $options['sitemap']['news']['advancedSettings']['excludePosts'], 'array' );
+		if ( $imageOptions && isset( $imageOptions['filename']['wordsToStrip'] ) ) {
+			$cachedOptions['image']['filename']['wordsToStrip']['value'] = preg_replace( '/\h/', "\n", $imageOptions['filename']['wordsToStrip'] );
 		}
 
 		aioseo()->core->optionsCache->setOptions( $this->optionsName, $cachedOptions );

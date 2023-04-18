@@ -2,6 +2,7 @@
 namespace AIOSEO\Plugin\Pro\Traits\Helpers;
 
 use AIOSEO\Plugin\Pro\Models;
+use AIOSEO\Plugin\Common\Models as CommonModels;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -39,13 +40,25 @@ trait Vue {
 
 		$data['translationsPro'] = $this->getJedLocaleData( 'aioseo-pro' );
 
+		$license = is_network_admin()
+			? aioseo()->networkLicense
+			: aioseo()->license;
+
+		$internalOptions = is_network_admin()
+			? aioseo()->internalNetworkOptions
+			: aioseo()->internalOptions;
+
 		$data['license'] = [
-			'isActive'   => aioseo()->license->isActive(),
-			'isExpired'  => aioseo()->license->isExpired(),
-			'isDisabled' => aioseo()->license->isDisabled(),
-			'isInvalid'  => aioseo()->license->isInvalid(),
-			'expires'    => aioseo()->internalOptions->internal->license->expires
+			'isActive'   => $license->isActive(),
+			'isExpired'  => $license->isExpired(),
+			'isDisabled' => $license->isDisabled(),
+			'isInvalid'  => $license->isInvalid(),
+			'expires'    => $internalOptions->internal->license->expires,
+			'features'   => $license->getLicenseFeatures()
 		];
+
+		// Check if this site is network licensed.
+		$data['data']['isNetworkLicensed'] = aioseo()->license->isNetworkLicensed();
 
 		$screen = aioseo()->helpers->getCurrentScreen();
 		if ( ! empty( $screen ) && 'term' === $screen->base ) {
@@ -59,7 +72,6 @@ trait Vue {
 				'priority'                    => ! empty( $term->priority ) ? $term->priority : 'default',
 				'frequency'                   => ! empty( $term->frequency ) ? $term->frequency : 'default',
 				'permalink'                   => get_term_link( $termId ),
-				'permalinkPath'               => aioseo()->helpers->leadingSlashIt( aioseo()->helpers->getPermalinkPath( get_term_link( $termId ) ) ),
 				'title'                       => ! empty( $term->title ) ? $term->title : aioseo()->meta->title->getTaxonomyTitle( $taxonomy->taxonomy ),
 				'description'                 => ! empty( $term->description ) ? $term->description : aioseo()->meta->description->getTaxonomyDescription( $taxonomy->taxonomy ),
 				'keywords'                    => ! empty( $term->keywords ) ? $term->keywords : wp_json_encode( [] ),
@@ -108,20 +120,40 @@ trait Vue {
 
 		if ( 'post' === $page ) {
 			$postId = $staticPostId ? $staticPostId : get_the_ID();
-			$post   = get_post( $postId );
-			if ( is_object( $post ) ) {
+			$wpPost = get_post( $postId );
+			if ( is_object( $wpPost ) ) {
 				$dynamicOptions                            = aioseo()->dynamicOptions->noConflict();
 				$data['currentPost']['defaultSchemaType']  = '';
 				$data['currentPost']['defaultWebPageType'] = '';
-				if ( $dynamicOptions->searchAppearance->postTypes->has( $post->post_type ) ) {
-					$data['currentPost']['defaultSchemaType']  = $dynamicOptions->searchAppearance->postTypes->{$post->post_type}->schemaType;
-					$data['currentPost']['defaultWebPageType'] = $dynamicOptions->searchAppearance->postTypes->{$post->post_type}->webPageType;
+				if ( $dynamicOptions->searchAppearance->postTypes->has( $wpPost->post_type ) ) {
+					$data['currentPost']['defaultSchemaType']  = $dynamicOptions->searchAppearance->postTypes->{$wpPost->post_type}->schemaType;
+					$data['currentPost']['defaultWebPageType'] = $dynamicOptions->searchAppearance->postTypes->{$wpPost->post_type}->webPageType;
 				}
 			}
+
+			static $validatorSchema = null;
+			if ( null !== $validatorSchema ) {
+				$clonedSchema    = json_decode( wp_json_encode( $data['currentPost']['schema'] ) );
+				$validatorSchema = aioseo()->schema->getValidatorOutput(
+					$postId,
+					$clonedSchema->graphs,
+					$clonedSchema->blockGraphs,
+					$clonedSchema->default
+				);
+			}
+
+			$data['schema']['output'] = $validatorSchema;
+
+			$aioseoPost                     = CommonModels\Post::getPost( $postId );
+			$data['currentPost']['open_ai'] = ! empty( $aioseoPost->open_ai )
+				? CommonModels\Post::getDefaultOpenAiOptions( $aioseoPost->open_ai )
+				: CommonModels\Post::getDefaultOpenAiOptions();
+
+			$data['data']['aiModel'] = aioseo()->ai->model;
 		}
 
-		$post = $this->getPost();
-		if ( $post && in_array( $post->post_type, [ 'product', 'download' ], true ) ) {
+		$wpPost = $this->getPost();
+		if ( $wpPost && in_array( $wpPost->post_type, [ 'product', 'download' ], true ) ) {
 			$isWooCommerceActive = $this->isWooCommerceActive();
 			$isEddActive         = $this->isEddActive();
 			$data['data']       += [
@@ -131,9 +163,10 @@ trait Vue {
 
 			if ( $isWooCommerceActive ) {
 				$data['data']['wooCommerce'] = [
-					'currencySymbol'            => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency_symbol() : '$',
-					'isWooCommerceBrandsActive' => $this->isWooCommerceBrandsActive(),
-					'isPerfectBrandsActive'     => $this->isPerfectBrandsActive()
+					'currencySymbol'                => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency_symbol() : '$',
+					'isPerfectBrandsActive'         => $this->isPerfectBrandsActive(),
+					'isWooCommerceBrandsActive'     => $this->isWooCommerceBrandsActive(),
+					'isWooCommerceUpcEanIsbnActive' => $this->isWooCommerceUpcEanIsbnActive()
 				];
 			}
 
@@ -181,6 +214,25 @@ trait Vue {
 			foreach ( $archives as $archive ) {
 				$data['breadcrumbs']['defaultTemplates']['archives']['postTypes'][ $archive['name'] ] =
 					aioseo()->helpers->encodeOutputHtml( aioseo()->breadcrumbs->frontend->getDefaultTemplate( 'postTypeArchive', $archive ) );
+			}
+
+			$data['searchStatistics']['isConnected'] = aioseo()->searchStatistics->api->auth->isConnected();
+		}
+
+		if ( is_multisite() && is_network_admin() ) {
+			if ( 'tools' === $page || 'settings' === $page ) {
+				$activeSites = json_decode( aioseo()->internalNetworkOptions->internal->sites->active );
+
+				$data['data']['network']['activeSites'] = empty( $activeSites ) ? [] : $activeSites;
+			}
+
+			if ( 'tools' === $page && aioseo()->license->hasCoreFeature( 'tools', 'network-tools-import-export' ) ) {
+				foreach ( aioseo()->helpers->getSites()['sites'] as $site ) {
+					aioseo()->helpers->switchToBlog( $site->blog_id );
+					$data['data']['network']['backups'][ $site->blog_id ] = array_reverse( aioseo()->backup->all() );
+				}
+
+				aioseo()->helpers->restoreCurrentBlog();
 			}
 		}
 

@@ -39,9 +39,10 @@ class MetaData extends CommonMeta\MetaData {
 			is_category() ||
 			is_tag() ||
 			is_tax() ||
-			( is_admin() && function_exists( 'get_current_screen' ) && 'term' === get_current_screen()->base )
+			( is_admin() && aioseo()->helpers->isScreenBase( 'term' ) )
 		) {
-			$termId = is_object( $term ) ? $term->term_id : get_queried_object()->term_id;
+			$term   = is_a( $term, 'WP_Term' ) ? $term : get_queried_object();
+			$termId = ! empty( $term->term_id ) ? $term->term_id : null;
 			if ( empty( $termId ) ) {
 				return parent::getMetaData( $term );
 			}

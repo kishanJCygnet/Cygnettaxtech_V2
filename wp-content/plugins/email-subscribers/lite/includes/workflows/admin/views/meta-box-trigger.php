@@ -27,6 +27,7 @@ if ( ! ES()->is_starter() ) {
 			'ig_es_ninja_forms_submitted'      => __( 'Ninja Form Submitted', 'email-subscribers' ),
 			'ig_es_gravity_forms_submitted'    => __( 'Gravity Form Submitted', 'email-subscribers' ),
 			'ig_es_forminator_forms_submitted' => __( 'Forminator Form Submitted', 'email-subscribers' ),
+			'ig_es_formidable_forms_submitted' => __( 'Formidable Form Submitted', 'email-subscribers' ),
 		),
 		'Order'   => array(
 			'ig_es_wc_order_completed'    => __( 'WooCommerce Order Completed', 'email-subscribers' ),
@@ -56,6 +57,30 @@ if ( ! ES()->is_pro() ) {
 		),
 		'User'      => array(
 			'ig_es_user_role_changed' => __( 'User Role Changed', 'email-subscribers' ),
+		),
+		'LearnDash' => array(
+			'ig_es_ld_user_enrolled' => __( 'User enrolled in course', 'email-subscribers' ),
+			'ig_es_ld_user_removed'  => __( 'User removed from a course', 'email-subscribers' ),
+		),
+		'Ultimate Member' => array(
+			'ig_es_um_membership_approved' => __( 'Membership Approved', 'email-subscribers' ),
+			'ig_es_um_membership_deactivated'  => __( 'Membership Deactivated', 'email-subscribers' ),
+		),
+		'Paid Memberships Pro' => array(
+			'ig_es_pmp_membership_purchased' => __( 'Membership Purchased', 'email-subscribers' ),
+			'ig_es_pmp_membership_expired'  => __( 'Membership Expired', 'email-subscribers' ),
+			'ig_es_pmp_membership_canceled'  => __( 'Membership Canceled', 'email-subscribers' ),
+		),
+		'MemberPress' => array(
+			'ig_es_mp_one_time_product_purchased' => __( 'Product Purchased - One Time', 'email-subscribers' ),
+			'ig_es_mp_recurring_product_purchased'  => __( 'Product Purchased - Recurring', 'email-subscribers' ),
+			'ig_es_mp_membership_expired'  => __( 'Membership Expired', 'email-subscribers' ),
+			'ig_es_mp_membership_canceled'  => __( 'Membership Canceled', 'email-subscribers' ),
+		),
+		'WooCommerce Memberships' => array(
+			'ig_es_wcm_membership_created' => __( 'Membership Created', 'email-subscribers' ),
+			'ig_es_wcm_membership_expired' => __( 'Membership Expired', 'email-subscribers' ),
+			'ig_es_wcm_membership_canceled'  => __( 'Membership Canceled', 'email-subscribers' ),
 		),
 	);
 	$trigger_list     = array_merge_recursive( $trigger_list, $pro_trigger_list );

@@ -52,7 +52,7 @@ class Main extends CommonMain\Main {
 		parent::enqueueTranslations();
 
 		wp_localize_script(
-			'aioseo-app',
+			aioseo()->core->assets->jsHandle( 'src/vue/standalone/app/main.js' ),
 			'aioseoTranslationsPro',
 			[
 				'translationsPro' => aioseo()->helpers->getJedLocaleData( 'aioseo-pro' )

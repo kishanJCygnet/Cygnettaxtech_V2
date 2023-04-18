@@ -6,12 +6,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use AIOSEO\Plugin\Common\Traits;
+
 /**
  * Handles the Open Graph meta.
  *
  * @since 4.0.0
  */
 class Facebook {
+	use Traits\SocialProfiles;
+
 	/**
 	 * Returns the Open Graph image URL.
 	 *
@@ -228,10 +232,12 @@ class Facebook {
 		}
 
 		if ( is_post_type_archive() ) {
-			$postType       = get_queried_object();
-			$dynamicOptions = aioseo()->dynamicOptions->noConflict();
-			if ( $dynamicOptions->searchAppearance->archives->has( $postType->name ) ) {
-				$title = aioseo()->meta->title->helpers->prepare( aioseo()->dynamicOptions->searchAppearance->archives->{ $postType->name }->title );
+			$postType = get_queried_object();
+			if ( is_a( $postType, 'WP_Post_Type' ) ) {
+				$dynamicOptions = aioseo()->dynamicOptions->noConflict();
+				if ( $dynamicOptions->searchAppearance->archives->has( $postType->name ) ) {
+					$title = aioseo()->meta->title->helpers->prepare( aioseo()->dynamicOptions->searchAppearance->archives->{ $postType->name }->title );
+				}
 			}
 		}
 
@@ -268,10 +274,12 @@ class Facebook {
 		}
 
 		if ( is_post_type_archive() ) {
-			$postType       = get_queried_object();
-			$dynamicOptions = aioseo()->dynamicOptions->noConflict();
-			if ( $dynamicOptions->searchAppearance->archives->has( $postType->name ) ) {
-				$description = aioseo()->meta->description->helpers->prepare( aioseo()->dynamicOptions->searchAppearance->archives->{ $postType->name }->metaDescription );
+			$postType = get_queried_object();
+			if ( is_a( $postType, 'WP_Post_Type' ) ) {
+				$dynamicOptions = aioseo()->dynamicOptions->noConflict();
+				if ( $dynamicOptions->searchAppearance->archives->has( $postType->name ) ) {
+					$description = aioseo()->meta->description->helpers->prepare( aioseo()->dynamicOptions->searchAppearance->archives->{ $postType->name }->metaDescription );
+				}
 			}
 		}
 
@@ -352,13 +360,21 @@ class Facebook {
 	 */
 	public function getAuthor() {
 		$post = aioseo()->helpers->getPost();
-		if ( ! $post || ! aioseo()->options->social->facebook->general->showAuthor ) {
+		if ( ! is_a( $post, 'WP_Post' ) || ! aioseo()->options->social->facebook->general->showAuthor ) {
 			return '';
 		}
 
-		$postAuthor = get_the_author_meta( 'aioseo_facebook', $post->post_author );
+		$author       = '';
+		$userProfiles = $this->getUserProfiles( $post->post_author );
+		if ( ! empty( $userProfiles['facebookPageUrl'] ) ) {
+			$author = $userProfiles['facebookPageUrl'];
+		}
 
-		return ! empty( $postAuthor ) ? $postAuthor : aioseo()->options->social->facebook->advanced->authorUrl;
+		if ( empty( $author ) ) {
+			$author = aioseo()->options->social->facebook->advanced->authorUrl;
+		}
+
+		return $author;
 	}
 
 	/**

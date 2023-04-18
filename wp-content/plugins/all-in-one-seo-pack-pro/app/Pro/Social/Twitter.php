@@ -68,7 +68,7 @@ class Twitter extends CommonSocial\Twitter {
 
 		$title = '';
 		if ( ! empty( $metaData->twitter_title ) ) {
-			$title = aioseo()->meta->title->helpers->prepare( $metaData->twitter_title );
+			$title = aioseo()->meta->title->helpers->prepare( $metaData->twitter_title, $term->term_id );
 		}
 
 		return $title ? $title : aioseo()->social->facebook->getTitle();
@@ -95,7 +95,7 @@ class Twitter extends CommonSocial\Twitter {
 
 		$description = '';
 		if ( ! empty( $metaData->twitter_description ) ) {
-			$description = aioseo()->meta->description->helpers->prepare( $metaData->twitter_description );
+			$description = aioseo()->meta->description->helpers->prepare( $metaData->twitter_description, $term->term_id );
 		}
 
 		return $description ? $description : aioseo()->social->facebook->getDescription();

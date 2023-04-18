@@ -100,7 +100,7 @@ class Facebook extends CommonSocial\Facebook {
 
 		$title = '';
 		if ( ! empty( $metaData->og_title ) ) {
-			$title = aioseo()->meta->title->helpers->prepare( $metaData->og_title );
+			$title = aioseo()->meta->title->helpers->prepare( $metaData->og_title, $term->term_id );
 		}
 
 		return $title ? $title : aioseo()->meta->title->getTermTitle( $term );
@@ -124,7 +124,7 @@ class Facebook extends CommonSocial\Facebook {
 
 		$description = '';
 		if ( ! empty( $metaData->og_description ) ) {
-			$description = aioseo()->meta->description->helpers->prepare( $metaData->og_description );
+			$description = aioseo()->meta->description->helpers->prepare( $metaData->og_description, $term->term_id );
 		}
 
 		return $description ? $description : aioseo()->meta->description->getTermDescription( $term );
@@ -142,7 +142,11 @@ class Facebook extends CommonSocial\Facebook {
 			return parent::getObjectType();
 		}
 
-		$term     = get_queried_object();
+		$term = get_queried_object();
+		if ( ! is_a( $term, 'WP_Term' ) ) {
+			return 'article';
+		}
+
 		$metaData = aioseo()->meta->metaData->getMetaData( $term );
 		if ( ! empty( $metaData->og_object_type ) && 'default' !== $metaData->og_object_type ) {
 			return $metaData->og_object_type;

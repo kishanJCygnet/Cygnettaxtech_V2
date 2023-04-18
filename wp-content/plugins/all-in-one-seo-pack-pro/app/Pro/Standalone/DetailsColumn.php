@@ -23,6 +23,10 @@ class DetailsColumn extends CommonDetailsColumn {
 	public function __construct() {
 		parent::__construct();
 
+		if ( wp_doing_ajax() ) {
+			add_action( 'init', [ $this, 'addTaxonomyColumnsAjax' ], 1 );
+		}
+
 		if ( ! is_admin() ) {
 			return;
 		}
@@ -46,6 +50,33 @@ class DetailsColumn extends CommonDetailsColumn {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueueScripts' ] );
 		add_filter( "manage_edit-{$screen->taxonomy}_columns", [ $this, 'addColumn' ], 10, 1 );
 		add_filter( "manage_{$screen->taxonomy}_custom_column", [ $this, 'renderTaxonomyColumn' ], 10, 3 );
+	}
+
+	/**
+	 * Registers our taxonomy columns after a term has been quick-edited.
+	 *
+	 * @since 4.2.3
+	 *
+	 * @returns void
+	 */
+	public function addTaxonomyColumnsAjax() {
+		if (
+			! isset( $_POST['_inline_edit'], $_POST['tax_ID'] ) ||
+			! wp_verify_nonce( $_POST['_inline_edit'], 'taxinlineeditnonce' )
+		) {
+			return;
+		}
+
+		$termId = (int) $_POST['tax_ID'];
+		if ( ! $termId ) {
+			return;
+		}
+
+		$term     = get_term( $termId );
+		$taxonomy = $term->taxonomy;
+
+		add_filter( "manage_edit-{$taxonomy}_columns", [ $this, 'addColumn' ] );
+		add_filter( "manage_{$taxonomy}_custom_column", [ $this, 'renderTaxonomyColumn' ], 10, 3 );
 	}
 
 	/**
@@ -97,7 +128,7 @@ class DetailsColumn extends CommonDetailsColumn {
 		wp_localize_script( 'aioseo/js/' . $this->scriptSlug, 'aioseo', $data );
 
 		ob_start();
-		require( AIOSEO_DIR . '/app/Common/Views/admin/terms/columns.php' );
+		require AIOSEO_DIR . '/app/Common/Views/admin/terms/columns.php';
 		$out = ob_get_clean();
 
 		return $out;
