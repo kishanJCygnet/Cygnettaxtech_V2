@@ -6,7 +6,6 @@
 			<section class="banner-content <?php echo the_field('banner_class'); ?>">    
 				<span class="bottom-arrow"></span>  
 				<div class="banner-slider" <?php if ( is_front_page() ) : ?> class="banner-slider" <?php endif; ?> >
-				<!--<div class="owl-carousel banner-slider">-->					
 						<?php while (have_rows('banner')) : the_row(); ?>
 						  <div>
 							<div class="banner-inner-content w-100" style="background-image:url('<?php echo the_sub_field('background_image'); ?>')">  
@@ -712,7 +711,7 @@
 						$s = 0;
 						if (have_rows('icon_box_content')) :  ?>
 								<div class="row icon-box-list">
-									<div class="owl-carousel icon-slider">
+									<div class="icon-slider">
 										<?php while (have_rows('icon_box_content')) : the_row(); ?>
 											<div class="icon-box wow fadeInUp" data-wow-delay="<?php echo $s; ?>s">
 												<?php if (get_sub_field('icon_box_image')){ ?>
@@ -754,41 +753,48 @@
 								</div>
 								<script>
 								jQuery(document).ready(function() {
-									jQuery('.icon-slider').length && jQuery('.icon-slider').owlCarousel({
-										loop: false,
-										margin: 10,
-										autoplay: false,
-										nav: true,
-										dots: false,
-										mouseDrag:false,
-									
-										navText: [
-											'<span><img src="<?php echo THEME_PATH; ?>/images/icon-angle.svg" alt="navigation right" /></span>',
-											'<span><img src="<?php echo THEME_PATH; ?>/images/icon-angle.svg" alt="navigation left" /></span>'
-										],
-										responsive : {
-											// breakpoint from 0 up
-											0 : {
-												items:1,
-											},
-											768 : {
-												items:2,
-											},
-											992 : {
-												items:3,
-											},
-											1200 : {
-												margin: 20,
-												items: <?php echo $dynamic_col; ?>,
-											},
-											// breakpoint from 1 up
-											1400 : {
-												margin: 40,
-												items: <?php echo $dynamic_col; ?>,
-											}
-										}										
-									})
-								})
+
+									jQuery('.icon-slider').each(function(){
+										jQuery(this).slick({
+											infinite: true,							
+											autoplay: true,
+											autoplaySpeed:3000,
+											arrows: true,
+											dots: false,
+											slidesToShow: '<?php echo $dynamic_col; ?>',
+											customPaging: '40px',							
+											prevArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation right' /></span>",
+											nextArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation left' /></span>",
+											responsive : [
+												// breakpoint from 0 up
+												{  breakpoint: 0,
+												settings : {
+													slidesToShow:1,
+													margin: 20,
+													}
+												},
+												{  breakpoint: 768,
+												settings : {
+														margin: 40,
+														slidesToShow:2,
+													}
+												},
+												{  breakpoint: 992,
+												settings : {
+														margin: 40,
+														slidesToShow:3,
+													}
+												},
+												{  breakpoint: 1200,
+													settings : {
+														margin: 40,
+														slidesToShow: '<?php echo $dynamic_col; ?>',
+													}
+												},
+										]
+										});
+									});
+								});
 								</script>
 						<?php endif; ?>
 					</div>
