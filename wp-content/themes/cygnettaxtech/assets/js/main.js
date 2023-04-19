@@ -212,10 +212,19 @@ jQuery(document).ready(function(){
 
       jQuery('.loader').fadeOut();      
       aboutheading();
+      // Remove Svg ClipPath
+      jQuery("svg").each(function () {
+        jQuery(this).find("g").removeAttr("clip-path");
+        jQuery(this).find("clipPath").remove();
+      });
+      // End Remove Svg Clip path     
+      jQuery('.owl-crousal-rowTwo .client-logos .client-logo-slider .owl-nav').addClass('disabled');
+
 });
 jQuery(window).resize(function(){
   aboutheading();
 });
+
 
 
 
