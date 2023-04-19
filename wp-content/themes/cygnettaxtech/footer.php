@@ -151,8 +151,8 @@
 
    <!-- js -->
     <script src="<?php echo THEME_PATH; ?>assets/dist/js/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo THEME_PATH; ?>assets/dist/js/bootstrap.bundle.js"></script>   
-	<script src="<?php echo THEME_PATH; ?>assets/dist/js/owl.carousel.min.js"></script>	
+    <script src="<?php echo THEME_PATH; ?>assets/dist/js/bootstrap.bundle.js"></script>
+	<script src="<?php echo THEME_PATH; ?>assets/dist/js/slick.min.js"></script>	
 	<script src="<?php echo THEME_PATH; ?>assets/dist/js/wow.min.js"></script>
 	<script src="<?php echo THEME_PATH; ?>assets/dist/js/main.js"></script>	
 	<script type='text/javascript' id='cygnet-global-js-extra'>

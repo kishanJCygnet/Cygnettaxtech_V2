@@ -43,7 +43,7 @@
 	<!--<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=626a78d085d62e001964c5d1&product=sop' id='share-this-share-buttons-mu-js' async='async'></script>-->
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> -->
     <link rel="stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/animate.css">
-	<link rel="stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/slick.css">
 	<link rel="newest stylesheet" href="<?php echo THEME_PATH; ?>assets/dist/css/style.css">
 	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6295d7619a09040019f206fd&product=sop' id='share-this-share-buttons-mu-js' async='async'></script>
 	<!-- Google Tag Manager -->

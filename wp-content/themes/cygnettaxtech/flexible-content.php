@@ -5,85 +5,87 @@
 		if (have_rows('banner')) : ?>
 			<section class="banner-content <?php echo the_field('banner_class'); ?>">    
 				<span class="bottom-arrow"></span>  
-				<div <?php if ( is_front_page() ) : ?> class="owl-carousel banner-slider" <?php endif; ?> >
-				<!--<div class="owl-carousel banner-slider">-->
-					<?php while (have_rows('banner')) : the_row(); ?>
-						<div class="banner-inner-content w-100" style="background-image:url('<?php echo the_sub_field('background_image'); ?>')">  
-							<div class="container">
-							 <div class="row" >
-								<div class="col-lg-12">
-									<div class="d-flex align-items-center h-100">
-										<div class="text-content ">
-											<div class="banner-text-heading-content">
-												<?php if (get_sub_field('sub_title')) :  ?>
-												<h3 class="text-white wow fadeInUp" data-wow-delay="0.6s"><?php echo the_sub_field('sub_title'); ?></h3>
-											<?php endif; ?>
-										    <?php if (get_sub_field('title')) :  ?>
-												<h1 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('title'); ?></h1>												
-											<?php endif; ?>
-											
-											<?php if (get_sub_field('sub_sub_title')) :  ?>
-												<div class="text-white wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('sub_sub_title'); ?></div>
-											<?php endif; ?>
+				<div class="banner-slider" <?php if ( is_front_page() ) : ?> class="banner-slider" <?php endif; ?> >
+						<?php while (have_rows('banner')) : the_row(); ?>
+						  <div>
+							<div class="banner-inner-content w-100" style="background-image:url('<?php echo the_sub_field('background_image'); ?>')">  
+								<div class="container">
+								<div class="row" >
+									<div class="col-lg-12">
+										<div class="d-flex align-items-center h-100">
+											<div class="text-content ">
+												<div class="banner-text-heading-content">
+													<?php if (get_sub_field('sub_title')) :  ?>
+													<h3 class="text-white wow fadeInUp" data-wow-delay="0.6s"><?php echo the_sub_field('sub_title'); ?></h3>
+												<?php endif; ?>
+												<?php if (get_sub_field('title')) :  ?>
+													<h1 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('title'); ?></h1>												
+												<?php endif; ?>
+												
+												<?php if (get_sub_field('sub_sub_title')) :  ?>
+													<div class="text-white wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('sub_sub_title'); ?></div>
+												<?php endif; ?>
+												</div>
+												<?php if (get_sub_field('primary_button_url') && get_sub_field('primary_button_label')) : ?>
+													<a href="<?php echo the_sub_field('primary_button_url'); ?>" class="btn btn-primary me-3 wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('primary_button_label'); ?></a>
+												<?php endif; ?>
+												<?php if (get_sub_field('secondary_button_url') && get_sub_field('secondary_button_label')) : ?>
+													<a href="<?php echo the_sub_field('secondary_button_url'); ?>" class="btn wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('secondary_button_label'); ?></a>
+												<?php endif; ?>
+												<?php //if( function_exists( 'aioseo_breadcrumbs' ) ) aioseo_breadcrumbs();  ?>
 											</div>
-											<?php if (get_sub_field('primary_button_url') && get_sub_field('primary_button_label')) : ?>
-												<a href="<?php echo the_sub_field('primary_button_url'); ?>" class="btn btn-primary me-3 wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('primary_button_label'); ?></a>
-											<?php endif; ?>
-											<?php if (get_sub_field('secondary_button_url') && get_sub_field('secondary_button_label')) : ?>
-												<a href="<?php echo the_sub_field('secondary_button_url'); ?>" class="btn wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('secondary_button_label'); ?></a>
-											<?php endif; ?>
-											<?php //if( function_exists( 'aioseo_breadcrumbs' ) ) aioseo_breadcrumbs();  ?>
 										</div>
+										<?php /*if (get_sub_field('left_image')) : ?>
+											<div class="banner-left-image" style="background-image: url(<?php echo the_sub_field('left_image'); ?>)"></div>
+										<?php endif; */?>
 									</div>
-									<?php /*if (get_sub_field('left_image')) : ?>
-										<div class="banner-left-image" style="background-image: url(<?php echo the_sub_field('left_image'); ?>)"></div>
-									<?php endif; */?>
-								</div>
-								<!-- <div class="col-lg-5 d-md-none d-none d-lg-block">
-									<div class="img-content">
-										<div class="inner-img-content mask1">
-											<?php /* if(get_sub_field('video_url')){ 
-												?>
-												<iframe class="banner-video" src="<?php echo the_sub_field('video_url'); ?>?autoplay=1&amp;modestbranding=1&amp;showinfo=0" allowfullscreen="allowfullscreen"></iframe>
-												<video class="banner-video animate__animated wow fadeIn " data-wow-duration="3s" data-wow-delay="1s" loop="true" autoplay="autoplay" muted/> 										  
-													<source src="<?php echo the_sub_field('video_url'); ?>" type="video/mp4"> 
-												</video>
-												<?php
-											} else {
-												if (get_sub_field('image')) :
+									<!-- <div class="col-lg-5 d-md-none d-none d-lg-block">
+										<div class="img-content">
+											<div class="inner-img-content mask1">
+												<?php /* if(get_sub_field('video_url')){ 
 													?>
-													<div class="bg-animation" style="background-image: url(<?php echo the_sub_field('image'); ?>)"></div>
-												  <?php
-												endif;
-											}*/ ?>
-											<?php /* if (get_sub_field('image')) : ?>
-												<img src="<?php echo the_sub_field('image'); ?>" class="w-100" alt="<?php echo the_sub_field('title'); ?>">
-											<?php endif */ ?>
+													<iframe class="banner-video" src="<?php echo the_sub_field('video_url'); ?>?autoplay=1&amp;modestbranding=1&amp;showinfo=0" allowfullscreen="allowfullscreen"></iframe>
+													<video class="banner-video animate__animated wow fadeIn " data-wow-duration="3s" data-wow-delay="1s" loop="true" autoplay="autoplay" muted/> 										  
+														<source src="<?php echo the_sub_field('video_url'); ?>" type="video/mp4"> 
+													</video>
+													<?php
+												} else {
+													if (get_sub_field('image')) :
+														?>
+														<div class="bg-animation" style="background-image: url(<?php echo the_sub_field('image'); ?>)"></div>
+													<?php
+													endif;
+												}*/ ?>
+												<?php /* if (get_sub_field('image')) : ?>
+													<img src="<?php echo the_sub_field('image'); ?>" class="w-100" alt="<?php echo the_sub_field('title'); ?>">
+												<?php endif */ ?>
+											</div>
 										</div>
-									</div>
-									<?php /* if (get_sub_field('right_content')) : */ ?>
-									<div class="banner-right-content">
-										<?php /* echo the_sub_field('right_content');*/ ?>
-									</div>
-									<?php/* endif;*/ ?>
-								</div> -->
-							</div>
-							</div>
-						</div>    
-					<?php endwhile;	?> 
+										<?php /* if (get_sub_field('right_content')) : */ ?>
+										<div class="banner-right-content">
+											<?php /* echo the_sub_field('right_content');*/ ?>
+										</div>
+										<?php/* endif;*/ ?>
+									</div> -->
+								</div>
+								</div>
+							</div>   
+							</div> 
+						<?php endwhile;	?> 				
 				</div>
 				<script>
 				jQuery(document).ready(function() {
-					jQuery('.banner-slider').length && jQuery('.banner-slider').owlCarousel({
-						loop: true,
-						autoplay: true,
-						nav: false,
-						dots: true,
-						mouseDrag:false,
-						animateOut: 'fadeOut',
-						animateIn: 'fadeIn',
-						items: 1,
-						autoplayTimeout: 7500,
+					jQuery('.banner-slider').each(function(){
+						jQuery(this).slick({
+							dots: true,
+							slidesToShow: 1,
+							slidesToScroll: 1,
+							infinite: true,
+							speed: 500,
+							fade: true,
+							cssEase: 'linear',
+							rows:1,
+						});
 					});
 				});
 				</script>
@@ -441,8 +443,9 @@
 						<?php $dynamic_col_logo = get_sub_field('columns');						
 						if (have_rows('logo_list')) : ?>					
 							<div class="client-logos">
-								<div class="owl-carousel client-logo-slider" id="<?php echo 'logo_slider_'.$logo_slider_cnt; ?>">
+								<div class="client-logo-slider" id="<?php echo 'logo_slider_'.$logo_slider_cnt; ?>">
 								   <?php while (have_rows('logo_list')) : the_row(); ?>
+								   <div>
 										<?php if (get_sub_field('logo_image')) { ?>											
 											    	<!--<img src="<?php echo the_sub_field('logo_image'); ?>" alt="<?php echo the_sub_field('logo_title'); ?>" >-->
 													<?php $extension = pathinfo(get_sub_field('logo_image'), PATHINFO_EXTENSION);
@@ -452,43 +455,53 @@
 														} else { ?>
 															<img src="<?php echo the_sub_field('logo_image'); ?>" alt="<?php echo the_sub_field('logo_title'); ?>" />
 													<?php } ?>							
-										<?php } ?>										
+										<?php } ?>		
+														</div>								
 								   <?php endwhile;?>
 								</div>
 							</div>
 							<script>
 							jQuery(document).ready(function() {
-								jQuery(<?php echo 'logo_slider_'.$logo_slider_cnt; ?>).length && jQuery(<?php echo 'logo_slider_'.$logo_slider_cnt; ?>).owlCarousel({
-									loop: true,									
+								jQuery(<?php echo 'logo_slider_'.$logo_slider_cnt; ?>).length && jQuery(<?php echo 'logo_slider_'.$logo_slider_cnt; ?>).slick({
+									infinite: true,							
 									autoplay: true,
-									autoplayTimeout:3000,
-									nav: true,
-									dots: false,									
-									navText: [
-										'<span><img src="<?php echo THEME_PATH; ?>/images/icon-angle.svg" alt="navigation right" /></span>',
-										'<span><img src="<?php echo THEME_PATH; ?>/images/icon-angle.svg" alt="navigation left" /></span>'									
-									],
-									responsive : {
+									autoplaySpeed:3000,
+									arrows: true,
+									dots: false,
+									slidesToShow: '<?php echo $dynamic_col_logo; ?>',
+									rows: 2,
+									customPaging: '40px',							
+									prevArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation right' /></span>",
+									nextArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation left' /></span>",
+									responsive : [
 											// breakpoint from 0 up
-											0 : {
-												items:1,
+											{  breakpoint: 0,
+											   settings : {
+												slidesToShow:1,
 												margin: 20,
+												}
 											},
-											768 : {
-												margin: 40,
-												items:2,
+											{  breakpoint: 768,
+											   settings : {
+													margin: 40,
+													slidesToShow:2,
+												}
 											},
-											992 : {
-												margin: 40,
-												items:3,
-											},											
-											1200 : {
-												margin: 40,
-												items: <?php echo $dynamic_col_logo; ?>,
-											},											
-										}
+											{  breakpoint: 992,
+											   settings : {
+													margin: 40,
+													slidesToShow:3,
+												}
+											},
+											{  breakpoint: 1200,
+											   settings : {
+													margin: 40,
+													slidesToShow: '<?php echo $dynamic_col_logo; ?>',
+												}
+											},
+									]
 									
-								})
+								});
 							})
 							</script>
 					<?php endif; ?>
@@ -698,7 +711,7 @@
 						$s = 0;
 						if (have_rows('icon_box_content')) :  ?>
 								<div class="row icon-box-list">
-									<div class="owl-carousel icon-slider">
+									<div class="icon-slider">
 										<?php while (have_rows('icon_box_content')) : the_row(); ?>
 											<div class="icon-box wow fadeInUp" data-wow-delay="<?php echo $s; ?>s">
 												<?php if (get_sub_field('icon_box_image')){ ?>
@@ -740,41 +753,48 @@
 								</div>
 								<script>
 								jQuery(document).ready(function() {
-									jQuery('.icon-slider').length && jQuery('.icon-slider').owlCarousel({
-										loop: false,
-										margin: 10,
-										autoplay: false,
-										nav: true,
-										dots: false,
-										mouseDrag:false,
-									
-										navText: [
-											'<span><img src="<?php echo THEME_PATH; ?>/images/icon-angle.svg" alt="navigation right" /></span>',
-											'<span><img src="<?php echo THEME_PATH; ?>/images/icon-angle.svg" alt="navigation left" /></span>'
-										],
-										responsive : {
-											// breakpoint from 0 up
-											0 : {
-												items:1,
-											},
-											768 : {
-												items:2,
-											},
-											992 : {
-												items:3,
-											},
-											1200 : {
-												margin: 20,
-												items: <?php echo $dynamic_col; ?>,
-											},
-											// breakpoint from 1 up
-											1400 : {
-												margin: 40,
-												items: <?php echo $dynamic_col; ?>,
-											}
-										}										
-									})
-								})
+
+									jQuery('.icon-slider').each(function(){
+										jQuery(this).slick({
+											infinite: true,							
+											autoplay: true,
+											autoplaySpeed:3000,
+											arrows: true,
+											dots: false,
+											slidesToShow: '<?php echo $dynamic_col; ?>',
+											customPaging: '40px',							
+											prevArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation right' /></span>",
+											nextArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation left' /></span>",
+											responsive : [
+												// breakpoint from 0 up
+												{  breakpoint: 0,
+												settings : {
+													slidesToShow:1,
+													margin: 20,
+													}
+												},
+												{  breakpoint: 768,
+												settings : {
+														margin: 40,
+														slidesToShow:2,
+													}
+												},
+												{  breakpoint: 992,
+												settings : {
+														margin: 40,
+														slidesToShow:3,
+													}
+												},
+												{  breakpoint: 1200,
+													settings : {
+														margin: 40,
+														slidesToShow: '<?php echo $dynamic_col; ?>',
+													}
+												},
+										]
+										});
+									});
+								});
 								</script>
 						<?php endif; ?>
 					</div>
@@ -1140,7 +1160,7 @@
 			/* Count Section Start */
 			if (get_row_layout() == 'count_section') :
 			?>
-				<section class="esignature-solution <?php echo the_sub_field('count_section_class'); ?>" <?php echo $slugid; ?>>
+				<section class="count-section <?php echo the_sub_field('count_section_class'); ?>" <?php echo $slugid; ?>>
 					<div class="container">
 						<div class="title-heading">
 							<?php if (get_sub_field('count_section_title')){ ?>
@@ -1149,11 +1169,13 @@
 						</div>
 						<?php if (have_rows('count_section_content')) : ?>
 							<div class="count-section-main-inner">
-								<div class="row">
+								
 								<?php $cnt=1; 
 								while (have_rows('count_section_content')) : the_row();	
 									if($cnt < 11){ ?>								
 										<div class="count-inner">
+											<div class="count-inner-content">
+												<div class="icon">
 											<?php if (get_sub_field('count_section_icon_image')){ ?>
 												<?php $extension = pathinfo(get_sub_field('count_section_icon_image'), PATHINFO_EXTENSION);
 													if($extension == 'svg'){
@@ -1169,21 +1191,23 @@
 														<img src="<?php echo the_sub_field('count_section_icon_image'); ?>" alt="<?php echo the_sub_field('count_section_label'); ?>">
 												<?php } ?>	
 											<?php } ?>
+											</div>
 											<?php //if (get_sub_field('count_section_value')){ ?>
 												<div class="count-label">
-													<?php if (get_sub_field('count_section_value')){ ?><span class="counter" data-count="<?php echo the_sub_field('count_section_value');?>">0</span><?php } ?><?php echo the_sub_field('count_section_sub_value');?>
+													<h2><?php if (get_sub_field('count_section_value')){ ?><span class="counter" data-count="<?php echo the_sub_field('count_section_value');?>">0</span> <?php } ?><?php echo the_sub_field('count_section_sub_value');?></h2>
 												</div>
 											<?php //} ?>
 											<?php if (get_sub_field('count_section_label')){ ?>
 												<div class="count-value">
-													<h2><?php echo the_sub_field('count_section_label'); ?></h2>
+													<?php echo the_sub_field('count_section_label'); ?>
 												</div>
 											<?php } ?>
+											</div>
 										</div>						
 									<?php } 
 									$cnt++; 
 								endwhile; ?>
-								</div>
+							
 							</div>
 						<?php endif; ?>
 					</div>
