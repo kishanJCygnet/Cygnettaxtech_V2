@@ -261,7 +261,6 @@ body {
     }
   }
 }
-
 .circle-animation {
   width: 48px;
   height: 48px;
@@ -378,7 +377,6 @@ body {
     background: transparent linear-gradient(180deg, #fff 0, rgba(153, 204, 204, 0.5) 100%) 0 0 no-repeat padding-box;
   }
 }
-
 body {
   .tab-within-tab-section {
     &.testing-services {
@@ -610,7 +608,6 @@ body {
     }
   }
 }
-
 .CTA-btn {
   &.btn-white {
     .btn {
@@ -619,7 +616,6 @@ body {
     }
   }
 }
-
 .thankyou-banner {
   display: none;
 }
@@ -795,4 +791,7 @@ video {
 }
 p{
   font-size: 14px;
+}
+.bg-gd-green{
+  background: transparent linear-gradient(50deg, #0F3764 0%, #009999 100%) 0% 0% no-repeat padding-box;
 }
