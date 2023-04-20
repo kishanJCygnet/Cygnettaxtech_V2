@@ -305,6 +305,10 @@ if ( ! class_exists( 'ES_Install' ) ) {
 				'ig_es_migrate_workflow_trigger_conditions_to_rules',
 				'ig_es_update_550_db_version',
 			),
+			'5.6.3'  => array(
+				'ig_es_update_563_enable_newsletter_summary_automation',
+				'ig_es_update_563_db_version',
+			),
 		);
 
 		/**

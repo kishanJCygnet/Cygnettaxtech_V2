@@ -179,9 +179,9 @@ class ES_Handle_Post_Notification {
 
 								$mailing_queue_hash = $guid;
 								$campaign_id        = $notification['id'];
-								$is_inserted		= ES_DB_Sending_Queue::do_insert_from_contacts_table( $mailing_queue_id, $mailing_queue_hash, $campaign_id, $list_id );
+								$emails_queued		= ES_DB_Sending_Queue::queue_emails( $mailing_queue_id, $mailing_queue_hash, $campaign_id, $list_id );
 
-								if ( $is_inserted ) {
+								if ( $emails_queued ) {
 									update_post_meta( $post_id, 'ig_es_is_post_notified', 1 );
 									$post_mailing_queue_ids[] = $mailing_queue_id;
 								}

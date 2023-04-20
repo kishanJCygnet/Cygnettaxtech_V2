@@ -4,9 +4,9 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Author URI: https://www.icegram.com/
 Tags: email marketing, subscription, autoresponder, post notification, welcome email
 Requires at least: 3.9
-Tested up to: 6.1.1
+Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 5.6.2
+Stable tag: 5.6.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses
 
@@ -447,12 +447,21 @@ Refer [here](https://www.icegram.com/documentation/es-faq/).
 
 == Upgrade Notice ==
 
-= 5.6.2 =
+= 5.6.3 =
 
-* New: Option to show custom success message per form
-* New: Import subscribers from BuddyBoss [MAX]
+* New: Option to redirect subscribers after subscription
+* New: Weekly summary email
+* Fix: Duplicate posts issue in post digest notifications [MAX]
+* Fix: Database error when creating custom field [MAX]
 
 == Changelog ==
+
+**5.6.3 (20.04.2023)**
+
+* New: Option to redirect subscribers after subscription
+* New: Weekly summary email
+* Fix: Duplicate posts issue in post digest notifications [MAX]
+* Fix: Database error when creating custom field [MAX]
 
 **5.6.2 (12.04.2023)**
 

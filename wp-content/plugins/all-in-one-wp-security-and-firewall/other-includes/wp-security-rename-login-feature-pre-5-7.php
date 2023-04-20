@@ -9,7 +9,7 @@
  */
 
 // Make sure that the WordPress bootstrap has run before continuing.
-// AIOS - for our special case we do not want to include wp-load.php
+// aiowps - for our special case we do not want to include wp-load.php
 //require __DIR__ . '/wp-load.php';
 
 // Redirect to HTTPS login if forced to use SSL.
@@ -537,10 +537,12 @@ if (defined('RELOCATE') && RELOCATE) { // Move flag is set.
 	}
 }
 
-setcookie(TEST_COOKIE, 'WP Cookie check', 0, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true);
+// Set a cookie now to see if they are supported by the browser.
+$secure = ('https' === parse_url(wp_login_url(), PHP_URL_SCHEME));
+setcookie(TEST_COOKIE, 'WP Cookie check', 0, COOKIEPATH, COOKIE_DOMAIN, $secure);
 
 if (SITECOOKIEPATH !== COOKIEPATH) {
-	setcookie(TEST_COOKIE, 'WP Cookie check', 0, SITECOOKIEPATH, COOKIE_DOMAIN, is_ssl(), true);
+	setcookie(TEST_COOKIE, 'WP Cookie check', 0, SITECOOKIEPATH, COOKIE_DOMAIN, $secure);
 }
 
 /**
@@ -719,7 +721,7 @@ switch ($action) {
 					$change_link = add_query_arg('highlight', 'confirm_admin_email', $change_link);
 					?>
 					<a class="button button-large" href="<?php echo esc_url($change_link); ?>"><?php _e('Update'); ?></a>
-					<input type="submit" name="correct-admin-email" id="correct-admin-email" class="button button-primary button-large" value="<?php esc_attr_e('The email is correct'); ?>">
+					<input type="submit" name="correct-admin-email" id="correct-admin-email" class="button button-primary button-large" value="<?php esc_attr_e('The email is correct'); ?>" />
 				</div>
 				<?php if ($remind_interval > 0) : ?>
 					<div class="admin-email__actions-secondary">
@@ -764,9 +766,16 @@ switch ($action) {
 		 *
 		 * @param int $expires The expiry time, as passed to setcookie().
 		 */
-		$expire = apply_filters('post_password_expires', time() + 10 * DAY_IN_SECONDS);
+		$expire  = apply_filters('post_password_expires', time() + 10 * DAY_IN_SECONDS);
+		$referer = wp_get_referer();
 
-		setcookie('wp-postpass_' . COOKIEHASH, $hasher->HashPassword(wp_unslash($_POST['post_password'])), $expire, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true);
+		if ($referer) {
+			$secure = ('https' === parse_url($referer, PHP_URL_SCHEME));
+		} else {
+			$secure = false;
+		}
+
+		setcookie('wp-postpass_' . COOKIEHASH, $hasher->HashPassword(wp_unslash($_POST['post_password'])), $expire, COOKIEPATH, COOKIE_DOMAIN, $secure);
 
 		wp_safe_redirect(wp_get_referer());
 		exit;
@@ -874,7 +883,7 @@ switch ($action) {
 			?>
 			<input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>" />
 			<p class="submit">
-				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Get new password'); ?>">
+				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Get New Password'); ?>" />
 			</p>
 		</form>
 
@@ -1007,7 +1016,7 @@ switch ($action) {
 			?>
 			<input type="hidden" name="rp_key" value="<?php echo esc_attr($rp_key); ?>" />
 			<p class="submit">
-				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Reset password'); ?>">
+				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Reset Password'); ?>" />
 			</p>
 		</form>
 
@@ -1107,7 +1116,7 @@ switch ($action) {
 			<br class="clear" />
 			<input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>" />
 			<p class="submit">
-				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Register'); ?>">
+				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Register'); ?>" />
 			</p>
 		</form>
 
@@ -1437,7 +1446,7 @@ switch ($action) {
 			?>
 			<p class="forgetmenot"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked($rememberme); ?> /> <label for="rememberme"><?php esc_html_e('Remember Me'); ?></label></p>
 			<p class="submit">
-				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log in'); ?>">
+				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log In'); ?>" />
 				<?php
 
 				if ($interim_login) {

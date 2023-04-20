@@ -170,8 +170,8 @@ class AIOWPSecurity_List_Table {
 
 		if ( empty( $this->modes ) ) {
 			$this->modes = array(
-				'list'    => __( 'List view' ),
-				'excerpt' => __( 'Excerpt view' ),
+				'list'    => __( 'List View' ),
+				'excerpt' => __( 'Excerpt View' ),
 			);
 		}
 	}
@@ -467,7 +467,7 @@ class AIOWPSecurity_List_Table {
 
 		echo '<label for="bulk-action-selector-' . esc_attr( $which ) . '" class="screen-reader-text">' . __( 'Select bulk action' ) . '</label>';
 		echo '<select name="action' . $two . '" id="bulk-action-selector-' . esc_attr( $which ) . "\">\n";
-		echo '<option value="-1">' . __('Bulk actions') . "</option>\n";
+		echo '<option value="-1">' . __( 'Bulk Actions' ) . "</option>\n";
 
 		foreach ( $this->_actions as $name => $title ) {
 			$class = 'edit' === $name ? ' class="hide-if-no-js"' : '';
@@ -477,13 +477,7 @@ class AIOWPSecurity_List_Table {
 
 		echo "</select>\n";
 
-		$submit_attributes = array('id' => "doaction$two");
-
-		if ('top' == $which) {
-			$submit_attributes['onclick'] = "return confirm('".esc_js(__('Are you sure you want to perform this bulk action?', 'all-in-one-wp-security-and-firewall'))."')";
-		}
-
-		submit_button(__('Apply'), 'action', '', false, $submit_attributes);
+		submit_button( __( 'Apply' ), 'action', '', false, array( 'id' => "doaction$two", 'onclick' => "return confirm('Are you sure you want to perform this bulk action?')" ) );
 		echo "\n";
 	}
 
@@ -855,11 +849,11 @@ class AIOWPSecurity_List_Table {
 
 		if ( 'bottom' === $which ) {
 			$html_current_page  = $current;
-			$total_pages_before = '<span class="screen-reader-text">' . __( 'Current page' ) . '</span><span id="table-paging" class="paging-input"><span class="tablenav-paging-text">';
+			$total_pages_before = '<span class="screen-reader-text">' . __( 'Current Page' ) . '</span><span id="table-paging" class="paging-input"><span class="tablenav-paging-text">';
 		} else {
 			$html_current_page = sprintf(
 				"%s<input class='current-page' id='current-page-selector' type='text' name='paged' value='%s' size='%d' aria-describedby='table-paging' /><span class='tablenav-paging-text'>",
-				'<label for="current-page-selector" class="screen-reader-text">' . __( 'Current page' ) . '</label>',
+				'<label for="current-page-selector" class="screen-reader-text">' . __( 'Current Page' ) . '</label>',
 				$current,
 				strlen( $total_pages )
 			);
@@ -1106,7 +1100,7 @@ class AIOWPSecurity_List_Table {
 
 		if ( ! empty( $columns['cb'] ) ) {
 			static $cb_counter = 1;
-			$columns['cb']     = '<label class="screen-reader-text" for="cb-select-all-' . $cb_counter . '">' . __( 'Select all' ) . '</label>'
+			$columns['cb']     = '<label class="screen-reader-text" for="cb-select-all-' . $cb_counter . '">' . __( 'Select All' ) . '</label>'
 				. '<input id="cb-select-all-' . $cb_counter . '" type="checkbox" />';
 			$cb_counter++;
 		}
@@ -1406,20 +1400,5 @@ class AIOWPSecurity_List_Table {
 		);
 
 		printf( "<script>list_args = %s;</script>\n", wp_json_encode( $args ) );
-	}
-
-	/**
-	 * Retrieves and returns current WP general settings date time format.
-	 *
-	 * @return String
-	 */
-	protected function get_wp_date_time_format() {
-		static $wp_date_time_format;
-
-		if (!isset($wp_date_time_format)) {
-			$wp_date_time_format = get_option('date_format').' '.get_option('time_format');
-		}
-
-		return $wp_date_time_format;
 	}
 }

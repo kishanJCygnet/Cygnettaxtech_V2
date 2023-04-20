@@ -148,7 +148,8 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 
 								$post_ids = array();
 								if ( class_exists( 'ES_Post_Digest' ) ) {
-									$post_ids = ES_Post_Digest::get_matching_post_ids( $campaign_id );
+									$ignore_stored_post_ids = true; // Set it to true so that we don't get same post ids which were set in the last run.
+									$post_ids               = ES_Post_Digest::get_matching_post_ids( $campaign_id, $ignore_stored_post_ids );
 								}
 
 								// Proceed only if we have posts for digest.
@@ -171,7 +172,11 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 
 										if ( ! empty( $mailing_queue_id ) ) {
 											$mailing_queue_hash = $result['hash'];
-											ES_DB_Sending_Queue::do_insert_from_contacts_table( $mailing_queue_id, $mailing_queue_hash, $campaign_id, $list_id );
+											$emails_queued      = ES_DB_Sending_Queue::queue_emails( $mailing_queue_id, $mailing_queue_hash, $campaign_id, $list_id );
+											if ( $emails_queued ) {
+												$meta_data['post_ids'] = $post_ids;
+												$meta_data['last_run'] = strtotime( ig_get_current_date_time() );
+											}
 										}
 									}
 								}
@@ -724,6 +729,13 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 							// Set status to Sending only if it in the queued status currently.
 							if ( 'In Queue' === $notification['status'] ) {
 								ES_DB_Mailing_Queue::update_sent_status( $notification_guid, 'Sending' );
+								if ( 'post_digest' === $campaign_type ) {
+									$campaign_meta = ES()->campaigns_db->get_campaign_meta_by_id( $campaign_id );
+									if ( ! empty( $campaign_meta['post_ids'] ) ) {
+										$post_ids = $campaign_meta['post_ids'];
+										ES_Post_Digest::set_post_notified_flag( $campaign_id, $post_ids );
+									}
+								}
 							}
 
 							// Sync mailing queue content with the related campaign.
@@ -758,8 +770,6 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 									} elseif ( 'post_digest' === $campaign_type ) {
 										$campaign_meta = ES()->campaigns_db->get_campaign_meta_by_id( $campaign_id );
 										if ( ! empty( $campaign_meta['post_ids'] ) ) {
-											$post_ids = $campaign_meta['post_ids'];
-											ES_Post_Digest::set_post_notified_flag( $campaign_id, $post_ids );
 											// Empty the post ids since they have already been sent in this campaign notification.
 											$campaign_meta['post_ids'] = array();
 											ES()->campaigns_db->update_campaign_meta( $campaign_id, $campaign_meta );
