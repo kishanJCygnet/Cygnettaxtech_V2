@@ -1,0 +1,51 @@
+.offering-tab{
+    .content{
+        .title{
+            padding: 15px 30px;
+            background: #24263229 0% 0% no-repeat padding-box;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .list-tabs {
+            display: flex;
+            margin: 0 -15px;
+            flex-wrap: wrap;
+
+            .list-item {
+                width: 33.33%;
+                margin-bottom: 30px;              
+                padding: 0 15px;
+                .accordion-button {
+                    background: transparent linear-gradient(104deg, #60D6D652 0%, #00999952 100%) 0% 0% no-repeat padding-box;
+                    border: 2px solid #60D6D629;
+                    border-radius: 8px;
+                    font-size: 18px;
+                    color: #fff; 
+                    &:after{
+                        content: "\f063";
+                        font-family: "Font Awesome 5 Pro";
+                        background-image: none;
+                        font-size: 14px;
+                        opacity: 1;
+                        transform: rotate(225deg);
+                        position: absolute;
+                        /* rotate: none; */                        
+                        
+                        transition: .3s all linear;
+                        right: 13px;
+                        top: 17px;
+                    }
+                    &.collapsed{
+                        &:after{
+                            transform: rotate(315deg);  
+                            opacity: 0.3;
+                            right: 8px;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

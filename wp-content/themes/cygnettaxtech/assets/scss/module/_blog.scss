@@ -44,7 +44,7 @@
 .blog-container .card-title {
     margin-bottom: 30px;
 }
-.blog-container .card-text{
+.blog-container {
  font-size: 18px;
  line-height: 28px;
  @include bp(md-max){

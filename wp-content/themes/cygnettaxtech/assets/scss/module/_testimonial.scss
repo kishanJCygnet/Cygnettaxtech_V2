@@ -555,6 +555,7 @@ background-color: #f8f8f8;
     padding-left: 0;
     display: flex;
     justify-content: center;
+    margin-top: 15px;
     li{
         display: flex;
         align-items: center;
@@ -567,7 +568,7 @@ background-color: #f8f8f8;
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background-color: #C154C1 !important;            
+            background-color: #099 !important;     
             margin: 0 5px;
             padding: 0;
             border: 0;
@@ -610,7 +611,4 @@ background-color: #f8f8f8;
   .progress > svg {
     height: 100%;
     display: block;
-  }
-  .slick-dots{
-    display: none !important;
   }

@@ -445,7 +445,7 @@
 							<div class="client-logos">
 								<div class="client-logo-slider" id="<?php echo 'logo_slider_'.$logo_slider_cnt; ?>">
 								   <?php while (have_rows('logo_list')) : the_row(); ?>
-								   <div>
+								   <div class="item">
 										<?php if (get_sub_field('logo_image')) { ?>											
 											    	<!--<img src="<?php echo the_sub_field('logo_image'); ?>" alt="<?php echo the_sub_field('logo_title'); ?>" >-->
 													<?php $extension = pathinfo(get_sub_field('logo_image'), PATHINFO_EXTENSION);
@@ -465,14 +465,11 @@
 								jQuery(<?php echo 'logo_slider_'.$logo_slider_cnt; ?>).length && jQuery(<?php echo 'logo_slider_'.$logo_slider_cnt; ?>).slick({
 									infinite: true,							
 									autoplay: true,
-									autoplaySpeed:3000,
-									arrows: true,
-									dots: false,
+									autoplaySpeed:3000,	
+									arrows:false,								
+									dots: true,
 									slidesToShow: '<?php echo $dynamic_col_logo; ?>',
-									rows: 2,
-									customPaging: '40px',							
-									prevArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation right' /></span>",
-									nextArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation left' /></span>",
+									rows: 2,						
 									responsive : [
 											// breakpoint from 0 up
 											{  breakpoint: 0,
@@ -873,7 +870,7 @@
 					<?php if (have_rows('tabs')) : ?>					
 							<div class="row">
 								<?php while (have_rows('tabs')) : the_row();	?>								
-									<div class="col-md-3">
+									<div class="col-md-12">
 										<div class="content">											
 											<div class="title text-start">												
 												<?php if (get_sub_field('tab_icon')){ ?>
