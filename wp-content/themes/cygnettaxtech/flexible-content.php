@@ -899,6 +899,7 @@
 																<h4 class="list-title accordion-header" id="accordionheading<?php echo $c.'_'.$cm; ?>">
 																	<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $c.'_'.$cm; ?>" aria-expanded="true" aria-controls="collapse<?php echo $c.'_'.$cm; ?>">
 																		<span><?php echo the_sub_field('inner_content_title'); ?></span>
+																		<?php if (get_sub_field('inner_content_sub_title')){ ?><span class="inner-content-sub-title"><?php echo the_sub_field('inner_content_sub_title'); ?></span><?php } ?>
 																	</button>
 																</h4>
 																<div id="collapse<?php echo $c.'_'.$cm; ?>" class="accordion-collapse collapse" aria-labelledby="accordionheading<?php echo $c.'_'.$cm; ?>" data-bs-parent="#accordionSection<?php echo $c; ?>">
