@@ -95,7 +95,7 @@ function remove_cssjs_ver($src)
     return $src;
 }
 add_filter('style_loader_src', 'remove_cssjs_ver', 10, 2);
-add_filter('script_loader_src', 'remove_cssjs_ver', 10, 2);
+//add_filter('script_loader_src', 'remove_cssjs_ver', 10, 2);
 /* Remove RSD Links */
 remove_action('wp_head', 'rsd_link');
 /* Disable Emoticons */
@@ -671,13 +671,18 @@ function RegisterNewUser_taxtech($cf7, &$abort, $submission){
 		$response_data = $response_decode['data']['result'];
 		$status = $response_data['status'];
 		$errormessage = $response_data['errormessage'];
+		$errorcode = $response_data['errorcode'];
 		$successmessage = $response_data['successmessage'];
 		if($successmessage != ''){
 			//echo $successmessage;
 			//exit;
 			return;
 		} else {
-			$errMsg = $errormessage;//"Unable to process the request at this movement. Please contact us over an email.";
+			if($errorcode == 'E004'){
+				$errMsg = 'E004';//"Unable to process the request at this movement. Please contact us over an email.";
+			} else {
+				$errMsg = $errormessage;//"Unable to process the request at this movement. Please contact us over an email.";
+			}
 			$abort = true;
 			$submission->set_response($cf7->message('validation_failed'));
 			$submission->set_response($cf7->filter_message($errMsg)); //custom msg;

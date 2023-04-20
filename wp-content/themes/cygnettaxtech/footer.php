@@ -41,6 +41,9 @@
 				<div class="form-content">
 					<?php echo do_shortcode('[contact-form-7 id="43625" title="R7VAT Landing Page API Form"]'); ?>
 				</div>
+				<div id="err-cf7-40804" style="display:none;margin: 2em 0.5em 1em;padding: 0.2em 1em;border:2px solid #dc3232;font-size: 14px;">
+					Your user details are already available for R7VAT tool, <a href="https://r7vatgcccompliance.cygnettaxtech.com/login" target="_blank" style="color: #009999;">Click here</a> to login.
+				</div>
 			<?php } ?>			
 			<?php //if ( is_front_page() ) : ?>
 				<div class="technology-move">
@@ -166,9 +169,26 @@
     <!-- End js -->
 	
 	<script>
+	document.addEventListener( 'wpcf7submit', function( event ) {
+		var status = event.detail.status; 
+		var res = event.detail.apiResponse.message; 
+		if(event.detail.contactFormId == 40804 && status === 'aborted' && res == 'E004'){
+			//jQuery('.wpcf7-response-output').html("Your user details are already available for R7VAT tool, <a href='https://r7vatgcccompliance.cygnettaxtech.com/login' target='_blank'>Click here</a> to login.");
+			jQuery('.wpcf7-response-output').hide();
+			jQuery('#err-cf7-40804').show();
+		} else {
+			jQuery('.wpcf7-response-output').show();
+			jQuery('#err-cf7-40804').hide();
+		}
+	}, false );
+
+	
+	
+	
+	
 	  var url = '<?php echo site_url(); ?>';
 	  document.addEventListener('wpcf7mailsent', function(e) {
-		if(e.detail.contactFormId == 172 || e.detail.contactFormId == 39050 || e.detail.contactFormId == 41345) {
+		if(e.detail.contactFormId == 172 || e.detail.contactFormId == 39050 || e.detail.contactFormId == 41345 || e.detail.contactFormId == 40804) {
 			location = url + '/thank-you-for-contacting-us';
 		} else if(e.detail.contactFormId == 41335) {
 			location = url + '/thank-you-for-downloading';
