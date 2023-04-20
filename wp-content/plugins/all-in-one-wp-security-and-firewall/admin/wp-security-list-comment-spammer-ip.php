@@ -24,7 +24,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
     function column_comment_author_IP($item){
         $tab = strip_tags($_REQUEST['tab']);
         //Build row actions
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1){
+        if (is_multisite() && get_current_blog_id() != 1){
             //Suppress the block link if site is a multi site AND not the main site
             $actions = array(); //blank array
         }else{
@@ -57,7 +57,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox
             'comment_author_IP' => __('Spammer IP', 'all-in-one-wp-security-and-firewall'),
-            'amount' => __('Number of SPAM Comments From This IP', 'all-in-one-wp-security-and-firewall'),
+			'amount' => __('Number of spam comments from this IP', 'all-in-one-wp-security-and-firewall'),
             'status' => __('Status', 'all-in-one-wp-security-and-firewall'),
         );
         return $columns;
@@ -73,7 +73,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
     }
     
     function get_bulk_actions() {
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1){
+        if (is_multisite() && get_current_blog_id() != 1){
             //Suppress the block link if site is a multi site AND not the main site
             $actions = array(); //blank array
         }else{
