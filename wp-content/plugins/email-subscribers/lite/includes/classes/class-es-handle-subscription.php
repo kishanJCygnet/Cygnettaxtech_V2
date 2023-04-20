@@ -201,8 +201,9 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 			);
 
 			$es           = ! empty( $_POST['es'] ) ? sanitize_text_field( wp_unslash( $_POST['es'] ) ) : '';
+			$es_form_id   = ! empty( $_POST['esfpx_form_id'] ) ? sanitize_text_field( wp_unslash( $_POST['esfpx_form_id'] ) ) : '';
 			$es_subscribe = ! empty( $_POST['esfpx_es-subscribe'] ) ? sanitize_text_field( wp_unslash( $_POST['esfpx_es-subscribe'] ) ) : '';
-
+			
 			if ( ! empty( $es_subscribe ) && wp_verify_nonce( $es_subscribe, 'es-subscribe' ) ) {
 				$nonce_verified = true;
 			}
@@ -405,15 +406,23 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 								$response['message'] = 'es_optin_success_message';
 							}
 
-							$response['status'] = 'SUCCESS';
+							$response['status']  = 'SUCCESS';
+							$form_settings       = ES()->forms_db->get_form_settings( $es_form_id );
+							$action_after_submit = ! empty( $form_settings['action_after_submit'] ) ? $form_settings['action_after_submit'] : '';
+
+							if ( 'redirect_to_url' === $action_after_submit ) {
+								$redirection_url             = ! empty( $form_settings['redirection_url'] ) ? $form_settings['redirection_url'] : '';
+								$response['redirection_url'] = $redirection_url;
+							}
 						} else {
 
 							$response['message'] = 'es_db_error_notice';
 						}
 					} else {
 						$response['status']  = 'SUCCESS';
-						$response['message'] = 'es_optin_success_message';
-						$response            = $this->do_response( $response );
+						$response['message'] = 'es_optin_success_message';							
+						
+						$response = $this->do_response( $response );
 						if ( $return_response ) {
 							return $response;
 						} elseif ( $doing_ajax ) {
@@ -434,7 +443,7 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 					}
 				}
 			} else {
-				$response['message'] = 'es_permission_denied_notice';
+				$response['message'] = 'es_permission_denied_notice';				
 			}
 
 			$response = $this->do_response( $response );
@@ -594,7 +603,7 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 
 			return false;
 		}
-		
+				
 		/**
 		 * Get Message description based on message
 		 *
@@ -644,6 +653,8 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 		 * Method to handle external subscriptions.
 		 *
 		 * @since 4.4.7
+		 * 
+		 * @modify 5.6.2
 		 **/
 		public function handle_subscription() {
 
@@ -686,10 +697,16 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 			$doing_ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
 			// Run only when it is normal form submission and not ajax form submission.
 			if ( ! $doing_ajax ) {
-				$es_action = ig_es_get_post_data( 'es' );
+				$es_action = ig_es_get_post_data( 'es' );				
 				if ( ! empty( $es_action ) && 'subscribe' === $es_action ) {
 					// Store the response, so that it can be shown while outputting the subscription form HTML.
-					ES_Shortcode::$response = $this->process_request();
+					$response = $this->process_request();
+					if ( ! empty ( $response['redirection_url'] ) ) {
+						wp_redirect( $response['redirection_url'] );
+						exit;
+					} 
+
+					ES_Shortcode::$response = $response;
 				}
 			}
 		}

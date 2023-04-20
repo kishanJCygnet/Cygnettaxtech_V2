@@ -21,7 +21,6 @@ class AIOWPSecurity_Block_Bootstrap extends AIOWPSecurity_Block_File {
 	 * @return boolean|WP_Error
 	 */
 	public function insert_contents() {
-
 		$info = pathinfo($this->file_path);
 	
 		if (!isset($info['dirname'])) {

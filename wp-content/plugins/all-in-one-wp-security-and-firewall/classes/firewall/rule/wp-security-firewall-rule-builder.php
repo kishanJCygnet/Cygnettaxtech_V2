@@ -18,11 +18,9 @@ class Rule_Builder {
 			$rule = new $classname();
 
 			if (!$rule->is_active()) {
-				Event::raise('rule_not_active', $rule, $classname);
 				continue;
 			}
 
-			Event::raise('rule_active', $rule, $classname);
 			yield $rule;
 		}
 	}
@@ -33,14 +31,18 @@ class Rule_Builder {
 	 * @return iterable
 	 */
 	private static function get_rule_classname() {
-		$rec_iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(AIOWPS_FIREWALL_DIR.'/rule/rules/', \FilesystemIterator::SKIP_DOTS));
 
-		foreach ($rec_iterator as $dir_iterator) {
-			$matches = array();
-			if (preg_match('/^rule-(?<rule_name>.*)\.php$/', $dir_iterator->getFilename(), $matches)) {
-				yield "AIOWPS\Firewall\Rule_".ucwords(str_replace('-', '_', $matches['rule_name']), '_');
+		$handle = opendir(AIOWPS_FIREWALL_DIR.'/rule/rules/');
+		if ($handle) {
+			while (false !== ($entry = readdir($handle))) {
+				$matches = array();
+				if (preg_match('/^rule-(.*)\.php$/', $entry, $matches)) {
+					yield "AIOWPS\Firewall\Rule_".ucwords(str_replace('-', '_', $matches[1]), '_');
+				}
 			}
+			@closedir($handle); //phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
 		}
+
 	}
 
 }

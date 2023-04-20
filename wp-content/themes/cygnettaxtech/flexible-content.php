@@ -1064,9 +1064,12 @@
 									while (have_rows('tab_section_with_click_content')) : the_row();	
 									$tab_section_with_click_tab_title = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '_', get_sub_field('tab_section_with_click_tab_title')));
 									?>	
-									  <li class="nav-item ">
+										<li class="nav-item <?php if($j == 0){ ?> active <?php } ?>">
+											<a class="nav-link" href="#<?php echo $tab_section_with_click_tab_title; ?>"><?php echo the_sub_field('tab_section_with_click_tab_title'); ?></a>
+										  </li>
+									  <!--<li class="nav-item ">
 										<a class="nav-link <?php if($j == 0){ ?> active <?php } ?>" href="#<?php echo $tab_section_with_click_tab_title; ?>"><?php echo the_sub_field('tab_section_with_click_tab_title'); ?></a>
-									  </li>
+									  </li>-->
 									<?php $j++;
 									endwhile; ?>
 								</ul>
@@ -1078,15 +1081,44 @@
 									?>	
 										<div class="tab-inner-content" id="<?php echo $tab_section_with_click_tab_title; ?>">
 											<div class="in-content">
-												<div class="col-img">
-													<!-- <div class="img-content" style="background-image:url('<?php echo the_sub_field('tab_section_with_click_content_image'); ?>')"> -->
-														<img src="<?php echo the_sub_field('tab_section_with_click_content_image'); ?>" alt="<?php echo the_sub_field('title'); ?>">
-													<!-- </div> -->
+												<div class="tab-col-left">													
+													<?php if (get_sub_field('tab_section_left_content_image')){ ?>
+														<div class="tab-col-left-img">
+															<?php $extension = pathinfo(get_sub_field('tab_section_left_content_image'), PATHINFO_EXTENSION);
+																if($extension == 'svg'){
+																	$tab_section_left_content_image = get_sub_field('tab_section_left_content_image');
+																	$stream_opts = [
+																		"ssl" => [
+																			"verify_peer"=>false,
+																			"verify_peer_name"=>false,
+																		]
+																	];														 
+																	echo file_get_contents($tab_section_left_content_image, false, stream_context_create($stream_opts));
+																} else { ?>
+																	<img src="<?php echo the_sub_field('tab_section_left_content_image'); ?>" alt="<?php echo the_sub_field('tab_section_left_content_title'); ?>">
+															<?php } ?>	
+														</div>
+													<?php } ?>
+													<?php if (get_sub_field('tab_section_left_content_title')){ ?>
+														<div class="tab-col-left-title">
+															<?php echo the_sub_field('tab_section_left_content_title'); ?>
+														</div>
+													<?php } ?>
+													<?php if (get_sub_field('tab_section_left_content_description')){ ?>
+														<div class="tab-col-left-desc">
+															<?php echo the_sub_field('tab_section_left_content_description'); ?>
+														</div>
+													<?php } ?>
+													<?php if (get_sub_field('tab_section_left_content_button_label')){ ?>
+														<div class="tab-col-left-btn">
+															<a href="<?php echo the_sub_field('tab_section_left_content_button_url'); ?>" class="btn"><?php echo the_sub_field('tab_section_left_content_button_label'); ?></a>															
+														</div>
+													<?php } ?>
 												</div>
-												<div class="col-text">
+												<div class="tab-col-right">
 													<div class="text-content">									
-														<?php if (get_sub_field('tab_section_with_click_content_desc')){ ?>
-															<p><?php echo the_sub_field('tab_section_with_click_content_desc'); ?></p>
+														<?php if (get_sub_field('tab_section_right_content')){ ?>
+															<p><?php echo the_sub_field('tab_section_right_content'); ?></p>
 														<?php } ?>
 													</div>
 												</div>
@@ -1099,15 +1131,24 @@
 					</div>
 				</div>
 				<script>
-				jQuery( document ).ready(function() {					
+				jQuery( document ).ready(function() {
+					jQuery("#click-tab-section li a").click(function(){
+						jQuery('#click-tab-section li').removeClass("active"); 
+						jQuery(this).parent('li').addClass("active");
+					});
+					jQuery("#click-tab-section li a").click(function() {
+					var position = jQuery(this).parent('li').position();
+					var width = jQuery(this).parent('li').width();
+						jQuery("#click-tab-section .slider-nav").css({"left":+ position.left,"width":width});
+					});
 					var actWidth = jQuery("#click-tab-section").find(".active").parent("li").width();
-					var actPosition = jQuery("#click-tab-section li a.active").position();
+					var actPosition = jQuery("#click-tab-section li.active").position();
 					jQuery("#click-tab-section .slider-nav").css({"left":+ actPosition.left,"width": actWidth});				
-				});	
-				var sectionIds = jQuery('#click-tab-section li a');
+					
+					var sectionIds = jQuery('#click-tab-section li');
 					jQuery(document).scroll(function(){
 					  sectionIds.each(function(){
-						  var container = jQuery(this).attr('href');
+						  var container = jQuery(this).children('a').attr('href');
 						  var containerOffset = jQuery(container).offset().top;
 						  var containerHeight = jQuery(container).outerHeight();
 						  var containerBottom = containerOffset + containerHeight;
@@ -1122,34 +1163,9 @@
 							  jQuery(this).removeClass('active');
 						  }
 					  });
-					}); 
-				
-				jQuery(function() {
-					jQuery('a[href*=\\#]:not([href=\\#])').click(function() {
-					if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
-				&& location.hostname == this.hostname) {
-				
-						var target = jQuery(this.hash);
-						target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
-						if (target.length) {
-						jQuery('html,body').animate({
-							scrollTop: target.offset().top - 185 //offsets for fixed header
-						}, 300);
-						return false;
-						}
-					}
-					});
-					//Executed on page load with URL containing an anchor tag.
-					if(jQuery(location.href.split("#")[1])) {
-						var target = jQuery('#'+location.href.split("#")[1]);
-						if (target.length) {
-						jQuery('html,body').animate({
-							scrollTop: target.offset().top - 185 //offset height of header here too.
-						},300 );
-						return false;
-						}
-					}
-				});
+					});  
+					
+				});				
 				</script>
 			</section>
 			<?php endif;  
