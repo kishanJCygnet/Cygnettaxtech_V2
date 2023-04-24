@@ -1,4 +1,99 @@
+function AddReadMore() {
+  //This limit you can set after how much characters you want to show Read More.
+  var carLmt = 25;
+  // Text to show when text is collapsed
+  var readMoreTxt = " More";
+  // Text to show when text is expanded
+  var readLessTxt = " Less";
+  
+  //Traverse all selectors with this class and manupulate HTML part to show Read More
+  jQuery(".icon-box .description:not('.no-read-more .icon-box .description')").each(function() {
+    
+    //alert(words.length);
+      if (jQuery(this).find(".firstSec").length)
+          return;
+
+      var allstr = jQuery(this).text().split(" ");
+      var firstSet = '';
+      var secdHalf = '';
+        for (var i=0;i<allstr.length;i++)
+        {
+          if(i < carLmt){
+            firstSet += allstr[i]+' ';
+          } else {
+            secdHalf += allstr[i]+' ';
+          }
+        }        
+          
+        if(secdHalf != ''){
+            var strtoadd = firstSet + "<span class='dot'>...</span>" + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + " </span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
+         }
+         else{
+          var strtoadd = firstSet;
+        
+         }
+          jQuery(this).html(strtoadd);
+         
+  });
+  //Read More and Read Less Click Event binding
+  jQuery(document).on("click", ".readMore, .readLess", function() {
+      jQuery(this).closest(".icon-box .description").toggleClass("showlesscontent showmorecontent");
+  });
+}
+function iconReadMore() {
+  //This limit you can set after how much characters you want to show Read More.
+  var carLmt = 10;
+  // Text to show when text is collapsed
+  var readMoreTxt = " Read More";
+  // Text to show when text is expanded
+  var readLessTxt = " Read Less";
+  
+  //Traverse all selectors with this class and manupulate HTML part to show Read More
+  jQuery(".client-logos .description").each(function() {
+    
+    //alert(words.length);
+      if (jQuery(this).find(".firstSec").length)
+          return;
+
+      var allstr = jQuery(this).text().split(" ");
+      var firstSet = '';
+      var secdHalf = '';
+        for (var i=0;i<allstr.length;i++)
+        {
+          if(i < carLmt){
+            firstSet += allstr[i]+' ';
+          } else {
+            secdHalf += allstr[i]+' ';
+          }
+        }        
+          
+        if(secdHalf != ''){
+            var strtoadd = firstSet + "<span class='dot'>...</span>" + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + "</span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
+         }
+         else{
+          var strtoadd = firstSet;
+        
+         }
+          jQuery(this).html(strtoadd);
+         
+  });
+  //Read More and Read Less Click Event binding
+  jQuery(document).on("click", ".readMore, .readLess", function() {
+      jQuery(this).closest(".client-logos .description").toggleClass("showlesscontent showmorecontent");
+  });
+}
+function aboutheading(){
+  var WiWidth = jQuery(window).width();
+  var CnWidth = jQuery('.about-pill-section .container').innerWidth();
+  var titleMargLeft = (0 - (((WiWidth - CnWidth)/ 2) + 15));
+  var titleMarg = ((WiWidth - CnWidth)/ 2) + 550;
+  jQuery('.about-pill-section .container .title-heading').css('margin-left', titleMargLeft);
+  jQuery('.about-pill-section .container .title-heading').css('min-width', titleMarg);
+
+}
+
 jQuery(document).ready(function(){
+//  Animation content on scroll
   wow = new WOW({
     boxClass: 'wow', // default
     animateClass: 'animated', // default
@@ -7,9 +102,12 @@ jQuery(document).ready(function(){
     live: true // default
   })
   wow.init();
+
+  //  header search icon
   jQuery('.search-icon .overlay').click(function(){
      jQuery('.search-icon').toggleClass('show');
   }); 
+  // Mobile menu overflow
   jQuery('.navbar-toggler').click(function(){
     jQuery('html').toggleClass('overflow-h');
   }); 
@@ -74,112 +172,15 @@ jQuery(window).scroll(function() {
 
 });
 
-function AddReadMore() {
-  //This limit you can set after how much characters you want to show Read More.
-  var carLmt = 25;
-  // Text to show when text is collapsed
-  var readMoreTxt = " More";
-  // Text to show when text is expanded
-  var readLessTxt = " Less";
-  
-  //Traverse all selectors with this class and manupulate HTML part to show Read More
-  jQuery(".icon-box .description").each(function() {
-    
-    //alert(words.length);
-      if (jQuery(this).find(".firstSec").length)
-          return;
 
-      var allstr = jQuery(this).text().split(" ");
-      var firstSet = '';
-      var secdHalf = '';
-        for (var i=0;i<allstr.length;i++)
-        {
-          if(i < carLmt){
-            firstSet += allstr[i]+' ';
-          } else {
-            secdHalf += allstr[i]+' ';
-          }
-        }        
-          
-        if(secdHalf != ''){
-            var strtoadd = firstSet + "<span class='dot'>...</span>" + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + " </span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
-         }
-         else{
-          var strtoadd = firstSet;
-        
-         }
-          jQuery(this).html(strtoadd);
-         
-  });
-  //Read More and Read Less Click Event binding
-  jQuery(document).on("click", ".readMore, .readLess", function() {
-      jQuery(this).closest(".icon-box .description").toggleClass("showlesscontent showmorecontent");
-  });
-}
 jQuery(function() {
   //Calling function after Page Load
   AddReadMore();
+  iconReadMore();
 }); 
 
-function iconReadMore() {
-  //This limit you can set after how much characters you want to show Read More.
-  var carLmt = 10;
-  // Text to show when text is collapsed
-  var readMoreTxt = " Read More";
-  // Text to show when text is expanded
-  var readLessTxt = " Read Less";
-  
-  //Traverse all selectors with this class and manupulate HTML part to show Read More
-  jQuery(".client-logos .description").each(function() {
-    
-    //alert(words.length);
-      if (jQuery(this).find(".firstSec").length)
-          return;
-
-      var allstr = jQuery(this).text().split(" ");
-      var firstSet = '';
-      var secdHalf = '';
-        for (var i=0;i<allstr.length;i++)
-        {
-          if(i < carLmt){
-            firstSet += allstr[i]+' ';
-          } else {
-            secdHalf += allstr[i]+' ';
-          }
-        }        
-          
-        if(secdHalf != ''){
-            var strtoadd = firstSet + "<span class='dot'>...</span>" + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + "</span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
-         }
-         else{
-          var strtoadd = firstSet;
-        
-         }
-          jQuery(this).html(strtoadd);
-         
-  });
-  //Read More and Read Less Click Event binding
-  jQuery(document).on("click", ".readMore, .readLess", function() {
-      jQuery(this).closest(".client-logos .description").toggleClass("showlesscontent showmorecontent");
-  });
-}
-jQuery(function() {
-  //Calling function after Page Load
-  iconReadMore();
-});
-
-function aboutheading(){
-  var WiWidth = jQuery(window).width();
-  var CnWidth = jQuery('.about-pill-section .container').innerWidth();
-  var titleMargLeft = (0 - (((WiWidth - CnWidth)/ 2) + 15));
-  var titleMarg = ((WiWidth - CnWidth)/ 2) + 550;
-  jQuery('.about-pill-section .container .title-heading').css('margin-left', titleMargLeft);
-  jQuery('.about-pill-section .container .title-heading').css('min-width', titleMarg);
-
-}
-
 jQuery(document).ready(function(){
-  
+    // Count section
       jQuery('.counter').each(function() {
         var $this = jQuery(this),
             countTo = $this.attr('data-count');
@@ -199,18 +200,21 @@ jQuery(document).ready(function(){
           }
         });  
       });
-      setTimeout(() => { jQuery('#contact_us').addClass('shake-btn') }, 400); 
-      jQuery('#contact_us').addClass('shake-btn');
-     
-      setTimeout(function() {
-        jQuery('#contact_us').removeClass('shake-btn')
-      }, 10000);
 
+      // setTimeout(() => { jQuery('#contact_us').addClass('shake-btn') }, 400); 
+      // jQuery('#contact_us').addClass('shake-btn');
+     
+      // setTimeout(function() {
+      //   jQuery('#contact_us').removeClass('shake-btn')
+      // }, 10000);
+
+      // Mobile menu
       jQuery('#primary-menu-list > .menu-item-has-children > a').click(function(){
         jQuery(this).parent('li').toggleClass('show-menu');
       });
-
-      jQuery('.loader').fadeOut();      
+      // Add Loader Section 
+      jQuery('.loader').fadeOut();   
+      // About us Title  
       aboutheading();
       // Remove Svg ClipPath
       jQuery("svg").each(function () {
@@ -220,8 +224,37 @@ jQuery(document).ready(function(){
       // End Remove Svg Clip path     
       jQuery('.owl-crousal-rowTwo .client-logos .client-logo-slider .owl-nav').addClass('disabled');
 
-});
+      // Offersection add class for tab opening
+
+      jQuery('.offering-tab  .list-item  .accordion-button').click(function(){
+        jQuery('.offering-tab  .list-item .list-item-content').removeClass('show-offer-tab');
+       
+        if(jQuery(this).hasClass('collapsed')){
+            jQuery(this).parents('.list-item-content').removeClass('show-offer-tab');
+        }
+        else{
+          jQuery(this).parents('.list-item-content').addClass('show-offer-tab');
+        }
+      });
+
+      $('.list-tabs').each(function(){  
+      
+        // Cache the highest
+        var highestBox = 0;        
+        // Select and loop the elements you want to equalise
+        $('.list-item .accordion-button', this).each(function(){          
+          // If this box is higher than the cached highest then store it
+          if($(this).height() > highestBox) {
+            highestBox = $(this).height(); 
+          }        
+        });                
+        // Set the height of all those children to whichever was highest 
+        $('.list-item .accordion-button',this).height(highestBox);                      
+      }); 
+
+    });
 jQuery(window).resize(function(){
+  // About us Title  
   aboutheading();
 });
 

@@ -30,7 +30,7 @@
     .form-select,
     .wpcf7-radio {
       
-       border-radius: 30px;
+       border-radius: 8px;
        margin-bottom: 35px;
        height: 56px;
        padding: 15px 30px;
@@ -57,10 +57,22 @@
     }
 }
 .contact-form-content {
-    background-color: #f5f5f5;
+    background-color: #242632;
     padding-bottom: 15px;
     position: relative;
-    padding-top: 80px;
+    padding-top: 0px;
+    display: inline-block;
+    width: 100%;
+    .contact-form{
+        .contact-form-inner-content{
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            box-shadow: 0px 8px 16px #00000029;
+            border: 1px solid #F1F3F6;
+            border-radius: 8px;
+            padding: 60px 0;
+            margin-top: -400px;
+        }
+    }
 }
 .wpcf7-not-valid-tip {
     position: absolute;
@@ -220,7 +232,7 @@ option {
     color:#414042;
 }
 .whatup-check > span:last-child a{
-    color: #C154C1;
+    color: #009999;
 }
 .whatup-check > span:last-child a:hover{
     color: #0C3761;
@@ -229,7 +241,7 @@ option {
 opacity: 0;
 }
 input[type=checkbox]:checked:after {
-    border: 3px solid #C154C1;
+    border: 3px solid #009999;
     border-top: 0;
     border-left: 0;
     left: 7px;
@@ -237,7 +249,7 @@ input[type=checkbox]:checked:after {
 .wpcf7 form .wpcf7-response-output {
     margin: .6em 0.5em 0em !important;
     padding: 0.2em 1em;
-    border: 2px solid #C154C1;
+    border: 2px solid #009999;
     font-size: 14px !important;
 }
 .submit-button{
