@@ -125,8 +125,6 @@ class Simba_Two_Factor_Authentication_1 {
 		if (!defined('TWO_FACTOR_DISABLE') || !TWO_FACTOR_DISABLE) {
 			add_filter('authenticate', array($this, 'tfaVerifyCodeAndUser'), 99999999999, 3);
 		}
-		
-		add_action('show_user_profile', array($this, 'show_user_profile'), 1);
 
 		if (defined('DOING_AJAX') && DOING_AJAX && defined('WP_ADMIN') && WP_ADMIN && !empty($_REQUEST['action']) && 'simbatfa-init-otp' == $_REQUEST['action']) {
 			// Try to prevent PHP notices breaking the AJAX conversation
@@ -137,18 +135,6 @@ class Simba_Two_Factor_Authentication_1 {
 		}
 	}
 
-	/**
-	 * Runs upon the WP action show_user_profile
-	 *
-	 * @param WP_User $user - the user that the profile is for
-	 */
-	public function show_user_profile($user) {
-		if ($user->ID !== get_current_user_id() || !$this->is_activated_for_user($user->ID)) return;
-		echo '<h2>'.__('Two Factor Authentication', 'all-in-one-wp-security-and-firewall').'</h2>';
-		$settings_url = admin_url('admin.php').'?page='.$this->get_user_settings_page_slug();
-		printf('<a target="_blank" href="%s">%s</a>', $settings_url, __('Go here for your two factor authentication settings...', 'all-in-one-wp-security-and-firewall'));
-	}
-	
 	/**
 	 * Runs upon the WP filter admin_menu
 	 */
@@ -309,12 +295,11 @@ class Simba_Two_Factor_Authentication_1 {
 	 * Enqueue CSS styling on the users page
 	 */
 	public function load_users_css() {
-		$css_version = (defined('WP_DEBUG') && WP_DEBUG) ? time() : filemtime($this->includes_dir().'/users.css');
 		wp_enqueue_style(
 			'tfa-users-css',
 			$this->includes_url().'/users.css',
 			array(),
-			$css_version,
+			$this->version,
 			'screen'
 		);
 	}
@@ -349,10 +334,10 @@ class Simba_Two_Factor_Authentication_1 {
 				$value = '&#8212;';
 			} elseif ($this->is_activated_by_user($user_id)) {
 				// Use value.
-				$value = '<span title="'.__('Enabled', 'all-in-one-wp-security-and-firewall').'" class="dashicons dashicons-yes"></span>';
+				$value = '<span title="' . __( 'Enabled', 'all-in-one-wp-security-and-firewall' ) . '" class="dashicons dashicons-yes"></span>';
 			} else {
 				// No group.
-				$value = '<span title="'.__('Disabled', 'all-in-one-wp-security-and-firewall').'" class="dashicons dashicons-no"></span>';
+				$value = '<span title="' . __( 'Disabled', 'all-in-one-wp-security-and-firewall' ) . '" class="dashicons dashicons-no"></span>';
 			}
 		}
 
@@ -370,100 +355,33 @@ class Simba_Two_Factor_Authentication_1 {
 	}
 
 	/**
-	 * Returns all two factor authentication setting name => group pairs.
-	 *
-	 * @return Array
+	 * Runs upon the WP action admin_init
 	 */
-	private function get_config_keys() {
+	public function register_two_factor_auth_settings() {
 		global $wp_roles;
-
 		if (!isset($wp_roles)) $wp_roles = new WP_Roles();
 
-		$keys = array(
-			'tfa_requireafter' => 'tfa_user_roles_required_group',
-			'tfa_require_enforce_after' => 'tfa_user_roles_required_group',
-			'tfa_if_required_redirect_to' => 'tfa_user_roles_required_group',
-			'tfa_hide_turn_off' => 'tfa_user_roles_required_group',
-			'tfa_trusted_for' => 'tfa_user_roles_trusted_group',
-			'tfa_wc_add_section' => 'simba_tfa_woocommerce_group',
-			'tfa_bot_protection' => 'simba_tfa_woocommerce_group',
-			'tfa_default_hmac' => 'simba_tfa_default_hmac_group',
-			'tfa_xmlrpc_on' => 'tfa_xmlrpc_status_group',
-		);
-
 		foreach ($wp_roles->role_names as $id => $name) {
-			$keys['tfa_'.$id] = 'tfa_user_roles_group';
-			$keys['tfa_trusted_'.$id] = 'tfa_user_roles_trusted_group';
-			$keys['tfa_required_'.$id] = 'tfa_user_roles_required_group';
+			register_setting('tfa_user_roles_group', 'tfa_'.$id);
+			register_setting('tfa_user_roles_trusted_group', 'tfa_trusted_'.$id);
+			register_setting('tfa_user_roles_required_group', 'tfa_required_'.$id);
 		}
 
 		if (is_multisite()) {
-			$keys['tfa__super_admin'] = 'tfa_user_roles_group';
-			$keys['tfa_trusted__super_admin'] = 'tfa_user_roles_trusted_group';
-			$keys['tfa_required__super_admin'] = 'tfa_user_roles_required_group';
+			register_setting('tfa_user_roles_group', 'tfa__super_admin');
+			register_setting('tfa_user_roles_trusted_group', 'tfa_trusted__super_admin');
+			register_setting('tfa_user_roles_required_group', 'tfa_required__super_admin');
 		}
 
-		return $keys;
-	}
-
-	/**
-	 * Registers all two factor authentication settings. Runs upon the WP action admin_init.
-	 */
-	public function register_two_factor_auth_settings() {
-		$config_keys = $this->get_config_keys();
-
-		foreach ($config_keys as $name => $group) {
-			register_setting($group, $name);
-		}
-	}
-
-	/**
-	 * Returns all two factor authentication options from the WP database.
-	 *
-	 * @return Array
-	 */
-	public function get_configs() {
-		$config_keys = $this->get_config_keys();
-
-		$configs = array();
-
-		foreach (array_keys($config_keys) as $name) {
-			if (false !== $this->get_option($name)) {
-				$configs[$name] = $this->get_option($name);
-			}
-		}
-
-		return $configs;
-	}
-
-	/**
-	 * Sets two factor authentication options from array.
-	 *
-	 * @param Array $configs
-	 *
-	 * @return Boolean
-	 */
-	public function set_configs($configs) {
-		$result = false;
-
-		foreach ($configs as $key => $value) {
-			$result = $this->update_option($key, $value) ? true : $result;
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Deletes all two factor authentication options from the WP database.
-	 *
-	 * @return Void
-	 */
-	public function delete_configs() {
-		$config_keys = $this->get_config_keys();
-
-		foreach (array_keys($config_keys) as $name) {
-			$this->delete_option($name);
-		}
+		register_setting('tfa_user_roles_required_group', 'tfa_requireafter');
+		register_setting('tfa_user_roles_required_group', 'tfa_require_enforce_after');
+		register_setting('tfa_user_roles_required_group', 'tfa_if_required_redirect_to');
+		register_setting('tfa_user_roles_required_group', 'tfa_hide_turn_off');
+		register_setting('tfa_user_roles_trusted_group', 'tfa_trusted_for');
+		register_setting('simba_tfa_woocommerce_group', 'tfa_wc_add_section');
+		register_setting('simba_tfa_woocommerce_group', 'tfa_bot_protection');
+		register_setting('simba_tfa_default_hmac_group', 'tfa_default_hmac');
+		register_setting('tfa_xmlrpc_status_group', 'tfa_xmlrpc_on');
 	}
 
 	/**
@@ -631,7 +549,7 @@ class Simba_Two_Factor_Authentication_1 {
 			'ip' => $_SERVER['REMOTE_ADDR'],
 			'until' => $until,
 			'user_agent' => empty($_SERVER['HTTP_USER_AGENT']) ? '' : (string) $_SERVER['HTTP_USER_AGENT'],
-			'token' => $token
+								   'token' => $token
 		);
 
 		$this->user_set_trusted_devices($user_id, $trusted_devices);
@@ -1125,47 +1043,6 @@ class Simba_Two_Factor_Authentication_1 {
 	}
 
 	/**
-	 * Updates an option.
-	 *
-	 * @param String $key   - option key
-	 * @param Mixed  $value - option value
-	 *
-	 * @return Boolean
-	 */
-	public function update_option($key, $value) {
-		if (!is_multisite()) return update_option($key, $value);
-
-		$main_site_id = function_exists('get_main_site_id') ? get_main_site_id() : 1;
-		$update_option_site_id = apply_filters('simba_tfa_update_option_site_id', $main_site_id);
-
-		switch_to_blog($update_option_site_id);
-		$result = update_option($key, $value);
-		restore_current_blog();
-
-		return $result;
-	}
-
-	/**
-	 * Deletes an option.
-	 *
-	 * @param String $key - option key
-	 *
-	 * @return Boolean
-	 */
-	public function delete_option($key) {
-		if (!is_multisite()) return delete_option($key);
-
-		$main_site_id = function_exists('get_main_site_id') ? get_main_site_id() : 1;
-		$delete_option_site_id = apply_filters('simba_tfa_delete_option_site_id', $main_site_id);
-
-		switch_to_blog($delete_option_site_id);
-		$result = delete_option($key);
-		restore_current_blog();
-
-		return $result;
-	}
-
-	/**
 	 * Paint a list of checkboxes, one for each role
 	 *
 	 * @param String  $prefix
@@ -1179,7 +1056,7 @@ class Simba_Two_Factor_Authentication_1 {
 			$setting = $this->get_option('tfa_'.$prefix.$id);
 			$setting = ($setting === false) ? $default : ($setting ? 1 : 0);
 
-			echo '<input type="checkbox" id="tfa_'.$prefix.$id.'" name="tfa_'.$prefix.$id.'" class="tfa_'.$prefix.'user_roles" value="1" '.($setting ? 'checked="checked"' :'').'> <label for="tfa_'.$prefix.$id.'">'.htmlspecialchars($name)."</label><br>\n";
+			echo '<input type="checkbox" id="tfa_'.$prefix.$id.'" name="tfa_'.$prefix.$id.'" value="1" '.($setting ? 'checked="checked"' :'').'> <label for="tfa_'.$prefix.$id.'">'.htmlspecialchars($name)."</label><br>\n";
 		}
 
 		global $wp_roles;
@@ -1189,7 +1066,7 @@ class Simba_Two_Factor_Authentication_1 {
 			$setting = $this->get_option('tfa_'.$prefix.$id);
 			$setting = ($setting === false) ? $default : ($setting ? 1 : 0);
 
-			echo '<input type="checkbox" id="tfa_'.$prefix.$id.'" name="tfa_'.$prefix.$id.'" class="tfa_'.$prefix.'user_roles" value="1" '.($setting ? 'checked="checked"' :'').'> <label for="tfa_'.$prefix.$id.'">'.htmlspecialchars(translate_user_role($name))."</label><br>\n";
+			echo '<input type="checkbox" id="tfa_'.$prefix.$id.'" name="tfa_'.$prefix.$id.'" value="1" '.($setting ? 'checked="checked"' :'').'> <label for="tfa_'.$prefix.$id.'">'.htmlspecialchars($name)."</label><br>\n";
 		}
 
 	}

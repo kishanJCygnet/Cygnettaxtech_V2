@@ -1163,8 +1163,8 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 						$list_ids = '';
 						// Delete existing sending queue if any already present.
 						ES_DB_Sending_Queue::delete_sending_queue_by_mailing_id( array( $mailing_queue_id ) );
-						$is_inserted = ES_DB_Sending_Queue::do_insert_from_contacts_table( $mailing_queue_id, $mailing_queue_hash, $campaign_id, $list_ids );
-						if ( $is_inserted ) {
+						$email_queued = ES_DB_Sending_Queue::queue_emails( $mailing_queue_id, $mailing_queue_hash, $campaign_id, $list_ids );
+						if ( $email_queued ) {
 							$campaign_scheduled = true;
 						} else {
 							$campaign_scheduled = false;

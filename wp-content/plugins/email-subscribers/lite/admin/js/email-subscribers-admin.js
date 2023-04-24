@@ -298,6 +298,26 @@
 					jQuery('#popup_input_block').hide();
 				}
 			});
+	
+
+			let action_after_submit = $(".ig_es_action_after_submit:checked").val()
+			change_block_as_per_action(action_after_submit);
+
+			$("input:radio[name='form_data[settings][action_after_submit]']").click(function() {
+				let action_after_submit = $(this).val();
+				change_block_as_per_action(action_after_submit);
+			});
+
+			function change_block_as_per_action( action_after_submit = '' ) {
+				if ( 'show_success_message' === action_after_submit ) {
+					$('#show_message_block').removeClass('hidden');
+					$('#show_redirect_to_url_block').addClass('hidden');
+				} else {
+					$('#show_redirect_to_url_block').removeClass('hidden');
+					$('#show_message_block').addClass('hidden');
+				}				
+			}
+
 
 			$("#broadcast_form .pre_btn, #broadcast_form #content_menu").click(function() {
 				var fieldset = $(this).closest('.es_fieldset');

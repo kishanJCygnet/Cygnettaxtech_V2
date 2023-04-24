@@ -320,25 +320,25 @@ class ES_DB_Sending_Queue {
 	}
 
 	/**
-	 * Method to insert sending queue data from contact table.
+	 * Method to queue emails from contact table.
 	 *
 	 * @param int          $mailing_queue_id Mailing queue ID.
 	 * @param string       $mailing_queue_hash Mailing Hash.
 	 * @param int          $campaign_id Campaign ID.
 	 * @param array|string $list_ids List IDs seperated by commas if string i.e. '1,2,3' or array( 1, 2, 3 ) if array.
 	 *
-	 * @return bool $is_inserted Is contacts inserted into sending_queue table.
+	 * @return bool $email_queued Emails queued or not.
 	 *
 	 * @since 4.6.4
 	 */
-	public static function do_insert_from_contacts_table( $mailing_queue_id = 0, $mailing_queue_hash = '', $campaign_id = 0, $list_ids = array() ) {
+	public static function queue_emails( $mailing_queue_id = 0, $mailing_queue_hash = '', $campaign_id = 0, $list_ids = array() ) {
 
 		global $wpbd;
 
-		$is_inserted = false;
+		$email_queued = false;
 
 		if ( empty( $mailing_queue_id ) || empty( $mailing_queue_hash ) || empty( $campaign_id ) ) {
-			return $is_inserted;
+			return $email_queued;
 		}
 
 		$column_defaults = self::get_column_defaults();
@@ -443,8 +443,9 @@ class ES_DB_Sending_Queue {
 
 		// Check if contacts added.
 		if ( ! empty( $total_contacts_added ) ) {
-			$is_inserted = true;
+			$email_queued = true;
 		} else {
+			// Delete report if there aren't any emails queued.
 			ES_DB_Mailing_Queue::delete_notifications( array( $mailing_queue_id ) );
 			
 			if ( empty( $list_ids ) ) {
@@ -469,11 +470,11 @@ class ES_DB_Sending_Queue {
 				$delivery_data['subscribers']      = $subscribers;
 				$delivery_data['campaign_id']      = $campaign_id;
 				$delivery_data['mailing_queue_id'] = $mailing_queue_id;
-				$is_inserted                       = self::do_batch_insert( $delivery_data );
+				$email_queued                      = self::do_batch_insert( $delivery_data );
 			}
 		}
 
-		if ( $is_inserted ) {
+		if ( $email_queued ) {
 			$data = array(
 				'count' => $total_contacts_added,
 				'status' => IG_ES_MAILING_QUEUE_STATUS_QUEUED
@@ -481,7 +482,7 @@ class ES_DB_Sending_Queue {
 			ES_DB_Mailing_Queue::update_mailing_queue( $mailing_queue_id, $data );
 		}
 
-		return $is_inserted;
+		return $email_queued;
 	}
 
 	public static function update_viewed_status( $guid = '', $email = '', $message_id = 0 ) {

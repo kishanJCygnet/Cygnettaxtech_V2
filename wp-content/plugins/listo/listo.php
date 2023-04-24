@@ -7,10 +7,10 @@ Author: Takayuki Miyoshi
 Author URI: https://ideasilo.wordpress.com/
 Text Domain: listo
 Domain Path: /languages/
-Version: 1.4
+Version: 1.6
 */
 
-define( 'LISTO_VERSION', '1.4' );
+define( 'LISTO_VERSION', '1.6' );
 define( 'LISTO_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'LISTO_MODULES_DIR', path_join( LISTO_PLUGIN_DIR, 'modules' ) );
 define( 'LISTO_LANGUAGES_DIR', path_join( LISTO_PLUGIN_DIR, 'languages' ) );
@@ -47,6 +47,7 @@ class Listo_Manager {
 			'ni_subdivisions' => 'Listo_NI_Subdivisions',
 			'pa_subdivisions' => 'Listo_PA_Subdivisions',
 			'pe_subdivisions' => 'Listo_PE_Subdivisions',
+			'pl_subdivisions' => 'Listo_PL_Subdivisions',
 			'py_subdivisions' => 'Listo_PY_Subdivisions',
 			'sv_subdivisions' => 'Listo_SV_Subdivisions',
 			'us_subdivisions' => 'Listo_US_Subdivisions',
@@ -94,8 +95,6 @@ class Listo_Manager {
 			return self::$lists[$cloak_ticket];
 		}
 
-		switch_to_locale( $locale );
-
 		$items = call_user_func( array( $class, 'items' ) );
 
 		if ( $group and is_callable( array( $class, 'groups' ) ) ) {
@@ -108,8 +107,6 @@ class Listo_Manager {
 				);
 			}
 		}
-
-		restore_previous_locale();
 
 		self::$lists[$cloak_ticket] = $items;
 		return $items;

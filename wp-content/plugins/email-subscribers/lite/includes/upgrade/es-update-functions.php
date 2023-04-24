@@ -1497,7 +1497,7 @@ function ig_es_update_4613_db_version() {
  * Add index to contact id column in the ig_list_contacts table
  *
  * We are adding index to improve the response time of the select query
- * e.g. Imrpoves performance of select query in ES_DB_Sending_Queue::do_insert_from_contacts_table() to get contact ids
+ * e.g. Imrpoves performance of select query in ES_DB_Sending_Queue::queue_emails() to get contact ids
  *
  * @since 4.7.8
  */
@@ -1979,3 +1979,27 @@ function ig_es_update_550_db_version() {
 }
 
 /* --------------------- ES 5.5.0(End)--------------------------- */
+
+/* --------------------- ES 5.6.3(Start)--------------------------- */
+
+/**
+ * Enable newsletter summary automation
+ *
+ * @since 5.6.3
+ */
+function ig_es_update_563_enable_newsletter_summary_automation() {
+	if ( ! ES()->is_pro() ) {
+		do_action( 'ig_es_enable_newsletter_summary_automation' );
+	}
+}
+
+/**
+ * Update DB version
+ *
+ * @since 5.6.3
+ */
+function ig_es_update_563_db_version() {
+	ES_Install::update_db_version( '5.6.3' );
+}
+
+/* --------------------- ES 5.6.3(End)--------------------------- */

@@ -28,6 +28,7 @@ add_action( 'ig_es_after_campaign_tracking_options_settings', 'ig_es_upsale_camp
 add_action( 'ig_es_add_multilist_options', 'ig_es_additional_multilist_and_post_digest' );
 add_action( 'ig_es_before_' . IG_CAMPAIGN_TYPE_POST_NOTIFICATION . '_content_settings', 'ig_es_upsale_post_digest' );
 add_action( 'ig_es_view_report_data', 'ig_es_view_additional_reports_data' );
+add_action( 'ig_es_redirect_to_url', 'ig_es_upsell_redirect_to_url' );
 add_action( 'ig_es_view_upsell_send_test_email_feature', 'ig_es_upsell_send_test_email_feature', 10, 2 );
 
 // Upsell add attachment feature.
@@ -1798,6 +1799,35 @@ function ig_es_upsell_add_attachment_feature( $editor_id ) {
 		}
 	}
 }
+
+/**
+ * Upsell redirect to url feature
+ *
+ * @since 5.6.2
+ */
+function ig_es_upsell_redirect_to_url() {
+	if ( ES()->can_upsell_features( array( 'lite', 'trial' ) ) ) {
+		$utm_args = array(
+			'utm_medium' => 'redirect_to_url',
+		);
+
+		$pricing_url = ES_Common::get_utm_tracking_url( $utm_args );
+		?>
+		<a href="<?php echo esc_url( $pricing_url ); ?>" target="_blank">
+			<div class="block w-full mx-4 pb-8">
+				<div class="py-2">
+					<input type="radio" class="form-radio" id="show_redirect_to_url" />					
+					<label for="redirect_to_url"
+						class="text-sm font-medium text-gray-500"><?php echo esc_html__( 'Redirect to url', 'email-subscribers' ); ?>
+					</label>
+					<span class="premium-icon inline-block"></span>
+				</div>
+			</div>
+		</a>
+		<?php
+	}
+}
+
 
 /**
  * Upsell pro import features

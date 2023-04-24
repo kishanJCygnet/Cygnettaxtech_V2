@@ -7,6 +7,7 @@
 global $aio_wp_security;
 $display_form = true;
 //Make this page look like the WP login page
+wp_head();
 wp_admin_css('login', true);
 wp_admin_css('colors-fresh', true);
 do_action('login_head');
@@ -66,8 +67,8 @@ if (isset($_POST['aiowps_wp_submit_unlock_request'])) {
 			}
 
 			if (!$unlock_url) {
-				//No entry found in lockout table with this IP range
-				$error_msg = '<p>'.__('Error: No locked entry was found in the database with your IP address range.', 'all-in-one-wp-security-and-firewall').'</p>';
+				//No entry found in lockdown table with this IP range
+				$error_msg = '<p>'.__('Error: No locked entry was found in the DB with your IP address range!', 'all-in-one-wp-security-and-firewall').'</p>';
 				echo '<div id="login_error">'.$error_msg.'</div>';
 			} else {
 				//Send an email to the user

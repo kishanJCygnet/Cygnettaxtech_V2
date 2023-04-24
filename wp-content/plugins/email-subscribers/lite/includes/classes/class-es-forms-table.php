@@ -337,21 +337,30 @@ class ES_Forms_Table extends ES_List_Table {
 	 * @param $form_data
 	 *
 	 * @since 5.6.1
+	 * 
+	 * @modify 5.6.2
 	 */
 	public function show_success_message( $form_data ) {
-		$success_message = ! empty( $form_data['settings']['success_message'] ) ? $form_data['settings']['success_message'] : '';
+		$action_after_submit = ! empty( $form_data['settings']['action_after_submit'] ) ? $form_data['settings']['action_after_submit'] : 'show_success_message';
+		$success_message     = ! empty( $form_data['settings']['success_message'] ) ? $form_data['settings']['success_message'] : '';
 		?>
-		<div class="pt-2 mx-4 pb-2 border-t border-gray-200">
-			<div class="block w-full pb-8">
+		<div class="pt-2 mx-4 border-t border-gray-200">
+			<div class="block w-full">
+			<span class="block pr-4 text-sm font-medium text-gray-600 pb-2"><?php esc_html_e( 'after submit...', 'email-subscribers' ); ?></span>
 				<div class="py-2">
-					<span class="block pr-4 text-sm font-medium text-gray-600"><?php esc_html_e( 'Success Message', 'email-subscribers' ); ?></span>
-					<div id="show_message_input_block" class="pt-2">												
-						<input id="success_message" class="form-input block border-gray-400 w-full shadow-sm focus:bg-gray-100 sm:text-sm sm:leading-5" name="form_data[settings][success_message]" value="<?php echo esc_attr( stripslashes( $success_message ) ); ?>" />
+					<input type="radio" name="form_data[settings][action_after_submit]" class="form-radio ig_es_action_after_submit" value="show_success_message" <?php checked( $action_after_submit, 'show_success_message' ); ?>/>
+					<label for="show_message"
+						class="text-sm font-medium text-gray-500"><?php echo esc_html__( 'Show message', 'email-subscribers' ); ?>
+					</label>
+					<br>					
+					<div id="show_message_block" class="pt-2 px-6">												
+						<input id="success_message" class="form-input block border-gray-400 w-full pl-3 pr-3 shadow-sm  focus:bg-gray-100 sm:text-sm sm:leading-5" name="form_data[settings][success_message]" value="<?php echo esc_attr( stripslashes( $success_message ) ); ?>" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<?php		
+		<?php
+		do_action( 'ig_es_redirect_to_url' );
 	}
 
 	/**
@@ -503,9 +512,7 @@ class ES_Forms_Table extends ES_List_Table {
 
 		$es_form_popup         = ! empty( $data['show_in_popup'] ) ? 'yes' : 'no';
 		$es_popup_headline     = ! empty( $data['popup_headline'] ) ? sanitize_text_field( $data['popup_headline'] ) : '';
-		$success_message       = ! empty( $data['success_message'] ) ? sanitize_text_field( $data['success_message'] ) : '';
-
-
+		
 		if ( ! $is_dnd_editor ) {
 			$desc               = ! empty( $data['desc'] ) ? wp_kses_post( trim( wp_unslash( $data['desc'] ) ) ) : '';
 			$email_label        = ! empty( $data['email_label'] ) ? sanitize_text_field( $data['email_label'] ) : '';
@@ -600,8 +607,7 @@ class ES_Forms_Table extends ES_List_Table {
 				'es_form_popup'  => array(
 					'show_in_popup'  => $es_form_popup,
 					'popup_headline' => $es_popup_headline,
-				),
-				'success_message' => $success_message,				
+				),						
 			);
 	
 			$settings = apply_filters( 'ig_es_form_settings', $settings, $data );
