@@ -892,7 +892,8 @@
 												<div class="list-tabs accordion" id="accordionSection<?php echo $c; ?>">
 													<?php while (have_rows('inner_content')) : the_row(); ?>
 														<div class="list-item wow fadeInDown" data-wow-delay="0.3s">
-															<?php if (get_sub_field('inner_content_title')){ ?>
+															<div class="list-item-content">
+														    <?php if (get_sub_field('inner_content_title')){ ?>
 																<h4 class="list-title accordion-header" id="accordionheading<?php echo $c.'_'.$cm; ?>">
 																	<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $c.'_'.$cm; ?>" aria-expanded="true" aria-controls="collapse<?php echo $c.'_'.$cm; ?>">
 																		<span><?php echo the_sub_field('inner_content_title'); ?></span>
@@ -907,6 +908,7 @@
 																  </div>
 																</div>
 															<?php } ?>
+															</div>
 														</div>
 													<?php $cm++;  
 													endwhile; ?>

@@ -469,7 +469,7 @@ sup{
                         left: 52px;
                         top: 0;
                         bottom: -4px;
-                        background: transparent linear-gradient(180deg,#C154C1 0,#c7158c 52%,#9d248e 100%) 0 0 no-repeat padding-box;
+                        background: transparent linear-gradient(180deg,#009999 0,#c7158c 52%,#9d248e 100%) 0 0 no-repeat padding-box;
                         width: 7px;
                         border-radius: 8px;
                         @include bp(xl-max){
@@ -645,7 +645,7 @@ sup{
                             left: 0;
                             top: 0;
                             bottom: -4px;
-                            background: transparent linear-gradient(180deg,#C154C1 0,#c7158c 52%,#9d248e 100%) 0 0 no-repeat padding-box;
+                            background: transparent linear-gradient(180deg,#009999 0,#c7158c 52%,#9d248e 100%) 0 0 no-repeat padding-box;
                             width: 7px;
                             border-radius: 8px;
                         }
@@ -672,7 +672,7 @@ sup{
                 &:nth-child(odd){
                    
                     @include bp(md-max){
-                        background-color: #C154C10a;
+                        background-color: #0099990a;
                         margin: 0 -15px;
                         padding: 30px 15px;
                         
@@ -730,7 +730,7 @@ sup{
                         left: 0;
                         top: 0;
                         bottom: -4px;
-                        background: transparent linear-gradient(180deg,#C154C1 0,#c7158c 52%,#9d248e 100%) 0 0 no-repeat padding-box;
+                        background: transparent linear-gradient(180deg,#009999 0,#c7158c 52%,#9d248e 100%) 0 0 no-repeat padding-box;
                         width: 7px;
                         border-radius: 8px;
                     }

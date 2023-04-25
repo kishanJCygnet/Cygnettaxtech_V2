@@ -22,6 +22,17 @@
                     border-radius: 8px;
                     font-size: 18px;
                     color: #fff; 
+                    flex-wrap: wrap;
+                   
+                    span{
+                        display: inline-block;
+                        width: 100%;
+                       &.inner-content-sub-title{
+                        color: #60D6D6;
+                        font-size: 12px;
+                        display: block;
+                       }
+                    }
                     &:after{
                         content: "\f063";
                         font-family: "Font Awesome 5 Pro";
@@ -34,13 +45,62 @@
                         
                         transition: .3s all linear;
                         right: 13px;
-                        top: 17px;
+                        top: calc(50% - 14px)
                     }
                     &.collapsed{
                         &:after{
                             transform: rotate(315deg);  
                             opacity: 0.3;
                             right: 8px;
+                        }
+                    }
+                }
+                .list-item-content{
+                    height: 100%;
+                    &.show-offer-tab{
+                        background: transparent linear-gradient(123deg, #60D6D652 0%, #00999952 100%) 0% 0% no-repeat padding-box;
+                        box-shadow: 0px 8px 16px #00000029;
+                        border: 2px solid #60D6D629;
+                        border-radius: 8px;
+                        .accordion-button {
+                            border: 0;
+                            background: transparent !important;
+                            border-radius: 0;
+                            box-shadow: inset 0 -1px 0 rgb(251 251 251 / 12%);
+                            .inner-content-sub-title{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                .accordion-body{
+                    br{
+                        display: none;
+                    }
+                    .description{
+                        color: #fff;
+                        h4{
+                            font-size: 14px;
+                            font-weight: normal;
+                            margin-top: 20px;
+                        }
+                        .tag-list{
+                            display: flex;
+                            flex-wrap: wrap;
+                            margin: 5px -10px 0;
+                            a{
+                                background-color: rgba(255, 255, 255,0.1);
+                                border-radius: 14px;                               
+                                font-size: 12px;
+                                margin: 5px 7px;
+                                padding: 7px 15px;
+                                display: inline-block;
+                                color: #fff;
+                                &:hover{
+                                    background-color: #fff;
+                                    color: #099;
+                                }
+                            }
                         }
                     }
                 }

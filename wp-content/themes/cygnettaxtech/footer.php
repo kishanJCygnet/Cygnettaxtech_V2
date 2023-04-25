@@ -14,6 +14,7 @@
 	<section class="contact-form-content">
 		<div class="contact-form">
 			<div class="container" id="contactus">			
+			<div class="contact-form-inner-content">
 			<?php $post_slug = $post->post_name;
 			//$post_slug != 'muwafaq-support-for-smes' &&
 			if($post_slug != 'muwafaq-support-for-smes' && $post_slug != 'thank-you-for-contacting-us' && $post_slug != 'thank-you-for-your-interest-in-muwafaq-support' && !is_404() && $post_slug != 'thank-you-ksa-phase-2' && $post_slug != 'thank-you' && $post_slug != 'thank-you-for-downloading' && !is_404()){  ?>				
@@ -45,11 +46,12 @@
 					Your user details are already available for R7VAT tool, <a href="https://r7vatgcccompliance.cygnettaxtech.com/login" target="_blank" style="color: #009999;">Click here</a> to login.
 				</div>
 			<?php } ?>			
-			<?php //if ( is_front_page() ) : ?>
+			<!-- <?php //if ( is_front_page() ) : ?>
 				<div class="technology-move">
 					<div class="text-center"> <img src="<?php echo THEME_PATH; ?>images/phraise.png" alt="" /></div>
 				</div>
-			<?php //endif; ?>
+			<?php //endif; ?> -->
+			</div>
 			</div>
 		</div>
 	</section>
