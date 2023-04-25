@@ -80,7 +80,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 								<?php while (have_rows('group_websites', 'option')) : the_row(); 
 										if (get_sub_field('website_url', 'option') && get_sub_field('website_title', 'option')) { ?>
 										<li>
-											<a href="<?php echo the_sub_field('website_url', 'option'); ?>" title="<?php echo the_sub_field('website_title', 'option'); ?>" ><?php echo the_sub_field('website_title', 'option'); ?></a>
+											<a href="<?php echo the_sub_field('website_url', 'option'); ?>" title="<?php echo the_sub_field('website_title', 'option'); ?>" <?php if(!is_front_page()){ ?> rel="nofollow" <?php } ?> ><?php echo the_sub_field('website_title', 'option'); ?></a>
 										</li>
 										<?php } 
 									endwhile; ?>

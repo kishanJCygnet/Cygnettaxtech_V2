@@ -12,7 +12,7 @@ class AIOWPSecurity_Captcha {
 	}
 
 	/**
-	 * Displays Google reCAPTCHA form v2
+	 * Displays Google reCaptcha form v2
 	 *
 	 * @global type $aio_wp_security
 	 */
@@ -34,7 +34,7 @@ class AIOWPSecurity_Captcha {
 	}
 
 	/**
-	 * Displays simple maths CAPTCHA form
+	 * Displays simple maths captcha form
 	 *
 	 * @global type $aio_wp_security
 	 */
@@ -44,8 +44,8 @@ class AIOWPSecurity_Captcha {
 			//if buddy press feature active add action hook so buddy press can display our errors properly on bp registration form
 			do_action('bp_aiowps-captcha-answer_errors');
 		}
-		$cap_form = '<p class="aiowps-captcha hide-when-displaying-tfa-input"><label for="aiowps-captcha-answer">'.__('Please enter an answer in digits:', 'all-in-one-wp-security-and-firewall').'</label>';
-		$cap_form .= '<div class="aiowps-captcha-equation hide-when-displaying-tfa-input"><strong>';
+		$cap_form = '<p class="aiowps-captcha"><label for="aiowps-captcha-answer">'.__('Please enter an answer in digits:', 'all-in-one-wp-security-and-firewall').'</label>';
+		$cap_form .= '<div class="aiowps-captcha-equation"><strong>';
 		$maths_question_output = $this->generate_maths_question();
 		$cap_form .= $maths_question_output . '</strong></div></p>';
 		echo $cap_form;
@@ -109,12 +109,12 @@ class AIOWPSecurity_Captcha {
 		$current_time = time();
 		$enc_result = base64_encode($current_time.$captcha_secret_string.$result);
 		$random_str = AIOWPSecurity_Utility::generate_alpha_numeric_random_string(10);
-		if (is_multisite()) {
+		if (AIOWPSecurity_Utility::is_multisite_install()) {
 			update_site_option('aiowps_captcha_string_info_'.$random_str, $enc_result);
 			update_site_option('aiowps_captcha_string_info_time_'.$random_str, $current_time);
 		} else {
-			update_option('aiowps_captcha_string_info_'.$random_str, $enc_result, false);
-			update_option('aiowps_captcha_string_info_time_'.$random_str, $current_time, false);
+			update_option('aiowps_captcha_string_info_'.$random_str, $enc_result);
+			update_option('aiowps_captcha_string_info_time_'.$random_str, $current_time);
 		}
 		$equation_string .= '<input type="hidden" name="aiowps-captcha-string-info" id="aiowps-captcha-string-info" value="'.$random_str.'" />';
 		$equation_string .= '<input type="hidden" name="aiowps-captcha-temp-string" id="aiowps-captcha-temp-string" value="'.$current_time.'" />';
@@ -150,9 +150,9 @@ class AIOWPSecurity_Captcha {
 
 
 	/**
-	 * Verifies the math or Google reCAPTCHA v2 forms
+	 * Verifies the math or Google recaptcha v2 forms
 	 * Returns TRUE if correct answer.
-	 * Returns FALSE on wrong CAPTCHA result or missing data.
+	 * Returns FALSE on wrong captcha result or missing data.
 	 *
 	 * @global type $aio_wp_security
 	 * @return boolean
@@ -160,7 +160,7 @@ class AIOWPSecurity_Captcha {
 	public function verify_captcha_submit() {
 		global $aio_wp_security;
 		if ($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
-			// Google reCAPTCHA enabled
+			//Google reCaptcha enabled
 			if (1 == $aio_wp_security->configs->get_value('aios_is_google_recaptcha_wrong_site_key')) {
 				return true;
 			}
@@ -170,25 +170,25 @@ class AIOWPSecurity_Captcha {
 				$verify_captcha = $this->verify_google_recaptcha($g_recaptcha_response);
 				return $verify_captcha;
 			} else {
-				// Expected CAPTCHA field in $_POST but got none!
+				// Expected captcha field in $_POST but got none!
 				return false;
 			}
 		} else {
-			// Math CAPTCHA is enabled
+			// math captcha is enabled
 			if (array_key_exists('aiowps-captcha-answer', $_POST)) {
 				$captcha_answer = isset($_POST['aiowps-captcha-answer']) ? sanitize_text_field($_POST['aiowps-captcha-answer']) : '';
 
 				$verify_captcha = $this->verify_math_captcha_answer($captcha_answer);
 				return $verify_captcha;
 			} else {
-				// Expected CAPTCHA field in $_POST but got none!
+				// Expected captcha field in $_POST but got none!
 				return false;
 			}
 		}
 	}
 
 	/**
-	 * Verifies the math CAPTCHA answer entered by the user
+	 * Verifies the math captcha answer entered by the user
 	 *
 	 * @param type $captcha_answer
 	 * @return boolean
@@ -199,7 +199,7 @@ class AIOWPSecurity_Captcha {
 		$captcha_temp_string = sanitize_text_field($_POST['aiowps-captcha-temp-string']);
 		$submitted_encoded_string = base64_encode($captcha_temp_string.$captcha_secret_string.$captcha_answer);
 		$trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
-		if (is_multisite()) {
+		if (AIOWPSecurity_Utility::is_multisite_install()) {
 			$captcha_string_info_option = get_site_option('aiowps_captcha_string_info_'.$trans_handle);
 			delete_site_option('aiowps_captcha_string_info_'.$trans_handle);
 			delete_site_option('aiowps_captcha_string_info_time_'.$trans_handle);
@@ -216,7 +216,7 @@ class AIOWPSecurity_Captcha {
 	}
 
 	/**
-	 * Send a query to Google API to verify reCAPTCHA submission
+	 * Send a query to Google api to verify reCaptcha submission
 	 *
 	 * @global type $aio_wp_security
 	 * @param type $resp_token
@@ -252,24 +252,6 @@ class AIOWPSecurity_Captcha {
 			$is_humanoid = true;
 		}
 		return $is_humanoid;
-	}
-
-	/**
-	 *  Get site locale code for Google reCaptcha.
-	 *
-	 * @return string The site locale code.
-	 */
-	public static function get_google_recaptcha_compatible_site_locale() {
-		$google_recaptcha_locale_codes = AIOS_Abstracted_Ids::get_google_recaptcha_locale_codes();
-		$locale = str_replace('_', '-', determine_locale());
-
-		if (in_array($locale, $google_recaptcha_locale_codes, true)) {
-			return $locale;
-		}
-
-		// Return 2 letter locale code.
-		$locale = explode('-', $locale);
-		return $locale[0];
 	}
 
 }
