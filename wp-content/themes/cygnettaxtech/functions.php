@@ -565,8 +565,10 @@ function getauthtoken_taxtech_app(){
 	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	  CURLOPT_CUSTOMREQUEST => 'POST',
 	  CURLOPT_HTTPHEADER => array(
-		'clientid: 5H2+oKwElTe9ORKdTuW9gXxA7zQyqEe5cEb+u0aphjLRtYBSu2ZN2sBwprIb29wbBJ9iMH/AqEaIQoaRHORAYXsKrHC2zRv5U76nVxlrV3NC3ZNWQKHg3k7HvV+kVRPo',
-		'client-secret: IBc1V5vigPLZIqNur5luSg5cICgVr77/t2w9nlZsYwN1FQRQXj4NrUtRiV72FJoDSIKejALCZGrqy4XJV5ouVsL1zrWbPIEHEI27rF0e8DJkA3d4AOEZ6lUgEjA1cBCFWXk3xJsGbDEudVCL9taBo544VE93NE47g7AsB2eyIdLivlxvfVMxcq8n2KeKacPx8ReFeZQktvYCdcXkQ379Wr3mAD2JvN6hFIkx99cqzOQAcrKg38Ff2u7yyIpjgDNZ',
+		'clientid: 5H2+oKwElTe9ORKdTuW9gXxA7zQyqEe5cEb+u0aphjLRtYBSu2ZN2sBwprIb29wbBJ9iMH/AqEaIQoaRHORAYXsKrHC2zRv5U76nVxlrV3NC3ZNWQKHg3k7HvV+kVRPo',  // Live id
+		'client-secret: IBc1V5vigPLZIqNur5luSg5cICgVr77/t2w9nlZsYwN1FQRQXj4NrUtRiV72FJoDSIKejALCZGrqy4XJV5ouVsL1zrWbPIEHEI27rF0e8DJkA3d4AOEZ6lUgEjA1cBCFWXk3xJsGbDEudVCL9taBo544VE93NE47g7AsB2eyIdLivlxvfVMxcq8n2KeKacPx8ReFeZQktvYCdcXkQ379Wr3mAD2JvN6hFIkx99cqzOQAcrKg38Ff2u7yyIpjgDNZ',  // Live id
+		//'clientid: lWfZRvu4Us/bORPydcufO6gLpecmFoOIf/GJ0XJe6ioIMudgohJEFHS5kYlHwO3k1lRk82Qpd5CNj+owFRf8NN+RG+LwGiLIK2PmGAdmG3HhwoVMriUw9k4CK1ThnT7b',  // Test id
+		//'client-secret: gLgD7KjvjENbC5eBhT7jLCQtX4V0H77jnUv3z72qLE+370A5I8Uzuajw5fHQee7Ae0NsX5din4bQ5HrGmHU3/3cxWE4g9NFbLRBI6Rm5EdhEo+E00gVQ2FooA6QQOyx2+h4TPr2MZ31gtOu/cF/NqiXTNgUSPFR5TnMknVmW/uc48z3RMKzgBAWhy78J3y1xUA4Rl3PTkmaP8j6jkFzQd3FndCNjPmNUeRQFXLL6S5gh92PpPs18EcVN6HQnekQR',  // Test id
 		'ip-usr: 172.16.33.99',
 		'Content-Type: application/json',
 		'Content-Length: 0'
@@ -672,8 +674,10 @@ function RegisterNewUser_taxtech($cf7, &$abort, $submission){
 			"IsAgreedToTermsAndConditions":"'.$IsAgreedToTermsAndConditions.'"
 		}',
 		  CURLOPT_HTTPHEADER => array(
-			'clientid: 5H2+oKwElTe9ORKdTuW9gXxA7zQyqEe5cEb+u0aphjLRtYBSu2ZN2sBwprIb29wbBJ9iMH/AqEaIQoaRHORAYXsKrHC2zRv5U76nVxlrV3NC3ZNWQKHg3k7HvV+kVRPo',
-			'client-secret: IBc1V5vigPLZIqNur5luSg5cICgVr77/t2w9nlZsYwN1FQRQXj4NrUtRiV72FJoDSIKejALCZGrqy4XJV5ouVsL1zrWbPIEHEI27rF0e8DJkA3d4AOEZ6lUgEjA1cBCFWXk3xJsGbDEudVCL9taBo544VE93NE47g7AsB2eyIdLivlxvfVMxcq8n2KeKacPx8ReFeZQktvYCdcXkQ379Wr3mAD2JvN6hFIkx99cqzOQAcrKg38Ff2u7yyIpjgDNZ',
+			'clientid: 5H2+oKwElTe9ORKdTuW9gXxA7zQyqEe5cEb+u0aphjLRtYBSu2ZN2sBwprIb29wbBJ9iMH/AqEaIQoaRHORAYXsKrHC2zRv5U76nVxlrV3NC3ZNWQKHg3k7HvV+kVRPo',  // Live id
+			'client-secret: IBc1V5vigPLZIqNur5luSg5cICgVr77/t2w9nlZsYwN1FQRQXj4NrUtRiV72FJoDSIKejALCZGrqy4XJV5ouVsL1zrWbPIEHEI27rF0e8DJkA3d4AOEZ6lUgEjA1cBCFWXk3xJsGbDEudVCL9taBo544VE93NE47g7AsB2eyIdLivlxvfVMxcq8n2KeKacPx8ReFeZQktvYCdcXkQ379Wr3mAD2JvN6hFIkx99cqzOQAcrKg38Ff2u7yyIpjgDNZ',  // Live id
+			//'clientid: lWfZRvu4Us/bORPydcufO6gLpecmFoOIf/GJ0XJe6ioIMudgohJEFHS5kYlHwO3k1lRk82Qpd5CNj+owFRf8NN+RG+LwGiLIK2PmGAdmG3HhwoVMriUw9k4CK1ThnT7b',  // Test id
+			//'client-secret: gLgD7KjvjENbC5eBhT7jLCQtX4V0H77jnUv3z72qLE+370A5I8Uzuajw5fHQee7Ae0NsX5din4bQ5HrGmHU3/3cxWE4g9NFbLRBI6Rm5EdhEo+E00gVQ2FooA6QQOyx2+h4TPr2MZ31gtOu/cF/NqiXTNgUSPFR5TnMknVmW/uc48z3RMKzgBAWhy78J3y1xUA4Rl3PTkmaP8j6jkFzQd3FndCNjPmNUeRQFXLL6S5gh92PpPs18EcVN6HQnekQR',  // Test id
 			'ip-usr: 172.16.33.99',
 			'Content-Type: application/json',
 			'auth-token: '.$accesstoken,
