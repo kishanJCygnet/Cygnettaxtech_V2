@@ -84,12 +84,15 @@ function iconReadMore() {
 }
 function aboutheading(){
   var WiWidth = jQuery(window).width();
-  var CnWidth = jQuery('.about-pill-section .container').innerWidth();
+  var CnWidth = jQuery('section .container').innerWidth();
+  var addWidthLeft = (((WiWidth - CnWidth)/ 2) + 15);
   var titleMargLeft = (0 - (((WiWidth - CnWidth)/ 2) + 15));
   var titleMarg = ((WiWidth - CnWidth)/ 2) + 550;
   jQuery('.about-pill-section .container .title-heading').css('margin-left', titleMargLeft);
   jQuery('.about-pill-section .container .title-heading').css('min-width', titleMarg);
-
+  jQuery('.wholesome-solutions .title-heading').css({'margin-left': titleMargLeft, 'padding-left': addWidthLeft });
+  jQuery('.we-are-proud .title-heading').css({'margin-left': titleMargLeft});
+  jQuery('.we-are-proud .title-heading h2').css({'padding-left': addWidthLeft + 150});
 }
 
 jQuery(document).ready(function(){

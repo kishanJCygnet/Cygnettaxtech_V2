@@ -1085,7 +1085,7 @@
 											<div class="in-content">
 												<div class="tab-col-left">													
 													<?php if (get_sub_field('tab_section_left_content_image')){ ?>
-														<div class="tab-col-left-img">
+														<div class="img">
 															<?php $extension = pathinfo(get_sub_field('tab_section_left_content_image'), PATHINFO_EXTENSION);
 																if($extension == 'svg'){
 																	$tab_section_left_content_image = get_sub_field('tab_section_left_content_image');
@@ -1102,17 +1102,17 @@
 														</div>
 													<?php } ?>
 													<?php if (get_sub_field('tab_section_left_content_title')){ ?>
-														<div class="tab-col-left-title">
+														<h3 class="title">
 															<?php echo the_sub_field('tab_section_left_content_title'); ?>
-														</div>
+													</h3>
 													<?php } ?>
 													<?php if (get_sub_field('tab_section_left_content_description')){ ?>
-														<div class="tab-col-left-desc">
+														<div class="desc">
 															<?php echo the_sub_field('tab_section_left_content_description'); ?>
 														</div>
 													<?php } ?>
 													<?php if (get_sub_field('tab_section_left_content_button_label')){ ?>
-														<div class="tab-col-left-btn">
+														<div class="con-btn">
 															<a href="<?php echo the_sub_field('tab_section_left_content_button_url'); ?>" class="btn"><?php echo the_sub_field('tab_section_left_content_button_label'); ?></a>															
 														</div>
 													<?php } ?>
@@ -1133,24 +1133,15 @@
 					</div>
 				</div>
 				<script>
-				jQuery( document ).ready(function() {
-					jQuery("#click-tab-section li a").click(function(){
-						jQuery('#click-tab-section li').removeClass("active"); 
-						jQuery(this).parent('li').addClass("active");
-					});
-					jQuery("#click-tab-section li a").click(function() {
-					var position = jQuery(this).parent('li').position();
-					var width = jQuery(this).parent('li').width();
-						jQuery("#click-tab-section .slider-nav").css({"left":+ position.left,"width":width});
-					});
+				jQuery( document ).ready(function() {					
 					var actWidth = jQuery("#click-tab-section").find(".active").parent("li").width();
-					var actPosition = jQuery("#click-tab-section li.active").position();
+					var actPosition = jQuery("#click-tab-section li a.active").position();
 					jQuery("#click-tab-section .slider-nav").css({"left":+ actPosition.left,"width": actWidth});				
-					
-					var sectionIds = jQuery('#click-tab-section li');
+				});	
+				var sectionIds = jQuery('#click-tab-section li a');
 					jQuery(document).scroll(function(){
 					  sectionIds.each(function(){
-						  var container = jQuery(this).children('a').attr('href');
+						  var container = jQuery(this).attr('href');
 						  var containerOffset = jQuery(container).offset().top;
 						  var containerHeight = jQuery(container).outerHeight();
 						  var containerBottom = containerOffset + containerHeight;
@@ -1165,9 +1156,34 @@
 							  jQuery(this).removeClass('active');
 						  }
 					  });
-					});  
-					
-				});				
+					}); 
+				
+				jQuery(function() {
+					jQuery('a[href*=\\#]:not([href=\\#])').click(function() {
+					if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+				&& location.hostname == this.hostname) {
+				
+						var target = jQuery(this.hash);
+						target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
+						if (target.length) {
+						jQuery('html,body').animate({
+							scrollTop: target.offset().top - 185 //offsets for fixed header
+						}, 300);
+						return false;
+						}
+					}
+					});
+					//Executed on page load with URL containing an anchor tag.
+					if(jQuery(location.href.split("#")[1])) {
+						var target = jQuery('#'+location.href.split("#")[1]);
+						if (target.length) {
+						jQuery('html,body').animate({
+							scrollTop: target.offset().top - 185 //offset height of header here too.
+						},300 );
+						return false;
+						}
+					}
+				});
 				</script>
 			</section>
 			<?php endif;  

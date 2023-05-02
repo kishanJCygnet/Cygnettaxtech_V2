@@ -827,6 +827,32 @@ p{
     top: -59px;
     left: 0;
   }
+  &.we-are-proud {
+    .title-heading{
+      position: relative;
+      width: 100%;
+      &::after{
+        content: '';
+        display: none;
+      }
+      h2{
+        margin-bottom: 0;
+        padding: 0 0;
+        position: absolute;
+        left: 0;
+        top: -51px;
+        background: transparent linear-gradient(270deg,#60d6d6 0,#fff 100%) 0 0 no-repeat padding-box;
+        box-shadow: 0 8px 16px rgba(0,0,0,.1607843137);
+        border-radius: 0 44px 44px 0;
+        color: #0c3761;
+        padding: 20px 74px;
+    }
+  }
+  .ins-img{
+      top: -95px;
+      z-index: 1;
+  }
+  }
 }
 
 .architect-help .pointer-list{
@@ -901,5 +927,67 @@ p{
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 8px 32px #00000014;
     border: 1px solid #ECEEF1;
+  }
+}
+
+.wholesome-solutions{
+  padding-top: 110px;
+  .container{
+    position: relative;
+    
+  }
+  .title-heading{
+    position: relative;
+    padding: 30px 0;
+    margin-bottom: 40px;
+    text-align: left;
+    h2{
+      color: #0F3764;
+      font-size: 32px;
+      text-align: left;
+      font-weight: bold;
+      font-family: $roboto;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0;
+      width: 660px;
+      max-width: 100%;
+      line-height: 40px;
+      padding-bottom: 0;
+    }
+    &::after{
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: transparent linear-gradient(90deg, #60d6d65f 0%, #FCFCFC 100%) 0% 0% no-repeat padding-box;
+    }
+  }
+  .title-img-content{
+    position: absolute;
+    right: 0;
+    top: -80px;
+  }
+}
+.proud-point{
+  padding-top: 68px;
+  .proud-item{
+    text-align: center;
+    color: #FCFCFC;
+    h3{
+      width:172px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      margin: auto;
+      background-image: url('../../images/aw-img.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-size: 24px;
+    }
+    p{
+      margin-top: 15px;
+    }
   }
 }
