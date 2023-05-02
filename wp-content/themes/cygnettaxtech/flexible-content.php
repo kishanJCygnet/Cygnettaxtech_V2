@@ -1021,7 +1021,7 @@
 							<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 								<?php while (have_rows('our_solution')) : the_row(); ?>
 									<div class="nav-link <?php if($img_cnt == 1){ ?> active <?php } ?>" id="v-pills-home-tab-<?php echo $img_cnt; ?>" data-bs-toggle="pill" data-bs-target="#v-pills-home-<?php echo $img_cnt; ?>" role="tab" aria-controls="v-pills-home-<?php echo $img_cnt; ?>" aria-selected="true">
-										<?php echo the_sub_field('our_solution_content'); ?>
+										<?php echo the_sub_field('our_solution_tab_title'); ?>
 									</div>
 								<?php $img_cnt++; 
 									endwhile; ?>	
@@ -1029,8 +1029,19 @@
 							<div class="tab-content" id="v-pills-tabContent">
 								<?php while (have_rows('our_solution')) : the_row(); ?>
 									<div class="tab-pane fade <?php if($con_cnt == 1){ ?> show active <?php } ?> " id="v-pills-home-<?php echo $con_cnt; ?>" role="tabpanel" aria-labelledby="v-pills-home-tab-<?php echo $con_cnt; ?>">
+										<div class="desc-content">
+											<?php echo the_sub_field('our_solution_content'); ?>
+										</div>
 										<div class="img-content">
-											<img src="<?php echo the_sub_field('our_solution_image'); ?>" alt="" />
+											<div class="solusition-slider">
+												<?php while (have_rows('our_solution_image_gallery')) : the_row(); ?>
+													<div class="icon-box">
+														<div class="image-inner-cls">
+															<img src="<?php echo the_sub_field('our_solution_image'); ?>" alt="" />
+														</div>
+													</div>
+												<?php endwhile; ?>
+											</div>
 										</div>
 									</div> 
 								<?php $con_cnt++; 
@@ -1039,6 +1050,50 @@
 						</div>
 						<?php endif; ?>
 					</div>
+					<script>
+						jQuery(document).ready(function() {
+							jQuery('.solusition-slider').each(function(){
+								jQuery(this).slick({
+									infinite: true,							
+									autoplay: false,
+									autoplaySpeed:3000,
+									arrows: true,
+									dots: false,
+									slidesToShow: 1,
+									customPaging: '40px',							
+									prevArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation right' /></span>",
+									nextArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation left' /></span>",
+									responsive : [
+										// breakpoint from 0 up
+										{  breakpoint: 0,
+										settings : {
+											slidesToShow:1,
+											margin: 20,
+											}
+										},
+										{  breakpoint: 768,
+										settings : {
+												margin: 40,
+												slidesToShow:2,
+											}
+										},
+										{  breakpoint: 992,
+										settings : {
+												margin: 40,
+												slidesToShow:3,
+											}
+										},
+										{  breakpoint: 1200,
+											settings : {
+												margin: 40,
+												slidesToShow:1,
+											}
+										},
+									]
+								});
+							});
+						});
+						</script>
 				</section>
 		    <?php endif; 
 			/* Our Solution Section End */
