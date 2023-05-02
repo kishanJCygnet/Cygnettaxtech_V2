@@ -1,4 +1,16 @@
 .tab-section{
+    .title-heading{
+        position: relative;
+        h3{
+            position: absolute;
+            top: -35px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: 600;
+            color: #099;
+        }
+    }
     .nav-tabs{
         justify-content: space-between;
         align-content: flex-end;
@@ -112,6 +124,23 @@
                     }
                 }
             }
+        }
+    }
+    .tab-box-content{
+        padding: 30px;
+        text-align: center;
+        background: #0F3764 0% 0% no-repeat padding-box;
+        box-shadow: 0px 8px 16px #00000029;
+        border-radius: 8px;
+        color: #fff;
+        h2{     
+            margin-bottom: 30px;      
+            span{
+                color: #009999;
+            }
+        }
+        p{
+            margin-bottom: 15px;
         }
     }
 }
