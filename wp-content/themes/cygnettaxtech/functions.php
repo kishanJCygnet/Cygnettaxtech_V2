@@ -700,7 +700,7 @@ function RegisterNewUser_taxtech($cf7, &$abort, $submission){
 			//exit;
 			return;
 		} else {
-			if($errorcode == 'E004'){
+			if($errorcode == 'E004' || $errorcode == 'E017'){
 				$errMsg = 'E004';//"Unable to process the request at this movement. Please contact us over an email.";
 			} else {
 				$errMsg = $errormessage;//"Unable to process the request at this movement. Please contact us over an email.";
