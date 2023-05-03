@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use AIOSEO\Plugin\Common\Admin as CommonAdmin;
 use AIOSEO\Plugin\Pro\Models;
+use AIOSEO\Plugin\Pro\Traits;
 
 /**
  * Abstract class that Pro and Lite both extend.
@@ -15,6 +16,8 @@ use AIOSEO\Plugin\Pro\Models;
  * @since 4.0.0
  */
 class Admin extends CommonAdmin\Admin {
+	use Traits\Admin;
+
 	/**
 	 * Class constructor.
 	 *
@@ -283,14 +286,4 @@ class Admin extends CommonAdmin\Admin {
 		parent::loadTextDomain();
 		aioseo()->helpers->loadTextDomain( 'aioseo-pro' );
 	}
-
-	/**
-	 * Outputs the element we can mount our footer promotion standalone Vue app on.
-	 * In Pro we do nothing.
-	 *
-	 * @since 4.3.4
-	 *
-	 * @return void
-	 */
-	public function addFooterPromotion() {}
 }

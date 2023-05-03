@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use \AIOSEO\Plugin\Common\Sitemap as CommonSitemap;
+use AIOSEO\Plugin\Common\Sitemap as CommonSitemap;
 
 /**
  * Determines the sitemap priority/frequency.

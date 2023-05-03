@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use \AIOSEO\Plugin\Common\Meta as CommonMeta;
+use AIOSEO\Plugin\Common\Meta as CommonMeta;
 
 /**
  * Handles the description.

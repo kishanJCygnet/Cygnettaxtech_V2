@@ -258,32 +258,37 @@ abstract class Filters {
 	}
 
 	/**
-	 * Action links for the plugins page.
+	 * Registers our row meta for the plugins page.
 	 *
 	 * @since 4.0.0
 	 *
-	 * @return array The array of actions.
+	 * @param  array  $actions    List of existing actions.
+	 * @param  string $pluginFile The plugin file.
+	 * @return array              List of action links.
 	 */
 	abstract public function pluginRowMeta( $actions, $pluginFile );
 
 	/**
-	 * Action links for the plugins page.
+	 * Registers our action links for the plugins page.
 	 *
 	 * @since 4.0.0
 	 *
-	 * @return array The array of actions.
+	 * @param  array  $actions    List of existing actions.
+	 * @param  string $pluginFile The plugin file.
+	 * @return array              List of action links.
 	 */
 	abstract public function pluginActionLinks( $actions, $pluginFile );
 
 	/**
-	 * Parse the action links.
+	 * Parses the action links.
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  array  $actions
-	 * @param  string $pluginFile
-	 * @param
-	 * @return array
+	 * @param  array  $actions     The actions.
+	 * @param  string $pluginFile  The plugin file.
+	 * @param  array  $actionLinks The action links.
+	 * @param  string $position    The position.
+	 * @return array               The parsed actions.
 	 */
 	protected function parseActionLinks( $actions, $pluginFile, $actionLinks = [], $position = 'after' ) {
 		if ( empty( $this->plugin ) ) {

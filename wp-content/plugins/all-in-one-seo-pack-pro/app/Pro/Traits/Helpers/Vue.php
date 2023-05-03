@@ -148,8 +148,9 @@ trait Vue {
 			$data['currentPost']['open_ai'] = ! empty( $aioseoPost->open_ai )
 				? CommonModels\Post::getDefaultOpenAiOptions( $aioseoPost->open_ai )
 				: CommonModels\Post::getDefaultOpenAiOptions();
-
 			$data['data']['aiModel'] = aioseo()->ai->model;
+
+			$data['currentPost']['primary_term'] = ! empty( $aioseoPost->primary_term ) ? $aioseoPost->primary_term : [];
 		}
 
 		$wpPost = $this->getPost();

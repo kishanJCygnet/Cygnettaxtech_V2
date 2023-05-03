@@ -190,16 +190,19 @@ class SearchStatistics {
 			], 400 );
 		}
 
-		$params     = $request->get_params();
-		$startDate  = ! empty( $params['startDate'] ) ? $params['startDate'] : '';
-		$endDate    = ! empty( $params['endDate'] ) ? $params['endDate'] : '';
-		$rolling    = ! empty( $params['rolling'] ) ? $params['rolling'] : '';
-		$limit      = ! empty( $params['limit'] ) ? $params['limit'] : aioseo()->settings->tablePagination['searchStatisticsSeoStatistics'];
-		$offset     = ! empty( $params['offset'] ) ? $params['offset'] : 0;
-		$filter     = ! empty( $params['filter'] ) ? $params['filter'] : 'all';
-		$searchTerm = ! empty( $params['searchTerm'] ) ? $params['searchTerm'] : '';
-		$orderDir   = ! empty( $params['orderDir'] ) ? strtoupper( $params['orderDir'] ) : 'DESC';
-		$orderBy    = ! empty( $params['orderBy'] ) ? aioseo()->helpers->toCamelCase( $params['orderBy'] ) : 'clicks';
+		$params            = $request->get_params();
+		$startDate         = ! empty( $params['startDate'] ) ? $params['startDate'] : '';
+		$endDate           = ! empty( $params['endDate'] ) ? $params['endDate'] : '';
+		$rolling           = ! empty( $params['rolling'] ) ? $params['rolling'] : '';
+		$limit             = ! empty( $params['limit'] ) ? $params['limit'] : aioseo()->settings->tablePagination['searchStatisticsSeoStatistics'];
+		$offset            = ! empty( $params['offset'] ) ? $params['offset'] : 0;
+		$filter            = ! empty( $params['filter'] ) ? $params['filter'] : 'all';
+		$searchTerm        = ! empty( $params['searchTerm'] ) ? sanitize_text_field( $params['searchTerm'] ) : '';
+		$orderDir          = ! empty( $params['orderDir'] ) ? strtoupper( $params['orderDir'] ) : 'DESC';
+		$orderBy           = ! empty( $params['orderBy'] ) ? aioseo()->helpers->toCamelCase( $params['orderBy'] ) : 'clicks';
+		$additionalFilters = ! empty( $params['additionalFilters'] ) ? $params['additionalFilters'] : [];
+
+		$postType = ! empty( $additionalFilters['postType'] ) ? $additionalFilters['postType'] : '';
 
 		// If we're on the Top Losing/Top Winning pages, then we need to override the default ORDER BY/ORDER DIR.
 		if ( 'all' !== $filter ) {
@@ -239,7 +242,8 @@ class SearchStatistics {
 			$filter,
 			$searchTerm,
 			$orderDir,
-			$orderBy
+			$orderBy,
+			$postType
 		];
 
 		$cacheHash  = sha1( implode( ',', $cacheArgs ) );
@@ -253,7 +257,8 @@ class SearchStatistics {
 				$cachedData = aioseo()->searchStatistics->stats->posts->addPostData( $cachedData, 'statistics' );
 
 				// Add localized filters to paginated data.
-				$cachedData['pages']['paginated']['filters'] = aioseo()->searchStatistics->stats->posts->getFilters( $filter, $searchTerm );
+				$cachedData['pages']['paginated']['filters']           = aioseo()->searchStatistics->stats->posts->getFilters( $filter, $searchTerm );
+				$cachedData['pages']['paginated']['additionalFilters'] = aioseo()->searchStatistics->stats->posts->getAdditionalFilters();
 			}
 
 			return new \WP_REST_Response( [
@@ -273,7 +278,8 @@ class SearchStatistics {
 				'searchTerm' => $searchTerm,
 				'orderDir'   => $orderDir,
 				'orderBy'    => $orderBy,
-				'postData'   => $postData
+				'postData'   => $postData,
+				'objects'    => ! empty( $postType ) ? aioseo()->searchStatistics->stats->posts->getPostObjectPaths( $postType ) : false
 			]
 		];
 
@@ -296,7 +302,8 @@ class SearchStatistics {
 		$data = aioseo()->searchStatistics->stats->posts->addPostData( $data, 'statistics' );
 
 		// Add localized filters to paginated data.
-		$data['pages']['paginated']['filters'] = aioseo()->searchStatistics->stats->posts->getFilters( $filter, $searchTerm );
+		$data['pages']['paginated']['filters']           = aioseo()->searchStatistics->stats->posts->getFilters( $filter, $searchTerm );
+		$data['pages']['paginated']['additionalFilters'] = aioseo()->searchStatistics->stats->posts->getAdditionalFilters();
 
 		return new \WP_REST_Response( [
 			'success' => true,
@@ -402,7 +409,7 @@ class SearchStatistics {
 		$limit      = ! empty( $params['limit'] ) ? $params['limit'] : aioseo()->settings->tablePagination['searchStatisticsKeywordRankings'];
 		$offset     = ! empty( $params['offset'] ) ? $params['offset'] : 0;
 		$filter     = ! empty( $params['filter'] ) ? $params['filter'] : 'all';
-		$searchTerm = ! empty( $params['searchTerm'] ) ? $params['searchTerm'] : '';
+		$searchTerm = ! empty( $params['searchTerm'] ) ? sanitize_text_field( $params['searchTerm'] ) : '';
 		$orderDir   = ! empty( $params['orderDir'] ) ? strtoupper( $params['orderDir'] ) : 'DESC';
 		$orderBy    = ! empty( $params['orderBy'] ) ? aioseo()->helpers->toCamelCase( $params['orderBy'] ) : 'clicks';
 
@@ -486,6 +493,108 @@ class SearchStatistics {
 		$data['paginated']['filters'] = aioseo()->searchStatistics->stats->keywords->getFilters( $filter, $searchTerm );
 
 		aioseo()->core->cache->update( "aioseo_search_statistics_keywords_{$cacheHash}", $data, MONTH_IN_SECONDS );
+
+		return new \WP_REST_Response( [
+			'success' => true,
+			'data'    => $data,
+			'range'   => aioseo()->searchStatistics->stats->getDateRange()
+		], 200 );
+	}
+
+	/**
+	 * Get Content Rankings data.
+	 *
+	 * @since 4.3.6
+	 *
+	 * @param  \WP_REST_Request  $request The REST Request
+	 * @return \WP_REST_Response          The response.
+	 */
+	public static function getContentRankings( $request ) {
+		if ( ! aioseo()->license->hasCoreFeature( 'search-statistics', 'content-rankings' ) ) {
+			return new \WP_REST_Response( [
+				'success' => false,
+				'message' => 'Feature not available.'
+			], 400 );
+		}
+
+		$params            = $request->get_params();
+		$limit             = ! empty( $params['limit'] ) ? $params['limit'] : aioseo()->settings->tablePagination['searchStatisticsKeywordRankings'];
+		$offset            = ! empty( $params['offset'] ) ? $params['offset'] : 0;
+		$searchTerm        = ! empty( $params['searchTerm'] ) ? sanitize_text_field( $params['searchTerm'] ) : '';
+		$orderDir          = ! empty( $params['orderDir'] ) ? strtoupper( $params['orderDir'] ) : 'ASC';
+		$orderBy           = ! empty( $params['orderBy'] ) ? aioseo()->helpers->toCamelCase( $params['orderBy'] ) : 'decay';
+		$additionalFilters = ! empty( $params['additionalFilters'] ) ? $params['additionalFilters'] : [];
+
+		$endDate    = ! empty( $params['endDate'] ) ? $params['endDate'] : '';
+		$startDate  = date( 'Y-m-d', strtotime( $endDate . ' - 1 year' ) );
+
+		$postType = ! empty( $additionalFilters['postType'] ) ? $additionalFilters['postType'] : '';
+
+		$cacheArgs = [
+			aioseo()->searchStatistics->api->auth->getAuthedSite(),
+			$startDate,
+			$endDate,
+			$limit,
+			$offset,
+			$searchTerm,
+			$postType,
+			$orderDir,
+			$orderBy
+		];
+
+		$cacheHash  = sha1( implode( ',', $cacheArgs ) );
+		$cachedData = aioseo()->core->cache->get( "aioseo_search_statistics_cont_rankings_{$cacheHash}" );
+		if ( null !== $cachedData ) {
+			$success    = false === $cachedData ? false : true;
+			$statusCode = false === $cachedData ? 400 : 200;
+
+			if ( $success ) {
+				// Add post objects to rows.
+				$cachedData = aioseo()->searchStatistics->stats->posts->addPostData( $cachedData, 'contentRankings' );
+
+				$cachedData['paginated']['additionalFilters'] = aioseo()->searchStatistics->stats->posts->getAdditionalFilters();
+			}
+
+			return new \WP_REST_Response( [
+				'success' => $success,
+				'data'    => $cachedData,
+				'range'   => aioseo()->searchStatistics->stats->getDateRange()
+			], $statusCode );
+		}
+
+		$args = [
+			'start'      => $startDate,
+			'end'        => $endDate,
+			'pagination' => [
+				'limit'      => $limit,
+				'offset'     => $offset,
+				'searchTerm' => $searchTerm,
+				'orderDir'   => $orderDir,
+				'orderBy'    => $orderBy,
+				'postData'   => $searchTerm ? aioseo()->searchStatistics->stats->posts->getPostData( $searchTerm ) : [],
+				'objects'    => aioseo()->searchStatistics->stats->posts->getPostObjectPaths( $postType )
+			]
+		];
+
+		$api      = new Main\Api\Request( 'google-search-console/statistics/content-rankings/', $args, 'POST' );
+		$response = $api->request();
+		if ( is_wp_error( $response ) || ! empty( $response['error'] ) || empty( $response['data'] ) ) {
+			aioseo()->core->cache->update( "aioseo_search_statistics_cont_rankings_{$cacheHash}", false, 60 );
+
+			return new \WP_REST_Response( [
+				'success' => false,
+				'data'    => false
+			], 400 );
+		}
+
+		$data = $response['data'];
+
+		aioseo()->core->cache->update( "aioseo_search_statistics_cont_rankings_{$cacheHash}", $data, MONTH_IN_SECONDS );
+
+		// Add post objects to rows.
+		$data = aioseo()->searchStatistics->stats->posts->addPostData( $data, 'contentRankings' );
+
+		$data['paginated']['additionalFilters'] = aioseo()->searchStatistics->stats->posts->getAdditionalFilters();
 
 		return new \WP_REST_Response( [
 			'success' => true,
@@ -781,7 +890,7 @@ class SearchStatistics {
 		$limit      = ! empty( $params['limit'] ) ? $params['limit'] : aioseo()->settings->tablePagination['searchStatisticsPostDetailKeywords'];
 		$offset     = ! empty( $params['offset'] ) ? $params['offset'] : 0;
 		$filter     = ! empty( $params['filter'] ) ? $params['filter'] : 'all';
-		$searchTerm = ! empty( $params['searchTerm'] ) ? $params['searchTerm'] : '';
+		$searchTerm = ! empty( $params['searchTerm'] ) ? sanitize_text_field( $params['searchTerm'] ) : '';
 		$orderDir   = ! empty( $params['orderDir'] ) ? strtoupper( $params['orderDir'] ) : 'DESC';
 		$orderBy    = ! empty( $params['orderBy'] ) ? aioseo()->helpers->toCamelCase( $params['orderBy'] ) : 'clicks';
 		$postId     = ! empty( $params['postId'] ) ? $params['postId'] : 0;

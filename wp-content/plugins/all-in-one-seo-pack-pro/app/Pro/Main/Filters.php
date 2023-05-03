@@ -15,11 +15,13 @@ use AIOSEO\Plugin\Lite\Main as LiteMain;
  */
 class Filters extends LiteMain\Filters {
 	/**
-	 * Action links for the plugins page.
+	 * Registers our action links for the plugins page.
 	 *
-	 * @param  array  $actions    An array of existing actions.
-	 * @param  string $pluginFile The plugin file we are modifying.
-	 * @return array              An array of action links.
+	 * @since 4.0.0
+	 *
+	 * @param  array  $actions    List of existing actions.
+	 * @param  string $pluginFile The plugin file.
+	 * @return array              List of action links.
 	 */
 	public function pluginActionLinks( $actions, $pluginFile ) {
 		$actionLinks = parent::pluginActionLinks( $actions, $pluginFile );
