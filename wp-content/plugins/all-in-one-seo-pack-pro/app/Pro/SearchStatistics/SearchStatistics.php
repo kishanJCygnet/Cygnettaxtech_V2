@@ -90,8 +90,9 @@ class SearchStatistics extends CommonSearchStatistics\SearchStatistics {
 			'rolling'             => aioseo()->internalOptions->internal->searchStatistics->rolling,
 			'authedSite'          => aioseo()->searchStatistics->api->auth->getAuthedSite(),
 			'data'                => [
-				'seoStatistics' => $this->getSeoOverviewData( $dateRange ),
-				'keywords'      => $this->getKeywordsData( $dateRange )
+				'seoStatistics'   => $this->getSeoOverviewData( $dateRange ),
+				'keywords'        => $this->getKeywordsData( $dateRange ),
+				'contentRankings' => $this->getContentRankingsData( $dateRange )
 			]
 		];
 
@@ -123,7 +124,8 @@ class SearchStatistics extends CommonSearchStatistics\SearchStatistics {
 			'all',
 			'',
 			'DESC',
-			'clicks'
+			'clicks',
+			''
 		];
 
 		$cacheHash  = sha1( implode( ',', $cacheArgs ) );
@@ -132,7 +134,8 @@ class SearchStatistics extends CommonSearchStatistics\SearchStatistics {
 			if ( ! empty( $cachedData['pages']['paginated']['rows'] ) ) {
 				$cachedData = aioseo()->searchStatistics->stats->posts->addPostData( $cachedData, 'statistics' );
 
-				$cachedData['pages']['paginated']['filters'] = aioseo()->searchStatistics->stats->posts->getFilters( 'all', '' );
+				$cachedData['pages']['paginated']['filters']           = aioseo()->searchStatistics->stats->posts->getFilters( 'all', '' );
+				$cachedData['pages']['paginated']['additionalFilters'] = aioseo()->searchStatistics->stats->posts->getAdditionalFilters();
 			}
 
 			return $cachedData;
@@ -172,6 +175,52 @@ class SearchStatistics extends CommonSearchStatistics\SearchStatistics {
 		$cacheHash  = sha1( implode( ',', $cacheArgs ) );
 		$cachedData = aioseo()->core->cache->get( "aioseo_search_statistics_keywords_{$cacheHash}" );
 		if ( $cachedData ) {
+			return $cachedData;
+		}
+
+		return [];
+	}
+
+	/**
+	 * Returns the Content Rankings data.
+	 *
+	 * @since 4.3.6
+	 *
+	 * @param  array $dateRange The date range.
+	 * @return array            The Content Rankings data.
+	 */
+	protected function getContentRankingsData( $dateRange = [] ) {
+		if (
+			! aioseo()->license->hasCoreFeature( 'search-statistics', 'content-rankings' ) ||
+			! aioseo()->searchStatistics->api->auth->isConnected()
+		) {
+			return parent::getContentRankingsData( $dateRange );
+		}
+
+		$endDate    = aioseo()->searchStatistics->stats->latestAvailableDate; // We do last available date for the end date.
+		$startDate  = date( 'Y-m-d', strtotime( $endDate . ' - 1 year' ) );
+
+		$cacheArgs = [
+			aioseo()->searchStatistics->api->auth->getAuthedSite(),
+			$startDate,
+			$endDate,
+			aioseo()->settings->tablePagination['searchStatisticsContentRankings'],
+			0,
+			'',
+			'',
+			'ASC',
+			'decay'
+		];
+
+		$cacheHash  = sha1( implode( ',', $cacheArgs ) );
+		$cachedData = aioseo()->core->cache->get( "aioseo_search_statistics_cont_rankings_{$cacheHash}" );
+		if ( $cachedData ) {
+			if ( ! empty( $cachedData['paginated']['rows'] ) ) {
+				$cachedData = aioseo()->searchStatistics->stats->posts->addPostData( $cachedData, 'contentRankings' );
+
+				$cachedData['paginated']['additionalFilters'] = aioseo()->searchStatistics->stats->posts->getAdditionalFilters();
+			}
+
 			return $cachedData;
 		}
 

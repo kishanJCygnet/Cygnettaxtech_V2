@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use AIOSEO\Plugin\Common\Admin as CommonAdmin;
+use AIOSEO\Plugin\Pro\Traits;
 
 /**
  * Pro class.
@@ -14,6 +15,13 @@ use AIOSEO\Plugin\Common\Admin as CommonAdmin;
  * @since 4.2.5
  */
 class NetworkAdmin extends CommonAdmin\NetworkAdmin {
+	use Traits\Admin;
+
+	/**
+	 * Construct method.
+	 *
+	 * @since 4.2.5
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -118,4 +126,14 @@ class NetworkAdmin extends CommonAdmin\NetworkAdmin {
 
 		return $tables;
 	}
+
+	/**
+	 * Outputs the element we can mount our footer promotion standalone Vue app on.
+	 * In Pro we do nothing.
+	 *
+	 * @since 4.3.6
+	 *
+	 * @return void
+	 */
+	public function addFooterPromotion() {}
 }

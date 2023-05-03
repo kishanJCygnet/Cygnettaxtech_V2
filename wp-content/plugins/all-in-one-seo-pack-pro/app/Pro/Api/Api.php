@@ -30,6 +30,7 @@ class Api extends CommonApi\Api {
 			'search-statistics/url/reauth'                 => [ 'callback' => [ 'SearchStatistics', 'getReauthUrl' ], 'access' => 'aioseo_search_statistics_settings' ],
 			'search-statistics/stats/seo-statistics'       => [ 'callback' => [ 'SearchStatistics', 'getSeoStatistics' ], 'access' => 'aioseo_search_statistics_settings' ],
 			'search-statistics/stats/keywords'             => [ 'callback' => [ 'SearchStatistics', 'getKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/stats/content-rankings'     => [ 'callback' => [ 'SearchStatistics', 'getContentRankings' ], 'access' => 'aioseo_search_statistics_settings' ],
 			'search-statistics/post-detail'                => [ 'callback' => [ 'SearchStatistics', 'getPostDetail' ], 'access' => 'aioseo_search_statistics_settings' ],
 			'search-statistics/post-detail/seo-statistics' => [ 'callback' => [ 'SearchStatistics', 'getPostDetailSeoStatistics' ], 'access' => 'aioseo_search_statistics_settings' ],
 			'search-statistics/post-detail/keywords'       => [ 'callback' => [ 'SearchStatistics', 'getPostDetailKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
