@@ -114,6 +114,37 @@ jQuery(document).ready(function(){
   jQuery('.navbar-toggler').click(function(){
     jQuery('html').toggleClass('overflow-h');
   }); 
+  var itemNo = 1;
+  jQuery('.nav-action > .right-nav').click(function(){
+    jQuery('.solution-tab-content .nav-link.active:not(.solution-tab-content .nav-link:last-child)').removeClass('active').next().addClass('active');
+    jQuery('.tab-content .tab-pane.active:not(.tab-content.tab-pane:last-child)').removeClass('active show').next().addClass('active show');
+    itemNo++;
+    
+    if( itemNo > 4){      
+      jQuery('.solution-tab-content .nav').animate({       
+        marginLeft: "-=296px"
+      }, "slow");
+    }
+    
+  });
+  jQuery('.nav-action > .left-nav').click(function(){
+    jQuery('.solution-tab-content .nav-link.active:not(.solution-tab-content .nav-link:first-child)').removeClass('active').prev().addClass('active');
+    jQuery('.tab-content .tab-pane.active:not(.tab-content .tab-pane:first-child)').removeClass('active show').prev().addClass('active show');
+    itemNo--;
+    if( itemNo > 3){  
+   
+      jQuery('.solution-tab-content .nav').animate({
+        marginLeft: "+=296px"
+      }, "slow");
+    }
+  
+  });
+
+
+
+
+
+});
 
 var sectionIds = jQuery('.product-feature-tab a');
 
@@ -164,7 +195,6 @@ jQuery(function() {
     });
 
 });
-
 jQuery(window).scroll(function() {
   var sticky = jQuery('header .navbar'),
     scroll = jQuery(window).scrollTop();
@@ -172,9 +202,6 @@ jQuery(window).scroll(function() {
   if (scroll >= 48) sticky.addClass('fixed');
   else sticky.removeClass('fixed');
 });
-
-});
-
 
 jQuery(function() {
   //Calling function after Page Load
@@ -240,20 +267,24 @@ jQuery(document).ready(function(){
         }
       });
 
-      $('.list-tabs').each(function(){  
+      jQuery('.list-tabs').each(function(){  
       
         // Cache the highest
         var highestBox = 0;        
         // Select and loop the elements you want to equalise
-        $('.list-item .accordion-button', this).each(function(){          
+        jQuery('.list-item .accordion-button', this).each(function(){          
           // If this box is higher than the cached highest then store it
-          if($(this).height() > highestBox) {
-            highestBox = $(this).height(); 
+          if(jQuery(this).height() > highestBox) {
+            highestBox = jQuery(this).height(); 
           }        
         });                
         // Set the height of all those children to whichever was highest 
-        $('.list-item .accordion-button',this).height(highestBox);                      
+        jQuery('.list-item .accordion-button',this).height(highestBox);   
+        
+       
       }); 
+
+      
 
     });
 jQuery(window).resize(function(){
