@@ -68,8 +68,7 @@
 								</div>
 								<div class="card-body">
 									<?php if (get_the_title()) : ?>
-										<h5 class="card-title"> <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-												<?php echo wp_trim_words(get_the_title(), 10, '...'); ?></a></h5>
+										<h5 class="card-title"> <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php echo wp_trim_words(get_the_title(), 10, '...'); ?></a></h5>
 									<?php endif; ?>
 									<?php
 									if (get_field('date', $post->ID)) : 
