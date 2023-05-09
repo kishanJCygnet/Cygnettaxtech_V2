@@ -24,11 +24,11 @@
 					</h2>
 				</div>
 				<div class="form-content">
-					<?php if(is_front_page()){ 
+					<?php /*if(is_front_page()){ 
 						echo do_shortcode('[contact-form-7 id="39050" title="Contact Us Home"]'); 
-					} else {
+					} else {*/
 						echo do_shortcode('[contact-form-7 id="172" title="Contact Us"]'); 
-					}						
+					//}						
 					?>
 					<input type="hidden" value="contact_us" id="hd_type">
 				</div>
