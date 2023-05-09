@@ -70,7 +70,7 @@ class License {
 
 		// If it does not activate, update the response to be an error.
 		if ( ! $activated ) {
-			$internalOptions->general->licenseKey = null;
+			$options->general->licenseKey = null;
 
 			$responseCode = 400;
 			$response     = [

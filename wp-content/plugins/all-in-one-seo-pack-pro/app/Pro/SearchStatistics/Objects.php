@@ -201,5 +201,8 @@ class Objects {
 		];
 
 		Models\WpObject::update( $object );
+
+		// Clear cache the for the posts.
+		aioseo()->core->cache->clearPrefix( 'aioseo_search_statistics_post_' );
 	}
 }

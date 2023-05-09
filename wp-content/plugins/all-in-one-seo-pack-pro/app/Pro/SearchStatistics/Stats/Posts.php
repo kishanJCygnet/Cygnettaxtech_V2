@@ -57,7 +57,7 @@ class Posts {
 		$postTypeOptions = [
 			[
 				'label' => __( 'All Content Types', 'all-in-one-seo-pack' ),
-				'value' => 'all'
+				'value' => ''
 			]
 		];
 
@@ -75,7 +75,7 @@ class Posts {
 		}
 
 		$additionalFilters[] = [
-			'name'    => 'post-type',
+			'name'    => 'postType',
 			'options' => $postTypeOptions
 		];
 
@@ -112,6 +112,12 @@ class Posts {
 			}
 
 			$data = $pagesWithObjects;
+		}
+
+		if ( 'contentRankings' === $type ) {
+			$pages = aioseo()->searchStatistics->helpers->setRowKey( $data['paginated']['rows'], 'page' );
+
+			$data['paginated']['rows'] = $this->mergeObjects( $pages );
 		}
 
 		return $data;
@@ -187,9 +193,10 @@ class Posts {
 			$newObjects[ $path ]['postTitle'] = $postTitle;
 			$newObjects[ $path ]['seoScore']  = (int) $objects[ $path ]->seo_score;
 			$newObjects[ $path ]['context']   = [
-				'postType'  => $postTypeObjects[ $objects[ $path ]->object_subtype ],
-				'permalink' => get_permalink( $objects[ $path ]->object_id ),
-				'editLink'  => get_edit_post_link( $objects[ $path ]->object_id, '' )
+				'postType'    => $postTypeObjects[ $objects[ $path ]->object_subtype ],
+				'permalink'   => get_permalink( $objects[ $path ]->object_id ),
+				'editLink'    => get_edit_post_link( $objects[ $path ]->object_id, '' ),
+				'lastUpdated' => get_the_modified_date( get_option( 'date_format' ), $objects[ $path ]->object_id )
 			];
 
 			$newObjects[ $path ]['linkAssistant'] = aioseo()->searchStatistics->helpers->getLinkAssistantData( (int) $objects[ $path ]->object_id );
@@ -232,5 +239,35 @@ class Posts {
 		aioseo()->core->cache->update( "aioseo_search_statistics_post_data_{$searchTerm}", $postData, 15 * MINUTE_IN_SECONDS );
 
 		return $postData;
+	}
+
+	/**
+	 * Returns the paths for all post objects.
+	 *
+	 * @since 4.3.6
+	 *
+	 * @param  string $postType The post type to get the paths for.
+	 * @return array            The list of paths.
+	 */
+	public function getPostObjectPaths( $postType = '' ) {
+		$cachedData = aioseo()->core->cache->get( "aioseo_search_statistics_post_paths_{$postType}" );
+		if ( $cachedData ) {
+			return $cachedData;
+		}
+
+		$displayableObjects = aioseo()->db->start( 'aioseo_search_statistics_objects as asso' )
+			->select( 'asso.object_path' )
+			->where( 'asso.object_type', 'post' );
+
+		if ( $postType ) {
+			$displayableObjects = $displayableObjects->where( 'asso.object_subtype', $postType );
+		}
+
+		$displayableObjects = $displayableObjects->run()->result();
+		$displayableObjects = wp_list_pluck( $displayableObjects, 'object_path' );
+
+		aioseo()->core->cache->update( "aioseo_search_statistics_post_paths_{$postType}", $displayableObjects, WEEK_IN_SECONDS );
+
+		return $displayableObjects;
 	}
 }

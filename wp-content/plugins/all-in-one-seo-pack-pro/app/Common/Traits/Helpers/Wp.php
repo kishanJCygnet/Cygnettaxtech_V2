@@ -296,13 +296,15 @@ trait Wp {
 				: [];
 
 			$taxonomies[] = [
-				'name'         => $name,
-				'label'        => ucwords( $taxObject->label ),
-				'singular'     => ucwords( $taxObject->labels->singular_name ),
-				'icon'         => strpos( $taxObject->label, 'categor' ) !== false ? 'dashicons-category' : 'dashicons-tag',
-				'hierarchical' => $taxObject->hierarchical,
-				'slug'         => isset( $taxObject->rewrite['slug'] ) ? $taxObject->rewrite['slug'] : '',
-				'postTypes'    => $taxonomyPostTypes
+				'name'               => $name,
+				'label'              => ucwords( $taxObject->label ),
+				'singular'           => ucwords( $taxObject->labels->singular_name ),
+				'icon'               => strpos( $taxObject->label, 'categor' ) !== false ? 'dashicons-category' : 'dashicons-tag',
+				'hierarchical'       => $taxObject->hierarchical,
+				'slug'               => isset( $taxObject->rewrite['slug'] ) ? $taxObject->rewrite['slug'] : '',
+				'primaryTermSupport' => (bool) $taxObject->hierarchical,
+				'restBase'           => ( $taxObject->rest_base ) ? $taxObject->rest_base : $taxObject->name,
+				'postTypes'          => $taxonomyPostTypes
 			];
 		}
 
