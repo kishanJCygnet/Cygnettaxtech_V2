@@ -997,28 +997,33 @@
 			if (get_row_layout() == 'our_solution_section') : ?>
 				<section class="our-solution-cls <?php echo the_sub_field('our_solution_custom_class'); ?>" <?php echo $slugid; ?>>
 					<div class="container">
+					
 						<div class="row">
 							<div class="col-md-12">
 								<div class="title-heading">
-								<?php if (get_sub_field('our_solution_title')){ ?>
-									<h2 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('our_solution_title'); ?>
-										<span class="heading-border"></span>
-									</h2>
-								<?php } ?>
-								<?php if (get_sub_field('our_solution_sub_title')){ ?>
-									<h3 class="wow fadeInUp" data-wow-delay="0.6s"><?php echo the_sub_field('our_solution_sub_title'); ?></h3>
-								<?php } ?>
+									<?php if (get_sub_field('our_solution_title')){ ?>
+										<h2 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('our_solution_title'); ?>
+											<span class="heading-border"></span>
+										</h2>
+									<?php } ?>
+									<?php if (get_sub_field('our_solution_sub_title')){ ?>
+										<h3 class="wow fadeInUp" data-wow-delay="0.6s"><?php echo the_sub_field('our_solution_sub_title'); ?></h3>
+									<?php } ?>
 								</div>
 								<?php if (get_sub_field('our_solution_main_content')){ ?>
 									<div class="editor-description wow fadeInUp"><?php echo the_sub_field('our_solution_main_content'); ?></div>
 								<?php } ?>
 							</div>
 						</div>
+						<div class="nav-action">
+								<span class="left-nav"><i class="far fa-angle-left"></i></span>
+								<span class="right-nav"><i class="far fa-angle-right"></i></span>
+					    </div>	
 						<?php if (have_rows('our_solution')) : 
 						$img_cnt = 1; 
 						$con_cnt = 1;  ?>
-						<div class="d-flex align-items-start solution-tab-content">								
-							<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<div class=" solution-tab-content">												
+							<div class="nav nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 								<?php while (have_rows('our_solution')) : the_row(); ?>
 									<div class="nav-link <?php if($img_cnt == 1){ ?> active <?php } ?>" id="v-pills-home-tab-<?php echo $img_cnt; ?>" data-bs-toggle="pill" data-bs-target="#v-pills-home-<?php echo $img_cnt; ?>" role="tab" aria-controls="v-pills-home-<?php echo $img_cnt; ?>" aria-selected="true">
 										<?php echo the_sub_field('our_solution_tab_title'); ?>
@@ -1035,11 +1040,9 @@
 										<div class="img-content">
 											<div class="solusition-slider">
 												<?php while (have_rows('our_solution_image_gallery')) : the_row(); ?>
-													<div class="icon-box">
-														<div class="image-inner-cls">
+													 <div>
 															<img src="<?php echo the_sub_field('our_solution_image'); ?>" alt="" />
-														</div>
-													</div>
+													 </div>
 												<?php endwhile; ?>
 											</div>
 										</div>
@@ -1052,44 +1055,18 @@
 					</div>
 					<script>
 						jQuery(document).ready(function() {
+							var numSlick = 0;
 							jQuery('.solusition-slider').each(function(){
-								jQuery(this).slick({
-									infinite: true,							
-									autoplay: false,
-									autoplaySpeed:3000,
-									arrows: true,
-									dots: false,
+								numSlick++;
+								jQuery(this).addClass( 'tab-slick-slider-' + numSlick ).slick({
 									slidesToShow: 1,
-									customPaging: '40px',							
-									prevArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation right' /></span>",
-									nextArrow: "<span><img src='<?php echo THEME_PATH; ?>assets/images/icon-angle.svg' alt='navigation left' /></span>",
-									responsive : [
-										// breakpoint from 0 up
-										{  breakpoint: 0,
-										settings : {
-											slidesToShow:1,
-											margin: 20,
-											}
-										},
-										{  breakpoint: 768,
-										settings : {
-												margin: 40,
-												slidesToShow:2,
-											}
-										},
-										{  breakpoint: 992,
-										settings : {
-												margin: 40,
-												slidesToShow:3,
-											}
-										},
-										{  breakpoint: 1200,
-											settings : {
-												margin: 40,
-												slidesToShow:1,
-											}
-										},
-									]
+									slidesToScroll: 1,
+									autoplay: true,
+									arrows: false,
+									infinite: true,
+									speed: 1200,
+									fade: true,
+									cssEase: 'linear'			
 								});
 							});
 						});
