@@ -214,15 +214,15 @@ class SiteHealth extends CommonAdmin\SiteHealth {
 				'critical',
 				sprintf(
 					// Translators: 1 - The plugin short name ("AIOSEO").
-					__( '%1$s needs to be updated', 'all-in-one-seo-pack' ),
+					__( '%1$s needs to be updated', 'aioseo-pro' ),
 					AIOSEO_PLUGIN_SHORT_NAME
 				),
 				sprintf(
 					// Translators: 1 - The plugin short name ("AIOSEO").
-					__( 'An update is available for %1$s. Upgrade to the latest version to receive all the latest features, bug fixes and security improvements.', 'all-in-one-seo-pack' ),
+					__( 'An update is available for %1$s. Upgrade to the latest version to receive all the latest features, bug fixes and security improvements.', 'aioseo-pro' ),
 					AIOSEO_PLUGIN_SHORT_NAME
 				),
-				$this->actionLink( admin_url( 'plugins.php' ), __( 'Go to Plugins', 'all-in-one-seo-pack' ) )
+				$this->actionLink( admin_url( 'plugins.php' ), __( 'Go to Plugins', 'aioseo-pro' ) )
 			);
 		}
 
@@ -231,10 +231,10 @@ class SiteHealth extends CommonAdmin\SiteHealth {
 			'good',
 			sprintf(
 				// Translators: 1 - The plugin short name ("AIOSEO").
-				__( '%1$s is updated to the latest version', 'all-in-one-seo-pack' ),
+				__( '%1$s is updated to the latest version', 'aioseo-pro' ),
 				AIOSEO_PLUGIN_SHORT_NAME
 			),
-			__( 'Fantastic! By updating to the latest version, you have access to all the latest features, bug fixes and security improvements.', 'all-in-one-seo-pack' )
+			__( 'Fantastic! By updating to the latest version, you have access to all the latest features, bug fixes and security improvements.', 'aioseo-pro' )
 		);
 	}
 
@@ -254,7 +254,7 @@ class SiteHealth extends CommonAdmin\SiteHealth {
 				! aioseo()->dynamicOptions->searchAppearance->archives->{ $postType['name'] }->advanced->robotsMeta->default &&
 				aioseo()->dynamicOptions->searchAppearance->archives->{ $postType['name'] }->advanced->robotsMeta->nofollow
 			) {
-				$nofollowed[] = $postType['label'] . ' ' . __( 'Archives', 'all-in-one-seo-pack' ) . ' (' . $postType['name'] . ')';
+				$nofollowed[] = $postType['label'] . ' ' . __( 'Archives', 'aioseo-pro' ) . ' (' . $postType['name'] . ')';
 			}
 		}
 
@@ -277,7 +277,7 @@ class SiteHealth extends CommonAdmin\SiteHealth {
 				! aioseo()->dynamicOptions->searchAppearance->archives->{ $postType['name'] }->advanced->robotsMeta->default &&
 				aioseo()->dynamicOptions->searchAppearance->archives->{ $postType['name'] }->advanced->robotsMeta->noindex
 			) {
-				$noindexed[] = $postType['label'] . ' ' . __( 'Archives', 'all-in-one-seo-pack' ) . ' (' . $postType['name'] . ')';
+				$noindexed[] = $postType['label'] . ' ' . __( 'Archives', 'aioseo-pro' ) . ' (' . $postType['name'] . ')';
 			}
 		}
 

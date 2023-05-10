@@ -118,22 +118,4 @@ class Api {
 
 		return $this->version;
 	}
-
-	/**
-	 * Prepares the route of the endpoint.
-	 *
-	 * @since 4.3.0
-	 *
-	 * @return string The prepared route.
-	 */
-	public function prepareRoute( $route = '' ) {
-		$replace = [
-			'{type}' => aioseo()->pro ? 'pro' : 'lite'
-		];
-
-		$route = str_replace( array_keys( $replace ), array_values( $replace ), $route );
-		$route = trailingslashit( $route );
-
-		return $route;
-	}
 }

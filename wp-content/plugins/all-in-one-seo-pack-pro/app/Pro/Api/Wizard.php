@@ -82,19 +82,22 @@ class Wizard extends CommonApi\Wizard {
 					Models\Notification::addNotification( [
 						'slug'              => uniqid(),
 						'notification_name' => 'install-addons',
-						// Translators: 1 - The plugin short name ("AIOSEO").
-						'title'             => sprintf( __( 'Install %1$s Addons', 'all-in-one-seo-pack' ), AIOSEO_PLUGIN_SHORT_NAME ),
+						'title'             => sprintf(
+							// Translators: 1 - The plugin short name ("AIOSEO").
+							__( 'Install %1$s Addons', 'aioseo-pro' ),
+							AIOSEO_PLUGIN_SHORT_NAME
+						),
 						'content'           => sprintf(
 							// Translators: 1 - The plugin short name ("AIOSEO"), 2 - A list of addons.
-							__( 'You selected to install the following addons during the setup of %1$s, but there was an issue during installation:%2$s', 'all-in-one-seo-pack' ),
+							__( 'You selected to install the following addons during the setup of %1$s, but there was an issue during installation:%2$s', 'aioseo-pro' ),
 							AIOSEO_PLUGIN_SHORT_NAME,
 							'<ul>' . $content . '</ul>'
 						),
 						'type'              => 'info',
 						'level'             => [ 'all' ],
-						'button1_label'     => __( 'Install Addons', 'all-in-one-seo-pack' ),
+						'button1_label'     => __( 'Install Addons', 'aioseo-pro' ),
 						'button1_action'    => html_entity_decode( aioseo()->helpers->utmUrl( AIOSEO_MARKETING_URL . 'account/downloads/', 'wizard-features', 'cant-install-addons' ) ),
-						'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+						'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 						'button2_action'    => 'http://action#notification/install-addons-reminder',
 						'start'             => gmdate( 'Y-m-d H:i:s' )
 					] );

@@ -36,15 +36,18 @@ class SearchStatistics {
 		if ( ! $valid ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				// Translators: 1 - The plugin name ("All in One SEO").
-				'message' => sprintf( __( 'Cannot authenticate. Please enter a valid, active license key for %1$s into the settings.', 'all-in-one-seo-pack' ), AIOSEO_PLUGIN_NAME ),
+				'message' => sprintf(
+					// Translators: 1 - The plugin name ("All in One SEO").
+					'Cannot authenticate. Please enter a valid, active license key for %1$s into the settings.',
+					AIOSEO_PLUGIN_NAME
+				),
 			], 200 );
 		}
 
 		if ( aioseo()->searchStatistics->api->auth->isConnected() ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Cannot authenticate. Please re-authenticate.', 'all-in-one-seo-pack' ),
+				'message' => 'Cannot authenticate. Please re-authenticate.'
 			], 200 );
 		}
 
@@ -58,7 +61,7 @@ class SearchStatistics {
 			'return'  => admin_url( 'admin.php?page=aioseo-search-statistics' ),
 			'testurl' => 'https://' . aioseo()->searchStatistics->api->getApiUrl() . '/v1/test/',
 			'license' => aioseo()->options->general->licenseKey
-		], aioseo()->searchStatistics->api->prepareRoute( 'https://' . aioseo()->searchStatistics->api->getApiUrl() . '/v1/auth/new/{type}/' ) );
+		], 'https://' . aioseo()->searchStatistics->api->getApiUrl() . '/v1/auth/new/pro/' );
 
 		$url = apply_filters( 'aioseo_search_statistics_auth_url', $url );
 
@@ -88,15 +91,18 @@ class SearchStatistics {
 		if ( ! $valid ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				// Translators: 1 - The plugin name ("All in One SEO").
-				'message' => sprintf( __( 'Cannot re-authenticate. Please enter a valid, active license key for %1$s into the settings.', 'all-in-one-seo-pack' ), AIOSEO_PLUGIN_NAME ),
+				'message' => sprintf(
+					// Translators: 1 - The plugin name ("All in One SEO").
+					'Cannot re-authenticate. Please enter a valid, active license key for %1$s into the settings.',
+					AIOSEO_PLUGIN_NAME
+				),
 			], 200 );
 		}
 
 		if ( ! aioseo()->searchStatistics->api->auth->isConnected() ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Cannot re-authenticate. Please authenticate.', 'all-in-one-seo-pack' ),
+				'message' => 'Cannot re-authenticate. Please authenticate.',
 			], 200 );
 		}
 
@@ -112,7 +118,7 @@ class SearchStatistics {
 			'return'  => admin_url( 'admin.php?page=aioseo-search-statistics' ),
 			'testurl' => 'https://' . aioseo()->searchStatistics->api->getApiUrl() . '/v1/test/',
 			'license' => aioseo()->options->general->licenseKey
-		], aioseo()->searchStatistics->api->prepareRoute( 'https://' . aioseo()->searchStatistics->api->getApiUrl() . '/v1/auth/reauth/{type}/' ) );
+		], 'https://' . aioseo()->searchStatistics->api->getApiUrl() . '/v1/auth/reauth/pro/' );
 
 		$url = apply_filters( 'aioseo_search_statistics_reauth_url', $url );
 
@@ -143,7 +149,7 @@ class SearchStatistics {
 		if ( ! aioseo()->searchStatistics->api->auth->isConnected() ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Cannot deauthenticate. You are not currently authed.', 'all-in-one-seo-pack' ),
+				'message' => 'Cannot deauthenticate. You are not currently authenticated.'
 			], 200 );
 		}
 
@@ -151,8 +157,11 @@ class SearchStatistics {
 		if ( ! $valid ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				// Translators: 1 - The plugin name ("All in One SEO").
-				'message' => sprintf( __( 'Cannot deauthenticate. Please enter a valid, active license key for %1$s into the settings.', 'all-in-one-seo-pack' ), AIOSEO_PLUGIN_NAME ),
+				'message' => sprintf(
+					// Translators: 1 - The plugin name ("All in One SEO").
+					'Cannot deauthenticate. Please enter a valid, active license key for %1$s into the settings.',
+					AIOSEO_PLUGIN_NAME
+				),
 			], 200 );
 		}
 
@@ -164,13 +173,13 @@ class SearchStatistics {
 
 			return new \WP_REST_Response( [
 				'success' => true,
-				'message' => __( 'Successfully deauthenticated.', 'all-in-one-seo-pack' ),
+				'message' => 'Successfully deauthenticated.'
 			], 200 );
 		}
 
 		return new \WP_REST_Response( [
 			'success' => false,
-			'message' => __( 'Could not deauthenticate, please try again.', 'all-in-one-seo-pack' ),
+			'message' => 'Could not deauthenticate, please try again.'
 		], 200 );
 	}
 
@@ -623,7 +632,7 @@ class SearchStatistics {
 		if ( empty( $postId ) || ! is_numeric( $postId ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid post id.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid post id.'
 			], 400 );
 		}
 
@@ -631,7 +640,7 @@ class SearchStatistics {
 		if ( empty( $url ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid post id.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid post id.'
 			], 400 );
 		}
 
@@ -657,7 +666,7 @@ class SearchStatistics {
 		if ( empty( $postId ) || ! is_numeric( $postId ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid post id.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid post id.'
 			], 400 );
 		}
 
@@ -665,7 +674,7 @@ class SearchStatistics {
 		if ( empty( $url ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid post id.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid post id.'
 			], 400 );
 		}
 
@@ -729,14 +738,14 @@ class SearchStatistics {
 		if ( empty( $startDate ) || empty( $endDate ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid date range.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid date range.'
 			], 400 );
 		}
 
 		if ( empty( $postId ) || ! is_numeric( $postId ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid post id.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid post id.'
 			], 400 );
 		}
 
@@ -805,14 +814,14 @@ class SearchStatistics {
 		if ( empty( $startDate ) || empty( $endDate ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid date range.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid date range.'
 			], 400 );
 		}
 
 		if ( empty( $postId ) || ! is_numeric( $postId ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid post id.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid post id.'
 			], 400 );
 		}
 
@@ -909,14 +918,14 @@ class SearchStatistics {
 		if ( empty( $startDate ) || empty( $endDate ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid date range.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid date range.'
 			], 400 );
 		}
 
 		if ( empty( $postId ) || ! is_numeric( $postId ) ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid post id.', 'all-in-one-seo-pack' )
+				'message' => 'Invalid post id.'
 			], 400 );
 		}
 
@@ -1142,12 +1151,12 @@ class SearchStatistics {
 				if ( isset( $customSchema['@graph'] ) && is_array( $customSchema['@graph'] ) ) {
 					foreach ( $customSchema['@graph'] as $graph ) {
 						if ( ! empty( $graph['@type'] ) ) {
-							$userDefinedGraphs[] = $graph['@type'] . ' ' . __( '(Custom)', 'all-in-one-seo-pack' );
+							$userDefinedGraphs[] = $graph['@type'] . ' ' . __( '(Custom)', 'aioseo-pro' );
 						}
 					}
 				} else {
 					if ( ! empty( $customSchema['@type'] ) ) {
-						$userDefinedGraphs[] = $customSchema['@type'] . ' ' . __( '(Custom)', 'all-in-one-seo-pack' );
+						$userDefinedGraphs[] = $customSchema['@type'] . ' ' . __( '(Custom)', 'aioseo-pro' );
 					}
 				}
 			}
@@ -1163,7 +1172,7 @@ class SearchStatistics {
 			$type = strtolower( $blockGraphData->type );
 			switch ( $type ) {
 				case 'aioseo/faq':
-					$blockGraphs[] = 'FAQPage' . ' ' . __( '(Block)', 'all-in-one-seo-pack' );
+					$blockGraphs[] = 'FAQPage' . ' ' . __( '(Block)', 'aioseo-pro' );
 					break;
 				default:
 					break;
@@ -1211,92 +1220,107 @@ class SearchStatistics {
 	 */
 	private static function getSuggestedChangeDescription( $change, $score ) {
 		// phpcs:disable Universal.Arrays.MixedArrayKeyTypes
-		$keyphraseString = __( 'Focus Keyphrase', 'all-in-one-seo-pack' );
+		$keyphraseString = __( 'Focus Keyphrase', 'aioseo-pro' );
 		$strings         = [
 			'keyphraseInContent'        => [
-				'3' => __( 'Your Focus Keyphrase was not found in your content.', 'all-in-one-seo-pack' )
+				'3' => __( 'Your Focus Keyphrase was not found in your content.', 'aioseo-pro' )
 			],
 			'keyphraseInIntroduction'   => [
-				'0' => __( 'No content added yet.', 'all-in-one-seo-pack' ),
-				// Translators: 1 - Focus Keyphrase or Keyphrase.
-				'3' => sprintf( __( 'Your %1$s does not appear in the first paragraph. Make sure the topic is clear immediately.', 'all-in-one-seo-pack' ), $keyphraseString )
+				'0' => __( 'No content added yet.', 'aioseo-pro' ),
+				'3' => sprintf(
+					// Translators: 1 - Focus Keyphrase or Keyphrase.
+					__( 'Your %1$s does not appear in the first paragraph. Make sure the topic is clear immediately.', 'aioseo-pro' ),
+					$keyphraseString
+				)
 			],
 			'keyphraseInDescription'    => [
-				// Translators: 1 - Focus Keyphrase or Keyphrase.
-				'3' => sprintf( __( 'Your %1$s was not found in the meta description.', 'all-in-one-seo-pack' ), $keyphraseString )
+				'3' => sprintf(
+					// Translators: 1 - Focus Keyphrase or Keyphrase.
+					__( 'Your %1$s was not found in the meta description.', 'aioseo-pro' ),
+					$keyphraseString
+				)
 			],
 			'keyphraseInURL'            => [
-				'1' => __( 'Focus Keyphrase not found in the URL.', 'all-in-one-seo-pack' )
+				'1' => __( 'Focus Keyphrase not found in the URL.', 'aioseo-pro' )
 			],
 			'keyphraseLength'           => [
-				// Translators: 1 - Focus Keyphrase or Keyphrase.
-				'-999' => sprintf( __( 'No %1$s was set. Set a %1$s in order to calculate your SEO score.', 'all-in-one-seo-pack' ), $keyphraseString ),
-				// Translators: 1 - Focus Keyphrase or Keyphrase.
-				'3'    => sprintf( __( 'The %1$s is too long. Try to make it shorter.', 'all-in-one-seo-pack' ), $keyphraseString ),
-				// Translators: 1 - Focus Keyphrase or Keyphrase.
-				'6'    => sprintf( __( 'The %1$s is slightly long. Try to make it shorter.', 'all-in-one-seo-pack' ), $keyphraseString )
+				'-999' => sprintf(
+					// Translators: 1 - Focus Keyphrase or Keyphrase.
+					__( 'No %1$s was set. Set a %1$s in order to calculate your SEO score.', 'aioseo-pro' ),
+					$keyphraseString
+				),
+				'3'    => sprintf(
+					// Translators: 1 - Focus Keyphrase or Keyphrase.
+					__( 'The %1$s is too long. Try to make it shorter.', 'aioseo-pro' ),
+					$keyphraseString
+				),
+				'6'    => sprintf(
+					// Translators: 1 - Focus Keyphrase or Keyphrase.
+					__( 'The %1$s is slightly long. Try to make it shorter.', 'aioseo-pro' ),
+					$keyphraseString
+				)
 			],
 			'metadescriptionLength'     => [
 				'tooltip' => true,
-				'1'       => __( 'No meta description has been specified. Search engines will display copy from the page instead. Make sure to write one!', 'all-in-one-seo-pack' ),
-				'6'       => __( 'Your meta description may not display correctly in search results.', 'all-in-one-seo-pack' )
+				'1'       => __( 'No meta description has been specified. Search engines will display copy from the page instead. Make sure to write one!', 'aioseo-pro' ),
+				'6'       => __( 'Your meta description may not display correctly in search results.', 'aioseo-pro' )
 			],
 			'lengthContent'             => [
-				'6'   => __( 'The content is below the minimum of words. Add more content.', 'all-in-one-seo-pack' ),
-				'3'   => __( 'The content is below the minimum of words. Add more content.', 'all-in-one-seo-pack' ),
-				'-10' => __( 'This is far below the recommended minimum of words.', 'all-in-one-seo-pack' ),
-				'-20' => __( 'This is far below the recommended minimum of words.', 'all-in-one-seo-pack' )
+				'6'   => __( 'The content is below the minimum of words. Add more content.', 'aioseo-pro' ),
+				'3'   => __( 'The content is below the minimum of words. Add more content.', 'aioseo-pro' ),
+				'-10' => __( 'This is far below the recommended minimum of words.', 'aioseo-pro' ),
+				'-20' => __( 'This is far below the recommended minimum of words.', 'aioseo-pro' )
 			],
 			'isInternalLink'            => [
-				'3' => __( 'There are not enough internal links in your content, try adding some more.', 'all-in-one-seo-pack' )
+				'3' => __( 'There are not enough internal links in your content, try adding some more.', 'aioseo-pro' )
 			],
 			'isExternalLink'            => [
-				'3' => __( 'No outbound links were found. Link out to external resources.', 'all-in-one-seo-pack' )
+				'3' => __( 'No outbound links were found. Link out to external resources.', 'aioseo-pro' )
 			],
 			'keyphraseInTitle'          => [
-				'3' => __( 'Your Focus keyphrase was not found in the SEO title.', 'all-in-one-seo-pack' )
+				'3' => __( 'Your Focus keyphrase was not found in the SEO title.', 'aioseo-pro' )
 			],
 			'keyphraseInBeginningTitle' => [
-				'3' => __( 'The Focus keyphrase doesn\'t appear at the beginning of the SEO title.', 'all-in-one-seo-pack' )
+				'3' => __( 'The Focus keyphrase doesn\'t appear at the beginning of the SEO title.', 'aioseo-pro' )
 			],
 			'titleLength'               => [
 				'tooltip' => true,
-				'1'       => __( 'No title has been specified. Make sure to write one!', 'all-in-one-seo-pack' ),
-				'6'       => __( 'Your title may not display correctly in search results.', 'all-in-one-seo-pack' )
+				'1'       => __( 'No title has been specified. Make sure to write one!', 'aioseo-pro' ),
+				'6'       => __( 'Your title may not display correctly in search results.', 'aioseo-pro' )
 			],
 			'contentHasAssets'          => [
-				'1' => __( 'You are not using rich media like images or videos.', 'all-in-one-seo-pack' )
+				'1' => __( 'You are not using rich media like images or videos.', 'aioseo-pro' )
 			],
 			'paragraphLength'           => [
-				'1' => __( 'At least one paragraph is long. Consider using short paragraphs.', 'all-in-one-seo-pack' )
+				'1' => __( 'At least one paragraph is long. Consider using short paragraphs.', 'aioseo-pro' )
 			],
 			'sentenceLength'            => [
 				'tooltip' => true,
-				'6'       => __( 'Some of your sentences are too long, try shortening them to improve readability.', 'all-in-one-seo-pack' )
+				'6'       => __( 'Some of your sentences are too long, try shortening them to improve readability.', 'aioseo-pro' )
 			],
 			'passiveVoice'              => [
 				'tooltip' => true,
-				'3'       => __( 'Try to use active counterparts on the sentences.', 'all-in-one-seo-pack' )
+				'3'       => __( 'Try to use active counterparts on the sentences.', 'aioseo-pro' )
 			],
 			'transitionWords'           => [
 				'tooltip' => true,
-				'3'       => __( 'Use more transition words in your content.', 'all-in-one-seo-pack' ),
-				'6'       => __( 'Use more transition words in your content.', 'all-in-one-seo-pack' )
+				'3'       => __( 'Use more transition words in your content.', 'aioseo-pro' ),
+				'6'       => __( 'Use more transition words in your content.', 'aioseo-pro' )
 			],
 			'consecutiveSentences'      => [
 				'tooltip' => true,
-				'3'       => __( 'The text contains a high number of consecutive sentences starting with the same word. Try to mix things up!', 'all-in-one-seo-pack' )
+				'3'       => __( 'The text contains a high number of consecutive sentences starting with the same word. Try to mix things up!', 'aioseo-pro' )
 			],
 			'subheadingsDistribution'   => [
 				'tooltip' => true,
-				'6'       => __( 'Add subheadings to improve readability.', 'all-in-one-seo-pack' ),
-				'3'       => __( 'Add subheadings to improve readability.', 'all-in-one-seo-pack' ),
-				'2'       => __( 'You are not using any subheadings, although your text is rather long. Try and add some subheadings.', 'all-in-one-seo-pack' )
+				'6'       => __( 'Add subheadings to improve readability.', 'aioseo-pro' ),
+				'3'       => __( 'Add subheadings to improve readability.', 'aioseo-pro' ),
+				'2'       => __( 'You are not using any subheadings, although your text is rather long. Try and add some subheadings.', 'aioseo-pro' )
 			],
 			'calculateFleschReading'    => [
 				'tooltip' => true,
-				'6'       => __( 'Use less difficult words to improve readability', 'all-in-one-seo-pack' ),
-				'3'       => __( 'Use less difficult words to improve readability', 'all-in-one-seo-pack' )
+				'6'       => __( 'Use less difficult words to improve readability', 'aioseo-pro' ),
+				'3'       => __( 'Use less difficult words to improve readability', 'aioseo-pro' )
 			],
 		];
 		// phpcs:enable Universal.Arrays.MixedArrayKeyTypes
