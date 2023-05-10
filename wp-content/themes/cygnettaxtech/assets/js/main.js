@@ -142,59 +142,59 @@ jQuery(document).ready(function(){
 
 
 
+  var sectionIds = jQuery('.product-feature-tab a');
 
-
-});
-
-var sectionIds = jQuery('.product-feature-tab a');
-
-jQuery(document).scroll(function(){
-    sectionIds.each(function(){
-        var container = jQuery(this).attr('href');
-        var containerOffset = jQuery(container).offset().top;
-        var containerHeight = jQuery(container).outerHeight();
-        var containerBottom = containerOffset + containerHeight;
-        var scrollPosition = jQuery(document).scrollTop() + 180;
-
-        if(scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20){
-            jQuery(this).addClass('active');
-        } else{
-            jQuery(this).removeClass('active');
+  jQuery(document).scroll(function(){
+      sectionIds.each(function(){
+          var container = jQuery(this).attr('href');
+          var containerOffset = jQuery(container).offset().top;
+          var containerHeight = jQuery(container).outerHeight();
+          var containerBottom = containerOffset + containerHeight;
+          var scrollPosition = jQuery(document).scrollTop() + 180;
+  
+          if(scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20){
+              jQuery(this).addClass('active');
+          } else{
+              jQuery(this).removeClass('active');
+          }
+      });
+  });  
+  
+  jQuery(function() {
+    jQuery('a[href*=\\#]:not([href=\\#]):not(.custom-tab-section .custom-tab-nav li a)').click(function() {
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+  && location.hostname == this.hostname) {
+  
+        var target = jQuery(this.hash);
+        target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          jQuery('html,body').animate({
+            scrollTop: target.offset().top - 185 //offsets for fixed header
+          }, 300);
+          return false;
         }
-    });
-});  
-
-jQuery(function() {
-  jQuery('a[href*=\\#]:not([href=\\#]):not(.custom-tab-section .custom-tab-nav li a)').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
-&& location.hostname == this.hostname) {
-
-      var target = jQuery(this.hash);
-      target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        jQuery('html,body').animate({
-          scrollTop: target.offset().top - 185 //offsets for fixed header
-        }, 300);
-        return false;
       }
-    }
+    });
+    //Executed on page load with URL containing an anchor tag.
+    if(jQuery(location.href.split("#")[1])) {
+        var target = jQuery('#'+location.href.split("#")[1]);
+        if (target.length) {
+          jQuery('html,body').animate({
+            scrollTop: target.offset().top - 185 //offset height of header here too.
+          },300 );
+          return false;
+        }
+      }
+      jQuery('.banner-content .bottom-arrow').click (function() {
+          jQuery('html, body').animate({scrollTop: jQuery('.banner-content .bottom-arrow').offset().top - 80 });
+        return false;
+      });
+  
   });
-  //Executed on page load with URL containing an anchor tag.
-  if(jQuery(location.href.split("#")[1])) {
-      var target = jQuery('#'+location.href.split("#")[1]);
-      if (target.length) {
-        jQuery('html,body').animate({
-          scrollTop: target.offset().top - 185 //offset height of header here too.
-        },300 );
-        return false;
-      }
-    }
-    jQuery('.banner-content .bottom-arrow').click (function() {
-        jQuery('html, body').animate({scrollTop: jQuery('.banner-content .bottom-arrow').offset().top - 80 });
-      return false;
-    });
 
 });
+
+
 jQuery(window).scroll(function() {
   var sticky = jQuery('header .navbar'),
     scroll = jQuery(window).scrollTop();
