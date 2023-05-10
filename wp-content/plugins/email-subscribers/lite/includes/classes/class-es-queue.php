@@ -272,6 +272,7 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 						continue;
 					}
 					
+					$send_when    = ! empty( $rules['send_when'] ) ? $rules['send_when'] : 'after_subscription';
 					$delay_unit   = $rules['unit'];
 					$delay_amount = $rules['amount'];
 
@@ -300,28 +301,39 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 							$conditions = $campaign_meta['list_conditions'];
 						}
 					}
-
+					
 					$conditions = ! empty( $meta['list_conditions'] ) ? $meta['list_conditions'] : array();
+
 					$end_time   = gmdate( 'Y-m-d H:i:s', $now );
+					if ( 'after_subscription' === $send_when ) {
+						$timestamp_field = 'lists_subscribers.subscribed_at';
+						$having = array( "timestamp <= UNIX_TIMESTAMP ( CONVERT_TZ( '$end_time', '+0:00', @@session.time_zone ) )" );
+					} else {
+						$timestamp_field = 'subscribers.' . $send_when;
+						$having          = array( "DATE_FORMAT(FROM_UNIXTIME(timestamp),'%m-%d') = DATE_FORMAT(NOW(),'%m-%d')" );
+					}
+
+					
 					$query_args = array(
 						'select'        => array(
 							'lists_subscribers.contact_id AS contact_id',
 							// Since UNIX_TIMESTAMP expect date to be in session time zone and subscribed_at is already in UTC, we are first converting subscribed_at date from UTC time to session time and then passing it to .
-							"UNIX_TIMESTAMP ( CONVERT_TZ( lists_subscribers.subscribed_at + INTERVAL $offset, '+0:00', @@session.time_zone ) ) AS timestamp",
+							"UNIX_TIMESTAMP ( CONVERT_TZ( $timestamp_field + INTERVAL $offset, '+0:00', @@session.time_zone ) ) AS timestamp",
 						),
 						'sent__not_in'  => array( $campaign_id ),
 						'queue__not_in' => array( $campaign_id ),
 						'lists'         => $list_ids,
 						'conditions'    => $conditions,
-						'having'        => array( "timestamp <= UNIX_TIMESTAMP ( CONVERT_TZ( '$end_time', '+0:00', @@session.time_zone ) )" ),
+						'having'        => $having,
 						'orderby'       => array( 'timestamp' ),
 						'groupby'       => 'lists_subscribers.contact_id',
 						'status'		=> 'subscribed',
 						'subscriber_status'		=> array( 'verified' ),
 					);
 
-					if ( $grace_period ) {
-						$start_time             = gmdate( 'Y-m-d H:i:s', $now - $grace_period );
+					if ( $grace_period && 'after_subscription' === $send_when ) {
+						$start_time = gmdate( 'Y-m-d H:i:s', $now - $grace_period );
+
 						$query_args['having'][] = "timestamp >= UNIX_TIMESTAMP ( CONVERT_TZ( '$start_time', '+0:00', @@session.time_zone ) )";
 					}
 

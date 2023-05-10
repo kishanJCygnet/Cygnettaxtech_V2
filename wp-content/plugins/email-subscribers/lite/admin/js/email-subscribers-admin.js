@@ -1259,11 +1259,11 @@
 					success: function (response) {
 						if (response.success) {
 							if ( 'undefined' !== typeof response.data ) {
-								let response_data    = response.data;
-								let preview_html     = response_data.preview_html;
-								let campaign_subject = response_data.campaign_subject;
-								let contact_name     = response_data.contact_name;
-								let contact_email    = response_data.contact_email;
+								let response_data      = response.data;
+								let preview_html       = response_data.preview_html;
+								let campaign_subject   = response_data.campaign_subject;
+								let contact_name       = response_data.contact_name;
+								let contact_email      = response_data.contact_email;
 								$('.campaign_preview_subject').html(campaign_subject);
 								$('.campaign_preview_contact_name').html(contact_name);
 								if ( '' !== contact_email ) {
@@ -1479,9 +1479,9 @@
 			// Check spam score
 			jQuery(document).on('click', '.es_spam' , function(e) {
 				e.preventDefault();
-				var tmpl_id = jQuery('.es_spam').next().next('#es_template_id').val();
-				var subject = jQuery('#ig_es_broadcast_subject,#ig_es_campaign_subject').val();
-				var content = jQuery('.wp-editor-boradcast,.wp-campaign-body-editor').val();
+				var tmpl_id   = jQuery('.es_spam').next().next('#es_template_id').val();
+				var subject   = jQuery('#ig_es_broadcast_subject,#ig_es_campaign_subject').val();
+				var content   = jQuery('.wp-editor-boradcast,.wp-campaign-body-editor').val();
 				jQuery('.es_spam').next('.es-loader-img').show();
 
 				let from_name  = jQuery( '#from_name' ).val();
