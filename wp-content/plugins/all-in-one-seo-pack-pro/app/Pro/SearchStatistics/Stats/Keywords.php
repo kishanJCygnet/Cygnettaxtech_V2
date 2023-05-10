@@ -25,17 +25,17 @@ class Keywords {
 		return [
 			[
 				'slug'   => 'all',
-				'name'   => __( 'All', 'all-in-one-seo-pack' ),
+				'name'   => __( 'All', 'aioseo-pro' ),
 				'active' => ( ! $filter || 'all' === $filter ) && ! $searchTerm
 			],
 			[
 				'slug'   => 'topLosing',
-				'name'   => __( 'Top Losing', 'all-in-one-seo-pack' ),
+				'name'   => __( 'Top Losing', 'aioseo-pro' ),
 				'active' => 'topLosing' === $filter
 			],
 			[
 				'slug'   => 'topWinning',
-				'name'   => __( 'Top Winning', 'all-in-one-seo-pack' ),
+				'name'   => __( 'Top Winning', 'aioseo-pro' ),
 				'active' => 'topWinning' === $filter
 			]
 		];

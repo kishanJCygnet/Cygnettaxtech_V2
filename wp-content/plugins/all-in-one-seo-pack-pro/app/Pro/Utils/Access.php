@@ -147,7 +147,7 @@ class Access extends CommonUtils\Access {
 	 * @param mixed  $value    The new value.
 	 * @return void
 	 */
-	public function maybeUpdateOptions( $option, $oldValue, $value ) {
+	public function maybeUpdateOptions( $option, $oldValue = '', $value = '' ) {
 		// Only performs when updating roles.
 		if ( wp_roles()->role_key !== $option ) {
 			return;

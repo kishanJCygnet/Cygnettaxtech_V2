@@ -32,7 +32,7 @@ class PostsTerms extends CommonApi\PostsTerms {
 		if ( ! $postId ) {
 			return new \WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Post ID is missing.', 'all-in-one-seo-pack' )
+				'message' => 'Post ID is missing.'
 			], 400 );
 		}
 

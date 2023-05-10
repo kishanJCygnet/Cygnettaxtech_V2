@@ -39,8 +39,8 @@ class Api extends CommonApi\Api {
 			'search-statistics/seo-analysis'               => [ 'callback' => [ 'SearchStatistics', 'getSeoAnalysis' ], 'access' => 'aioseo_search_statistics_settings' ]
 		],
 		'POST'   => [
-			'ai/generate'                                               => [ 'callback' => [ 'Ai', 'generate' ], 'access' => 'aioseo_page_titles_settings' ],
-			'ai/save-api-key'                                           => [ 'callback' => [ 'Ai', 'saveApiKey' ], 'access' => 'aioseo_page_titles_settings' ],
+			'ai/generate'                                               => [ 'callback' => [ 'Ai', 'generate' ], 'access' => 'aioseo_general_settings' ],
+			'ai/save-api-key'                                           => [ 'callback' => [ 'Ai', 'saveApiKey' ], 'access' => 'aioseo_general_settings' ],
 			'activate'                                                  => [ 'callback' => [ 'License', 'activateLicense' ], 'access' => 'aioseo_general_settings' ],
 			'deactivate'                                                => [ 'callback' => [ 'License', 'deactivateLicense' ], 'access' => 'aioseo_general_settings' ],
 			'multisite'                                                 => [ 'callback' => [ 'License', 'multisite' ], 'access' => 'aioseo_general_settings' ],

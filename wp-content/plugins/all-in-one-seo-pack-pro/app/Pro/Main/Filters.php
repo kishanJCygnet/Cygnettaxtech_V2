@@ -23,7 +23,7 @@ class Filters extends LiteMain\Filters {
 	 * @param  string $pluginFile The plugin file.
 	 * @return array              List of action links.
 	 */
-	public function pluginActionLinks( $actions, $pluginFile ) {
+	public function pluginActionLinks( $actions, $pluginFile = '' ) {
 		$actionLinks = parent::pluginActionLinks( $actions, $pluginFile );
 
 		// We don't need a Pro upgrade link here so we can unset it.

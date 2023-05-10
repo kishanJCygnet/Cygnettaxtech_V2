@@ -90,18 +90,18 @@ class LocalBusiness extends ImportExport\LocalBusiness {
 			Models\Notification::addNotification( [
 				'slug'              => uniqid(),
 				'notification_name' => 'import-local-business-number',
-				'title'             => __( 'Invalid Phone Number for Local SEO', 'all-in-one-seo-pack' ),
+				'title'             => __( 'Invalid Phone Number for Local SEO', 'aioseo-pro' ),
 				'content'           => sprintf(
 					// Translators: 1 - The phone number.
 					__( 'The phone number that you previously entered for your Local Business schema markup is invalid.
-					As it needs to be internationally formatted, please enter it (%1$s) again with the country code, e.g. +1 (555) 555-1234.', 'all-in-one-seo-pack' ),
+					As it needs to be internationally formatted, please enter it (%1$s) again with the country code, e.g. +1 (555) 555-1234.', 'aioseo-pro' ),
 					"<strong>$phoneNumber</strong>"
 				),
 				'type'              => 'warning',
 				'level'             => [ 'all' ],
-				'button1_label'     => __( 'Fix Now', 'all-in-one-seo-pack' ),
+				'button1_label'     => __( 'Fix Now', 'aioseo-pro' ),
 				'button1_action'    => 'http://route#aioseo-local-seo&aioseo-scroll=info-business-contact-row&aioseo-highlight=aioseo-local-business-phone-number:business-info',
-				'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+				'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 				'button2_action'    => 'http://action#notification/import-local-business-number-reminder',
 				'start'             => gmdate( 'Y-m-d H:i:s' )
 			] );
@@ -133,18 +133,18 @@ class LocalBusiness extends ImportExport\LocalBusiness {
 			Models\Notification::addNotification( [
 				'slug'              => uniqid(),
 				'notification_name' => 'import-local-business-fax',
-				'title'             => __( 'Invalid Fax Number for Local SEO', 'all-in-one-seo-pack' ),
+				'title'             => __( 'Invalid Fax Number for Local SEO', 'aioseo-pro' ),
 				'content'           => sprintf(
 					// Translators: 1 - The fax number.
 					__( 'The fax number that you previously entered for your Local Business schema markup is invalid.
-					As it needs to be internationally formatted, please enter it (%1$s) again with the country code, e.g. +1 (555) 555-1234.', 'all-in-one-seo-pack' ),
+					As it needs to be internationally formatted, please enter it (%1$s) again with the country code, e.g. +1 (555) 555-1234.', 'aioseo-pro' ),
 					"<strong>$faxNumber</strong>"
 				),
 				'type'              => 'warning',
 				'level'             => [ 'all' ],
-				'button1_label'     => __( 'Fix Now', 'all-in-one-seo-pack' ),
+				'button1_label'     => __( 'Fix Now', 'aioseo-pro' ),
 				'button1_action'    => 'http://route#aioseo-local-seo&aioseo-scroll=info-business-contact-row&aioseo-highlight=aioseo-local-business-fax-number:business-info',
-				'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+				'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 				'button2_action'    => 'http://action#notification/import-local-business-fax-reminder',
 				'start'             => gmdate( 'Y-m-d H:i:s' )
 			] );
@@ -206,18 +206,18 @@ class LocalBusiness extends ImportExport\LocalBusiness {
 			Models\Notification::addNotification( [
 				'slug'              => uniqid(),
 				'notification_name' => 'import-local-business-currencies',
-				'title'             => __( 'Invalid Currencies for Local SEO', 'all-in-one-seo-pack' ),
+				'title'             => __( 'Invalid Currencies for Local SEO', 'aioseo-pro' ),
 				'content'           => sprintf(
 					// Translators: 1 - The phone number.
 					__( 'One or more currencies that you previously entered for your Local Business schema markup are invalid.
-					Please select these again using our dropdown menu.</br>%1$s', 'all-in-one-seo-pack' ),
+					Please select these again using our dropdown menu.</br>%1$s', 'aioseo-pro' ),
 					"<strong>$currencies</strong>"
 				),
 				'type'              => 'warning',
 				'level'             => [ 'all' ],
-				'button1_label'     => __( 'Fix Now', 'all-in-one-seo-pack' ),
+				'button1_label'     => __( 'Fix Now', 'aioseo-pro' ),
 				'button1_action'    => 'http://route#aioseo-local-seo&aioseo-scroll=info-payment-info-row&aioseo-highlight=aioseo-local-business-currencies-accepted:business-info',
-				'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+				'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 				'button2_action'    => 'http://action#notification/import-local-business-currencies-reminder',
 				'start'             => gmdate( 'Y-m-d H:i:s' )
 			] );

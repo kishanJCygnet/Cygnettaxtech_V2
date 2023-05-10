@@ -101,7 +101,7 @@ class Objects {
 	 * @param  mixed  $value     The new option value.
 	 * @return void
 	 */
-	public function syncHomeUrl( $option, $oldValue, $value ) {
+	public function syncHomeUrl( $option, $oldValue = '', $value = '' ) {
 		if ( 'show_on_front' === $option ) {
 			$this->updatePost( get_option( 'page_on_front' ) );
 		}

@@ -128,6 +128,8 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 		 * Method to process campaign submission.
 		 *
 		 * @since 4.4.7
+		 * 
+		 * @modify 5.6.4
 		 */
 		public function process_submission() {
 
@@ -155,6 +157,7 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 						$meta['es_schedule_date']          = ! empty( $campaign_data['es_schedule_date'] ) ? $campaign_data['es_schedule_date'] : '';
 						$meta['es_schedule_time']          = ! empty( $campaign_data['es_schedule_time'] ) ? $campaign_data['es_schedule_time'] : '';
 						$meta['pre_header']                = ! empty( $campaign_data['pre_header'] ) ? $campaign_data['pre_header'] : '';
+						$meta['preheader']                 = ! empty( $campaign_data['preheader'] ) ? $campaign_data['preheader'] : '';
 
 						if ( ! empty( $meta['list_conditions'] ) ) {
 							$meta['list_conditions'] = IG_ES_Campaign_Rules::remove_empty_conditions( $meta['list_conditions'] );
@@ -578,6 +581,8 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 		 * @param array $campaign_data Posted campaign data
 		 *
 		 * @since  4.4.2 Added $campaign_data param
+		 * 
+		 * @modify 5.6.4
 		 */
 		public function show_campaign_form( $message_data = array() ) {
 
@@ -592,7 +597,8 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 			$campaign_subject   = ! empty( $campaign_data['subject'] ) ? $campaign_data['subject'] : $this->get_campaign_default_subject();
 			$campaign_status    = ! empty( $campaign_data['status'] ) ? (int) $campaign_data['status'] : IG_ES_CAMPAIGN_STATUS_IN_ACTIVE;
 			$campaign_type      = ! empty( $campaign_data['type'] ) ? $campaign_data['type']               : '';
-			$editor_type        = ! empty( $campaign_data['meta']['editor_type'] ) ? $campaign_data['meta']['editor_type']               : '';
+			$editor_type        = ! empty( $campaign_data['meta']['editor_type'] ) ? $campaign_data['meta']['editor_type'] : '';
+			$campaign_preheader = ! empty( $campaign_data['meta']['preheader'] ) ? $campaign_data['meta']['preheader'] : '';
 			$campaign_text      = '';
 			$gallery_page_url   = admin_url( 'admin.php?page=es_gallery' );
 
@@ -723,17 +729,25 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 														<span class="dashicons dashicons-tag cursor-pointer"></span>
 														<div x-show="open" id="ig-es-tag-icon-dropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
 														 x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 mt-2 z-10 hidden w-56 origin-top-right rounded-md shadow-lg">
-														<div class="bg-white rounded-md shadow-xs">
-															<?php
-															$this->show_merge_tags( $campaign_type );
-															?>
+															<div class="bg-white rounded-md shadow-xs">
+																<?php
+																$this->show_merge_tags( $campaign_type );
+																?>
+															</div>
 														</div>
-													</div>
 													</div>
 													<div>
 														<input id="ig_es_campaign_subject"  style="width:95%;" class="outline-none" name="campaign_data[subject]" value="<?php echo esc_attr( $campaign_subject ); ?>"/>
 													</div>
 													
+												</div>
+											</div>
+											<div class="block px-4 py-2">
+												<label class="text-sm font-medium leading-5 text-gray-700"><?php echo esc_html__( 'Preheader', 'email-subscribers' ); ?></label>
+												<div class="w-full mt-1 relative text-sm leading-5 rounded-md shadow-sm form-input border-gray-400">
+													<div>
+														<input style="width:100%;" class="outline-none" name="campaign_data[preheader]" value="<?php echo esc_attr( $campaign_preheader ); ?>"/>
+													</div>
 												</div>
 											</div>
 											<div class="w-full px-4 pt-1 pb-2 mt-1 message-label-wrapper">
@@ -1090,7 +1104,6 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 		 * @since 5.3.3
 		 */
 		public static function save_campaign( $campaign_data ) {
-
 			$campaign_saved = false;
 			if ( ! empty( $campaign_data['body'] ) ) {
 				$campaign_id   = ! empty( $campaign_data['id'] ) ? $campaign_data['id'] : 0;
@@ -1104,6 +1117,7 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 				$campaign_data = apply_filters( 'ig_es_' . $campaign_type . '_data', $campaign_data );
 
 				if ( ! empty( $campaign_id ) ) {
+
 					$campaign_saved = ES()->campaigns_db->save_campaign( $campaign_data, $campaign_id );
 				}
 			}
@@ -1331,11 +1345,13 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 				unset( $campaign_data['id'] );
 			}
 
+
 			$campaign_data['base_template_id'] = $template_id;
 			$campaign_data['list_ids']         = $list_id;
 			$campaign_data['status']           = ! empty( $campaign_data['status'] ) ? (int) $campaign_data['status'] : 0;
 			$meta                              = ! empty( $campaign_data['meta'] ) ? $campaign_data['meta'] : array();
 			$meta['pre_header']                = ! empty( $campaign_data['pre_header'] ) ? $campaign_data['pre_header'] : '';
+
 
 			if ( ! empty( $meta['list_conditions'] ) ) {
 				$meta['list_conditions'] = IG_ES_Campaign_Rules::remove_empty_conditions( $meta['list_conditions'] );
@@ -1659,18 +1675,18 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 
 			$response = array();
 
-			$campaign_data    = ig_es_get_request_data( 'campaign_data', array(), false );
-			$campaign_type    = ! empty( $campaign_data['type'] ) ? $campaign_data['type'] : IG_ES_DRAG_AND_DROP_EDITOR;
-			$campaign_body    = ! empty( $campaign_data['body'] ) ? $campaign_data['body'] : '';
-			$campaign_subject = ! empty( $campaign_data['subject'] ) ? $campaign_data['subject'] : '';
+			$campaign_data       = ig_es_get_request_data( 'campaign_data', array(), false );
+			$campaign_type       = ! empty( $campaign_data['type'] ) ? $campaign_data['type'] : IG_ES_DRAG_AND_DROP_EDITOR;
+			$campaign_body       = ! empty( $campaign_data['body'] ) ? $campaign_data['body'] : '';
+			$campaign_subject    = ! empty( $campaign_data['subject'] ) ? $campaign_data['subject'] : '';
 
 			if ( ! empty( $campaign_subject) && ! empty( $campaign_body ) ) {
 
 				$template_data = array(
-					'post_title'   => $campaign_subject,
-					'post_content' => $campaign_body,
-					'post_type'    => 'es_template',
-					'post_status'  => 'publish',
+					'post_title'   	  => $campaign_subject,
+					'post_content'    => $campaign_body,
+					'post_type'       => 'es_template',
+					'post_status'     => 'publish',
 				);
 
 				$template_id       = wp_insert_post( $template_data );

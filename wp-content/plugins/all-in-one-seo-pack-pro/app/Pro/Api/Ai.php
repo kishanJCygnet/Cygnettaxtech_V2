@@ -35,7 +35,8 @@ class Ai {
 			], 400 );
 		}
 
-		$postContent = normalize_whitespace( wp_strip_all_tags( $postContent ) );
+		$postContent = strip_shortcodes( wp_strip_all_tags( $postContent ) );
+		$postContent = normalize_whitespace( $postContent );
 		$postContent = preg_replace( '/\v+/', ' ', $postContent ); // Remove new lines.
 		$postContent = wp_trim_words( $postContent, 800 );
 		$postContent = html_entity_decode( $postContent );

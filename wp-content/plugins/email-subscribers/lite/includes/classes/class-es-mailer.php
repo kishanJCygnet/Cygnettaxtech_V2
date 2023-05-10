@@ -557,6 +557,8 @@ if ( ! class_exists( 'ES_Mailer' ) ) {
 		 * @return mixed
 		 *
 		 * @since 4.3.2
+		 * 
+		 * @modify 5.6.4
 		 */
 		public function send( $subject, $content, $emails = array(), $merge_tags = array(), $nl2br = false ) {
 
@@ -583,6 +585,11 @@ if ( ! class_exists( 'ES_Mailer' ) ) {
 					}
 
 					$campaign_meta = maybe_unserialize( $campaign['meta'] );
+
+					if ( ! empty( $campaign_meta['preheader'] ) ) {
+						$content = '<span class="preheader" style="display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">' . $campaign_meta['preheader'] . '</span>' . $content;
+					}
+
 					if ( ! empty( $campaign_meta['attachments'] ) ) {
 						$sender_data['attachments'] = array();
 						$attachments                = $campaign_meta['attachments'];

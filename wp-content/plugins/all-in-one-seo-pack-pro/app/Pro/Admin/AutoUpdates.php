@@ -58,7 +58,7 @@ class AutoUpdates {
 	 * @param  object $item   Update data about a specific plugin.
 	 * @return bool           The new update state.
 	 */
-	public function automaticUpdates( $update, $item ) {
+	public function automaticUpdates( $update, $item = null ) {
 		$item = (array) $item;
 		if ( empty( $item['plugin'] ) ) {
 			return $update;
@@ -161,7 +161,7 @@ class AutoUpdates {
 	 * @param  string $pluginFile
 	 * @return string
 	 */
-	public function filterWordPressAutoUpdateSetting( $html, $pluginFile, $pluginData ) {
+	public function filterWordPressAutoUpdateSetting( $html, $pluginFile = '', $pluginData = [] ) {
 		if ( empty( $pluginData['slug'] ) ) {
 			return $html;
 		}
@@ -176,14 +176,17 @@ class AutoUpdates {
 			$html = sprintf(
 				'<a href="%s" target="_blank">%s</a>',
 				aioseo()->helpers->utmUrl( AIOSEO_MARKETING_URL . 'docs/how-to-upgrade-from-all-in-one-seo-lite-to-pro', 'plugins-autoupdate', 'upgrade-to-autoupdate' ),
-				// Translators: 1 - "AIOSEO Pro"
-				sprintf( __( 'Enable the %1$s plugin to manage auto-updates', 'all-in-one-seo-pack' ), 'AIOSEO Pro' )
+				sprintf(
+					// Translators: 1 - "AIOSEO Pro"
+					__( 'Enable the %1$s plugin to manage auto-updates', 'aioseo-pro' ),
+					'AIOSEO Pro'
+				)
 			);
 			add_filter( "aioseo_is_autoupdate_setting_html_filtered_$pluginFile", '__return_true' );
 		} elseif ( $hasPermission &&
 				( $isMainFree || $isMainPro || ( $isAddon && $isPro ) )
 		) {
-			$text = __( 'Manage auto-updates', 'all-in-one-seo-pack' );
+			$text = __( 'Manage auto-updates', 'aioseo-pro' );
 			$html .= '<br>' . sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=aioseo-settings#/advanced' ), $text );
 			add_filter( "aioseo_is_autoupdate_setting_html_filtered_$pluginFile", '__return_true' );
 		}

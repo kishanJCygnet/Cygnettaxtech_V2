@@ -89,7 +89,7 @@ class DetailsColumn extends CommonDetailsColumn {
 	 * @param  int    $termId     The current term id.
 	 * @return string             A rendered html.
 	 */
-	public function renderTaxonomyColumn( $out, $columnName, $termId ) {
+	public function renderTaxonomyColumn( $out, $columnName = '', $termId = 0 ) {
 		if ( 'aioseo-details' !== $columnName ) {
 			return $out;
 		}

@@ -52,7 +52,7 @@ class NetworkAdmin extends CommonAdmin\NetworkAdmin {
 		if ( current_user_can( 'aioseo_manage_seo' ) && ! aioseo()->networkLicense->isActive() ) {
 			global $submenu;
 			$submenu[ $this->pageSlug ][] = [
-				'<span class="aioseo-menu-highlight red">' . esc_html__( 'Add License Key', 'all-in-one-seo-pack' ) . '</span>',
+				'<span class="aioseo-menu-highlight red">' . esc_html__( 'Add License Key', 'aioseo-pro' ) . '</span>',
 				apply_filters( 'aioseo_manage_seo', 'aioseo_manage_seo' ),
 				esc_url( network_admin_url( 'admin.php?page=aioseo-settings' ) )
 			];
