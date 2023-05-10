@@ -91,17 +91,17 @@ class LocalBusiness {
 			Models\Notification::addNotification( [
 				'slug'              => uniqid(),
 				'notification_name' => 'v3-migration-local-business-country',
-				'title'             => __( 'Re-Enter Country in Local Business', 'all-in-one-seo-pack' ),
+				'title'             => __( 'Re-Enter Country in Local Business', 'aioseo-pro' ),
 				'content'           => sprintf(
 					// Translators: 1 - The country.
-					__( 'For technical reasons, we were unable to migrate the country you entered for your Local Business schema markup. Please enter it (%1$s) again by using the dropdown menu.', 'all-in-one-seo-pack' ), // phpcs:ignore Generic.Files.LineLength.MaxExceeded
+					__( 'For technical reasons, we were unable to migrate the country you entered for your Local Business schema markup. Please enter it (%1$s) again by using the dropdown menu.', 'aioseo-pro' ), // phpcs:ignore Generic.Files.LineLength.MaxExceeded
 					"<strong>$country</strong>"
 				),
 				'type'              => 'warning',
 				'level'             => [ 'all' ],
-				'button1_label'     => __( 'Fix Now', 'all-in-one-seo-pack' ),
+				'button1_label'     => __( 'Fix Now', 'aioseo-pro' ),
 				'button1_action'    => 'http://route#aioseo-local-seo&aioseo-scroll=info-business-address-row&aioseo-highlight=info-business-address-row:locations',
-				'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+				'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 				'button2_action'    => 'http://action#notification/v3-migration-local-business-country-reminder',
 				'start'             => gmdate( 'Y-m-d H:i:s' )
 			] );
@@ -130,17 +130,17 @@ class LocalBusiness {
 			Models\Notification::addNotification( [
 				'slug'              => uniqid(),
 				'notification_name' => 'v3-migration-local-business-number',
-				'title'             => __( 'Invalid Phone Number for Local SEO', 'all-in-one-seo-pack' ),
+				'title'             => __( 'Invalid Phone Number for Local SEO', 'aioseo-pro' ),
 				'content'           => sprintf(
 					// Translators: 1 - The phone number.
-					__( 'The phone number that you previously entered for your Local Business schema markup is invalid. As it needs to be internationally formatted, please enter it (%1$s) again with the country code, e.g. +1 (555) 555-1234.', 'all-in-one-seo-pack' ), // phpcs:ignore Generic.Files.LineLength.MaxExceeded
+					__( 'The phone number that you previously entered for your Local Business schema markup is invalid. As it needs to be internationally formatted, please enter it (%1$s) again with the country code, e.g. +1 (555) 555-1234.', 'aioseo-pro' ), // phpcs:ignore Generic.Files.LineLength.MaxExceeded
 					"<strong>$phoneNumber</strong>"
 				),
 				'type'              => 'warning',
 				'level'             => [ 'all' ],
-				'button1_label'     => __( 'Fix Now', 'all-in-one-seo-pack' ),
+				'button1_label'     => __( 'Fix Now', 'aioseo-pro' ),
 				'button1_action'    => 'http://route#aioseo-local-seo&aioseo-scroll=info-business-contact-row&aioseo-highlight=info-business-contact-row:global-settings',
-				'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+				'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 				'button2_action'    => 'http://action#notification/v3-migration-local-business-number-reminder',
 				'start'             => gmdate( 'Y-m-d H:i:s' )
 			] );

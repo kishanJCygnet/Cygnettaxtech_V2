@@ -43,7 +43,7 @@ class Social extends CommonSocial\Social {
 		$this->twitter  = new Twitter();
 		$this->output   = new Output();
 
-		add_action( 'edited_terms', [ $this, 'scheduleBustOgCacheTerm' ], 10, 1 );
+		add_action( 'edited_terms', [ $this, 'scheduleBustOgCacheTerm' ] );
 	}
 
 	/**

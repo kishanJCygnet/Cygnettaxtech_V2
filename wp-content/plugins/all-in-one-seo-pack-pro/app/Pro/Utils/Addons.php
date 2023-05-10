@@ -292,7 +292,7 @@ class Addons extends CommonUtils\Addons {
 				$level   = empty( $level ) ? __( 'Unlicensed', 'aioseo-pro' ) : $level;
 				$message = sprintf(
 					// Translators: 1 - The current plan name, 2 - Opening HTML link tag, 3 - Closing HTML link tag.
-					__( 'The following addons cannot be used, because your plan level %1$s does not include access to these addons. To upgrade your subscription, please %2$svisit our website%3$s.', 'all-in-one-seo-pack' ), // phpcs:ignore Generic.Files.LineLength.MaxExceeded
+					__( 'The following addons cannot be used, because your plan level %1$s does not include access to these addons. To upgrade your subscription, please %2$svisit our website%3$s.', 'aioseo-pro' ), // phpcs:ignore Generic.Files.LineLength.MaxExceeded
 					'<strong>(' . wp_kses_post( ucfirst( $level ) ) . ')</strong>',
 					'<a target="_blank" href="' . aioseo()->helpers->utmUrl( AIOSEO_MARKETING_URL . 'pro-upgrade/', $addon->name, 'notifications-fail-plan-level' ) . '">', // phpcs:ignore WordPress.Security.EscapeOutput, Generic.Files.LineLength.MaxExceeded
 					'</a>'

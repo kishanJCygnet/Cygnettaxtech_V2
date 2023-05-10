@@ -239,7 +239,7 @@ class Request {
 	 */
 	public function __construct( $route, $args, $method = 'POST' ) {
 		$this->base         = trailingslashit( aioseo()->searchStatistics->api->getApiUrl() ) . trailingslashit( aioseo()->searchStatistics->api->getApiVersion() );
-		$this->route        = aioseo()->searchStatistics->api->prepareRoute( $route );
+		$this->route        = trailingslashit( $route );
 		$this->url          = trailingslashit( $this->scheme . $this->base . $this->route );
 		$this->method       = $method;
 		$this->network      = is_network_admin() || ! empty( $args['network'] );

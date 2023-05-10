@@ -786,6 +786,7 @@ class License {
 	 */
 	public function sendLicenseRequest( $type, $licenseKey, $domains ) {
 		$payload = [
+			'sku'         => 'all-in-one-seo-pack-pro',
 			'version'     => AIOSEO_VERSION,
 			'license'     => $licenseKey,
 			'domains'     => $domains,

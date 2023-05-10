@@ -586,7 +586,7 @@ class Options extends CommonOptions\Options {
 	public function translateDefaults() {
 		parent::translateDefaults();
 
-		$this->proDefaults['breadcrumbs']['advanced']['pagedFormat']['default'] = sprintf( '%1$s #breadcrumb_format_page_number', __( 'Page', 'all-in-one-seo-pack' ) );
+		$this->proDefaults['breadcrumbs']['advanced']['pagedFormat']['default'] = sprintf( '%1$s #breadcrumb_format_page_number', __( 'Page', 'aioseo-pro' ) );
 	}
 
 	/**

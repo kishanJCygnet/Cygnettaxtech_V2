@@ -201,7 +201,7 @@ class EddProduct extends Product {
 	protected function getCategory() {
 		$categories = wp_get_post_terms( $this->download->get_id(), 'download_category', [ 'fields' => 'names' ] );
 
-		return ! empty( $categories ) && __( 'Uncategorized', '' ) !== $categories[0] ? $categories[0] : ''; // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		return ! empty( $categories ) && __( 'Uncategorized' ) !== $categories[0] ? $categories[0] : ''; // phpcs:ignore AIOSEO.Wp.I18n.MissingArgDomain
 	}
 
 	/**

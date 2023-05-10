@@ -25,17 +25,17 @@ class Posts {
 		return [
 			[
 				'slug'   => 'all',
-				'name'   => __( 'All', 'all-in-one-seo-pack' ),
+				'name'   => __( 'All', 'aioseo-pro' ),
 				'active' => ( ! $filter || 'all' === $filter ) && ! $searchTerm
 			],
 			[
 				'slug'   => 'topLosing',
-				'name'   => __( 'Top Losing', 'all-in-one-seo-pack' ),
+				'name'   => __( 'Top Losing', 'aioseo-pro' ),
 				'active' => 'topLosing' === $filter
 			],
 			[
 				'slug'   => 'topWinning',
-				'name'   => __( 'Top Winning', 'all-in-one-seo-pack' ),
+				'name'   => __( 'Top Winning', 'aioseo-pro' ),
 				'active' => 'topWinning' === $filter
 			]
 		];
@@ -56,7 +56,7 @@ class Posts {
 
 		$postTypeOptions = [
 			[
-				'label' => __( 'All Content Types', 'all-in-one-seo-pack' ),
+				'label' => __( 'All Content Types', 'aioseo-pro' ),
 				'value' => ''
 			]
 		];
@@ -181,7 +181,7 @@ class Posts {
 				continue;
 			}
 
-			$postTitle = ! empty( $objects[ $path ]->post_title ) ? $objects[ $path ]->post_title : __( '(no title)' ); // phpcs:ignore WordPress.WP.I18n.MissingArgDomain
+			$postTitle = ! empty( $objects[ $path ]->post_title ) ? $objects[ $path ]->post_title : __( '(no title)' ); // phpcs:ignore AIOSEO.Wp.I18n.MissingArgDomain
 			$postTitle = aioseo()->helpers->decodeHtmlEntities( $postTitle );
 
 			static $postTypeObjects = [];

@@ -90,7 +90,7 @@ class Translations {
 		// Short-circuits translations API requests for private projects.
 		add_filter(
 			'translations_api',
-			function ( $result, $requestedType, $args ) {
+			function ( $result, $requestedType = '', $args = [] ) {
 				if ( $this->type . 's' === $requestedType && $this->slug === $args['slug'] ) {
 					return $this->getTranslations( $this->type, $args['slug'], $this->apiUrl );
 				}

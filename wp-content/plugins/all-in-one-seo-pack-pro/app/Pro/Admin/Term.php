@@ -23,10 +23,10 @@ class Term {
 	 */
 	public function __construct() {
 		// Save New Term data
-		add_action( 'created_term', [ $this, 'saveNewTerm' ], 1000, 3 );
+		add_action( 'created_term', [ $this, 'saveNewTerm' ], 1000 );
 
 		// Update term metabox
-		add_action( 'edit_term', [ $this, 'saveTermSettingsMetabox' ], 10, 1 );
+		add_action( 'edit_term', [ $this, 'saveTermSettingsMetabox' ] );
 	}
 
 	/**
@@ -34,12 +34,10 @@ class Term {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  int    $termId Term ID.
-	 * @param  int    $ttid   Term taxonomy ID.
-	 * @param  string $slug   Taxonomy slug.
+	 * @param  int  $termId Term ID.
 	 * @return void
 	 */
-	public function saveNewTerm( $termId, $ttid, $slug ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+	public function saveNewTerm( $termId ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		$term            = Models\Term::getTerm( $termId );
 		$term->term_id   = $termId;
 		$term->priority  = 'default';

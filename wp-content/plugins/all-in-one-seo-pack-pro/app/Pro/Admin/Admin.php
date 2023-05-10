@@ -45,7 +45,7 @@ class Admin extends CommonAdmin\Admin {
 		if ( current_user_can( 'update_plugins' ) && ! aioseo()->license->isActive() ) {
 			$this->adminBarMenuItems['aioseo-pro-license'] = [
 				'parent' => 'aioseo-main',
-				'title'  => '<span class="aioseo-menu-highlight red">' . __( 'Add License Key', 'all-in-one-seo-pack' ) . '</span>',
+				'title'  => '<span class="aioseo-menu-highlight red">' . __( 'Add License Key', 'aioseo-pro' ) . '</span>',
 				'id'     => 'aioseo-pro-license',
 				'href'   => esc_url( admin_url( 'admin.php?page=aioseo-settings' ) )
 			];
@@ -113,7 +113,7 @@ class Admin extends CommonAdmin\Admin {
 		if ( current_user_can( 'aioseo_manage_seo' ) && ! aioseo()->license->isActive() ) {
 			global $submenu;
 			$submenu[ $this->pageSlug ][] = [
-				'<span class="aioseo-menu-highlight red">' . esc_html__( 'Add License Key', 'all-in-one-seo-pack' ) . '</span>',
+				'<span class="aioseo-menu-highlight red">' . esc_html__( 'Add License Key', 'aioseo-pro' ) . '</span>',
 				apply_filters( 'aioseo_manage_seo', 'aioseo_manage_seo' ),
 				esc_url( admin_url( 'admin.php?page=aioseo-settings' ) )
 			];
@@ -172,7 +172,7 @@ class Admin extends CommonAdmin\Admin {
 		$this->adminBarMenuItems[] = [
 			'id'     => 'aioseo-edit-' . $term->term_id,
 			'parent' => 'aioseo-main',
-			'title'  => esc_html__( 'Edit SEO', 'all-in-one-seo-pack' ),
+			'title'  => esc_html__( 'Edit SEO', 'aioseo-pro' ),
 			'href'   => get_edit_term_link( $term->term_id, $term->taxonomy ) . '#aioseo-tabbed',
 		];
 	}

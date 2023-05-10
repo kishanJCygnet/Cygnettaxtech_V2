@@ -282,20 +282,26 @@ class Migration extends CommonMigration\Migration {
 				Models\Notification::addNotification( [
 					'slug'              => uniqid(),
 					'notification_name' => 'install-' . $addon->sku,
-					// Translators: 1 - The addon or plugin name.
-					'title'             => sprintf( __( 'Install %1$s', 'all-in-one-seo-pack' ), $addon->name ),
+					'title'             => sprintf(
+						// Translators: 1 - The addon or plugin name.
+						__( 'Install %1$s', 'aioseo-pro' ),
+						$addon->name
+					),
 					'content'           => sprintf(
 						// Translators: 1 - The addon name, 2 - The plugin short name ("AIOSEO").
-						__( 'You previously had the %1$s module active in a previous version of %2$s. While trying to migrate, we ran into an issue with installing the new addon. Click below to manually install.', 'all-in-one-seo-pack' ), // phpcs:ignore Generic.Files.LineLength.MaxExceeded
+						__( 'You previously had the %1$s module active in a previous version of %2$s. While trying to migrate, we ran into an issue with installing the new addon. Click below to manually install.', 'aioseo-pro' ), // phpcs:ignore Generic.Files.LineLength.MaxExceeded
 						$addon->name,
 						AIOSEO_PLUGIN_SHORT_NAME
 					),
 					'type'              => 'error',
 					'level'             => [ 'all' ],
-					// Translators: 1 - The addon or plugin name.
-					'button1_label'     => sprintf( __( 'Install %1$s', 'all-in-one-seo-pack' ), $addon->name ),
+					'button1_label'     => sprintf(
+						// Translators: 1 - The addon or plugin name.
+						__( 'Install %1$s', 'aioseo-pro' ),
+						$addon->name
+					),
 					'button1_action'    => html_entity_decode( aioseo()->helpers->utmUrl( AIOSEO_MARKETING_URL . 'account/downloads/', 'migration-' . $addon->sku, 'cant-install-addons' ) ),
-					'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+					'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 					'button2_action'    => 'http://action#notification/install-addons-reminder',
 					'start'             => gmdate( 'Y-m-d H:i:s' )
 				] );

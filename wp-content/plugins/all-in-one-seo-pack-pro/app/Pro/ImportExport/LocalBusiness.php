@@ -48,18 +48,18 @@ abstract class LocalBusiness {
 		Models\Notification::addNotification( [
 			'slug'              => uniqid(),
 			'notification_name' => 'import-local-business-type',
-			'title'             => __( 'Re-Enter Business Type in Local Business', 'all-in-one-seo-pack' ),
+			'title'             => __( 'Re-Enter Business Type in Local Business', 'aioseo-pro' ),
 			'content'           => sprintf(
 				// Translators: 1 - The country.
 				__( 'For technical reasons, we were unable to migrate the business type you entered for your Local Business schema markup.
-				Please enter it (%1$s) again by using the dropdown menu.', 'all-in-one-seo-pack' ),
+				Please enter it (%1$s) again by using the dropdown menu.', 'aioseo-pro' ),
 				"<strong>$businessType</strong>"
 			),
 			'type'              => 'warning',
 			'level'             => [ 'all' ],
-			'button1_label'     => __( 'Fix Now', 'all-in-one-seo-pack' ),
+			'button1_label'     => __( 'Fix Now', 'aioseo-pro' ),
 			'button1_action'    => 'http://route#aioseo-local-seo&aioseo-scroll=info-business-type&aioseo-highlight=info-business-type:locations',
-			'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+			'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 			'button2_action'    => 'http://action#notification/import-local-business-type-reminder',
 			'start'             => gmdate( 'Y-m-d H:i:s' )
 		] );
@@ -94,18 +94,18 @@ abstract class LocalBusiness {
 		Models\Notification::addNotification( [
 			'slug'              => uniqid(),
 			'notification_name' => 'import-local-business-country',
-			'title'             => __( 'Re-Enter Country in Local Business', 'all-in-one-seo-pack' ),
+			'title'             => __( 'Re-Enter Country in Local Business', 'aioseo-pro' ),
 			'content'           => sprintf(
 				// Translators: 1 - The country.
 				__( 'For technical reasons, we were unable to migrate the country you entered for your Local Business schema markup.
-				Please enter it (%1$s) again by using the dropdown menu.', 'all-in-one-seo-pack' ),
+				Please enter it (%1$s) again by using the dropdown menu.', 'aioseo-pro' ),
 				"<strong>$country</strong>"
 			),
 			'type'              => 'warning',
 			'level'             => [ 'all' ],
-			'button1_label'     => __( 'Fix Now', 'all-in-one-seo-pack' ),
+			'button1_label'     => __( 'Fix Now', 'aioseo-pro' ),
 			'button1_action'    => 'http://route#aioseo-local-seo&aioseo-scroll=info-business-address-row&aioseo-highlight=aioseo-local-business-business-country:business-info',
-			'button2_label'     => __( 'Remind Me Later', 'all-in-one-seo-pack' ),
+			'button2_label'     => __( 'Remind Me Later', 'aioseo-pro' ),
 			'button2_action'    => 'http://action#notification/import-local-business-country-reminder',
 			'start'             => gmdate( 'Y-m-d H:i:s' )
 		] );

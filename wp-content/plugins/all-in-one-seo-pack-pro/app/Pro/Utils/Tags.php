@@ -34,18 +34,18 @@ class Tags extends Utils\Tags {
 		$this->tags = array_merge( $this->tags, [
 			[
 				'id'          => 'woocommerce_sku',
-				'name'        => __( 'WooCommerce SKU', 'all-in-one-seo-pack' ),
-				'description' => __( 'The SKU of the WooCommerce product.', 'all-in-one-seo-pack' )
+				'name'        => __( 'WooCommerce SKU', 'aioseo-pro' ),
+				'description' => __( 'The SKU of the WooCommerce product.', 'aioseo-pro' )
 			],
 			[
 				'id'          => 'woocommerce_price',
-				'name'        => __( 'WooCommerce Price', 'all-in-one-seo-pack' ),
-				'description' => __( 'The price of the WooCommerce product.', 'all-in-one-seo-pack' )
+				'name'        => __( 'WooCommerce Price', 'aioseo-pro' ),
+				'description' => __( 'The price of the WooCommerce product.', 'aioseo-pro' )
 			],
 			[
 				'id'          => 'woocommerce_brand',
-				'name'        => __( 'WooCommerce Brand', 'all-in-one-seo-pack' ),
-				'description' => __( 'The brand of the WooCommerce product (compatible with WooCommerce Brands and Perfect WooCommerce Brands plugins).', 'all-in-one-seo-pack' )
+				'name'        => __( 'WooCommerce Brand', 'aioseo-pro' ),
+				'description' => __( 'The brand of the WooCommerce product (compatible with WooCommerce Brands and Perfect WooCommerce Brands plugins).', 'aioseo-pro' )
 			]
 		] );
 	}
@@ -118,13 +118,13 @@ class Tags extends Utils\Tags {
 		switch ( $tag['id'] ) {
 			case 'woocommerce_sku':
 				if ( ! is_object( $product ) ) {
-					return $sampleData ? __( 'Sample SKU', 'all-in-one-seo-pack' ) : '';
+					return $sampleData ? __( 'Sample SKU', 'aioseo-pro' ) : '';
 				}
 
 				return $product ? $product->get_sku() : '';
 			case 'woocommerce_price':
 				if ( ! is_object( $product ) ) {
-					return $sampleData ? __( '$5.99', 'all-in-one-seo-pack' ) : '';
+					return $sampleData ? __( '$5.99', 'aioseo-pro' ) : '';
 				}
 
 				if (
@@ -144,7 +144,7 @@ class Tags extends Utils\Tags {
 				return $this->formatPrice( $productPrice );
 			case 'woocommerce_brand':
 				if ( ! is_object( $product ) ) {
-					return $sampleData ? __( 'Sample Brand', 'all-in-one-seo-pack' ) : '';
+					return $sampleData ? __( 'Sample Brand', 'aioseo-pro' ) : '';
 				}
 
 				return aioseo()->helpers->getWooCommerceBrand( $product->get_id() );

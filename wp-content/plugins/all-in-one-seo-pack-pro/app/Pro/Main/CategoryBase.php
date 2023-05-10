@@ -238,7 +238,7 @@ class CategoryBase {
 	 * @param  string $taxonomy The current Taxonomy.
 	 * @return string           The modified term link.
 	 */
-	public function modifyTermLink( $link, $term, $taxonomy ) {
+	public function modifyTermLink( $link, $term = null, $taxonomy = '' ) {
 		if ( 'category' !== $taxonomy ) {
 			return $link;
 		}

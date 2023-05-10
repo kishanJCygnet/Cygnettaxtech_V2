@@ -74,7 +74,7 @@ class PostSettings extends LiteAdmin\PostSettings {
 						<?php
 							echo sprintf(
 								// Translators: 1 - The plugin short name ("AIOSEO").
-								esc_html__( '%1$s Settings', 'all-in-one-seo-pack' ),
+								esc_html__( '%1$s Settings', 'aioseo-pro' ),
 								AIOSEO_PLUGIN_SHORT_NAME //phpcs:ignore
 							)
 						?>
