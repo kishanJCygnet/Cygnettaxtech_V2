@@ -42,7 +42,7 @@
 				<div class="form-content">
 					<?php echo do_shortcode('[contact-form-7 id="43625" title="R7VAT Landing Page API Form"]'); ?>
 				</div>
-				<div id="err-cf7-40804" style="display:none;margin: 2em 0.5em 1em;padding: 0.2em 1em;border:2px solid #dc3232;font-size: 14px;">
+				<div id="err-cf7-43625" style="display:none;margin: 2em 0.5em 1em;padding: 0.2em 1em;border:2px solid #dc3232;font-size: 14px;">
 					Your user details are already available for R7VAT tool, <a href="https://r7vatgcccompliance.cygnettaxtech.com/login" target="_blank" style="color: #009999;">Click here</a> to login.
 				</div>
 			<?php } ?>			
@@ -133,13 +133,14 @@
     <!-- End Footer -->
 	
 	<!-- Start Breadcrumb with link section -->
-	<?php 
+	<?php $childpages = '';
 	if ( is_page() && $post->post_parent ) {
 		$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->post_parent . '&echo=0&exclude='.$post->ID );
 	} else {
 		$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->ID . '&echo=0' );
 	}
-	if ( $childpages ) { ?>
+	
+	if ( $childpages && !is_404()) { ?>
 		<div class="sticky-main-cls">
 			<div class="sticky-left-cls">
 				<?php if ( $post->post_parent ) { ?>
@@ -174,13 +175,13 @@
 	document.addEventListener( 'wpcf7submit', function( event ) {
 		var status = event.detail.status; 
 		var res = event.detail.apiResponse.message; 
-		if(event.detail.contactFormId == 40804 && status === 'aborted' && res == 'E004'){
+		if(event.detail.contactFormId == 43625 && status === 'aborted' && res == 'E004'){
 			//jQuery('.wpcf7-response-output').html("Your user details are already available for R7VAT tool, <a href='https://r7vatgcccompliance.cygnettaxtech.com/login' target='_blank'>Click here</a> to login.");
 			jQuery('.wpcf7-response-output').hide();
-			jQuery('#err-cf7-40804').show();
-		} else {
+			jQuery('#err-cf7-43625').show();
+		} else if(event.detail.contactFormId == 43625 && status != 'aborted'){
 			jQuery('.wpcf7-response-output').show();
-			jQuery('#err-cf7-40804').hide();
+			jQuery('#err-cf7-43625').hide();
 		}
 	}, false );
 
@@ -190,7 +191,7 @@
 	
 	  var url = '<?php echo site_url(); ?>';
 	  document.addEventListener('wpcf7mailsent', function(e) {
-		if(e.detail.contactFormId == 172 || e.detail.contactFormId == 39050 || e.detail.contactFormId == 41345 || e.detail.contactFormId == 40804) {
+		if(e.detail.contactFormId == 172 || e.detail.contactFormId == 39050 || e.detail.contactFormId == 41345 || e.detail.contactFormId == 43625) {
 			location = url + '/thank-you-for-contacting-us';
 		} else if(e.detail.contactFormId == 41335) {
 			location = url + '/thank-you-for-downloading';
@@ -439,7 +440,7 @@
 			}
 			return false;
 		});
-		
+				
 	});
 	
 	document.addEventListener('wpcf7mailsent', function(e) {

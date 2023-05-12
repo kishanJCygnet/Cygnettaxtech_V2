@@ -239,7 +239,7 @@ if (have_posts()) :
 							<button type="button" class="btn-close modal-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></i></button>
 						</div>                       
                         <div class="modal-body  p-4 contact-form">
-							<div class="modal-webinar-contact-form"><?php echo do_shortcode('[contact-form-7 id="22267" title="Webinar contact form"]'); ?></div>
+							<div class="modal-webinar-contact-form"><?php echo do_shortcode('[contact-form-7 id="44064" title="Webinar contact form"]'); ?></div>
                           <div class="ratio ratio-16x9 modal-video-main" style="display:none;">
 							<iframe width="100%" height="350" src="" class="modal-video-iframe" ></iframe><!--allow="autoplay" -->
 							</div>
@@ -333,7 +333,7 @@ jQuery( document ).ready(function() {
 });
 
 document.addEventListener('wpcf7mailsent', function(e) {
-	if(e.detail.contactFormId == 22267) {		
+	if(e.detail.contactFormId == 44064) {		
 		jQuery(".modal-webinar-contact-form").hide();
 		jQuery(".modal-video-main").show();
 		//jQuery('.modal-video-iframe').attr('allow', 'autoplay');
