@@ -219,29 +219,30 @@ function testimonial_slider()
 						<div>
                             <div class="testimonial-content d-flex">
                                 <!-- <div class="client-details text-dark-blue wow fadeIn" >
-                                    <?php if (get_field('image', $testimonial->ID)) { ?>
-                                            <img src="<?php echo the_field('image', $testimonial->ID); ?>" >
-                                    <?php } ?>
-                                    
+                                    <?php if (get_field('image', $testimonial->ID)) { 
+											$imageID = attachment_url_to_postid( get_field('image', $testimonial->ID) );
+											$alt_text = get_post_meta($imageID , '_wp_attachment_image_alt', true); ?>
+                                            <img src="<?php echo the_field('image', $testimonial->ID); ?>" alt="<?php echo $alt_text; ?>">
+                                    <?php } ?>                                    
                                 </div> -->
                                 <div class="short-decoration">
-                                       <p class="p2 wow fadeInUp"  data-wow-delay="0.9s">
-                                   <?php                                  
-                                   $testimonialContent = $testimonial->post_content;
-                                    echo wp_trim_words( $testimonial->post_content, 250 );
-                                   ?>
+                                    <p class="p2 wow fadeInUp"  data-wow-delay="0.9s">
+										   <?php                                  
+										   $testimonialContent = $testimonial->post_content;
+											echo wp_trim_words( $testimonial->post_content, 250 );
+										   ?>
                                    </p>
                                     <h3 class="p1 wow fadeInUp" data-wow-delay="0.3s" ><?php echo $testimonial->post_title;?></h3>
-                                    <div class="designation wow fadeInUp"  data-wow-delay="0.6s"><?php if (get_field('designation', $testimonial->ID)) {
+                                    <div class="designation wow fadeInUp"  data-wow-delay="0.6s">
+										<?php if (get_field('designation', $testimonial->ID)) {
                                             echo the_field('designation', $testimonial->ID);
-                                        }?></div>                                    
-
+                                        } ?>
+									</div>
                                 </div>                                   
                             </div>
 						</div>
                        <?php endforeach;?>
-                    </div>
-                
+                    </div>                
             </div>
         </section>
 		<script>
