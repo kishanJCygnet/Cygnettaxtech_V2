@@ -20,8 +20,7 @@
 												<?php endif; ?>
 												<?php if (get_sub_field('title')) :  ?>
 													<h1 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('title'); ?></h1>												
-												<?php endif; ?>
-												
+												<?php endif; ?>												
 												<?php if (get_sub_field('sub_sub_title')) :  ?>
 													<div class="text-white wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('sub_sub_title'); ?></div>
 												<?php endif; ?>
