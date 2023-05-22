@@ -264,6 +264,8 @@
 				$('.setting-content').hide();
 				var activeTab = $(this).find('a').attr('href');
 				$(activeTab).show();
+				// Trigger resize event to fix scroll issue in the API tab.
+				$(document).trigger('resize');
 				return false;
 			});
 
@@ -3567,9 +3569,9 @@
 				// Create the media frame.
 				wp.media.frames.ig_es_attachments = wp.media({
 					// Set the title of the modal.
-					title: es_admin_data.i18n_data.add_attachment_text,
+					title: ig_es_js_data.i18n_data.add_attachment_text,
 					button: {
-						text: es_admin_data.i18n_data.add_attachment_text,
+						text: ig_es_js_data.i18n_data.add_attachment_text,
 					},
 					multiple: false,
 					states: [

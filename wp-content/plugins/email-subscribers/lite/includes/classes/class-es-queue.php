@@ -841,10 +841,13 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 								update_option( 'ig_es_last_cron_run', time() );
 
 							} else {
-								$response['es_remaining_email_count'] = 0;
-								$response['message']                  = 'EMAILS_NOT_FOUND';
-								$response['status']                   = 'SUCCESS';
-								ES_DB_Mailing_Queue::update_sent_status( $notification_guid, 'Sent' );
+								$pending_emails = ES_DB_Sending_Queue::get_total_emails_to_be_sent_by_hash( $notification_guid );
+								if ( empty( $pending_emails ) ) {
+									$response['es_remaining_email_count'] = 0;
+									$response['message']                  = 'EMAILS_NOT_FOUND';
+									$response['status']                   = 'SUCCESS';
+									ES_DB_Mailing_Queue::update_sent_status( $notification_guid, 'Sent' );
+								}
 							}
 
 							$this->unlock_cron_job( $cron_job );

@@ -6,7 +6,7 @@ Tags: email marketing, subscription, autoresponder, post notification, welcome e
 Requires at least: 3.9
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 5.6.5
+Stable tag: 5.6.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses
 
@@ -447,14 +447,21 @@ Refer [here](https://www.icegram.com/documentation/es-faq/).
 
 == Upgrade Notice ==
 
-= 5.6.5 =
+= 5.6.6 =
 
-* New: Send emails on subscriber birthdays/anniversaries [MAX]
-* New: Add preheader text to emails
-* Fix: Accessibility issue in the subscription form
-* Fix: Issue with email sending when using Sendgrid [MAX]
+* New: Optimize emails sending time based on subscriber's previous average email open time [MAX]
+* Fix: Extra label in the subscription form
+* Fix: Category reset issue in the post notification campaign
+* Fix: JavaScript error while setting template preview image
 
 == Changelog ==
+
+**5.6.6 (17.05.2023)**
+
+* New: Optimize emails sending time based on subscriber's previous average email open time [MAX]
+* Fix: Extra label in the subscription form
+* Fix: Category reset issue in the post notification campaign
+* Fix: JavaScript error while setting template preview image
 
 **5.6.5 (09.05.2023)**
 
