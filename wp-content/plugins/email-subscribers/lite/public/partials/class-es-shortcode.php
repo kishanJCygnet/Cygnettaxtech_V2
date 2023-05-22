@@ -380,7 +380,7 @@ class ES_Shortcode {
 			<input type="hidden" name="esfpx_es_email_page_url" value="' . $current_page_url . '"/>
 			<input type="hidden" name="esfpx_status" value="Unconfirmed"/>
 			<input type="hidden" name="esfpx_es-subscribe" id="es-subscribe-' . $unique_id . '" value="' . $nonce . '"/>
-			<label style="' . $hp_style . '" aria-hidden="true">' . __( 'Please leave this field empty.', 'email-subscribers' ) . '<input type="email" name="esfpx_es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>';
+			<label style="' . $hp_style . '" aria-hidden="true"><span hidden>' . __( 'Please leave this field empty.', 'email-subscribers' ) . '</span><input type="email" name="esfpx_es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>';
 
 			$spinner_image_path = ES_PLUGIN_URL . 'lite/public/images/spinner.gif';
 

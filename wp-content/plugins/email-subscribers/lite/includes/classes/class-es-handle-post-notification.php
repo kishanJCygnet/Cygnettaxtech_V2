@@ -341,7 +341,7 @@ class ES_Handle_Post_Notification {
 			$post_link_with_title = "<a href='" . $post_link . "' target='_blank'>" . $post_title . '</a>';
 			$es_templ_body        = str_replace( '{{POSTLINK-WITHTITLE}}', $post_link_with_title, $es_templ_body );
 			$es_templ_body        = str_replace( '{{post.link_with_title}}', $post_link_with_title, $es_templ_body );
-			$post_link            = "<a href='" . $post_link . "' target='_blank'>" . $post_link . '</a>';
+			$post_link            = "<a href='" . urldecode( $post_link ) . "' target='_blank'>" . urldecode( $post_link ) . '</a>';
 		}
 		$es_templ_body = str_replace( '{{POSTLINK}}', $post_link, $es_templ_body );
 		$es_templ_body = str_replace( '{{post.link}}', $post_link, $es_templ_body );

@@ -389,21 +389,65 @@ class ES_DB_Sending_Queue {
 			$queue_opened_at,
 		);
 
+		$send_at_query = '';
 		if ($send_immediately) {
 			$send_at_query = $wpbd->prepare('%s AS `send_at`', array($current_utc_time));
 		} else {
-			$send_at_query = $wpbd->prepare("
-			CASE 
-				WHEN `timezone` IS null THEN %s
-		        ELSE 
-		            CASE
-		                WHEN CONVERT_TZ(%s,`timezone`,'+0:00') < %s THEN DATE_ADD(CONVERT_TZ(%s,`timezone`,'+0:00'), INTERVAL 86400 SECOND)
-		                ELSE CONVERT_TZ(%s,`timezone`,'+0:00')
-		            END
-		    END AS `send_at`
-			", array($scheduled_utc_time,$schedule_base_time,$current_utc_time,$schedule_base_time,$schedule_base_time));
+			if ( ES()->is_pro() ) {
+				$is_optimzation_enabled = ES_Email_Send_Time_Optimizer::is_optimizer_enabled();
+				if ( $is_optimzation_enabled ) {
+					$optimization_method = ES_Email_Send_Time_Optimizer::get_optimization_method();
+					if ( 'subscriber_average_open_time' === $optimization_method ) {
+						$send_at_query = $wpbd->prepare('
+						CASE 
+							WHEN `average_opened_at` IS null THEN %s
+							ELSE 
+								CASE
+									WHEN DATE_ADD(DATE(%s), INTERVAL `average_opened_at` HOUR_SECOND) < %s THEN DATE_ADD(DATE_ADD(DATE(%s),INTERVAL `average_opened_at` HOUR_SECOND), INTERVAL 86400 SECOND)
+									ELSE DATE_ADD(DATE(%s),INTERVAL `average_opened_at` HOUR_SECOND)
+								END
+						END AS `send_at`
+						', array($scheduled_utc_time,$schedule_base_time,$current_utc_time,$schedule_base_time,$schedule_base_time));
+					} else {
+						$send_at_query = $wpbd->prepare("
+						CASE 
+							WHEN `timezone` IS null THEN %s
+							ELSE 
+								CASE
+									WHEN CONVERT_TZ(%s,`timezone`,'+0:00') < %s THEN DATE_ADD(CONVERT_TZ(%s,`timezone`,'+0:00'), INTERVAL 86400 SECOND)
+									ELSE CONVERT_TZ(%s,`timezone`,'+0:00')
+								END
+						END AS `send_at`
+						", array($scheduled_utc_time,$schedule_base_time,$current_utc_time,$schedule_base_time,$schedule_base_time));
+					}
+				}
+			}
 		}
 
+		if ( empty( $send_at_query ) ) {
+			$send_at_query = $wpbd->prepare('%s AS `send_at`', array($current_utc_time));
+		}
+		
+		$query = $wpbd->prepare(
+			"SELECT 
+				%d AS `mailing_queue_id`,
+				%s AS `mailing_queue_hash`,
+				%d AS `campaign_id`,
+				MAX(`ig_contacts`.`id`) AS `contact_id`,
+				MAX(`ig_contacts`.`hash`) AS `contact_hash`,
+				`ig_contacts`.`email` AS `email`,
+				%s AS `status`,
+				%s AS `links`,
+				%d AS `opened`,
+				%s AS `sent_at`,
+				%s AS `opened_at`,
+				   {$send_at_query}
+			FROM `{$wpbd->prefix}ig_contacts` AS `ig_contacts` 
+			WHERE id IN ( " . $sql_query . ')
+			GROUP BY `ig_contacts`.`email`',
+			$query_args
+		);
+		
 		$total_contacts_added = $wpbd->query(
 			$wpbd->prepare(
 				"INSERT INTO `{$wpbd->prefix}ig_sending_queue` 
