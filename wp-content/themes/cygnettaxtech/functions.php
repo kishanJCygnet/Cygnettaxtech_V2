@@ -208,12 +208,22 @@ function testimonial_slider()
 	
     if ($testimonials && count($testimonials) > 0) :?>
         <section class="testimonial-section <?php echo the_sub_field('testimonials_section_custom_class'); ?>">
-            <div class="container">                
-				<?php if (get_field('testimonial_title', 'option')) : ?>
+            <div class="container">
+				<div class="title-heading">
+					<?php if (get_sub_field('testimonials_title')){ ?>
+						<h2 class="wow fadeInUp" data-wow-offset="50"><?php echo the_sub_field('testimonials_title'); ?>
+							<span class="heading-border"></span>
+						</h2>
+					<?php } ?>
+					<?php if (get_sub_field('testimonials_sub_title')){ ?>
+						<h3 class="wow fadeInUp" data-wow-offset="50"><?php echo the_sub_field('testimonials_sub_title'); ?></h3>
+					<?php } ?>
+				</div>
+				<?php /*if (get_field('testimonial_title', 'option')) : ?>
 					<div class="title-heading">
 						<h2 class="wow fadeInUp" data-wow-offset="50"><?php echo the_field('testimonial_title', 'option'); ?> <span class="heading-border"></span></h2>
 					</div>
-				<?php endif; ?>                  
+				<?php endif; */ ?>                  
                     <div class="testimonial-slider">
                        <?php foreach ($testimonials as $testimonial) :?>
 						<div>
