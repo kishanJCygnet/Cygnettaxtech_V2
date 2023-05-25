@@ -92,7 +92,7 @@ function aboutheading(){
   jQuery('.about-pill-section .container .title-heading').css('min-width', titleMarg);
   jQuery('.wholesome-solutions .title-heading').css({'margin-left': titleMargLeft, 'padding-left': addWidthLeft });
   jQuery('.we-are-proud .title-heading').css({'margin-left': titleMargLeft});
-  jQuery('.we-are-proud .title-heading h2').css({'padding-left': addWidthLeft + 150});
+  jQuery('.we-are-proud .title-heading h2').css({'padding-left': addWidthLeft + 280});
 }
 
 jQuery(document).ready(function(){

@@ -148,9 +148,13 @@
 				<?php } ?>
 				<?php echo $post->post_title; ?>
 			</div>
-			<div class="sticky-right-cls">
-				<?php echo $string = '<ul>'. $childpages . '</ul>';	?>
+			<div class="sticky-right-cls dropup">			
+			<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				Solutions
+				<span class="caret"></span></button>
+				<?php echo $string = '<ul class="dropdown-menu">'. $childpages . '</ul>';	?>
 			</div>
+			
 		</div>
 	<?php } ?>
 	<!-- End Breadcrumb with link section -->
