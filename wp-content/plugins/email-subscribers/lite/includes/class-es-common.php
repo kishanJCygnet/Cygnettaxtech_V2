@@ -702,7 +702,13 @@ class ES_Common {
 		if ( ! is_array( $category_names ) ) {
 			$category_names = array();
 		}
-		$checked_selected = in_array( 'selected_cat', $category_names, true ) ? "checked='checked'" : '';
+
+		// By default select All Categories option.
+		if ( empty( $category_names ) ) {
+			$category_names = array( 'All' );
+		}
+
+		$checked_selected = ! array_intersect( array( 'All', 'None' ), $category_names ) ? "checked='checked'" : '';
 		$category_html    = '<tr><td style="padding-top:4px;padding-bottom:4px;padding-right:10px;" ><span class="block pr-4 text-sm font-normal text-gray-600 pb-1"><input class="es-note-category-parent form-radio text-indigo-600" type="radio" ' . esc_attr( $checked_selected ) . ' value="selected_cat"  name="campaign_data[es_note_cat_parent]">' . __(
 			'Select Categories',
 			'email-subscribers'
@@ -717,7 +723,7 @@ class ES_Common {
 
 			$category_html .= '<tr class="es-note-child-category"><td style="padding-top:4px;padding-bottom:4px;padding-right:10px;"><span class="block pr-4 text-sm font-normal text-gray-600 pb-1"><input type="checkbox" class="form-checkbox" ' . esc_attr( $checked ) . ' value="' . esc_attr( $category->term_id ) . '" id="es_note_cat[]" name="campaign_data[es_note_cat][]">' . esc_html( $category->name ) . '</td></tr>';
 		}
-		$checked_all = ! array_intersect( array( 'selected_cat', 'None' ), $category_names ) ? "checked='checked'" : '';
+		$checked_all = in_array( 'All', $category_names ) ? "checked='checked'" : '';
 		$all_html    = '<tr><td style="padding-top:4px;padding-bottom:4px;padding-right:10px;"><span class="block pr-4 text-sm font-normal text-gray-600 pb-1"><input type="radio" class="form-radio text-indigo-600 es-note-category-parent"  ' . esc_attr( $checked_all ) . ' value="{a}All{a}"  name="campaign_data[es_note_cat_parent]">' . __(
 			'All Categories (Also include all categories which will create later)',
 			'email-subscribers'
@@ -3006,5 +3012,17 @@ class ES_Common {
 	public static function get_plugin_installation_date() {
 		$installation_date = get_option( 'ig_es_installed_on' );
 		return $installation_date;
+	}
+
+	public static function get_gmt_timestamp_from_day_and_time( $day_and_time ) {
+		try {
+			$date                   = new DateTime( $day_and_time );
+			$scheduled_datetime     = $date->format( 'Y-m-d h:i:s A' );
+			$scheduled_datetime_gmt = get_gmt_from_date( $scheduled_datetime );
+
+			return strtotime( $scheduled_datetime_gmt );
+		} catch ( Exception $e ) {
+			return null;
+		}
 	}
 }

@@ -236,6 +236,8 @@ class Email_Subscribers_Admin {
 				'confirm_select_all'			  => esc_html__('Want to select contacts on all pages?', 'email-subscribers'),
 
 				'ess_fallback_text'               => esc_html__('Automatically fallback to selected Sender after crossing Icegram Email Sending Service daily limits.', 'email-subscribers'),
+
+				'add_attachment_text'             => __( 'Add Attachment', 'email-subscribers' ),
 			),
 			'is_pro'     => ES()->is_pro() ? true : false,
 			'is_premium' => ES()->is_premium(),

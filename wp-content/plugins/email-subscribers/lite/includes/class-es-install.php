@@ -309,6 +309,11 @@ if ( ! class_exists( 'ES_Install' ) ) {
 				'ig_es_update_563_enable_newsletter_summary_automation',
 				'ig_es_update_563_db_version',
 			),
+			'5.6.6' => array(
+				'ig_es_add_average_opened_at_to_contacts_table',
+				'ig_es_migrate_customer_timezone_settings',
+				'ig_es_update_566_db_version'
+			),
 		);
 
 		/**
@@ -1099,6 +1104,7 @@ if ( ! class_exists( 'ES_Install' ) ) {
 				`unsubscribed` tinyint(1) NOT NULL DEFAULT '0',
 				`hash` varchar(50) DEFAULT NULL,
 				`engagement_score` float DEFAULT NULL,
+				`average_opened_at` TIME DEFAULT NULL,
 				`created_at` datetime DEFAULT NULL,
 				`updated_at` datetime DEFAULT NULL,
 				`is_verified` tinyint(1) DEFAULT '0',

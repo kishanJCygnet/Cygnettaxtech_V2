@@ -20,8 +20,7 @@
 												<?php endif; ?>
 												<?php if (get_sub_field('title')) :  ?>
 													<h1 class="wow fadeInUp" data-wow-delay="0.3s"><?php echo the_sub_field('title'); ?></h1>												
-												<?php endif; ?>
-												
+												<?php endif; ?>												
 												<?php if (get_sub_field('sub_sub_title')) :  ?>
 													<div class="text-white wow fadeInUp" data-wow-delay="0.9s"><?php echo the_sub_field('sub_sub_title'); ?></div>
 												<?php endif; ?>
@@ -306,8 +305,10 @@
 								</div>
 								<div class="col-right">
 									<div class="two-inner-image-content">
-										<?php if (get_sub_field('image')){ ?>
-											<img src="<?php echo the_sub_field('image'); ?>"  alt="image" class="wow fadeIn" data-wow-delay="0.3s">
+										<?php if (get_sub_field('image')){ 
+										$twoimageID = attachment_url_to_postid( get_sub_field('image') );
+										$two_alt_text = get_post_meta($twoimageID , '_wp_attachment_image_alt', true); ?>
+											<img src="<?php echo the_sub_field('image'); ?>"  alt="<?php echo $two_alt_text; ?>" class="wow fadeIn" data-wow-delay="0.3s">
 										<?php } ?>
 									</div>
 								</div>
@@ -446,14 +447,16 @@
 								<div class="client-logo-slider" id="<?php echo 'logo_slider_'.$logo_slider_cnt; ?>">
 								   <?php while (have_rows('logo_list')) : the_row(); ?>
 								   <div class="item">
-										<?php if (get_sub_field('logo_image')) { ?>											
+										<?php if (get_sub_field('logo_image')) { 
+										$imageID = attachment_url_to_postid( get_sub_field('logo_image') );
+										$alt_text = get_post_meta($imageID , '_wp_attachment_image_alt', true); ?>											
 											    	<!--<img src="<?php echo the_sub_field('logo_image'); ?>" alt="<?php echo the_sub_field('logo_title'); ?>" >-->
 													<?php $extension = pathinfo(get_sub_field('logo_image'), PATHINFO_EXTENSION);
 														if($extension == 'svg'){
 															$logo_image = get_sub_field('logo_image');
 															echo file_get_contents($logo_image);  
 														} else { ?>
-															<img src="<?php echo the_sub_field('logo_image'); ?>" alt="<?php echo the_sub_field('logo_title'); ?>" />
+															<img src="<?php echo the_sub_field('logo_image'); ?>" alt="<?php echo $alt_text; ?>" />
 													<?php } ?>							
 										<?php } ?>		
 														</div>								
@@ -622,9 +625,11 @@
 									<div class="col-md-4">
 										<div class="d-flex align-items-center h-100">											
 											<div class="title-heading text-start">												
-												<?php if (get_sub_field('column_image')){ ?>
+												<?php if (get_sub_field('column_image')){ 
+												$threeimageID = attachment_url_to_postid( get_sub_field('column_image') );
+												$three_alt_text = get_post_meta($threeimageID , '_wp_attachment_image_alt', true);?>
 													<div class="">
-														<img src="<?php echo the_sub_field('column_image'); ?>" alt="<?php echo the_sub_field('column_title'); ?>">
+														<img src="<?php echo the_sub_field('column_image'); ?>" alt="<?php echo $three_alt_text; ?>">
 													</div>
 												<?php } ?>
 												<?php if (get_sub_field('column_title')){ ?>
@@ -698,9 +703,11 @@
 								<h3><?php echo the_sub_field('sub_title'); ?></h3>
 							<?php } ?>
 						</div>
-						<?php if (get_sub_field('icon_box_top_image')){ ?>
+						<?php if (get_sub_field('icon_box_top_image')){ 
+						$iconimageID = attachment_url_to_postid( get_sub_field('icon_box_top_image') );
+						$icon_alt_text = get_post_meta($iconimageID , '_wp_attachment_image_alt', true); ?>
 							<div class="icon-box-top-image">
-								<img src="<?php echo the_sub_field('icon_box_top_image'); ?>" alt="<?php echo the_sub_field('title'); ?>">
+								<img src="<?php echo the_sub_field('icon_box_top_image'); ?>" alt="<?php echo $icon_alt_text; ?>">
 							</div>
 						<?php } ?>
 						<?php 
@@ -804,9 +811,11 @@
 			<section class="accordion_section faq-accordian" <?php echo $slugid; ?>>
 				<div class="container">
 					<div class="title-heading">
-						<?php if (get_sub_field('accordion_image')){ ?>
+						<?php if (get_sub_field('accordion_image')){ 
+						$accimageID = attachment_url_to_postid( get_sub_field('accordion_image') );
+						$acc_alt_text = get_post_meta($accimageID , '_wp_attachment_image_alt', true); ?>
 							<div class="icon">
-								<img src="<?php echo the_sub_field('accordion_image'); ?>" alt="<?php echo the_sub_field('accordion_title'); ?>" />
+								<img src="<?php echo the_sub_field('accordion_image'); ?>" alt="<?php echo $acc_alt_text; ?>" />
 							</div>
 						<?php } ?>
 						<?php if (get_sub_field('accordion_title')){ ?>
@@ -873,9 +882,11 @@
 									<div class="col-md-12">
 										<div class="content">											
 											<div class="title text-start">												
-												<?php if (get_sub_field('tab_icon')){ ?>
+												<?php if (get_sub_field('tab_icon')){ 
+												$tabimageID = attachment_url_to_postid( get_sub_field('tab_icon') );
+												$tab_alt_text = get_post_meta($tabimageID , '_wp_attachment_image_alt', true); ?>
 													<div class="">
-														<img src="<?php echo the_sub_field('tab_icon'); ?>" alt="<?php echo the_sub_field('tab_title'); ?>">
+														<img src="<?php echo the_sub_field('tab_icon'); ?>" alt="<?php echo $tab_alt_text; ?>">
 													</div>
 												<?php } ?>
 												<?php if (get_sub_field('tab_title')){ ?>
@@ -936,9 +947,11 @@
 									<div class="address-inner-content">
 										<div class="address-inner-div">
 											<div class="address-top-section <?php echo the_sub_field('address_class'); ?>">
-												<?php if(get_sub_field('country_icon')) { ?>
+												<?php if(get_sub_field('country_icon')) { 
+												$couimageID = attachment_url_to_postid( get_sub_field('country_icon') );
+												$cou_alt_text = get_post_meta($couimageID , '_wp_attachment_image_alt', true); ?>
 													<div class="country-icon">
-														<img src="<?php echo the_sub_field('country_icon'); ?>" alt="<?php echo the_sub_field('country_name'); ?>" />
+														<img src="<?php echo the_sub_field('country_icon'); ?>" alt="<?php echo $cou_alt_text; ?>" />
 													</div>
 												<?php } ?>
 												<?php if(get_sub_field('country_name')) { ?>
@@ -1039,9 +1052,11 @@
 										</div>
 										<div class="img-content">
 											<div class="solusition-slider">
-												<?php while (have_rows('our_solution_image_gallery')) : the_row(); ?>
+												<?php while (have_rows('our_solution_image_gallery')) : the_row(); 
+												$solimageID = attachment_url_to_postid( get_sub_field('our_solution_image_gallery') );
+												$sol_alt_text = get_post_meta($solimageID , '_wp_attachment_image_alt', true); ?>
 													 <div>
-															<img src="<?php echo the_sub_field('our_solution_image'); ?>" alt="" />
+														<img src="<?php echo the_sub_field('our_solution_image'); ?>" alt="<?php echo $sol_alt_text; ?>" />
 													 </div>
 												<?php endwhile; ?>
 											</div>

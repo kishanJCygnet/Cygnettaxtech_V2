@@ -208,40 +208,51 @@ function testimonial_slider()
 	
     if ($testimonials && count($testimonials) > 0) :?>
         <section class="testimonial-section <?php echo the_sub_field('testimonials_section_custom_class'); ?>">
-            <div class="container">                
-				<?php if (get_field('testimonial_title', 'option')) : ?>
+            <div class="container">
+				<div class="title-heading">
+					<?php if (get_sub_field('testimonials_title')){ ?>
+						<h2 class="wow fadeInUp" data-wow-offset="50"><?php echo the_sub_field('testimonials_title'); ?>
+							<span class="heading-border"></span>
+						</h2>
+					<?php } ?>
+					<?php if (get_sub_field('testimonials_sub_title')){ ?>
+						<h3 class="wow fadeInUp" data-wow-offset="50"><?php echo the_sub_field('testimonials_sub_title'); ?></h3>
+					<?php } ?>
+				</div>
+				<?php /*if (get_field('testimonial_title', 'option')) : ?>
 					<div class="title-heading">
 						<h2 class="wow fadeInUp" data-wow-offset="50"><?php echo the_field('testimonial_title', 'option'); ?> <span class="heading-border"></span></h2>
 					</div>
-				<?php endif; ?>                  
+				<?php endif; */ ?>                  
                     <div class="testimonial-slider">
                        <?php foreach ($testimonials as $testimonial) :?>
 						<div>
                             <div class="testimonial-content d-flex">
                                 <!-- <div class="client-details text-dark-blue wow fadeIn" >
-                                    <?php if (get_field('image', $testimonial->ID)) { ?>
-                                            <img src="<?php echo the_field('image', $testimonial->ID); ?>" >
-                                    <?php } ?>
-                                    
+                                    <?php if (get_field('image', $testimonial->ID)) { 
+											$imageID = attachment_url_to_postid( get_field('image', $testimonial->ID) );
+											$alt_text = get_post_meta($imageID , '_wp_attachment_image_alt', true); ?>
+                                            <img src="<?php echo the_field('image', $testimonial->ID); ?>" alt="<?php echo $alt_text; ?>">
+                                    <?php } ?>                                    
                                 </div> -->
                                 <div class="short-decoration">
-                                       <p class="p2 wow fadeInUp"  data-wow-delay="0.9s">
-                                   <?php                                  
-                                   $testimonialContent = $testimonial->post_content;
-                                    echo wp_trim_words( $testimonial->post_content, 250 );
-                                   ?>
+                                    <p class="p2 wow fadeInUp"  data-wow-delay="0.9s">
+										   <?php                                  
+										   $testimonialContent = $testimonial->post_content;
+											echo wp_trim_words( $testimonial->post_content, 250 );
+										   ?>
                                    </p>
                                     <h3 class="p1 wow fadeInUp" data-wow-delay="0.3s" ><?php echo $testimonial->post_title;?></h3>
-                                    <div class="designation wow fadeInUp"  data-wow-delay="0.6s"><?php if (get_field('designation', $testimonial->ID)) {
+                                    <div class="designation wow fadeInUp"  data-wow-delay="0.6s">
+										<?php if (get_field('designation', $testimonial->ID)) {
                                             echo the_field('designation', $testimonial->ID);
-                                        }?></div>                                    
-
+                                        } ?>
+									</div>
                                 </div>                                   
                             </div>
 						</div>
                        <?php endforeach;?>
-                    </div>
-                
+                    </div>                
             </div>
         </section>
 		<script>

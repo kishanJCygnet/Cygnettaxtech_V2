@@ -2003,3 +2003,47 @@ function ig_es_update_563_db_version() {
 }
 
 /* --------------------- ES 5.6.3(End)--------------------------- */
+
+/* --------------------- ES 5.6.4(Start)--------------------------- */
+
+/**
+ * Add engagement_score column to contacts table
+ *
+ * @since 5.6.6
+ */
+function ig_es_add_average_opened_at_to_contacts_table() {
+	global $wpdb;
+
+	$cols = $wpdb->get_col( "SHOW COLUMNS FROM {$wpdb->prefix}ig_contacts" );
+
+	if ( ! in_array( 'average_opened_at', $cols, true ) ) {
+		$wpdb->query(
+			"ALTER TABLE {$wpdb->prefix}ig_contacts
+			ADD COLUMN `average_opened_at` TIME NULL AFTER `engagement_score`"
+		);
+	}
+}
+
+/**
+ * Migrate customer timezone settings to send time optimzer setting
+ *
+ * @since 5.6.6
+ */
+function ig_es_migrate_customer_timezone_settings() {
+	$ig_es_enable_sending_mails_in_customer_timezone = get_option( 'ig_es_enable_sending_mails_in_customer_timezone', 'no' );
+	if ( 'yes' === $ig_es_enable_sending_mails_in_customer_timezone ) {
+		update_option( 'ig_es_send_time_optimizer_enabled', 'yes', false );
+		update_option( 'ig_es_send_time_optimization_method', 'subscriber_timezone', false );
+	}
+}
+
+/**
+ * Update DB version
+ *
+ * @since 5.6.6
+ */
+function ig_es_update_566_db_version() {
+	ES_Install::update_db_version( '5.6.6' );
+}
+
+/* --------------------- ES 5.6.3(End)--------------------------- */
