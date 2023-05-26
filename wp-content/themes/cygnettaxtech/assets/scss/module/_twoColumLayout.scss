@@ -123,13 +123,12 @@
     box-shadow: 0px 8px 16px #00000029;
     border-radius: 8px;
     padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .two-about-section {
-    .blue-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+   
     .client-data {
         text-align: center;
         h4 {

@@ -1207,3 +1207,94 @@ p {
 .pb-250{
     padding-bottom: 250px;
 }
+.pb-160{
+    padding-bottom: 160px;
+}
+.idp-invoice{
+    .idp-content{
+        display: flex;
+
+        .blue-box{
+            width: 264px;
+            padding: 30px;
+            .inner-content{
+                text-align: center;
+                color: #fff;
+                h2{
+                    margin-bottom: 15px;
+                    font-size: 32px;
+                    span{
+                        color: #60D6D6;
+                    }
+                }
+               
+            }
+        }
+        .left{
+            width: calc(100% - 264px);
+            padding-right: 30px;
+            .idp-list-cn{
+                background-color: #F1F3F6;
+                border-radius: 8px;
+                padding: 30px;
+                h2{
+                    font-size: 32px;
+                    color: #0c3761;
+                    margin-bottom: 30px;
+                    span{
+                        color: #009999;
+                    }
+                }
+
+                ul{
+                    padding-left: 0;
+                    list-style-type: none;
+                    li{
+                        background-color: #fff;
+                        border-radius: 8px;
+                        padding: 20px;
+                        margin-bottom: 10px;
+                        font-size: 18px;
+                        color: #0c3761;
+                        font-weight: 500;
+                        line-height: 28px;                       
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        & > span{
+                            min-width: 48px;
+                            height: 48px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            
+                            background: #0F3764 0% 0% no-repeat padding-box;
+                            box-shadow: 0px 8px 16px #00000029;
+                            border-radius: 8px;
+                            color: #fff;
+                            margin-right: 20px;
+                        }
+                        &:nth-child(2){
+                            span{
+                             background-color: #60D6D6;
+                            }
+                        }
+                        &:last-child{
+                            margin-bottom: 0;
+                            span{
+                                background-color: #009999;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.process-sec-cta{
+    padding: 0 !important;
+    height: 0;
+    .btn{
+        margin-top: -188px;
+    }
+}
