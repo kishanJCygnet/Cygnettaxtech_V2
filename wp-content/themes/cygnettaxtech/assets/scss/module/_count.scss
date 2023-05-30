@@ -29,6 +29,9 @@
             border-radius: 8px;
             padding: 0px 60px 18px;
             height: 100%;
+            @include bp(lg-max){
+                padding: 0px 15px 18px;
+            }
         }
         .icon{
             background: transparent linear-gradient(135deg, #60D6D6 0%, #009999 100%) 0% 0% no-repeat padding-box;
@@ -50,6 +53,11 @@
         }
         .count-label{
             margin-bottom: 7px;
+            h2{
+                @include bp(lg-max){
+                    font-size: 28px;
+                }
+            }
         }
         .count-value{
                 font-size: 14px;
@@ -71,7 +79,7 @@
                 font-size: 48px;
                 line-height: 60px;
                 span{
-                    color: #60D6D6  ;
+                    color: #60D6D6;
                 }
             }
         }

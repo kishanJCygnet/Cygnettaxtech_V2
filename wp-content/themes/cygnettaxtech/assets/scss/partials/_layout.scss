@@ -215,7 +215,7 @@ body {
         padding: 0 15px;
         h2 {
             color: #0c3761;
-            font-size: 32px;
+            font-size: 48px;
             padding-bottom: 20px;
             margin-bottom: 30px;
             line-height: 50px;
@@ -223,6 +223,12 @@ body {
             position: relative;
             font-weight: bold;
             font-family: $roboto;
+            @include bp(xl-max){
+                font-size: 42px;
+            }
+            @include bp(lg-max){
+                font-size: 36px;
+            }
             span {
                 font-weight: bold;
                 color: #009999;
@@ -819,7 +825,7 @@ p {
     padding-top: 0;
     .container {
         & > div {
-            padding-left: 380px;
+            padding-left: 450px;
         }
     }
     .title-heading {
@@ -839,6 +845,9 @@ p {
             position: relative;
             z-index: 1;
             color: #fff;
+            @include bp(xl-max){
+                padding: 40px 0; 
+            }
         }
     }
     .ins-img {
@@ -872,7 +881,6 @@ p {
             z-index: 1;
         }
     }
-
     &.about-facts {
         position: relative;
 
@@ -961,6 +969,9 @@ p {
             padding-bottom: 0;
             font-size: 48px;
             line-height: 60px;
+            @include bp(xl-max){
+                font-size: 42px;
+            }
         }
     }
     p {
