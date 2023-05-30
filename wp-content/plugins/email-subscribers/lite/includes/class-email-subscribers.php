@@ -827,6 +827,9 @@ if ( ! class_exists( 'Email_Subscribers' ) ) {
 				// pricing
 				'lite/includes/classes/class-email-subscribers-pricing.php',
 
+				// logs
+				'lite/includes/classes/class-email-subscribers-logs.php',
+
 				// Core Functions
 				'lite/includes/es-core-functions.php',
 
@@ -1259,6 +1262,7 @@ if ( ! class_exists( 'Email_Subscribers' ) ) {
 				"{$prefix}_page_es_newsletters",
 				"{$prefix}_page_es_notifications",
 				"{$prefix}_page_es_reports",
+				"{$prefix}_page_es_logs",
 				"{$prefix}_page_es_settings",
 				"{$prefix}_page_es_tools",
 				"{$prefix}_page_es_general_information",
@@ -1733,6 +1737,15 @@ if ( ! class_exists( 'Email_Subscribers' ) ) {
 
 					break;
 
+				case 'mailersend':
+					switch ( $key ) {
+						case 'api_token':
+							$return = defined( 'IG_ES_MAILERSEND_API_TOKEN' ) && IG_ES_MAILERSEND_API_TOKEN;
+							break;
+					}
+
+					break;
+
 				case 'sendinblue':
 					switch ( $key ) {
 						case 'api_token':
@@ -1869,6 +1882,15 @@ if ( ! class_exists( 'Email_Subscribers' ) ) {
 					switch ( $key ) {
 						case 'api_token':
 							$return = $this->is_const_defined( $group, $key ) ? IG_ES_POSTMARK_API_TOKEN : $value;
+							break;
+					}
+
+					break;
+
+				case 'mailersend':
+					switch ( $key ) {
+						case 'api_token':
+							$return = $this->is_const_defined( $group, $key ) ? IG_ES_MAILERSEND_API_TOKEN : $value;
 							break;
 					}
 
@@ -2020,6 +2042,15 @@ if ( ! class_exists( 'Email_Subscribers' ) ) {
 						switch ( $key ) {
 							case 'api_token':
 								$return = 'IG_ES_POSTMARK_API_TOKEN';
+								break;
+						}
+
+						break;
+
+					case 'mailersend':
+						switch ( $key ) {
+							case 'api_token':
+								$return = 'IG_ES_MAILERSEND_API_TOKEN';
 								break;
 						}
 

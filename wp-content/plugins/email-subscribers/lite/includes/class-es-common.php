@@ -1829,6 +1829,7 @@ class ES_Common {
 				'workflows',
 				'audience',
 				'reports',
+				'logs',
 				'forms',
 				'campaigns',
 				'sequences',
@@ -1912,9 +1913,9 @@ class ES_Common {
 
 			if ( ! ES()->is_premium() ) {
 				$articles_upsell[] = array(
-					'title'       => __( 'Icegram Express MAX', 'email-subscribers' ),
+					'title'       => __( 'Unlock all premium features', 'email-subscribers' ),
 					'link'        => $pricing_page_url,
-					'label'       => __( 'MAX', 'email-subscribers' ),
+					'label'       => __( '25% OFF', 'email-subscribers' ),
 					'label_class' => 'bg-green-100 text-green-800',
 				);
 			}

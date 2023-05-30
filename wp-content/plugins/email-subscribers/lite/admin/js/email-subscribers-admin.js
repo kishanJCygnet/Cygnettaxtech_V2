@@ -589,6 +589,9 @@
 			}
 
 
+			jQuery('#ig-es-log-files').ig_es_select2();
+		
+
 			// Broadcast Setttings
 			$('#ig_es_campaign_submit_button').attr("disabled", true);
 
@@ -2207,7 +2210,7 @@
 								$meta_box_footer.removeClass('hidden');
 							} else {
 								$meta_box_footer.addClass('hidden');
-								$rule_template_container.find('.ig-es-no-rules-message').clone().appendTo($rules_container)
+								$rule_template_container.find('.ig-es-no-rules-message').clone().appendTo($rules_container);
 							}
 						}
 

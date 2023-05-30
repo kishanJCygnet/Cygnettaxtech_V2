@@ -180,7 +180,7 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 	<main class="mx-auto max-w-7xl">
 
 		<section id="es-dashboard-stats" class="relative py-4 my-8 bg-white rounded-lg shadow md:flex md:items-start md:justify-between sm:px-4 sm:grid sm:grid-cols-3">
-			<div class="flex-auto min-w-0 es-w-50 pl-2">
+			<div class="flex-auto min-w-0 es-w-55 pl-2">
 				<p class="pb-3 text-lg font-medium leading-6 text-gray-400">
 					<span class="leading-7">
 						<?php
@@ -207,9 +207,9 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 				);
 				?>
 			</div>
-			<div class="flex-auto min-w-0 es-w-50 px-3">
+			<div class="flex-auto min-w-0 es-w-45 px-3">
 			<?php
-			if ( ES_Service_Email_Sending::is_onboarding_completed() ) {
+			if ( false && ES_Service_Email_Sending::is_onboarding_completed() ) {
 				$current_date        = ig_es_get_current_date();
 				$service_status      = ES_Service_Email_Sending::get_sending_service_status();
 				$ess_data            = get_option( 'ig_es_ess_data', array() );
@@ -243,11 +243,11 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 		</section>
 
 		<section id="es-sending-service" class="py-4 my-8 bg-white rounded-lg shadow md:flex md:items-start md:justify-between sm:px-4 sm:grid sm:grid-cols-2">
-		<div class="flex-auto min-w-0 es-w-25 px-3">
+		<div class="flex-auto min-w-0 es-w-35 px-2">
 				<?php
 				$countries_count = 5;
 				?>
-				<p class="px-3 text-lg font-medium leading-7 text-gray-400">
+				<p class="text-lg font-medium leading-7 text-gray-400">
 					<?php
 						/* Translators: %s. Country count */
 						echo sprintf( esc_html__( 'Top %s countries', 'email-subscribers' ), esc_html( $countries_count ) );
@@ -262,7 +262,7 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 						$pricing_url = ES_Common::get_utm_tracking_url( $utm_args );
 						?>
 						<a  target="_blank" href="<?php echo esc_url( $pricing_url ); ?>">
-							<span class="premium-icon inline-block"></span>
+							<span class="premium-icon inline-block max"></span>
 						</a>
 						<?php
 					}
@@ -272,7 +272,7 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 					do_action( 'ig_es_show_top_countries_stats', $countries_count );
 				?>
 			</div>
-			<div class="flex-auto min-w-0 es-w-35 pr-2">
+			<div class="flex-auto min-w-0 es-w-65 pr-2">
 				<p class="text-lg font-medium leading-6 text-gray-400">
 					<span class="leading-7">
 						<?php
@@ -287,7 +287,7 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 							$pricing_url = ES_Common::get_utm_tracking_url( $utm_args );
 							?>
 							<a  target="_blank" href="<?php echo esc_url( $pricing_url ); ?>">
-								<span class="premium-icon inline-block"></span>
+								<span class="premium-icon inline-block max"></span>
 							</a>
 							<?php
 						}
@@ -332,8 +332,8 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 		</section>
 
 		<section id="es-campaign-stats" class="pt-4 my-8 bg-white rounded-lg shadow md:flex md:items-start md:justify-between sm:px-4 sm:grid sm:grid-cols-2">
-			<div class="flex-auto min-w-0 es-w-65 pr-3">
-				<p class="px-3 text-lg font-medium leading-6 text-gray-400">
+			<div class="flex-auto min-w-0 es-w-65 px-2">
+				<p class="text-lg font-medium leading-6 text-gray-400">
 					<?php
 						echo esc_html__( 'Recent campaigns', 'email-subscribers' );
 					?>

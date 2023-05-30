@@ -320,9 +320,9 @@ class Addons extends CommonUtils\Addons {
 			'aioseo-image-seo'      => '1.1.7',
 			'aioseo-link-assistant' => '1.0.15',
 			'aioseo-local-business' => '1.2.16',
-			'aioseo-news-sitemap'   => '1.0.14',
+			'aioseo-news-sitemap'   => '1.0.15',
 			'aioseo-redirects'      => '1.2.10',
-			'aioseo-video-sitemap'  => '1.1.12',
+			'aioseo-video-sitemap'  => '1.1.13',
 			'aioseo-index-now'      => '1.0.10',
 			'aioseo-rest-api'       => '1.0.5'
 		];

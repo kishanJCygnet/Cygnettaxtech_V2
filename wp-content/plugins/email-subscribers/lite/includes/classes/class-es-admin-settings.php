@@ -718,7 +718,8 @@ class ES_Admin_Settings {
 				$html .= $field['name'];
 
 				if ( ! empty( $field['is_premium'] ) ) {
-					$html .= '</span><a class="ml-1" href="' . $field['link'] . '" target="_blank"><span class="premium-icon"></span></a>';
+					$premium_plan = isset( $field['plan'] ) ? $field['plan'] : '';
+					$html .= '</span><a class="ml-1" href="' . $field['link'] . '" target="_blank"><span class="premium-icon ' . $premium_plan . '"></span></a>';
 				}
 
 				// If there is help text
@@ -858,7 +859,8 @@ class ES_Admin_Settings {
 			. $mailer['name'] . '</p>';
 
 			if ( ! empty( $mailer['is_premium'] ) ) {
-				$html .= '<span class="premium-icon"></span>';
+				$plan = isset( $mailer['plan'] ) ? $mailer['plan'] : '';
+				$html .= '<span class="premium-icon ' . $plan . '"></span>';
 			}
 
 			$html .= '</div>';

@@ -490,7 +490,7 @@ class Email_Subscribers_Pricing {
 								<?php echo esc_html__( 'Default SMTP', 'email-subscribers' ); ?>
 							</td>
 							<td class="ig_es_pro_feature_name">
-								<?php echo esc_html__( 'Amazon SES, Mailgun, SendGrid, SparkPost, Postmark, Sendinblue & Mailjet.', 'email-subscribers' ); ?>
+								<?php echo esc_html__( 'Amazon SES, Mailgun, SendGrid, SparkPost, Postmark, Sendinblue, Mailjet & Mailersend.', 'email-subscribers' ); ?>
 							</td>
 						</tr>
 						<tr>

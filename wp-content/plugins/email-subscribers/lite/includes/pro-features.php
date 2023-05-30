@@ -65,6 +65,7 @@ function ig_es_mailers_promo( $mailers ) {
 			'name'       => 'SMTP',
 			'logo'       => ES_PLUGIN_URL . 'lite/admin/images/smtp.png',
 			'is_premium' => true,
+			'plan'       => 'pro',
 			'url'        => ES_Common::get_utm_tracking_url(
 			array(
 				'url'=>'https://www.icegram.com/documentation/how-to-configure-smtp-to-send-emails-in-email-subscribers-plugin/',
@@ -76,6 +77,7 @@ function ig_es_mailers_promo( $mailers ) {
 			'name'       => 'Gmail',
 			'logo'       => ES_PLUGIN_URL . 'lite/admin/images/gmail.png',
 			'is_premium' => true,
+			'plan'       => 'pro',
 			'url'        => ES_Common::get_utm_tracking_url(
 			array(
 				'url'=>'https://www.icegram.com/documentation/how-to-configure-gmail-to-send-emails-in-email-subscribers/',
@@ -92,6 +94,7 @@ function ig_es_mailers_promo( $mailers ) {
 				'name'       => 'Amazon SES',
 				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/aws.svg',
 				'is_premium' => true,
+				'plan'       => 'max',
 				'url'        => ES_Common::get_utm_tracking_url(
 					array(
 						'url'        => 'https://www.icegram.com/documentation/how-to-configure-amazon-ses-to-send-emails-in-the-email-subscribers-plugin/',
@@ -103,6 +106,7 @@ function ig_es_mailers_promo( $mailers ) {
 				'name'       => 'Mailgun',
 				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/mailgun.svg',
 				'is_premium' => true,
+				'plan'       => 'max',
 				'url'        => ES_Common::get_utm_tracking_url(
 					array(
 						'url'        => 'https://www.icegram.com/documentation/how-to-configure-mailgun-to-send-emails-in-the-email-subscribers-plugin/',
@@ -114,6 +118,7 @@ function ig_es_mailers_promo( $mailers ) {
 				'name'       => 'SendGrid',
 				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/sendgrid.svg',
 				'is_premium' => true,
+				'plan'       => 'max',
 				'url'        => ES_Common::get_utm_tracking_url(
 					array(
 						'url'        => 'https://www.icegram.com/documentation/how-to-configure-sendgrid-to-send-emails-in-the-email-subscribers-plugin/',
@@ -125,6 +130,7 @@ function ig_es_mailers_promo( $mailers ) {
 				'name'       => 'SparkPost',
 				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/sparkpost.png',
 				'is_premium' => true,
+				'plan'       => 'max',
 				'url'        => ES_Common::get_utm_tracking_url(
 					array(
 						'url'        => 'https://www.icegram.com/documentation/how-to-configure-sparkpost-to-send-emails-in-the-email-subscribers-plugin/',
@@ -136,6 +142,7 @@ function ig_es_mailers_promo( $mailers ) {
 				'name'       => 'Postmark',
 				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/postmark.png',
 				'is_premium' => true,
+				'plan'       => 'max',
 				'url'        => ES_Common::get_utm_tracking_url(
 					array(
 						'url'        => 'https://www.icegram.com/documentation/how-to-configure-postmark-to-send-emails-in-the-email-subscribers-plugin/',
@@ -147,6 +154,7 @@ function ig_es_mailers_promo( $mailers ) {
 				'name'       => 'Sendinblue',
 				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/sendinblue.png',
 				'is_premium' => true,
+				'plan'       => 'max',
 				'url'        => ES_Common::get_utm_tracking_url(
 					array(
 						'url'        => 'https://www.icegram.com/documentation/how-to-configure-sendinblue-to-send-emails-in-the-email-subscribers-plugin/',
@@ -158,10 +166,22 @@ function ig_es_mailers_promo( $mailers ) {
 				'name'       => 'Mailjet',
 				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/mailjet.png',
 				'is_premium' => true,
+				'plan'       => 'max',
 				'url'        => ES_Common::get_utm_tracking_url(
 					array(
 						'url'        => 'https://www.icegram.com/documentation/how-to-configure-mailjet-to-send-emails-in-the-email-subscribers-plugin/',
 						'utm_medium' => 'mailjet_mailer',
+					)
+				),
+			),
+			'Mailersend'   => array(
+				'name'       => 'Mailersend',
+				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/mailersend.svg',
+				'is_premium' => true,
+				'url'        => ES_Common::get_utm_tracking_url(
+					array(
+						'url'        => 'https://www.icegram.com/express/pricing/?utm_source=in_app&utm_medium=track_clicks&utm_campaign=es_upsell/',
+						'utm_medium' => 'mailersend_mailer',
 					)
 				),
 			),
@@ -305,6 +325,7 @@ function ig_es_add_upsale( $fields ) {
 				'type'          => 'checkbox',
 				'default'       => 'no',
 				'is_premium'    => true,
+				'plan'          => 'max',
 				'link'          => $premium_url,
 				'disabled'      => true,
 				/* translators: %s: Icegram Pricing page url with utm tracking */
@@ -325,6 +346,7 @@ function ig_es_add_upsale( $fields ) {
 					'type'       => 'checkbox',
 					'default'    => 'no',
 					'is_premium' => true,
+					'plan'       => 'max',
 					'link'       => ES_Common::get_utm_tracking_url( array(
 						'url'=>'https://www.icegram.com/documentation/how-to-add-utm-parameters-to-email/',
 						'utm_medium' => 'utm_tracking' ) ),
@@ -337,6 +359,7 @@ function ig_es_add_upsale( $fields ) {
 					'type'       => 'checkbox',
 					'default'    => 'no',
 					'is_premium' => true,
+					'plan'       => 'max',
 					'link'       => ES_Common::get_utm_tracking_url( array(
 						'url'		 => 'https://www.icegram.com/documentation/enabling-and-understanding-the-weekly-summary-report-in-the-email-subscribers/',
 						'utm_medium' => 'summary_automation' ) ),
@@ -360,6 +383,7 @@ function ig_es_add_upsale( $fields ) {
 				'type'       => 'checkbox',
 				'default'    => 'no',
 				'is_premium' => true,
+				'plan'       => 'pro',
 				'link'       => ES_Common::get_utm_tracking_url( array(
 					'url' => 'https://www.icegram.com/documentation/how-to-allow-user-to-select-list-while-unsubscribe/',
 					'utm_medium' => 'intermediate_unsubscribe_page' ) ),
@@ -391,6 +415,7 @@ function ig_es_add_upsale( $fields ) {
 					),
 				),
 				'is_premium' => true,
+				'plan'       => 'pro',
 				'link'       => ES_Common::get_utm_tracking_url( array( 'utm_medium' => 'opt_in_consent_text' ) ),
 				'disabled'   => true,
 			),
@@ -413,6 +438,7 @@ function ig_es_add_upsale( $fields ) {
 			'type'          => 'checkbox',
 			'default'       => 'no',
 			'is_premium'    => true,
+			'plan'          => 'pro',
 			'link'          => ES_Common::get_utm_tracking_url( array(
 				'url'=>'https://www.icegram.com/documentation/preventing-spammers/',
 				'utm_medium' => 'known_attackers' ) ),
@@ -429,6 +455,7 @@ function ig_es_add_upsale( $fields ) {
 			'type'       => 'checkbox',
 			'default'    => 'no',
 			'is_premium' => true,
+			'plan'       => 'pro',
 			'link'       => ES_Common::get_utm_tracking_url( array(
 				'url'=>'https://www.icegram.com/documentation/preventing-spammers/',
 				'utm_medium' => 'disposable_domains' ) ),
@@ -443,6 +470,7 @@ function ig_es_add_upsale( $fields ) {
 			'type'       => 'checkbox',
 			'default'    => 'no',
 			'is_premium' => true,
+			'plan'       => 'pro',
 			'link'       => $premium_url,
 			'disabled'   => true,
 		);
@@ -468,6 +496,7 @@ function ig_es_add_upsale( $fields ) {
 			'type'          => 'checkbox',
 			'default'       => 'no',
 			'is_premium'    => true,
+			'plan'          => 'max',
 			'link'          => ES_Common::get_utm_tracking_url( array( 'utm_medium' => 'ip_tracking' ) ),
 			'disabled'      => true,
 			/* translators: %s: Icegram Pricing page url with utm tracking */
@@ -942,7 +971,7 @@ function ig_es_add_captcha_option( $form_data ) {
 						<div class="ml-4 mr-8 mr-4 pt-4 mb-2">
 							<label for="tag-link" class="ml-4 text-sm font-medium text-gray-500 pb-2 cursor-default"><?php echo esc_html__( 'Enable Captcha', 'email-subscribers' ); ?>
 							<a href="<?php echo esc_url( $pricing_url ); ?>" target="_blank"  >
-								<span class="premium-icon"></span></a>
+								<span class="premium-icon max"></span></a>
 							</label>
 							<p class="italic text-xs text-gray-400 mt-2 ml-4 leading-snug pb-4 cursor-default"><?php esc_html_e( 'Show a captcha to protect from bot signups.', 'email-subscribers' ); ?></p>
 						</div>
@@ -1001,7 +1030,7 @@ function ig_es_additional_multilist_and_post_digest() {
 		<tr>
 				<th scope="row" class="w-3/12 text-left pr-3 -my-4">
 					<label for="tag-link" class="ml-6 text-sm font-medium text-gray-500 pb-2 cursor-default"><?php echo esc_html__( 'Is a post digest?', 'email-subscribers' ); ?></label>
-					<span class="premium-icon"></span>
+					<span class="premium-icon max"></span>
 					<p class="italic text-xs font-normal text-gray-400 mt-2 ml-6 leading-snug">
 					<?php echo esc_html__( 'Schedule one notification email for multiple posts', 'email-subscribers' ); ?>
 					</p>
@@ -1021,7 +1050,7 @@ function ig_es_additional_multilist_and_post_digest() {
 				<tr class="es_post_digest border-b border-gray-100 pt-3">
 					<th scope="row" class="text-left">
 						<label class="ml-6 text-sm font-medium text-gray-500 pb-2 cursor-default"><?php echo esc_html__( 'Schedules at', 'email-subscribers' ); ?></label>
-						<span class="premium-icon"></span>
+						<span class="premium-icon max"></span>
 							<p class="italic text-xs font-normal text-gray-400 mt-2 ml-6 leading-snug"><?php echo esc_html__( 'When to send?', 'email-subscribers' ); ?></p></label>
 						</th>
 						<td>
@@ -1059,7 +1088,7 @@ function ig_es_upsale_post_digest() {
 				<div class="w-11/12 text-sm font-normal text-gray-600">
 					<?php echo esc_html__( 'Is a post digest?', 'email-subscribers' ); ?>
 					<a href="<?php echo esc_url( $pricing_url ); ?>" target="_blank"  >
-						<span class="premium-icon"></span>
+						<span class="premium-icon max"></span>
 					</a>
 				</div>
 				<div>
@@ -1118,7 +1147,7 @@ function ig_es_upsale_campaign_tracking_options( $campaign_data ) {
 			<div class="w-11/12 text-sm font-normal text-gray-600">
 				<label class="pt-3 text-sm leading-5 text-gray-500 cursor-default"><?php echo esc_html__( 'Link tracking', 'email-subscribers' ); ?></label>
 				<a href="<?php echo esc_url( $pricing_url ); ?>" target="_blank">
-				<span class="premium-icon"></span></a>
+				<span class="premium-icon max"></span></a>
 			</div>
 
 			<div>
@@ -1153,7 +1182,7 @@ function ig_es_upsale_campaign_tracking_options( $campaign_data ) {
 			<div class="w-11/12 text-sm font-normal text-gray-600">
 				<label class="pt-3 text-sm leading-5 text-gray-500 cursor-default"><?php echo esc_html__( 'UTM tracking', 'email-subscribers' ); ?></label>
 				<a href="<?php echo esc_url( $utm_feature_url ); ?>" target="_blank">
-				<span class="premium-icon"></span></a>
+				<span class="premium-icon max"></span></a>
 			</div>
 
 			<div>
@@ -1169,7 +1198,7 @@ function ig_es_upsale_campaign_tracking_options( $campaign_data ) {
 		<div class="block my-3">
 			<label class="pt-3 text-sm leading-5 font-medium text-gray-500 cursor-default"><?php echo esc_html__( 'Get spam score', 'email-subscribers' ); ?></label>
 			<a href="<?php echo esc_url( $spam_score_url ); ?>" target="_blank">
-			<span class="premium-icon"></span></a>
+			<span class="premium-icon max"></span></a>
 			<button type="button" id="spam_score" disabled class="float-right es_spam rounded-md border text-indigo-400 border-indigo-300 text-sm leading-5 font-medium inline-flex justify-center px-3 py-1 cursor-default"><?php echo esc_html__( 'Check', 'email-subscribers' ); ?>
 			</button>
 		</div>
@@ -1190,7 +1219,7 @@ function ig_es_upsale_campaign_tracking_options( $campaign_data ) {
 				<label for="schedule_later" class="text-sm font-normal text-gray-500 cursor-default"><?php echo esc_html__( 'Schedule for later', 'email-subscribers' ); ?>
 				</label>
 				<a href="<?php echo esc_url( $pricing_url ); ?>" target="_blank">
-			<span class="premium-icon"></span></a>
+			<span class="premium-icon max"></span></a>
 			<br>
 			<div id="schedule_later" class="px-6">
 				<div class="flex pt-4" >
@@ -1260,8 +1289,9 @@ function ig_es_upsell_send_test_email_feature( $type, $test_email ) {
 					<input id="ig_es_preview_email_address" value="<?php echo esc_attr( $test_email ); ?>" placeholder="<?php echo esc_attr( 'Enter email address'); ?>" class="campaign-preview-option inline-block text-sm leading-5 border-gray-400 rounded-md shadow-sm form-input mr-2" name="ig_es_preview_email_address" autocomplete="email" style="min-width: 238px;">
 					<button id="send-<?php echo esc_attr($type); ?>-preview-email-btn" type="button" class="ig-es-inline-loader rounded-md border text-indigo-600 border-indigo-500 text-sm leading-5 font-medium transition ease-in-out duration-150 select-none inline-flex justify-center hover:text-indigo-500 hover:border-indigo-600 hover:shadow-md focus:outline-none focus:shadow-outline-indigo focus:shadow-lg mt-1 px-2 py-2">
 						<a href="<?php echo esc_url( $pricing_url ); ?>" target="_blank">
-						<span><?php echo esc_html__( 'Send email', 'email-subscribers' ); ?></span><span class = "premium-icon ml-2"></span></a>
+						<span><?php echo esc_html__( 'Send email', 'email-subscribers' ); ?></span></a>
 					</button>
+					<span class = "premium-icon max"></span>
 				</div>
 				<?php
 	}
@@ -1792,8 +1822,8 @@ function ig_es_upsell_add_attachment_feature( $editor_id ) {
 						<path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path>
 					</svg>
 					<?php echo esc_html__( 'Add Attachments', 'email-subscribers' ); ?>
-					<span class="premium-icon"></span>
 				</button></a>
+				<span class="premium-icon max"></span>
 			</div>
 			<?php
 		}
@@ -1852,7 +1882,7 @@ function ig_es_upsell_pro_import_features() {
 					</div>
 					<p class="mb-2 text-sm inline-block font-medium text-gray-600">
 						<?php echo esc_html__( 'Import existing WordPress users', 'email-subscribers' ); ?>
-						<span class="premium-icon inline-block"></span>
+						<span class="premium-icon max"></span>
 					</p>
 				</div>
 			</label>
@@ -1878,7 +1908,7 @@ function ig_es_upsell_pro_import_features() {
 						<p class="mb-2 text-sm inline-block font-medium text-gray-600">
 							<?php echo esc_html__( 'Import from', 'email-subscribers' ); ?>
 							<span class="text-xs"><?php echo esc_html__( 'WooCommerce orders', 'email-subscribers' ); ?></span>
-							<span class="premium-icon inline-block"></span>
+							<span class="premium-icon max"></span>
 						</p>
 					</div>
 				</label>
@@ -1904,7 +1934,7 @@ function ig_es_upsell_pro_import_features() {
 						<p class="mb-2 text-sm inline-block font-medium text-gray-600">
 							<?php echo esc_html__( 'Import BuddyBoss members', 'email-subscribers' ); ?>
 						</p>
-						<span class="premium-icon inline-block"></span>
+						<span class="premium-icon max"></span>
 					</div>
 				</label>
 			</a>
@@ -2029,8 +2059,8 @@ function ig_es_upsell_cf_button() {
 		?>
 		<a href = "<?php echo esc_url( $url ); ?>" target = "_blank" class="inline-flex justify-center border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 transition duration-150 ease-in-out px-3 py-1 ml-2 leading-5 align-middle">
 			<?php esc_html_e( 'Manage Custom Fields', 'email-subscribers' ); ?>
-			<span class = "premium-icon ml-2"></span>
 		</a>
+		<span class="premium-icon max"></span>
 
 		<?php
 	}
@@ -2050,7 +2080,7 @@ function ig_es_upsell_cf_form_field() {
 					<?php esc_html_e( 'Want to add more form fields?', 'email-subscribers' ); ?>
 				</b>
 				<a href = "<?php echo esc_url( $url ); ?>" target = "_blank" >
-					<span class = "premium-icon ml-2 mb-1"></span>
+					<span class = "premium-icon ml-2 mb-1 max"></span>
 				</a>
 			</td>
 		</tr>
@@ -2150,6 +2180,11 @@ function ig_es_upsell_recent_activities( $days, $report_data = array() ) {
 			array(
 				/* translators: %s. Strong tag */
 				'text' => sprintf( __( '%1$sjoel.doe@example.com%2$s unsubscribed from %1$sMain%2$s list', 'email-subscribers' ), '<a href="#">', '</a>' ),
+				'time' => '1 ' . __( 'week ago', 'email-subscribers' ),
+			),
+			array(
+				/* translators: %s. Anchors tag */
+				'text' => sprintf( __( '%1$sJohn%2$s subscribed to %1$sPublic%2$s list', 'email-subscribers' ), '<a href="#">', '</a>' ),
 				'time' => '1 ' . __( 'week ago', 'email-subscribers' ),
 			),
 		);

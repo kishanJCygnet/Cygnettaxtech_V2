@@ -6,7 +6,7 @@
 					<?php echo esc_html__( 'Country', 'email-subscribers' ); ?>
 				</span>
 			</th>
-			<th class="w-1/3 px-1 py-3 font-bold text-center">
+			<th class="w-1/3 px-1 py-3 font-bold text-right">
 				<span>
 					<?php echo esc_html__( 'Subscribers', 'email-subscribers' ); ?>
 				</span>
@@ -33,7 +33,7 @@
 							<?php echo esc_html( $country_name ); ?>
 						</span>
 					</td>
-					<td class="pl-1 py-3 text-gray-600 text-center">
+					<td class="pl-1 py-3 text-gray-600 text-right">
 						<span>
 							<?php echo esc_html( number_format_i18n( $total_subscribers ) ); ?>
 						</span>

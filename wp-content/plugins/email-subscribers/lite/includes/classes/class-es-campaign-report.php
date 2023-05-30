@@ -246,7 +246,7 @@ class ES_Campaign_Report extends ES_List_Table {
 								<p class="mt-1 font-medium leading-6 text-gray-500">
 									<?php echo esc_html__( 'Clicked', 'email-subscribers' ); ?>
 									<a target="_blank" href="<?php echo esc_url( $pricing_url ); ?>">
-										<span class="premium-icon ml-2 mb-1"></span>
+										<span class="premium-icon max ml-2 mb-1"></span>
 									</a>	
 								</p>
 							</div>
@@ -271,7 +271,7 @@ class ES_Campaign_Report extends ES_List_Table {
 								<p class="mt-1 font-medium leading-6 text-gray-500">
 									<?php echo esc_html__( 'Unsubscribed', 'email-subscribers' ); ?>
 									<a target="_blank" href="<?php echo esc_url( $pricing_url ); ?>">
-										<span class="premium-icon ml-2 mb-1"></span>
+										<span class="premium-icon max ml-2 mb-1"></span>
 									</a>
 								</p>
 							</div>
