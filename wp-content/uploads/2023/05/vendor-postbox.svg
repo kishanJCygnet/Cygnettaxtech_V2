@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1174" height="508" viewBox="0 0 1174 508">
+  <defs>
+    <filter id="Rectangle_8" x="767" y="57" width="201" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-2" x="767" y="115" width="120" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-2"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-2"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-3" x="767" y="173" width="120" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-3"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-3"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-4" x="767" y="289" width="120" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-4"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-4"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-5" x="767" y="231" width="201" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-5"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-5"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-6" x="849" y="115" width="119" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-6"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-6"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-7" x="849" y="173" width="119" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-7"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-7"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-8" x="849" y="289" width="119" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-8"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-8"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-9" x="1010" y="217" width="164" height="106">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-9"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-9"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_480" data-name="Rectangle 480" width="68" height="66.919" fill="none"></rect>
+    </clipPath>
+    <filter id="Rectangle_8-10" x="10" y="46" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-10"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-10"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-11" x="10" y="104" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-11"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-11"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-12" x="10" y="162" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-12"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-12"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-13" x="0" y="304" width="194" height="164">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-13"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-13"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-14" x="246" y="46" width="174" height="106">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-14"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-14"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-15" x="246" y="114" width="174" height="106">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-15"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-15"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-16" x="246" y="182" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-16"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-16"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-17" x="246" y="240" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-17"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-17"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-18" x="246" y="298" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-18"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-18"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-19" x="246" y="356" width="174" height="106">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-19"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-19"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-20" x="500" y="78" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-20"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-20"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-21" x="500" y="136" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-21"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-21"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-22" x="500" y="267" width="174" height="96">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-22"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-22"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+    <filter id="Rectangle_8-23" x="500" y="194" width="174" height="111">
+      <feOffset dy="8"></feOffset>
+      <feGaussianBlur stdDeviation="8" result="blur-23"></feGaussianBlur>
+      <feFlood flood-opacity="0.161"></feFlood>
+      <feComposite operator="in" in2="blur-23"></feComposite>
+      <feComposite in="SourceGraphic"></feComposite>
+    </filter>
+  </defs>
+  <g id="Group_5897" data-name="Group 5897" transform="translate(-96 -1218)">
+    <g id="Active" transform="translate(110 1218)">
+      <rect id="Rectangle_8-24" data-name="Rectangle 8" width="460" height="508" rx="8" fill="#f1f3f6"></rect>
+    </g>
+    <g id="Active-2" data-name="Active" transform="translate(600 1218)">
+      <rect id="Rectangle_8-25" data-name="Rectangle 8" width="460" height="508" rx="8" fill="#fff2f2"></rect>
+    </g>
+    <g id="Active-3" data-name="Active" transform="translate(877 1281)">
+      <rect id="Rectangle_8-26" data-name="Rectangle 8" width="173" height="300" rx="8" fill="#fff"></rect>
+    </g>
+    <g id="Active-4" data-name="Active" transform="translate(887 1291)">
+      <g transform="matrix(1, 0, 0, 1, -791, -73)" filter="url(#Rectangle_8)">
+        <rect id="Rectangle_8-27" data-name="Rectangle 8" width="153" height="48" rx="8" transform="translate(791 73)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-5" data-name="Active" transform="translate(887 1349)">
+      <g transform="matrix(1, 0, 0, 1, -791, -131)" filter="url(#Rectangle_8-2)">
+        <rect id="Rectangle_8-28" data-name="Rectangle 8" width="72" height="48" rx="8" transform="translate(791 131)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-6" data-name="Active" transform="translate(887 1407)">
+      <g transform="matrix(1, 0, 0, 1, -791, -189)" filter="url(#Rectangle_8-3)">
+        <rect id="Rectangle_8-29" data-name="Rectangle 8" width="72" height="48" rx="8" transform="translate(791 189)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-7" data-name="Active" transform="translate(887 1523)">
+      <g transform="matrix(1, 0, 0, 1, -791, -305)" filter="url(#Rectangle_8-4)">
+        <rect id="Rectangle_8-30" data-name="Rectangle 8" width="72" height="48" rx="8" transform="translate(791 305)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-8" data-name="Active" transform="translate(887 1465)">
+      <g transform="matrix(1, 0, 0, 1, -791, -247)" filter="url(#Rectangle_8-5)">
+        <rect id="Rectangle_8-31" data-name="Rectangle 8" width="153" height="48" rx="8" transform="translate(791 247)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-9" data-name="Active" transform="translate(969 1349)">
+      <g transform="matrix(1, 0, 0, 1, -873, -131)" filter="url(#Rectangle_8-6)">
+        <rect id="Rectangle_8-32" data-name="Rectangle 8" width="71" height="48" rx="8" transform="translate(873 131)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-10" data-name="Active" transform="translate(969 1407)">
+      <g transform="matrix(1, 0, 0, 1, -873, -189)" filter="url(#Rectangle_8-7)">
+        <rect id="Rectangle_8-33" data-name="Rectangle 8" width="71" height="48" rx="8" transform="translate(873 189)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-11" data-name="Active" transform="translate(969 1523)">
+      <g transform="matrix(1, 0, 0, 1, -873, -305)" filter="url(#Rectangle_8-8)">
+        <rect id="Rectangle_8-34" data-name="Rectangle 8" width="71" height="48" rx="8" transform="translate(873 305)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Sub_title_1_Medium" data-name="Sub title 1 Medium" transform="translate(904 1308)">
+      <text id="Real_time_reporting" data-name="Real time reporting" transform="translate(60 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-59" y="0">Real time reporting</tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-2" data-name="Sub title 1 Medium" transform="translate(896 1356)">
+      <text id="Road_Permits" data-name="Road Permits" transform="translate(24 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-16" y="0">Road</tspan>
+        <tspan x="-24" y="17">Permits</tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-3" data-name="Sub title 1 Medium" transform="translate(895 1414)">
+      <text id="A_c_payables" data-name="A/c payables" transform="translate(28 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-11" y="0">A/c</tspan>
+        <tspan x="-27" y="17">payables</tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-4" data-name="Sub title 1 Medium" transform="translate(899 1530)">
+      <text id="Notices_mgmt" data-name="Notices mgmt" transform="translate(24 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-24" y="0">Notices</tspan>
+        <tspan x="-18" y="17">mgmt</tspan>
+      </text>
+    </g>
+    <g id="Body_medium" data-name="Body medium" transform="translate(901 1471)">
+      <text id="Vendor_Compliance_Notification_mgmt" data-name="Vendor Compliance &amp; Notification mgmt" transform="translate(63 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-61" y="0">Vendor Compliance</tspan>
+        <tspan x="-63" y="20">&amp; Notification mgmt</tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-5" data-name="Sub title 1 Medium" transform="translate(985 1356)">
+      <text id="Tax_returns" data-name="Tax returns" transform="translate(22 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-10" y="0">Tax</tspan>
+        <tspan x="-22" y="17">returns</tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-6" data-name="Sub title 1 Medium" transform="translate(991 1424)">
+      <text id="Reco" transform="translate(16 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-15" y="0">Reco</tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-7" data-name="Sub title 1 Medium" transform="translate(979 1540)">
+      <text id="GL_Reco" data-name="GL Reco" transform="translate(26 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-26" y="0">GL Reco</tspan>
+      </text>
+    </g>
+    <g id="Active-12" data-name="Active" transform="translate(1120 1344)">
+      <rect id="Rectangle_8-35" data-name="Rectangle 8" width="136" height="175" rx="8" fill="#f1f3f6"></rect>
+    </g>
+    <g id="Active-13" data-name="Active" transform="translate(1130 1451)">
+      <g transform="matrix(1, 0, 0, 1, -1034, -233)" filter="url(#Rectangle_8-9)">
+        <rect id="Rectangle_8-36" data-name="Rectangle 8" width="116" height="58" rx="8" transform="translate(1034 233)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Sub_title_1_Medium-8" data-name="Sub title 1 Medium" transform="translate(273 1238)">
+      <text id="Vendor_Post_Box" data-name="Vendor Post Box" transform="translate(67 17)" fill="#0f3764" font-size="18" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-67" y="0">Vendor Post Box</tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-9" data-name="Sub title 1 Medium" transform="translate(663 1238)">
+      <text id="Tax_compliance_and_Invoicing_automation" data-name="Tax compliance and Invoicing automation" transform="translate(167 17)" fill="#f16161" font-size="18" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-167" y="0">Tax compliance and Invoicing automation</tspan>
+      </text>
+    </g>
+    <g id="Group_1795" data-name="Group 1795" transform="translate(1154 1364.581)">
+      <g id="Group_1794" data-name="Group 1794" transform="translate(0 0)" clip-path="url(#clip-path)">
+        <path id="Path_2322" data-name="Path 2322" d="M12.558,15.394l-4.481-2.26a15.39,15.39,0,0,1,3.944-4.478,17.627,17.627,0,0,1,5.363-2.444l1.372,4.324a11.844,11.844,0,0,0-6.2,4.859" transform="translate(15.91 12.233)" fill="#36d994"></path>
+        <path id="Path_2323" data-name="Path 2323" d="M10.443,11.412,7.583,7.881a28.966,28.966,0,0,1,3.778-2.236A21.082,21.082,0,0,1,15.48,4.062a33.278,33.278,0,0,1,4.467-.823A23.8,23.8,0,0,1,29.028,4.3a15.774,15.774,0,0,1,3.561,1.36l-2.251,3.9a13.232,13.232,0,0,0-2.72-1.016,21,21,0,0,0-7.327-.864A18.652,18.652,0,0,0,13.526,9.6a19.429,19.429,0,0,0-3.083,1.815" transform="translate(14.937 6.225)" fill="#0f6182"></path>
+        <path id="Path_2324" data-name="Path 2324" d="M37.047,14.422a24.518,24.518,0,0,0-7.341-5.729,22.791,22.791,0,0,0-9.019-2.388,21.694,21.694,0,0,0-8.909,1.161c-.306.125-.713.252-1.022.377l-1.731-4.5a5.9,5.9,0,0,1,1.224-.493A30.717,30.717,0,0,1,15.5,1.7a24.52,24.52,0,0,1,5.521-.229A25.328,25.328,0,0,1,26.51,2.4a32.587,32.587,0,0,1,5.34,1.981A30.266,30.266,0,0,1,36.628,7.44a23.666,23.666,0,0,1,3.994,3.944Z" transform="translate(17.776 2.795)" fill="#009687"></path>
+        <path id="Path_2325" data-name="Path 2325" d="M38.022,24.528A24.959,24.959,0,0,0,33.235,14.9,28.545,28.545,0,0,0,12.841,4.568L13.153,0a38.552,38.552,0,0,1,6.762,1.093,36.033,36.033,0,0,1,6.453,2.483,30.817,30.817,0,0,1,5.723,3.674,31.6,31.6,0,0,1,4.891,4.868,37.241,37.241,0,0,1,3.537,5.361,36.386,36.386,0,0,1,2.186,5.859Z" transform="translate(25.294 -0.001)" fill="#0f3863"></path>
+        <path id="Path_2326" data-name="Path 2326" d="M10.876,14.315l-3.16-3.579a15.05,15.05,0,0,1,2.658-2.527,24.99,24.99,0,0,1,3.118-1.936,16.439,16.439,0,0,1,3.267-1.137,18.214,18.214,0,0,1,3.421-.454,12.106,12.106,0,0,1,3.472.339l-.826,5.01a11.683,11.683,0,0,0-5.194.11A11.25,11.25,0,0,0,12.9,12.423a11.233,11.233,0,0,0-2.019,1.892" transform="translate(15.199 9.205)" fill="#179999"></path>
+        <path id="Path_2327" data-name="Path 2327" d="M17.818,14.858l.282,5.01a15.361,15.361,0,0,1-5.848-1.176,17.594,17.594,0,0,1-4.8-3.421l3.059-3.35a11.854,11.854,0,0,0,7.306,2.937" transform="translate(14.681 23.481)" fill="#36d994"></path>
+        <path id="Path_2328" data-name="Path 2328" d="M19.2,26.306,17.57,30.547a28.971,28.971,0,0,1-3.828-2.15,21.055,21.055,0,0,1-3.427-2.777,33.267,33.267,0,0,1-2.946-3.457,23.888,23.888,0,0,1-3.623-8.4A15.8,15.8,0,0,1,3.143,10h4.5a13.148,13.148,0,0,0,.481,2.863,20.913,20.913,0,0,0,2.916,6.78,18.629,18.629,0,0,0,5.043,4.9A19.72,19.72,0,0,0,19.2,26.306" transform="translate(6.191 19.701)" fill="#0f6182"></path>
+        <path id="Path_2329" data-name="Path 2329" d="M7.529,8.022a24.54,24.54,0,0,0-1.292,9.224,22.909,22.909,0,0,0,2.441,9,21.719,21.719,0,0,0,5.464,7.134c.258.2.573.493.835.695l-3.029,3.748a6.191,6.191,0,0,1-1.039-.811A31.257,31.257,0,0,1,7.285,33.04a24.536,24.536,0,0,1-2.958-4.666,25.3,25.3,0,0,1-1.942-5.215,32.725,32.725,0,0,1-.953-5.616,30.133,30.133,0,0,1,.261-5.666A23.54,23.54,0,0,1,3.11,6.445Z" transform="translate(2.777 12.694)" fill="#009687"></path>
+        <path id="Path_2330" data-name="Path 2330" d="M12.39,5.564a24.969,24.969,0,0,0-5.949,8.963A28.548,28.548,0,0,0,7.695,37.353l-4.11,2.014a38.591,38.591,0,0,1-2.435-6.4A35.88,35.88,0,0,1,.071,26.133a30.853,30.853,0,0,1,.321-6.795,31.517,31.517,0,0,1,1.77-6.667A37.047,37.047,0,0,1,5.037,6.927,36.066,36.066,0,0,1,9.016,2.1Z" transform="translate(0 4.143)" fill="#0f3863"></path>
+        <path id="Path_2331" data-name="Path 2331" d="M19.725,19.742,18.2,24.268a15.292,15.292,0,0,1-3.516-1.036A25.238,25.238,0,0,1,11.454,21.5a16.516,16.516,0,0,1-2.622-2.26,18.434,18.434,0,0,1-2.1-2.735,12.285,12.285,0,0,1-1.443-3.175l4.752-1.791a11.674,11.674,0,0,0,2.694,4.443,11.256,11.256,0,0,0,4.345,2.961,11.259,11.259,0,0,0,2.649.8" transform="translate(10.412 22.723)" fill="#179999"></path>
+        <path id="Path_2332" data-name="Path 2332" d="M13.388,11.755,17.587,9a15.371,15.371,0,0,1,1.9,5.655,17.519,17.519,0,0,1-.564,5.865L14.5,19.551a11.858,11.858,0,0,0-1.108-7.8" transform="translate(26.372 17.737)" fill="#36d994"></path>
+        <path id="Path_2333" data-name="Path 2333" d="M22.356,11.184l4.487-.71a29.23,29.23,0,0,1,.05,4.386,21.068,21.068,0,0,1-.689,4.36,33.712,33.712,0,0,1-1.524,4.28,23.811,23.811,0,0,1-5.459,7.335,16.019,16.019,0,0,1-2.958,2.406l-2.254-3.9a12.9,12.9,0,0,0,2.242-1.847,20.85,20.85,0,0,0,4.41-5.913,18.583,18.583,0,0,0,1.722-6.819,19.431,19.431,0,0,0-.03-3.576" transform="translate(27.599 20.631)" fill="#0f6182"></path>
+        <path id="Path_2334" data-name="Path 2334" d="M11.986,32.289A24.531,24.531,0,0,0,20.619,28.8,22.85,22.85,0,0,0,27.2,22.18a21.673,21.673,0,0,0,3.445-8.3c.048-.327.14-.745.184-1.072l4.764.748a6.162,6.162,0,0,1-.184,1.307,31.244,31.244,0,0,1-1.63,5.126,24.555,24.555,0,0,1-2.563,4.894,25.278,25.278,0,0,1-3.546,4.288,32.809,32.809,0,0,1-4.386,3.635,30.131,30.131,0,0,1-5.04,2.608A23.512,23.512,0,0,1,12.829,36.9Z" transform="translate(23.61 25.232)" fill="#009687"></path>
+        <path id="Path_2335" data-name="Path 2335" d="M9.294,28.461a24.921,24.921,0,0,0,10.736.668,28.536,28.536,0,0,0,19.141-12.5l3.8,2.554a38.291,38.291,0,0,1-4.33,5.31,35.739,35.739,0,0,1-5.375,4.348,31.008,31.008,0,0,1-6.044,3.121,31.617,31.617,0,0,1-6.661,1.8,37.077,37.077,0,0,1-6.412.383,36.283,36.283,0,0,1-6.165-1.036Z" transform="translate(15.727 32.761)" fill="#0f3863"></path>
+        <path id="Path_2336" data-name="Path 2336" d="M16.49,10.553l4.68-.947a15.233,15.233,0,0,1,.858,3.567,24.938,24.938,0,0,1,.116,3.668,16.189,16.189,0,0,1-.647,3.4,17.942,17.942,0,0,1-1.316,3.19,12.121,12.121,0,0,1-2.028,2.836l-3.926-3.216a11.667,11.667,0,0,0,2.5-4.556,11.246,11.246,0,0,0,.392-5.245,11.239,11.239,0,0,0-.63-2.694" transform="translate(28.025 18.921)" fill="#179999"></path>
+      </g>
+    </g>
+    <g id="Group_1796" data-name="Group 1796" transform="translate(0 -650.21)">
+      <g id="Group_185" data-name="Group 185" transform="translate(103 2908.5) rotate(-90)">
+        <path id="Path_335" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" transform="translate(870 1009)" fill="#60d6d6"></path>
+        <path id="Path_336" data-name="Path 336" d="M11.534,6.233,8,9.767,4.466,6.233" transform="translate(870 1009)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </g>
+      <circle id="Ellipse_33" data-name="Ellipse 33" cx="4" cy="4" r="4" transform="translate(1056 2034.5) rotate(-90)" fill="#60d6d6"></circle>
+      <line id="Line_8" data-name="Line 8" y2="58.5" transform="translate(1060.5 2030.5) rotate(-90)" fill="none" stroke="#60d6d6" stroke-width="1"></line>
+      <g id="Group_186" data-name="Group 186" transform="translate(2077 1178.5) rotate(90)">
+        <path id="Path_335-2" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" transform="translate(870 1009)" fill="#0f3764"></path>
+        <path id="Path_336-2" data-name="Path 336" d="M11.534,6.233,8,9.767,4.466,6.233" transform="translate(870 1009)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </g>
+      <circle id="Ellipse_34" data-name="Ellipse 34" cx="4" cy="4" r="4" transform="translate(1116 2060.5) rotate(-90)" fill="#0f3764"></circle>
+      <line id="Line_9" data-name="Line 9" y2="58.5" transform="translate(1061.5 2056.5) rotate(-90)" fill="none" stroke="#0f3764" stroke-width="1"></line>
+      <g id="Info_Regular" data-name="Info Regular" transform="translate(1075 2011)">
+        <text id="API" font-size="12" font-family="Roboto-Regular, Roboto">
+          <tspan x="-9" y="11">API</tspan>
+        </text>
+      </g>
+    </g>
+    <g id="Sub_title_1_Medium-10" data-name="Sub title 1 Medium" transform="translate(1156 1462)">
+      <text id="Gov._Tax_regulators" data-name="Gov. Tax regulators" transform="translate(32 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-26" y="0">Gov. Tax</tspan>
+        <tspan x="-31" y="17">regulators</tspan>
+      </text>
+    </g>
+    <g id="Active-14" data-name="Active" transform="translate(120 1270)">
+      <rect id="Rectangle_8-37" data-name="Rectangle 8" width="146" height="184" rx="8" fill="#fff"></rect>
+    </g>
+    <g id="Active-15" data-name="Active" transform="translate(130 1280)">
+      <g transform="matrix(1, 0, 0, 1, -34, -62)" filter="url(#Rectangle_8-10)">
+        <rect id="Rectangle_8-38" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(34 62)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-16" data-name="Active" transform="translate(130 1338)">
+      <g transform="matrix(1, 0, 0, 1, -34, -120)" filter="url(#Rectangle_8-11)">
+        <rect id="Rectangle_8-39" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(34 120)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-17" data-name="Active" transform="translate(130 1396)">
+      <g transform="matrix(1, 0, 0, 1, -34, -178)" filter="url(#Rectangle_8-12)">
+        <rect id="Rectangle_8-40" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(34 178)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Body_medium-2" data-name="Body medium" transform="translate(165 1296)">
+      <text id="Vendor_1" data-name="Vendor 1" transform="translate(28 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-28" y="0">Vendor 1</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-3" data-name="Body medium" transform="translate(165 1354)">
+      <text id="Vendor_2" data-name="Vendor 2" transform="translate(28 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-28" y="0">Vendor 2</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-4" data-name="Body medium" transform="translate(165 1412)">
+      <text id="Vendor_3" data-name="Vendor 3" transform="translate(0 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="0" y="0">Vendor 3</tspan>
+      </text>
+    </g>
+    <g id="Active-18" data-name="Active" transform="translate(120 1538)">
+      <g transform="matrix(1, 0, 0, 1, -24, -320)" filter="url(#Rectangle_8-13)">
+        <rect id="Rectangle_8-41" data-name="Rectangle 8" width="146" height="116" rx="8" transform="translate(24 320)" fill="#fff"></rect>
+      </g>
+    </g>
+    <g id="Body_medium-5" data-name="Body medium" transform="translate(140 1558)">
+      <text id="Also_Invoicing_Accounting_tools_for_MSME_SME" data-name="Also, Invoicing &amp; Accounting tools for MSME, SME" transform="translate(53 13)" fill="#0f3764" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-15" y="0">Also,</tspan>
+        <tspan x="-34" y="20">Invoicing &amp;</tspan>
+        <tspan x="-53" y="40">Accounting tools</tspan>
+        <tspan x="-48" y="60">for MSME, SME</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-6" data-name="Body medium" transform="translate(140 1475)">
+      <text id="Vendor_Ecosystem" data-name="Vendor Ecosystem" transform="translate(34 13)" fill="#0f3764" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-22" y="0">Vendor</tspan>
+        <tspan x="-34" y="20">Ecosystem</tspan>
+      </text>
+    </g>
+    <g id="Group_1860" data-name="Group 1860" transform="translate(7306 97)">
+      <g id="Group_188" data-name="Group 188" transform="translate(-6198 2374) rotate(180)">
+        <path id="Path_335-3" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" transform="translate(870 1009)" fill="#0f3764"></path>
+        <path id="Path_336-3" data-name="Path 336" d="M11.534,6.233,8,9.767,4.466,6.233" transform="translate(870 1009)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </g>
+      <line id="Line_11" data-name="Line 11" y2="83" transform="translate(-7076 1358.5)" fill="none" stroke="#0f3764" stroke-width="1"></line>
+      <circle id="Ellipse_36" data-name="Ellipse 36" cx="4" cy="4" r="4" transform="translate(-7080 1437)" fill="#0f3764"></circle>
+    </g>
+    <g id="Sub_title_1_Medium-11" data-name="Sub title 1 Medium" transform="translate(342 1668)">
+      <text id="Cygnet_Vendor_Post_Box" data-name="Cygnet Vendor Post Box" transform="translate(87 15)" fill="#0f3764" font-size="16" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-86" y="0">Cygnet Vendor Post Box</tspan>
+      </text>
+    </g>
+    <g id="Active-19" data-name="Active" transform="translate(356 1270)">
+      <rect id="Rectangle_8-42" data-name="Rectangle 8" width="146" height="388" rx="8" fill="#fff"></rect>
+    </g>
+    <g id="Active-20" data-name="Active" transform="translate(366 1280)">
+      <g transform="matrix(1, 0, 0, 1, -270, -62)" filter="url(#Rectangle_8-14)">
+        <rect id="Rectangle_8-43" data-name="Rectangle 8" width="126" height="58" rx="8" transform="translate(270 62)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-21" data-name="Active" transform="translate(366 1348)">
+      <g transform="matrix(1, 0, 0, 1, -270, -130)" filter="url(#Rectangle_8-15)">
+        <rect id="Rectangle_8-44" data-name="Rectangle 8" width="126" height="58" rx="8" transform="translate(270 130)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-22" data-name="Active" transform="translate(366 1416)">
+      <g transform="matrix(1, 0, 0, 1, -270, -198)" filter="url(#Rectangle_8-16)">
+        <rect id="Rectangle_8-45" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(270 198)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-23" data-name="Active" transform="translate(366 1474)">
+      <g transform="matrix(1, 0, 0, 1, -270, -256)" filter="url(#Rectangle_8-17)">
+        <rect id="Rectangle_8-46" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(270 256)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-24" data-name="Active" transform="translate(366 1532)">
+      <g transform="matrix(1, 0, 0, 1, -270, -314)" filter="url(#Rectangle_8-18)">
+        <rect id="Rectangle_8-47" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(270 314)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-25" data-name="Active" transform="translate(366 1590)">
+      <g transform="matrix(1, 0, 0, 1, -270, -372)" filter="url(#Rectangle_8-19)">
+        <rect id="Rectangle_8-48" data-name="Rectangle 8" width="126" height="58" rx="8" transform="translate(270 372)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Body_medium-7" data-name="Body medium" transform="translate(385 1291)">
+      <text id="Invoice_create_upload" data-name="Invoice create/upload" transform="translate(44 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-22" y="0">Invoice</tspan>
+        <tspan x="-43" y="20">create/upload</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-8" data-name="Body medium" transform="translate(392 1351)">
+      <text id="Intelligent_Document_Processing_" data-name="IntelligentDocumentProcessing " transform="translate(37 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-31" y="0">Intelligent</tspan>
+        <tspan x="-32" y="17">Document</tspan>
+        <tspan x="-36" y="34">Processing </tspan>
+      </text>
+    </g>
+    <g id="Body_medium-9" data-name="Body medium" transform="translate(385 1432)">
+      <text id="Reconciliation" transform="translate(44 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-44" y="0">Reconciliation</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-10" data-name="Body medium" transform="translate(394 1481)">
+      <text id="Invoice_verification" data-name="Invoiceverification" transform="translate(35 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-22" y="0">Invoice</tspan>
+        <tspan x="-34" y="17">verification</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-11" data-name="Body medium" transform="translate(386 1548)">
+      <text id="Approval_flow" data-name="Approval flow" transform="translate(43 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-42" y="0">Approval flow</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-12" data-name="Body medium" transform="translate(400 1601)">
+      <text id="Real_time_reporting-2" data-name="Real time reporting" transform="translate(29 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-29" y="0">Real time</tspan>
+        <tspan x="-28" y="20">reporting</tspan>
+      </text>
+    </g>
+    <g id="Info_Regular-2" data-name="Info Regular" transform="translate(280 1328)">
+      <text id="Digital_or_Scanned_Invoices_Manual_Invoices_API" data-name="Digital or Scanned Invoices, Manual Invoices, API" font-size="12" font-family="Roboto-Regular, Roboto">
+        <tspan x="-23" y="11">Digital or </tspan>
+        <tspan x="-23" y="25">Scanned</tspan>
+        <tspan x="-23" y="39">Invoices, </tspan>
+        <tspan x="-19" y="53">Manual</tspan>
+        <tspan x="-23" y="67">Invoices, </tspan>
+        <tspan x="-9" y="81">API</tspan>
+      </text>
+    </g>
+    <g id="Info_Regular-3" data-name="Info Regular" transform="translate(504 1342)">
+      <text id="Only_verified_invoices_are_posted" data-name="Only verified invoices are posted" font-size="12" font-family="Roboto-Regular, Roboto">
+        <tspan x="-11" y="11">Only</tspan>
+        <tspan x="-19" y="25">verified</tspan>
+        <tspan x="-21" y="39">invoices</tspan>
+        <tspan x="-8" y="53">are</tspan>
+        <tspan x="-18" y="67">posted</tspan>
+      </text>
+    </g>
+    <g id="Info_Regular-4" data-name="Info Regular" transform="translate(280 1448)">
+      <text id="Consolidate_invoice_collection_mechanism" data-name="Consolidate invoice collection mechanism" font-size="12" font-family="Roboto-Regular, Roboto">
+        <tspan x="-31" y="11">Consolidate</tspan>
+        <tspan x="-18" y="25">invoice</tspan>
+        <tspan x="-25" y="39">collection</tspan>
+        <tspan x="-31" y="53">mechanism</tspan>
+      </text>
+    </g>
+    <g id="Group_1864" data-name="Group 1864" transform="translate(1713.52 8506) rotate(90)">
+      <g id="Group_188-2" data-name="Group 188" transform="translate(-7068 1365) rotate(180)">
+        <path id="Path_335-4" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" fill="#0f3764"></path>
+        <path id="Path_336-4" data-name="Path 336" d="M7.068,0,3.534,3.534,0,0" transform="translate(4.466 6.233)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </g>
+      <line id="Line_11-2" data-name="Line 11" y2="87.52" transform="translate(-7076 1358.5)" fill="none" stroke="#0f3764" stroke-width="1"></line>
+      <circle id="Ellipse_36-2" data-name="Ellipse 36" cx="4" cy="4" r="4" transform="translate(-7080 1443.52)" fill="#0f3764"></circle>
+    </g>
+    <g id="Group_1865" data-name="Group 1865" transform="translate(1956.795 8506) rotate(90)">
+      <g id="Group_188-3" data-name="Group 188" transform="translate(-7068 1365) rotate(180)">
+        <path id="Path_335-5" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" transform="translate(0 0)" fill="#0f3764"></path>
+        <path id="Path_336-5" data-name="Path 336" d="M7.068,0,3.534,3.534,0,0" transform="translate(4.466 6.233)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </g>
+      <line id="Line_11-3" data-name="Line 11" y2="95.314" transform="translate(-7076 1358.5)" fill="none" stroke="#0f3764" stroke-width="1"></line>
+      <circle id="Ellipse_36-3" data-name="Ellipse 36" cx="4" cy="4" r="4" transform="translate(-7080 1451.314)" fill="#0f3764"></circle>
+    </g>
+    <g id="Active-26" data-name="Active" transform="translate(610 1302)">
+      <rect id="Rectangle_8-49" data-name="Rectangle 8" width="146" height="257" rx="8" fill="#fff"></rect>
+    </g>
+    <g id="Active-27" data-name="Active" transform="translate(620 1312)">
+      <g transform="matrix(1, 0, 0, 1, -524, -94)" filter="url(#Rectangle_8-20)">
+        <rect id="Rectangle_8-50" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(524 94)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-28" data-name="Active" transform="translate(620 1370)">
+      <g transform="matrix(1, 0, 0, 1, -524, -152)" filter="url(#Rectangle_8-21)">
+        <rect id="Rectangle_8-51" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(524 152)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-29" data-name="Active" transform="translate(620 1501)">
+      <g transform="matrix(1, 0, 0, 1, -524, -283)" filter="url(#Rectangle_8-22)">
+        <rect id="Rectangle_8-52" data-name="Rectangle 8" width="126" height="48" rx="8" transform="translate(524 283)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-30" data-name="Active" transform="translate(620 1428)">
+      <g transform="matrix(1, 0, 0, 1, -524, -210)" filter="url(#Rectangle_8-23)">
+        <rect id="Rectangle_8-53" data-name="Rectangle 8" width="126" height="63" rx="8" transform="translate(524 210)" fill="#0f3764"></rect>
+      </g>
+    </g>
+    <g id="Active-31" data-name="Active" transform="translate(775 1280)">
+      <rect id="Rectangle_8-54" data-name="Rectangle 8" width="85" height="301" rx="8" fill="#fff"></rect>
+    </g>
+    <g id="Body_Regular" data-name="Body Regular" transform="translate(782 1322)">
+      <text id="For_data_translation_mapping_and_modeling_to_address_complex_broken_data_from_multiple_sources_" data-name="For data translation, mapping and modeling to address complex broken data from multiple sources  " fill="#414042" font-size="14" font-family="Roboto-Regular, Roboto">
+        <tspan x="-25" y="13">For data </tspan>
+        <tspan x="-34" y="33">translation, </tspan>
+        <tspan x="-27" y="53">mapping </tspan>
+        <tspan x="-11" y="73">and </tspan>
+        <tspan x="-28" y="93">modeling </tspan>
+        <tspan x="-32" y="113">to address </tspan>
+        <tspan x="-26" y="133">complex </tspan>
+        <tspan x="-21" y="153">broken </tspan>
+        <tspan x="-30" y="173">data from </tspan>
+        <tspan x="-25" y="193">multiple </tspan>
+        <tspan x="-24" y="213" xml:space="preserve">sources  </tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-12" data-name="Sub title 1 Medium" transform="translate(627 1569)">
+      <text id="Multiple_Source_Systems" data-name="Multiple Source Systems" transform="translate(56 15)" fill="#0f3764" font-size="16" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-56" y="0">Multiple Source</tspan>
+        <tspan x="-30" y="19">Systems</tspan>
+      </text>
+    </g>
+    <g id="Sub_title_1_Medium-13" data-name="Sub title 1 Medium" transform="translate(778 1591)">
+      <text id="Cygnet_Data_Connectors" data-name="Cygnet Data Connectors" transform="translate(44 15)" fill="#0f3764" font-size="16" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-43" y="0">Cygnet Data</tspan>
+        <tspan x="-41" y="19">Connectors</tspan>
+      </text>
+    </g>
+    <g id="Group_1870" data-name="Group 1870">
+      <g id="Group_1868" data-name="Group 1868" transform="translate(752.143 1386)">
+        <circle id="Ellipse_33-2" data-name="Ellipse 33" cx="4" cy="4" r="4" transform="translate(0 12) rotate(-90)" fill="#60d6d6"></circle>
+        <line id="Line_8-2" data-name="Line 8" x2="24.806" transform="translate(4.5 8)" fill="none" stroke="#60d6d6" stroke-width="1"></line>
+        <g id="Group_185-2" data-name="Group 185" transform="translate(14.19 16) rotate(-90)">
+          <path id="Path_335-6" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" fill="#60d6d6"></path>
+          <path id="Path_336-6" data-name="Path 336" d="M7.068,0,3.534,3.534,0,0" transform="translate(4.466 6.233)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </g>
+      </g>
+      <g id="Group_1869" data-name="Group 1869" transform="translate(747.984 1416)">
+        <circle id="Ellipse_34-2" data-name="Ellipse 34" cx="4" cy="4" r="4" transform="translate(22.933 12) rotate(-90)" fill="#0f3764"></circle>
+        <line id="Line_9-2" data-name="Line 9" x2="23.897" transform="translate(3.036 8)" fill="none" stroke="#0f3764" stroke-width="1"></line>
+        <g id="Group_186-2" data-name="Group 186" transform="translate(16) rotate(90)">
+          <path id="Path_335-7" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" fill="#0f3764"></path>
+          <path id="Path_336-7" data-name="Path 336" d="M7.068,0,3.534,3.534,0,0" transform="translate(4.466 6.233)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </g>
+      </g>
+    </g>
+    <g id="Group_1871" data-name="Group 1871" transform="translate(104)">
+      <g id="Group_1868-2" data-name="Group 1868" transform="translate(752.143 1386)">
+        <circle id="Ellipse_33-3" data-name="Ellipse 33" cx="4" cy="4" r="4" transform="translate(0 12) rotate(-90)" fill="#60d6d6"></circle>
+        <line id="Line_8-3" data-name="Line 8" x2="24.806" transform="translate(4.5 8)" fill="none" stroke="#60d6d6" stroke-width="1"></line>
+        <g id="Group_185-3" data-name="Group 185" transform="translate(14.19 16) rotate(-90)">
+          <path id="Path_335-8" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" fill="#60d6d6"></path>
+          <path id="Path_336-8" data-name="Path 336" d="M7.068,0,3.534,3.534,0,0" transform="translate(4.466 6.233)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </g>
+      </g>
+      <g id="Group_1869-2" data-name="Group 1869" transform="translate(747.984 1416)">
+        <circle id="Ellipse_34-3" data-name="Ellipse 34" cx="4" cy="4" r="4" transform="translate(20.933 12) rotate(-90)" fill="#0f3764"></circle>
+        <line id="Line_9-3" data-name="Line 9" x2="23.897" transform="translate(3.036 8)" fill="none" stroke="#0f3764" stroke-width="1"></line>
+        <g id="Group_186-3" data-name="Group 186" transform="translate(16) rotate(90)">
+          <path id="Path_335-9" data-name="Path 335" d="M16,8A8,8,0,1,1,8,0a8,8,0,0,1,8,8" fill="#0f3764"></path>
+          <path id="Path_336-9" data-name="Path 336" d="M7.068,0,3.534,3.534,0,0" transform="translate(4.466 6.233)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </g>
+      </g>
+    </g>
+    <g id="Sub_title_1_Medium-14" data-name="Sub title 1 Medium" transform="translate(886 1591)">
+      <text id="Cygnet_Compliance_Platform" data-name="Cygnet Compliance Platform" transform="translate(78 17)" fill="#0f3764" font-size="18" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-78" y="0">Cygnet Compliance</tspan>
+        <tspan x="-35" y="22">Platform</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-13" data-name="Body medium" transform="translate(670 1328)">
+      <text id="SAP" transform="translate(13 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-13" y="0">SAP</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-14" data-name="Body medium" transform="translate(663 1386)">
+      <text id="Oracle" transform="translate(20 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-20" y="0">Oracle</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-15" data-name="Body medium" transform="translate(652 1441)">
+      <text id="Microsoft_Dynamics" data-name="Microsoft Dynamics" transform="translate(31 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-30" y="0">Microsoft</tspan>
+        <tspan x="-30" y="20">Dynamics</tspan>
+      </text>
+    </g>
+    <g id="Body_medium-16" data-name="Body medium" transform="translate(648 1517)">
+      <text id="Other_ERPs" data-name="Other ERPs" transform="translate(35 13)" fill="#fff" font-size="14" font-family="Roboto-Medium, Roboto" font-weight="500">
+        <tspan x="-35" y="0">Other ERPs</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

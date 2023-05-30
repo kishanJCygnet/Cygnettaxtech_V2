@@ -472,7 +472,7 @@
 									arrows:false,								
 									dots: true,
 									slidesToShow: '<?php echo $dynamic_col_logo; ?>',
-									rows: 2,						
+									rows: 2,			
 									responsive : [
 											// breakpoint from 0 up
 											{  breakpoint: 0,

@@ -2,7 +2,16 @@
     padding-bottom: 480px;
     .title-heading{
         text-align: left;
+        margin-bottom: 50px;
         h2{
+            color: #fff;
+            padding-bottom: 16px;
+            margin-bottom: 0;
+            font-size: 48px;
+        }
+        h3{
+            font-size: 24px;
+            font-weight: 500;
             color: #fff;
         }
     }
@@ -12,7 +21,7 @@
         }
         
         .slick-slide{
-            padding:  15px 15px 0;
+                padding:  15px 15px 0;
                 display: flex;
                 height: auto;
 
