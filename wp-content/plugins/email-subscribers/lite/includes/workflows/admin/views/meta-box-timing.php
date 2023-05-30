@@ -23,7 +23,6 @@ $option_base = 'ig_es_workflow_data[workflow_options]';
 <table class="ig-es-table">
 	<tr class="ig-es-table__row">
 		<td class="ig-es-table__col">
-			<label class="ig-es-label"><?php esc_html_e( 'Timing', 'email-subscribers' ); ?></label>
 				<?php
 				$field = new ES_Select( false );
 				$field

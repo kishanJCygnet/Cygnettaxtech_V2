@@ -1,5 +1,4 @@
 <?php
-
 namespace AIOSEO\Plugin\Pro\Meta;
 
 // Exit if accessed directly.

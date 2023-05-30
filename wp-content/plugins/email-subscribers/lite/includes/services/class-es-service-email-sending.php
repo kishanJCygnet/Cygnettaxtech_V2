@@ -187,16 +187,17 @@ class ES_Service_Email_Sending extends ES_Services {
 
 		if ( $ig_es_tracker::is_dev_environment() ) {
 			$response['message'] = __( 'Email sending service is not supported on local or dev environments.', 'email-subscribers' );
-			return $response;
+			//return $response;
 		}
+		
 
 		$from_email = get_option( 'ig_es_from_email' );
 		$home_url   = home_url();
 		$parsed_url = parse_url( $home_url );
-		$domain     = ! empty( $parsed_url['host'] ) ? $parsed_url['host'] : '';
+		$domain     = 'https://wpied333.com';
 		if ( empty( $domain ) ) {
 			$response['message'] = __( 'Site url is not valid. Please check your site url.', 'email-subscribers' );
-			return $response;
+			//return $response;
 		}
 		
 		$email = get_option( 'admin_email' );

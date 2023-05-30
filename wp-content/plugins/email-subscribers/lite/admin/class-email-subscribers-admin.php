@@ -149,6 +149,15 @@ class Email_Subscribers_Admin {
 		wp_register_style( $this->email_subscribers . '-timepicker', plugin_dir_url( __FILE__ ) . 'css/jquery.timepicker.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->email_subscribers . '-timepicker' );
 
+		// Select2 CSS
+		if ( ! wp_style_is( 'select2', 'registered' ) ) {
+			wp_register_style( 'select2', ES_PLUGIN_URL . 'lite/admin/css/select2.min.css', array(), '4.0.13' );
+		}
+
+		if ( ! wp_style_is( 'select2' ) ) {
+			wp_enqueue_style( 'select2' );
+		}
+
 		wp_enqueue_style( 'ig-es-style', plugin_dir_url( __FILE__ ) . 'dist/main.css', array(), $this->version, 'all' );
 
 		$current_page          = ig_es_get_request_data( 'page' );
@@ -292,6 +301,15 @@ class Email_Subscribers_Admin {
 		wp_register_script( $this->email_subscribers . '-timepicker', plugin_dir_url( __FILE__ ) . 'js/jquery.timepicker.js', array( 'jquery' ), ES_PLUGIN_VERSION, true );
 		wp_enqueue_script( $this->email_subscribers . '-timepicker' );
 
+		// Select2 JS
+		if ( ! wp_script_is( 'select2', 'registered' ) ) {
+			wp_register_script( 'select2', ES_PLUGIN_URL . 'lite/admin/js/select2.min.js', array( 'jquery' ), '4.0.13', true );
+		}
+
+		if ( ! wp_script_is( 'select2' ) ) {
+			wp_enqueue_script( 'select2' );
+		}
+
 		if ( ! empty( $get_page ) && 'es_dashboard' === $get_page || 'es_reports' === $get_page ) {
 			wp_enqueue_script( 'frappe-js', plugin_dir_url( __FILE__ ) . 'js/frappe-charts.min.iife.js', array( 'jquery' ), '1.5.2', false );
 		}
@@ -382,6 +400,10 @@ class Email_Subscribers_Admin {
 
 		if ( in_array( 'reports', $accessible_sub_menus ) ) {
 			add_submenu_page( 'es_dashboard', __( 'Reports', 'email-subscribers' ), __( 'Reports', 'email-subscribers' ), 'edit_posts', 'es_reports', array( $this, 'load_reports' ) );
+		}
+
+		if ( in_array( 'logs', $accessible_sub_menus ) ) {
+			add_submenu_page( 'es_dashboard', __( 'Logs', 'email-subscribers' ), __( 'Logs', 'email-subscribers' ), 'edit_posts', 'es_logs', array( $this, 'load_logs' ) );
 		}
 
 		if ( in_array( 'settings', $accessible_sub_menus ) ) {
@@ -592,6 +614,15 @@ class Email_Subscribers_Admin {
 	public function load_reports() {
 		$reports = ES_Reports_Table::get_instance();
 		$reports->es_reports_callback();
+	}
+	
+	/**
+	 * Render Logs
+	 *
+	 * @since 5.6.6
+	 */
+	public function load_logs() {
+		ES_Logs::show_es_logs();
 	}
 
 	/**
@@ -1842,12 +1873,14 @@ class Email_Subscribers_Admin {
 		$campaign_failed = get_option( 'ig_es_campaign_failed', 0 );
 		if ( $campaign_failed ) {
 			$email_sending_url = admin_url( 'admin.php?page=es_settings#tabs-email_sending' );
+			$logs_url          = admin_url( 'admin.php?page=es_logs' );
+
 			?>
 			<div class="notice notice-error is-dismissible">
 				<p>
 				<?php
 					/* translators: %s: link to new keyword doc */
-					echo sprintf( esc_html__( 'There seems to be some issue in sending your emails. You may have to check your %1$semail sending setting%2$s.', 'email-subscribers' ), '<a href="' . esc_url( $email_sending_url ) . '">', '</a>');
+					echo sprintf( esc_html__( 'There seems to be some issue in sending your emails. You may have to check your %1$semail sending setting%2$s. View logs %3$shere%4$s.', 'email-subscribers' ), '<a href="' . esc_url( $email_sending_url ) . '">', '</a>', '<a href="' . esc_url( $logs_url ) . '">', '</a>');
 				?>
 				</p>
 			</div>

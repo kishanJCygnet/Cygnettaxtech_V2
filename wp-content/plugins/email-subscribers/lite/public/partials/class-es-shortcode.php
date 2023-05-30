@@ -497,9 +497,9 @@ class ES_Shortcode {
 			return $form; 
 			
 		} else {
-			add_filter( 'safe_style_css', 'ig_es_allowed_css_style' );
+			add_filter( 'safe_style_css', 'ig_es_allowed_css_style', 999 );
 			echo wp_kses( $form, $allowedtags );
-			
+			remove_filter( 'safe_style_css', 'ig_es_allowed_css_style', 999 );
 		}
 	}
 
