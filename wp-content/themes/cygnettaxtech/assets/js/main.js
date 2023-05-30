@@ -89,10 +89,15 @@ function aboutheading(){
   var titleMargLeft = (0 - (((WiWidth - CnWidth)/ 2) + 15));
   var titleMarg = ((WiWidth - CnWidth)/ 2) + 550;
   jQuery('.about-pill-section .container .title-heading').css('margin-left', titleMargLeft);
-  jQuery('.about-pill-section .container .title-heading').css('min-width', titleMarg);
+  if(jQuery(window).width() > 1200){
+    jQuery('.about-pill-section .container .title-heading').css('min-width', titleMarg);
+  }
   jQuery('.wholesome-solutions .title-heading').css({'margin-left': titleMargLeft, 'padding-left': addWidthLeft });
   jQuery('.we-are-proud .title-heading').css({'margin-left': titleMargLeft});
-  jQuery('.we-are-proud .title-heading h2').css({'padding-left': addWidthLeft + 150});
+  jQuery('.we-are-proud .title-heading h2').css({'padding-left': addWidthLeft + 280});
+  jQuery('.zick-zack-content .zick-zack-inner-content:nth-child(odd) .col-text .text-content h3').css({'margin-left': titleMargLeft, 'padding-left': addWidthLeft });
+  jQuery('.zick-zack-content .zick-zack-inner-content:nth-child(even) .col-text .text-content h3, .easy-connectors').css({'margin-right': titleMargLeft, 'padding-right': addWidthLeft});
+ 
 }
 
 jQuery(document).ready(function(){
