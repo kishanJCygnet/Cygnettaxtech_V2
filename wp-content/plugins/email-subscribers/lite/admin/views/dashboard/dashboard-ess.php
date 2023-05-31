@@ -77,7 +77,7 @@ if ( $show_trial_optin ) {
 			/* translators: %d: Trial period in days */
 			'desc'         => sprintf( __( 'Start your %d days free trial to get automatic email sending, advance spam protection and more.', 'email-subscribers' ), $trial_period_in_days),
 			'cta_text'     => __( 'Start trial', 'email-subscribers' ),
-			'feature_url'  => '',
+			'feature_url'  => '#',
 		),
 	);
 } elseif ( ! ES()->is_premium() && ES()->trial->is_trial() && ES()->trial->is_trial_valid() ) {
@@ -209,7 +209,7 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 			</div>
 			<div class="flex-auto min-w-0 es-w-45 px-3">
 			<?php
-			if ( false && ES_Service_Email_Sending::is_onboarding_completed() ) {
+			if ( ES_Service_Email_Sending::is_onboarding_completed() ) {
 				$current_date        = ig_es_get_current_date();
 				$service_status      = ES_Service_Email_Sending::get_sending_service_status();
 				$ess_data            = get_option( 'ig_es_ess_data', array() );
@@ -231,10 +231,12 @@ $allowed_html_tags = ig_es_allowed_html_tags_in_esc();
 				);
 			} else {
 				$ess_onboarding_step = get_option( 'ig_es_ess_onboarding_step', 1 );
+				$ess_optin           = ig_es_get_request_data( 'ess_optin' );
 				ES_Admin::get_view(
 					'dashboard/ess-onboarding', 
 					array(
 						'ess_onboarding_step' => (int) $ess_onboarding_step,
+						'ess_optin'           => $ess_optin,
 					)
 				);
 			}

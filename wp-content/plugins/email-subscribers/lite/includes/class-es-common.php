@@ -2695,6 +2695,53 @@ class ES_Common {
 	}
 
 	/**
+	 * Check if the domain is blocked based on email
+	 *
+	 * @param $email
+	 *
+	 * @return bool
+	 *
+	 * @since 4.1.0
+	 */
+	public static function is_domain_blocked( $email ) {
+
+		if ( empty( $email ) ) {
+			return true;
+		}
+
+		$domains = trim( get_option( 'ig_es_blocked_domains', '' ) );
+
+		// No domains to block? Return
+		if ( empty( $domains ) ) {
+			return false;
+		}
+
+		$domains = explode( PHP_EOL, $domains );
+
+		$domains = apply_filters( 'ig_es_blocked_domains', $domains );
+
+		if ( empty( $domains ) ) {
+			return false;
+		}
+
+		$rev_email = strrev( $email );
+		foreach ( $domains as $domain ) {
+			$domain = trim( $domain );
+			if ( strpos( $rev_email, strrev( $domain ) ) === 0 ) {
+				$email_parts = explode( '@', $email );
+				if ( ! empty( $email_parts[1] ) ) {
+					$email_domain = $email_parts[1];
+					if ( $email_domain === $domain ) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Get column datatype for custom field in contacts table
 	 *
 	 * @param $selected

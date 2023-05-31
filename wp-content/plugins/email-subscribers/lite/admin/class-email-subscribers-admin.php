@@ -112,7 +112,7 @@ class Email_Subscribers_Admin {
 
 		add_action( 'ig_es_campaign_deleted', array( $this, 'delete_child_campaigns' ) );
 
-		add_action( 'ig_es_campaign_failed', array( $this, 'add_campaign_failed_flag' ) );
+		add_action( 'ig_es_campaign_failed', array( $this, 'save_campaign_error_details' ) );
 		add_action( 'ig_es_campaign_sent', array( $this, 'remove_campaign_failed_flag' ) );
 		add_action( 'admin_notices', array( $this, 'show_email_sending_failed_notice' ) );
 
@@ -247,15 +247,16 @@ class Email_Subscribers_Admin {
 				'ess_fallback_text'               => esc_html__('Automatically fallback to selected Sender after crossing Icegram Email Sending Service daily limits.', 'email-subscribers'),
 
 				'add_attachment_text'             => __( 'Add Attachment', 'email-subscribers' ),
+				'sending_error_text'              => __( 'Sending error', 'email-subscribers' ),
 			),
 			'is_pro'     => ES()->is_pro() ? true : false,
 			'is_premium' => ES()->is_premium(),
 		);
 
 		if ( 'es_settings' === $get_page ) {
-			$ig_es_js_data['popular_domains'] = ES_Common::get_popular_domains();
+			$ig_es_js_data['popular_domains']                           = ES_Common::get_popular_domains();
 			$ig_es_js_data['i18n_data']['delete_rest_api_confirmation'] = __( 'Are you sure you want to delete this key? This action cannot be undone.', 'email-subscribers' );
-			$ig_es_js_data['i18n_data']['select_user'] = __( 'Please select a user.', 'email-subscribers' );
+			$ig_es_js_data['i18n_data']['select_user']                  = __( 'Please select a user.', 'email-subscribers' );
 		}
 
 		if ( 'es_forms' === $get_page && ES_Drag_And_Drop_Editor::is_dnd_editor_page() ) {
@@ -1225,9 +1226,9 @@ class Email_Subscribers_Admin {
 		// Add CSS inliner task data to request if valid request.
 		if ( ES()->validate_service_request( array( 'css_inliner' ) ) ) {
 
-			$meta            = ! empty( $data['campaign_id'] ) ? ES()->campaigns_db->get_campaign_meta_by_id( $data['campaign_id'] ) : '';
-			$data['html']    = $data['content'];
-			$data['css']     = '';
+			$meta         = ! empty( $data['campaign_id'] ) ? ES()->campaigns_db->get_campaign_meta_by_id( $data['campaign_id'] ) : '';
+			$data['html'] = $data['content'];
+			$data['css']  = '';
 			if ( ! empty( $meta['es_custom_css'] ) ) {
 				$data['css'] = $meta['es_custom_css'];
 			} elseif ( ! empty( $data['tmpl_id'] ) ) {
@@ -1850,12 +1851,12 @@ class Email_Subscribers_Admin {
 		}
 	}
 
-	public function add_campaign_failed_flag() {
-		update_option( 'ig_es_campaign_failed', 1, false );
+	public function save_campaign_error_details( $error_details ) {
+		update_option( 'ig_es_campaign_error', $error_details, false );
 	}
 
 	public function remove_campaign_failed_flag() {
-		delete_option( 'ig_es_campaign_failed' );
+		delete_option( 'ig_es_campaign_error' );
 	}
 
 	public function show_email_sending_failed_notice() {
@@ -1870,22 +1871,45 @@ class Email_Subscribers_Admin {
 			return;
 		}
 
-		$campaign_failed = get_option( 'ig_es_campaign_failed', 0 );
-		if ( $campaign_failed ) {
-			$email_sending_url = admin_url( 'admin.php?page=es_settings#tabs-email_sending' );
-			$logs_url          = admin_url( 'admin.php?page=es_logs' );
-
+		$campaign_error = get_option( 'ig_es_campaign_error', 0 );
+		if ( $campaign_error ) {
+			$logs_url             = admin_url( 'admin.php?page=es_logs' );
+			$notification_guid    = $campaign_error['notification_guid'];
+			$notification         = ES_DB_Mailing_Queue::get_notification_by_hash( $notification_guid );
+			$notification_subject = $notification['subject'];
+			$error_message        = is_array( $campaign_error['error_message'] ) ? implode( '', $campaign_error['error_message'] ) : $campaign_error['error_message'];
 			?>
 			<div class="notice notice-error is-dismissible">
 				<p>
 				<?php
-					/* translators: %s: link to new keyword doc */
-					echo sprintf( esc_html__( 'There seems to be some issue in sending your emails. You may have to check your %1$semail sending setting%2$s. View logs %3$shere%4$s.', 'email-subscribers' ), '<a href="' . esc_url( $email_sending_url ) . '">', '</a>', '<a href="' . esc_url( $logs_url ) . '">', '</a>');
+				/* translators: 1: Notificatin subject 2. Error message */
+				echo sprintf( esc_html__( 'Campaign %1$s has an error while sending emails: %2$s', 'email-subscribers' ), 
+						'<strong>' . esc_html( $notification_subject ) . '</strong>', 
+						'<strong>' . esc_html( $error_message ) . '</strong>'
+				);
+				?>
+				</p>
+				<p>
+				<?php
+				/* translators: 1: Anchor tag 2. Closing anchor tag */
+				echo sprintf( esc_html__( 'Automatic sending has been paused for this campaign. For more details, view sending logs from %1$shere%2$s.', 'email-subscribers' ),
+						'<a href="' . esc_url( $logs_url ) . '" target="_blank">',
+						'</a>'
+				);
+				?>
+				</p>
+				<?php
+				$can_promote_ess = ES_Service_Email_Sending::can_promote_ess();
+				if ( $can_promote_ess ) {
+					$promotion_message_html = ES_Service_Email_Sending::get_ess_promotion_message_html();
+					$allowed_tags           = ig_es_allowed_html_tags_in_esc();
+					echo wp_kses( $promotion_message_html, $allowed_tags );
+				}
 				?>
 				</p>
 			</div>
 			<?php
-			delete_option( 'ig_es_campaign_failed' );
+			delete_option( 'ig_es_campaign_error' );
 		}
 	}
 

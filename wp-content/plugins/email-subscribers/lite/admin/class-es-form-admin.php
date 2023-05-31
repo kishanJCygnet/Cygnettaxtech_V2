@@ -1,9 +1,6 @@
 <?php
 
 // Exit if accessed directly
-
-use BracketSpace\Notification\Utils\Settings\Fields\Import;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -18,10 +15,9 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 	 * @subpackage Email_Subscribers/admin
 	 */
 	class ES_Form_Admin {
-
 		// class instance
 		public static $instance;
-
+		
 		// class constructor
 		public function __construct() {
 			$this->init();

@@ -769,7 +769,7 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 								$subject = $notification['subject'];
 								$content = $notification['body'];
 
-								ES()->mailer->send( $subject, $content, $emails, $merge_tags );
+								$send_result = ES()->mailer->send( $subject, $content, $emails, $merge_tags );
 
 								$total_remaining_emails      = ES_DB_Sending_Queue::get_total_emails_to_be_sent_by_hash( $notification_guid );
 								$remaining_emails_to_be_sent = ES_DB_Sending_Queue::get_total_emails_to_be_sent();
@@ -792,8 +792,8 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 								}
 
 								
-								$message_failed = did_action( 'ig_es_message_failed' );
-								if ( $message_failed ) {
+								$sending_failed = ! empty( $send_result['status'] ) && 'ERROR' === $send_result['status'];
+								if ( $sending_failed ) {
 									$pending_statuses = array( 
 										IG_ES_SENDING_QUEUE_STATUS_QUEUED,
 										IG_ES_SENDING_QUEUE_STATUS_SENDING 
@@ -812,7 +812,14 @@ if ( ! class_exists( 'ES_Queue' ) ) {
 										$failed_count_exceeded = $failed_count >= $maximum_failed_counts;
 										if ( $failed_count_exceeded ) {
 											$notification_data['status'] = IG_ES_MAILING_QUEUE_STATUS_FAILED;
-											do_action( 'ig_es_campaign_failed', $notification_guid );
+											$error_message               = $send_result['message'];
+											$action_data                 = array(
+												'notification_guid' => $notification_guid,
+												'message_id'        => $message_id,
+												'campaign_id'       => $campaign_id,
+												'error_message'     => $error_message,
+											);
+											do_action( 'ig_es_campaign_failed', $action_data );
 										}
 										ES_DB_Mailing_Queue::update_mailing_queue( $message_id, $notification_data );
 									}									

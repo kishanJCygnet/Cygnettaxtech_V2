@@ -270,9 +270,6 @@
 				}
 			}
 			
-			if(isset($this->options->wpFastestCacheLanguage) && $this->options->wpFastestCacheLanguage != "eng"){
-				wp_enqueue_script("wpfc-dictionary", plugins_url("wp-fastest-cache/js/lang/".$this->options->wpFastestCacheLanguage.".js"), array(), time(), false);
-			}
 		}
 
 		public function saveOption(){
@@ -1277,7 +1274,7 @@
 							<div class="questionCon">
 								<div class="question"><?php _e('Gzip', 'wp-fastest-cache'); ?></div>
 								<div class="inputCon"><input type="checkbox" <?php echo $wpFastestCacheGzip; ?> id="wpFastestCacheGzip" name="wpFastestCacheGzip"><label for="wpFastestCacheGzip"><?php _e("Reduce the size of files sent from your server", "wp-fastest-cache"); ?></label></div>
-								<div class="get-info"><a target="_blank" href="http://www.wpfastestcache.com/optimization/enable-gzip-compression/"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
+								<div class="get-info"><a target="_blank" href="https://www.wpfastestcache.com/tutorial/how-to-enable-gzip-compression-in-wordpress/#advantage"><img src="<?php echo plugins_url("wp-fastest-cache/images/info.png"); ?>" /></a></div>
 							</div>
 
 							<?php
