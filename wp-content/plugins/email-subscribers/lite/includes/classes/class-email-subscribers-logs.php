@@ -17,6 +17,8 @@ if ( ! class_exists( 'ES_Logs' ) ) {
 		 * Method to show es logs
 		 * 
 		 * @since 5.6.6
+		 * 
+		 * @modify 5.6.7
 		 */
 		public static function show_es_logs() {          
 			$log_files         = IG_Log_Handler_File::get_log_files();
@@ -85,7 +87,7 @@ if ( ! class_exists( 'ES_Logs' ) ) {
 				<div class="w-full bg-white rounded shadow">
 					<div class="px-6 py-4">
 						<p class="text-gray-700 text-base">
-							<pre><?php echo esc_html__( file_get_contents( IG_LOG_DIR . $log_file_name ) ); ?></pre>
+							<pre id="ig_es_log_content"><?php echo esc_html__( file_get_contents( IG_LOG_DIR . $log_file_name ) ); ?></pre>
 						</p>
 					</div>                
 				</div>

@@ -2924,3 +2924,11 @@ top: 50%;}
 .ig-es-log-files-dropdown {
 	width:300px;
 }
+
+#ig_es_log_content {
+	overflow-y: auto;
+}
+
+#ig_es_ess_promotion_message p {
+    margin: 0;
+}

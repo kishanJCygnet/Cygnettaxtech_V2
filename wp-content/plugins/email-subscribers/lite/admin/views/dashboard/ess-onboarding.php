@@ -1,4 +1,4 @@
-<div id="sending-service-benefits" class="pr-6 pl-6 w-full <?php echo 1 !== $ess_onboarding_step ? 'hidden' : ''; ?>">
+<div id="sending-service-benefits" class="pr-6 pl-6 w-full <?php echo 1 !== $ess_onboarding_step || 'yes' === $ess_optin ? 'hidden' : ''; ?>">
 	<p class="pb-3 text-lg font-medium leading-6 text-gray-400">
 		<span class="leading-7">
 			<?php echo esc_html__( 'Use our Email Sending Service', 'email-subscribers' ); ?>
@@ -36,7 +36,20 @@
 		</a>
 	</div>
 </div>
-<div id="sending-service-onboarding-tasks-list" class="pr-6 pl-6 w-full <?php echo 2 !== $ess_onboarding_step ? 'hidden' : ''; ?>">
+<?php
+if ( 'yes' === $ess_optin ) {
+	?>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			setTimeout(function(){
+				jQuery('#ig-ess-optin-cta').trigger('click');
+			},1000);
+		});
+	</script>
+	<?php
+}
+?>
+<div id="sending-service-onboarding-tasks-list" class="pr-6 pl-6 w-full <?php echo 2 !== $ess_onboarding_step && 'yes' !== $ess_optin ? 'hidden' : ''; ?>">
 	<p class="pb-3 text-lg font-medium leading-6 text-gray-400">
 		<span class="leading-7">
 			<?php echo esc_html__( 'Excellent choice!', 'email-subscribers' ); ?>

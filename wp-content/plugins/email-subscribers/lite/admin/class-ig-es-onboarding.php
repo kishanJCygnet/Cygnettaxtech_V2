@@ -1153,21 +1153,16 @@ if ( ! class_exists( 'IG_ES_Onboarding' ) ) {
 		}
 
 		/**
-		 * Method to subscribe to klawoo in the onboarding process.
+		 * Method to save final configuration.
 		 *
 		 * @since 4.6.0
+		 * 
+		 * @modify 5.6.7
 		 */
 		public function save_final_configuration() {
 
 			$response = array();
-
-			$is_trial = ig_es_get_request_data( 'is_trial', '' );
-
-			if ( ! empty( $is_trial ) ) {
-				// Add trial preferences.
-				ES()->trial->add_trial_data( $is_trial, time() );
-			}
-
+			
 			// Set flag for onboarding completion.
 			update_option( 'ig_es_onboarding_complete', 'yes' );
 

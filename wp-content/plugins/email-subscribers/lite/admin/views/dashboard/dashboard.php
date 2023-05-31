@@ -77,7 +77,7 @@ if ( $show_trial_optin ) {
 			/* translators: %d: Trial period in days */
 			'desc'         => sprintf( __( 'Start your %d days free trial to get automatic email sending, advance spam protection and more.', 'email-subscribers' ), $trial_period_in_days),
 			'cta_text'     => __( 'Start trial', 'email-subscribers' ),
-			'feature_url'  => '',
+			'feature_url'  => '#',
 		),
 	);
 } elseif ( ! ES()->is_premium() && ES()->trial->is_trial() && ES()->trial->is_trial_valid() ) {
