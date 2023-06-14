@@ -486,6 +486,8 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 		 * @return array|mixed|void
 		 *
 		 * @since 4.0.0
+		 * 
+		 * @modify 5.6.7
 		 */
 		public function validate_data( $data ) {
 
@@ -521,7 +523,7 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 				return $es_response;
 			}
 
-			$is_domain_blocked = $this->is_domain_blocked( $email );
+			$is_domain_blocked = ES_Common::is_domain_blocked( $email );
 
 			// Store it blocked emails
 			if ( $is_domain_blocked ) {
@@ -556,53 +558,6 @@ if ( ! class_exists( 'ES_Handle_Subscription' ) ) {
 			$es_response['status'] = 'SUCCESS';
 
 			return $es_response;
-		}
-
-		/**
-		 * Check if the domain is blocked based on email
-		 *
-		 * @param $email
-		 *
-		 * @return bool
-		 *
-		 * @since 4.1.0
-		 */
-		public function is_domain_blocked( $email ) {
-
-			if ( empty( $email ) ) {
-				return true;
-			}
-
-			$domains = trim( get_option( 'ig_es_blocked_domains', '' ) );
-
-			// No domains to block? Return
-			if ( empty( $domains ) ) {
-				return false;
-			}
-
-			$domains = explode( PHP_EOL, $domains );
-
-			$domains = apply_filters( 'ig_es_blocked_domains', $domains );
-
-			if ( empty( $domains ) ) {
-				return false;
-			}
-
-			$rev_email = strrev( $email );
-			foreach ( $domains as $domain ) {
-				$domain = trim( $domain );
-				if ( strpos( $rev_email, strrev( $domain ) ) === 0 ) {
-					$email_parts = explode( '@', $email );
-					if ( ! empty( $email_parts[1] ) ) {
-						$email_domain = $email_parts[1];
-						if ( $email_domain === $domain ) {
-							return true;
-						}
-					}
-				}
-			}
-
-			return false;
 		}
 				
 		/**

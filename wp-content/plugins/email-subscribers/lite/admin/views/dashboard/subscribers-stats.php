@@ -301,7 +301,7 @@ $last_period_end_date     = gmdate( $convert_date_format, strtotime( '-' . $days
 						$pricing_url = ES_Common::get_utm_tracking_url( $utm_args );
 						?>
 						<a  target="_blank" href="<?php echo esc_url( $pricing_url ); ?>">
-							<span class="premium-icon inline-block"></span>
+							<span class="premium-icon inline-block max"></span>
 						</a>
 						<?php
 					}

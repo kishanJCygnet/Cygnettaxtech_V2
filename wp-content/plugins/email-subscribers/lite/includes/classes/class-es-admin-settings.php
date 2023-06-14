@@ -493,8 +493,7 @@ class ES_Admin_Settings {
 
 			'ig_es_test_send_email'         => array(
 				'type'         => 'html',
-				/* translators: %s: Spinner image path */
-				'html'         => sprintf( '<input id="es-test-email" type="email" value=%s class="mt-3 mb-1 border-gray-400 form-input h-9"/><input type="submit" name="submit" id="es-send-test" class="ig-es-primary-button" value="Send Email"><span class="es_spinner_image_admin" id="spinner-image" style="display:none"><img src="%s" alt="Loading..."/></span>', $test_email, ES_PLUGIN_URL . 'lite/public/images/spinner.gif' ),
+				'html'         => self::get_test_send_email_html( $test_email ),
 				'placeholder'  => '',
 				'supplemental' => '',
 				'default'      => '',
@@ -718,7 +717,8 @@ class ES_Admin_Settings {
 				$html .= $field['name'];
 
 				if ( ! empty( $field['is_premium'] ) ) {
-					$html .= '</span><a class="ml-1" href="' . $field['link'] . '" target="_blank"><span class="premium-icon"></span></a>';
+					$premium_plan = isset( $field['plan'] ) ? $field['plan'] : '';
+					$html .= '</span><a class="ml-1" href="' . $field['link'] . '" target="_blank"><span class="premium-icon ' . $premium_plan . '"></span></a>';
 				}
 
 				// If there is help text
@@ -858,7 +858,8 @@ class ES_Admin_Settings {
 			. $mailer['name'] . '</p>';
 
 			if ( ! empty( $mailer['is_premium'] ) ) {
-				$html .= '<span class="premium-icon"></span>';
+				$plan = isset( $mailer['plan'] ) ? $mailer['plan'] : '';
+				$html .= '<span class="premium-icon ' . $plan . '"></span>';
 			}
 
 			$html .= '</div>';
@@ -874,11 +875,9 @@ class ES_Admin_Settings {
 	}
 
 	/**
-	 * Prepare Mailers Setting
+	 * Prepare Icegram Mailer Setting
 	 *
 	 * @return string
-	 *
-	 * @modify 4.3.12
 	 */
 	public static function get_icegram_mailer_html() {
 		$html                      = '';
@@ -961,6 +960,13 @@ class ES_Admin_Settings {
 		</section>
 		<?php
 		$html = ob_get_clean();
+		return $html;
+	}
+
+	public static function get_test_send_email_html( $test_email ) {
+
+		/* translators: %s: Spinner image path */
+		$html = sprintf( '<input id="es-test-email" type="email" value=%s class="mt-3 mb-1 border-gray-400 form-input h-9"/><input type="submit" name="submit" id="es-send-test" class="ig-es-primary-button" value="Send Email"><span class="es_spinner_image_admin" id="spinner-image" style="display:none"><img src="%s" alt="Loading..."/></span>', $test_email, ES_PLUGIN_URL . 'lite/public/images/spinner.gif' );
 		return $html;
 	}
 

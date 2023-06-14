@@ -11,7 +11,7 @@
 							<?php echo wp_kses( $activitiy['text'], $allowed_html_tags ); ?>
 						</span>
 					</td>
-					<td class="pl-1 py-3 text-gray-600">
+					<td class="pl-1 py-3 text-gray-600 text-right">
 						<span>
 							<?php echo esc_html( $activitiy['time'] ); ?>
 						</span>

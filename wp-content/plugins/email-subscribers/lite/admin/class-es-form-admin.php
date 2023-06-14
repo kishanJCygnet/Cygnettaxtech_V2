@@ -15,10 +15,9 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 	 * @subpackage Email_Subscribers/admin
 	 */
 	class ES_Form_Admin {
-
 		// class instance
 		public static $instance;
-
+		
 		// class constructor
 		public function __construct() {
 			$this->init();
@@ -709,21 +708,17 @@ if ( ! class_exists( 'ES_Form_Admin' ) ) {
 				return $css_html;
 			}
 			$content = $response['body'];
-			preg_match_all( '#<link\s+(?:[^>]*?\s+)?href=(\'|")?(https?[^\'"]+)(\'|")?#', $content, $links );
-			$links = $links[2];
-			foreach ( $links as $link) {
-				if (false === strpos( $link, '.css' ) ) {
-					continue;
-				}
-				$css_html .= '<link href="' . $link . '" ';
-				$css_html .= 'rel="stylesheet"/>';
+			preg_match_all( '/<link\s+rel=[\'"]stylesheet[\'"]\s+.*?>/', $content, $matches );
+			$mateched_link_tags = $matches[0];
+			if ( ! empty( $mateched_link_tags ) ) {
+				$css_html .= implode( '', $mateched_link_tags );
 			}
 	
-			preg_match_all('/[<]style[^>]*[>]([^<]+)[<]\/style[>]/', $content, $matches, PREG_OFFSET_CAPTURE);
+			preg_match_all('/<style[^>]*>[\s\S]*?<\/style>/', $content, $matches );
 			
-			$count = count($matches[1]);
-			for ( $i = 0; $i < $count; $i++ ) {
-				$css_html .= '<style type="text/css">' . $matches[1][$i][0] . '</style>';
+			$matched_style_tags = $matches[0];
+			if ( ! empty( $matched_style_tags ) ) {
+				$css_html .= implode( '', $matched_style_tags );
 			}
 	
 			return $css_html;

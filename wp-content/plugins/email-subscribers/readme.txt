@@ -6,7 +6,7 @@ Tags: email marketing, subscription, autoresponder, post notification, welcome e
 Requires at least: 3.9
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 5.6.6
+Stable tag: 5.6.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses
 
@@ -447,14 +447,29 @@ Refer [here](https://www.icegram.com/documentation/es-faq/).
 
 == Upgrade Notice ==
 
-= 5.6.6 =
+= 5.6.8 =
 
-* New: Optimize emails sending time based on subscriber's previous average email open time [MAX]
-* Fix: Extra label in the subscription form
-* Fix: Category reset issue in the post notification campaign
-* Fix: JavaScript error while setting template preview image
+* Improvements: Option to enable Icegram sending service when email sending fails
+* Improvements: Blocked domain check while adding contacts through workflows
+* Fix: Incorrect email stats in Weekly summary email
+* Fix: Issue with custom field having special characters [MAX]
+* Fix: Trial optin issue on dashboard
 
 == Changelog ==
+
+**5.6.8 (31.05.2023)**
+
+* Improvements: Option to enable Icegram sending service when email sending fails
+* Improvements: Blocked domain check while adding contacts through workflows
+* Fix: Incorrect email stats in Weekly summary email
+* Fix: Issue with custom field having special characters [MAX]
+* Fix: Trial optin issue on dashboard
+
+**5.6.7 (24.05.2023)**
+
+* New: Option to check email sending logs
+* Fix: Extra field in the subscription form when Otter – Gutenberg Blocks plugin is active 
+* Improvements: Small UI improvements
 
 **5.6.6 (17.05.2023)**
 

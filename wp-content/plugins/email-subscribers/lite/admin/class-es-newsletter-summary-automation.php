@@ -157,10 +157,12 @@ class ES_Newsletter_Summary_Automation {
 			'days' => $interval
 		);
 
+		$distinct_count = false;
+
 		$email_stats = array(
-			'total_subscribed'    => ES_Reports_Data::get_total_subscribed_contacts( $args ),
-			'total_sent_mails'   => ES_Reports_Data::get_total_emails_sent( $args ),
-			'total_opened_mails' => ES_Reports_Data::get_total_contacts_opened_emails( $args ),
+			'total_subscribed'    => ES_Reports_Data::get_total_subscribed_contacts( $args, $distinct_count ),
+			'total_sent_mails'   => ES_Reports_Data::get_total_emails_sent( $args, $distinct_count ),
+			'total_opened_mails' => ES_Reports_Data::get_total_contacts_opened_emails( $args, $distinct_count ),
 		);
 
 		if ( ES()->is_pro() ) {

@@ -89,7 +89,7 @@ class ES_Drag_And_Drop_Editor {
 		
 		$current_page = ig_es_get_request_data( 'page' );
 		//Only for development - this branch only
-		// wp_register_script( 'es_editor_js', 'http://localhost:9000/main.js', array(), time(), true );
+		//wp_register_script( 'es_editor_js', 'http://localhost:9000/main.js', array(), time(), true );
 		wp_register_script( 'es_editor_js', ES_PLUGIN_URL . 'lite/admin/js/editor.js', array( ), ES_PLUGIN_VERSION, true );
 		
 		if ( 'es_forms' === $current_page ) {
@@ -97,8 +97,9 @@ class ES_Drag_And_Drop_Editor {
 			$lists = ES()->lists_db->get_lists();
 
 			$form_editor_data = array(
-				'lists' => $lists,
-				'i18n'  => array(
+				'site_url' => home_url(),
+				'lists'    => $lists,
+				'i18n'     => array(
 					'no_list_selected_message' => __( 'Please select list(s) in which contact will be subscribed.', 'email-subscribers' ),
 				),
 			);
@@ -137,7 +138,7 @@ class ES_Drag_And_Drop_Editor {
 			return;
 		}
 		
-		// wp_enqueue_style( 'es_editor_css', 'http://localhost:9000/main.css', array(), time(), 'all' );
+		//wp_enqueue_style( 'es_editor_css', 'http://localhost:9000/main.css', array(), time(), 'all' );
 		wp_enqueue_style( 'es_editor_css', ES_PLUGIN_URL . 'lite/admin/css/editor.css', array(), ES_PLUGIN_VERSION, 'all' );
 	}
 

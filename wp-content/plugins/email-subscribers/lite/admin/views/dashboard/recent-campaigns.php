@@ -133,10 +133,16 @@ if ( ! empty( $campaigns ) && count( $campaigns ) > 0 ) { ?>
 	</ul>
 <?php 
 } else {
+	$campaign_url = admin_url( 'admin.php?page=es_campaigns' );
 	?>
-	<p class="px-3">
-		<?php echo esc_html__( 'No campaigns found.', 'email-subscribers' ); ?>
+	<p class="py-2 text-sm leading-5 text-gray-900">
+		<?php echo esc_html__( 'No recent campaigns were found.', 'email-subscribers' ); ?>
 	</p>
+	<a href="<?php echo esc_url( $campaign_url ); ?>" class="inline-flex justify-center py-1 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-indigo-600 border border-indigo-500 rounded-md cursor-pointer select-none focus:outline-none focus:shadow-outline-indigo focus:shadow-lg hover:bg-indigo-500 hover:text-white  hover:shadow-md md:px-1 lg:px-3 xl:px-3">
+		<span>
+			<?php echo esc_html__( 'Create new campaign', 'email-subscribers' ); ?>
+		</span>
+	</a>
 	<?php
 }
 

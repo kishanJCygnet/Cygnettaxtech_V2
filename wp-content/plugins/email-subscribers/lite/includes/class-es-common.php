@@ -1829,6 +1829,7 @@ class ES_Common {
 				'workflows',
 				'audience',
 				'reports',
+				'logs',
 				'forms',
 				'campaigns',
 				'sequences',
@@ -1912,9 +1913,9 @@ class ES_Common {
 
 			if ( ! ES()->is_premium() ) {
 				$articles_upsell[] = array(
-					'title'       => __( 'Icegram Express MAX', 'email-subscribers' ),
+					'title'       => __( 'Unlock all premium features', 'email-subscribers' ),
 					'link'        => $pricing_page_url,
-					'label'       => __( 'MAX', 'email-subscribers' ),
+					'label'       => __( '25% OFF', 'email-subscribers' ),
 					'label_class' => 'bg-green-100 text-green-800',
 				);
 			}
@@ -2691,6 +2692,53 @@ class ES_Common {
 		unset( $slug_name[0] );
 		unset( $slug_name[1] );
 		return implode( '_', $slug_name	 );
+	}
+
+	/**
+	 * Check if the domain is blocked based on email
+	 *
+	 * @param $email
+	 *
+	 * @return bool
+	 *
+	 * @since 4.1.0
+	 */
+	public static function is_domain_blocked( $email ) {
+
+		if ( empty( $email ) ) {
+			return true;
+		}
+
+		$domains = trim( get_option( 'ig_es_blocked_domains', '' ) );
+
+		// No domains to block? Return
+		if ( empty( $domains ) ) {
+			return false;
+		}
+
+		$domains = explode( PHP_EOL, $domains );
+
+		$domains = apply_filters( 'ig_es_blocked_domains', $domains );
+
+		if ( empty( $domains ) ) {
+			return false;
+		}
+
+		$rev_email = strrev( $email );
+		foreach ( $domains as $domain ) {
+			$domain = trim( $domain );
+			if ( strpos( $rev_email, strrev( $domain ) ) === 0 ) {
+				$email_parts = explode( '@', $email );
+				if ( ! empty( $email_parts[1] ) ) {
+					$email_domain = $email_parts[1];
+					if ( $email_domain === $domain ) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**

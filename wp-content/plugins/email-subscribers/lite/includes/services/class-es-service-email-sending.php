@@ -189,6 +189,7 @@ class ES_Service_Email_Sending extends ES_Services {
 			$response['message'] = __( 'Email sending service is not supported on local or dev environments.', 'email-subscribers' );
 			return $response;
 		}
+		
 
 		$from_email = get_option( 'ig_es_from_email' );
 		$home_url   = home_url();
@@ -872,6 +873,49 @@ class ES_Service_Email_Sending extends ES_Services {
 	public static function is_ess_branding_enabled() {
 		$ess_branding_enabled = get_option( 'ig_es_ess_branding_enabled', 'yes' );
 		return 'yes' === $ess_branding_enabled; 
+	}
+
+	public static function can_promote_ess() {
+		if ( ! self::opted_for_sending_service() && ! self::is_ess_promotion_disabled() ) {
+			return true;
+		}
+		return false;
+	}
+
+	public static function is_ess_promotion_disabled() {
+		$is_ess_promotion_disabled = 'yes' === get_option( 'ig_es_promotion_disabled', 'no' );
+		return $is_ess_promotion_disabled;
+	}
+
+	public static function get_ess_promotion_message_html() {
+		ob_start();
+		$optin_url      = admin_url( '?page=es_dashboard&ess_optin=yes' );
+		$learn_more_url = 'https://www.icegram.com/email-sending-service-in-icegram-express/';
+		?>
+		<div id="ig_es_ess_promotion_message" class="text-gray-700 not-italic">
+			<p>
+				<?php echo esc_html__( 'Please fix above sending error to continue sending emails', 'email-subscribers' ); ?>
+			</p>
+			<p>
+				<?php echo esc_html__( 'OR', 'email-subscribers' ); ?>
+			</p>
+			<p>
+				<?php echo esc_html__( 'Use our Icegram email sending service for a hassle-free email sending experience.', 'email-subscribers' ); ?>
+			</p>
+			<a href="<?php echo esc_url( $optin_url ); ?>" target="_blank" id="ig-es-ess-optin-promo" class="ig-es-primary-button px-3 py-1 mt-2 align-middle">
+				<?php
+					echo esc_html__( 'Signup to ESS', 'email-subscribers' );
+				?>
+			</a>
+			<a href="<?php echo esc_url( $learn_more_url ); ?>" target="_blank" class="ig-es-title-button px-3 py-1 mt-2 ml-2 align-middle">
+				<?php
+					echo esc_html__( 'Learn more', 'email-subscribers' );
+				?>
+			</a>
+		</div>
+		<?php
+		$message_html = ob_get_clean();
+		return $message_html;
 	}
 }
 

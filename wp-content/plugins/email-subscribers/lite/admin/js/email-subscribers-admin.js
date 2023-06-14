@@ -457,9 +457,11 @@
 						dataType: 'json',
 						success: function (response) {
 							if (response && typeof response.status !== 'undefined' && response.status == "SUCCESS") {
-								$('#es-send-test').parent().find('.helper').html('<span style="color:green">' + response.message + '</span>');
+								let successMessageHTML = '<span style="color:green">' + response.message + '</span>';
+								$('#es-send-test').parent().find('.helper').html(successMessageHTML);
 							} else {
-								$('#es-send-test').parent().find('.helper').html('<span style="color:#e66060">' + response.message + '</span>');
+								let errorMessageHTML = '<span style="color:#e66060"><strong>' + ig_es_js_data.i18n_data.sending_error_text + '</strong>: ' + ( Array.isArray( response.message ) ? response.message.join() : response.message ) + '</span>';
+								$('#es-send-test').parent().find('.helper').html(errorMessageHTML);
 							}
 
 							$('#es-send-test').next('#spinner-image').hide();
@@ -588,6 +590,9 @@
 				}
 			}
 
+
+			jQuery('#ig-es-log-files').ig_es_select2();
+		
 
 			// Broadcast Setttings
 			$('#ig_es_campaign_submit_button').attr("disabled", true);
@@ -2207,7 +2212,7 @@
 								$meta_box_footer.removeClass('hidden');
 							} else {
 								$meta_box_footer.addClass('hidden');
-								$rule_template_container.find('.ig-es-no-rules-message').clone().appendTo($rules_container)
+								$rule_template_container.find('.ig-es-no-rules-message').clone().appendTo($rules_container);
 							}
 						}
 

@@ -29,12 +29,12 @@ class PrimaryTerm extends CommonPrimaryTerm {
 		$primaryTerms = ! empty( $aioseoPost->primary_term ) ? $aioseoPost->primary_term : false;
 
 		if ( ! $primaryTerms || empty( $primaryTerms->{$taxonomyName} ) ) {
-			return false;
+			return apply_filters( 'aioseo_post_primary_term', false, $taxonomyName );
 		}
 
 		$term = get_term( $primaryTerms->{$taxonomyName}, $taxonomyName );
 		if ( is_wp_error( $term ) ) {
-			return false;
+			return apply_filters( 'aioseo_post_primary_term', false, $taxonomyName );
 		}
 
 		return apply_filters( 'aioseo_post_primary_term', $term, $taxonomyName );

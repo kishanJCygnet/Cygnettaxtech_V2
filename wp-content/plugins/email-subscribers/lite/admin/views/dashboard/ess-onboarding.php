@@ -1,10 +1,12 @@
-<div id="sending-service-benefits" class="pr-6 pl-6 w-full <?php echo 1 !== $ess_onboarding_step ? 'hidden' : ''; ?>">
-	<h3 class="text-lg font-medium tracking-tight text-gray-900 " style="line-height: 1.2em;">
-		<?php echo esc_html__( 'Use our Email Sending Service', 'email-subscribers' ); ?>
-	</h3>
+<div id="sending-service-benefits" class="pr-6 pl-6 w-full <?php echo 1 !== $ess_onboarding_step || 'yes' === $ess_optin ? 'hidden' : ''; ?>">
+	<p class="pb-3 text-lg font-medium leading-6 text-gray-400">
+		<span class="leading-7">
+			<?php echo esc_html__( 'Use our Email Sending Service', 'email-subscribers' ); ?>
+		</span>
+	</p>
 	<img class="absolute bottom-0 right-0 w-24 -mr-3 " src="<?php echo esc_url( ES_PLUGIN_URL . '/lite/admin/images/dashboard-send-newsletter.png' ); ?>">
 	<div class="step-1  block-description" style="width: calc(100% - 4rem)">
-		<ul class="pt-2 pb-1 space-y-4 text-sm font-medium leading-5 text-gray-400">
+		<ul class="pt-2 pb-1 space-y-2 text-sm font-medium leading-5 text-gray-400">
 			<li class="flex items-start space-x-3 group">
 				<div class="relative pt-1 flex items-center justify-center flex-shrink-0 w-5 h-5">
 					<span class="block w-2 h-2 transition duration-150 ease-in-out bg-gray-300 rounded-full group-hover:bg-gray-400 group-focus:bg-gray-400"></span>
@@ -34,12 +36,27 @@
 		</a>
 	</div>
 </div>
-<div id="sending-service-onboarding-tasks-list" class="pr-6 pl-6 w-full <?php echo 2 !== $ess_onboarding_step ? 'hidden' : ''; ?>">
-	<h3 class="text-lg font-medium tracking-tight text-gray-900 " style="line-height: 1.2em;">
-		<?php echo esc_html__( 'Excellent choice!', 'email-subscribers' ); ?>
-	</h3>
+<?php
+if ( 'yes' === $ess_optin ) {
+	?>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			setTimeout(function(){
+				jQuery('#ig-ess-optin-cta').trigger('click');
+			},1000);
+		});
+	</script>
+	<?php
+}
+?>
+<div id="sending-service-onboarding-tasks-list" class="pr-6 pl-6 w-full <?php echo 2 !== $ess_onboarding_step && 'yes' !== $ess_optin ? 'hidden' : ''; ?>">
+	<p class="pb-3 text-lg font-medium leading-6 text-gray-400">
+		<span class="leading-7">
+			<?php echo esc_html__( 'Excellent choice!', 'email-subscribers' ); ?>
+		</span>
+	</p>
 	<img class="absolute bottom-0 right-0 w-24 -mr-3 " src="<?php echo esc_url( ES_PLUGIN_URL . '/lite/admin/images/dashboard-send-newsletter.png' ); ?>">
-	<ul class="pt-2 pb-1 space-y-4 text-sm font-medium leading-5 text-gray-400 pt-2">
+	<ul class="pt-2 pb-1 space-y-2 text-sm font-medium leading-5 text-gray-400 pt-2">
 		<li id="ig-es-onboard-create_ess_account" class="flex items-start space-x-3 group">
 			<div class="relative pt-1 flex items-center justify-center flex-shrink-0 w-5 h-5">
 			<span class="animate-ping absolute w-4 h-4 bg-indigo-200 rounded-full"></span>

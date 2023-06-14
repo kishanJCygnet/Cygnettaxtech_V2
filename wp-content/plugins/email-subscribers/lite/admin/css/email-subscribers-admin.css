@@ -882,17 +882,33 @@ h5.es-badge {
 	width: 40%;
 }
 
+.es-w-45 {
+	width: 45%;
+}
+
 .es-w-50 {
     width: 50%;
+}
+
+.es-w-55 {
+    width: 55%;
 }
 
 .es-w-65 {
 	width: 65%;
 }
 
+table#top-countries {
+	width: 90%;
+}
+
 table#top-countries tbody tr:last-child:not(first-child),
 table#recent-subscribers-activities tbody tr:last-child:not(first-child) {
     border-bottom: none;
+}
+
+table#top-countries tbody tr:last-child:not(first-child) td, table#recent-subscribers-activities tbody tr:last-child:not(first-child) td {
+    padding-bottom: 5px;
 }
 
 #subscribers-stats.loading,
@@ -1857,12 +1873,63 @@ body.email-subscribers_page_es_campaigns .column-status .dashicons[title="Finish
 
 .premium-icon {
 	display: inline-block;
-	vertical-align: middle;
 	color: #319795;
-  	width: 20px;
-  	height: 21px;
-  	padding-top: 0.25rem;
-	background: url('../images/premium-icon.svg');
+	width: 44px;
+	height: 20px;
+	position: relative;
+}
+
+.premium-icon-rocket {
+    display: inline-block;
+    vertical-align: middle;
+    color: #319795;
+    width: 20px;
+    height: 21px;
+    padding-top: 0.25rem;
+    background: url(../images/premium-icon-white.svg);
+}
+
+.premium-icon::before {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 0px 10px;
+    border-radius: 5px;
+    background-color: #e7e6fd;
+    color: #5850ec;
+    position: absolute;
+    line-height: 1.8;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+    height: 100%;
+}
+
+.premium-icon.max::before {
+    content: 'MAX';
+}
+
+.premium-icon::before {
+    content: 'PRO';
+}
+
+.es-mailer-logo .premium-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.es-mailer-logo {
+    position: relative;
+}
+
+.es-mailer-logo .premium-icon::before {
+    border-radius: 0;
+    border-top-right-radius: 5px;
+}
+
+#ig-es-campaign-gallery-items-wrapper .premium-icon {
+	display: none;
 }
 
 .trial-icon {
@@ -2835,3 +2902,33 @@ top: 50%;}
 	width: 58%;
 }
 /** Workflow Rules CSS - END **/
+
+#ig-es-log-files-container .select2-container--default .select2-selection--single {
+	height: 34px;
+}
+
+#ig-es-log-files-container .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    background: #fff url('../images/arrow.svg') no-repeat;
+    border: none;
+    height: 15px;
+    width: 20px;
+    position: absolute;
+    margin-top: 0px;
+    transform: translate(-50%, -50%);
+}
+
+.ig-es-log-file-name {
+	line-height: 32px;
+}
+
+.ig-es-log-files-dropdown {
+	width:300px;
+}
+
+#ig_es_log_content {
+	overflow-y: auto;
+}
+
+#ig_es_ess_promotion_message p {
+    margin: 0;
+}
