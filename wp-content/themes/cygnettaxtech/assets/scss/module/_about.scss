@@ -2,6 +2,9 @@
     & > div{
         display: flex;
         align-items:flex-start ;
+        @include bp(md-max){
+            flex-wrap: wrap;
+        }
         .title-heading{
             background-color: #0F3764;
             min-width: 550px;
@@ -15,6 +18,17 @@
             padding:80px 50px 80px 0;
             @include bp(lg-max){
                 min-width: 450px;
+                padding:40px 50px 40px 0;
+            }
+            @include bp(md-max){
+                padding:20px 50px 20px 0;
+                margin-bottom: 20px;
+            }
+            @include bp(xs-max){
+                min-width: auto;
+                width: 100%;
+                margin-right: 0;
+                padding-left: 30px;
             }
             h2{
                 margin-bottom: 0;
