@@ -875,6 +875,12 @@ p {
             @include bp(md-max){
                 padding: 20px 0; 
             }
+            @include bp(sm-max){
+                padding-left: 180px;
+            }
+            @include bp(xs-max){
+                padding-left: 0;
+            }
         }
     }
     .ins-img {
@@ -883,14 +889,14 @@ p {
         left: 0;
         @include bp(lg-max){
             width:350px;
+            bottom: -2px;
+            top: auto;
         }
         @include bp(md-max){
-            width: 300px;
+            width: 230px;
+            top: auto;
         }
-        @include bp(sm-max){
-            width: 210px;
-            top: -26px;
-        }
+      
          @include bp(xs-max){
            display: none;
         }
@@ -914,11 +920,17 @@ p {
                 border-radius: 0 44px 44px 0;
                 color: #0c3761;
                 padding: 20px 74px;
+                @include bp(sm-max){
+                    padding-left: 50px !important;
+                }
             }
         }
         .ins-img {
             top: -95px;
             z-index: 1;
+            @include bp(md-max){
+                top: auto;
+            }
         }
     }
     &.about-facts {
@@ -972,6 +984,9 @@ p {
     @include bp(md-max){
         width: 100%;
     }
+    @include bp(sm-max){
+        padding: 15px;
+    }
     li {
         min-height: 48px;
         align-items: center;
@@ -1010,6 +1025,9 @@ p {
         @include bp(md-max){
             padding-left: 0;
         }
+        @include bp(sm-max){
+            padding-left: 15px;
+        }
     }
     .title-heading {
         position: absolute;
@@ -1028,6 +1046,7 @@ p {
             min-width: auto;
             max-width: 100%;
             margin: auto;
+            margin-bottom: 30px;
         }
         
         h2 {
@@ -1044,6 +1063,11 @@ p {
             @include bp(md-max){
                 font-size: 32px;
                 line-height: 42px;
+            }
+            @include bp(xs-max){
+                font-size: 24px;
+                line-height: 32px;
+                
             }
         }
     }
@@ -1077,6 +1101,12 @@ p {
 
 .wholesome-solutions {
     padding-top: 110px;
+    @include bp(md-max){
+        padding-top: 60px;
+    }
+    @include bp(sm-max){
+        padding-top: 40px;
+    }
     .container {
         position: relative;
     }
@@ -1085,6 +1115,12 @@ p {
         padding: 30px 0;
         margin-bottom: 40px;
         text-align: left;
+        @include bp(md-max){
+            padding-right: 150px;
+        }
+        @include bp(sm-max){
+            padding-right: 0px;
+        }
 
         h2 {
             color: #0f3764;
@@ -1099,6 +1135,12 @@ p {
             max-width: 100%;
             line-height: 40px;
             padding-bottom: 0;
+            @include bp(md-max){
+                padding-right: 160px;
+            }
+            @include bp(sm-max){
+                padding-right: 0px;
+            }
         }
         h3 {
             font-size: 24px;
@@ -1116,6 +1158,15 @@ p {
         position: absolute;
         right: 0;
         top: -80px;
+        @include bp(md-max){
+            position: absolute;
+            right: 0;
+            bottom: 40px;
+            top: auto;
+        }
+        @include bp(sm-max){
+            width: 100px;
+        }
     }
 
     &.about-notice-mg {
@@ -1150,6 +1201,11 @@ p {
             background-size: cover;
             background-repeat: no-repeat;
             font-size: 24px;
+            @include bp(md-max){
+                width: 130px;
+                height: 123px;
+                font-size: 18px;
+            }
         }
         p {
             margin-top: 15px;

@@ -74,6 +74,9 @@
             @include bp(md-max){
                 padding: 60px 30px;
             }
+            @include bp(sm-max){
+                padding: 30px 15px 60px;
+            }
         }
     }
 }
