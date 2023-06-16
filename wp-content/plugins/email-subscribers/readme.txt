@@ -6,7 +6,7 @@ Tags: email marketing, subscription, autoresponder, post notification, welcome e
 Requires at least: 3.9
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 5.6.8
+Stable tag: 5.6.10
 License: GPLv3
 License URI: http://www.gnu.org/licenses
 
@@ -447,15 +447,25 @@ Refer [here](https://www.icegram.com/documentation/es-faq/).
 
 == Upgrade Notice ==
 
-= 5.6.8 =
+= 5.6.10 =
 
-* Improvements: Option to enable Icegram sending service when email sending fails
-* Improvements: Blocked domain check while adding contacts through workflows
-* Fix: Incorrect email stats in Weekly summary email
-* Fix: Issue with custom field having special characters [MAX]
-* Fix: Trial optin issue on dashboard
+* New: Option to update existing subscribers' data while importing
+* New: Option to add surveys in email campaigns using Drag and Drop builder [MAX]
+* Fix: Fatal error when sending emails through SMTP mailer in a few cases [PRO]
+* Improvements: SQL query optimization used for sending emails
 
 == Changelog ==
+
+**5.6.10 (14.06.2023)**
+
+* New: Option to update existing subscribers' data while importing
+* New: Option to add surveys in email campaigns using Drag and Drop builder [MAX]
+* Fix: Fatal error when sending emails through SMTP mailer in a few cases [PRO]
+* Improvements: SQL query optimization used for sending emails
+
+**5.6.9 (07.06.2023)**
+
+* Fix: Scroll issue for subscription form
 
 **5.6.8 (31.05.2023)**
 

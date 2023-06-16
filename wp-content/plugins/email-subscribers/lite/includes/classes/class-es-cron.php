@@ -158,9 +158,12 @@ class ES_Cron {
 				}
 			}
 
-			$list_cleanup_cron_scheduled = wp_next_scheduled( 'ig_es_list_cleanup_worker' );
-			if ( ! $list_cleanup_cron_scheduled ) {
-				wp_schedule_event( floor( time() / 300 ) * 300, 'ig_es_monthly_interval', 'ig_es_list_cleanup_worker' );
+			$es_services = ES()->get_es_services();
+			if ( ! empty( $es_services ) && in_array( 'list_cleanup', $es_services, true ) ) {
+				$list_cleanup_cron_scheduled = wp_next_scheduled( 'ig_es_list_cleanup_worker' );
+				if ( ! $list_cleanup_cron_scheduled ) {
+					wp_schedule_event( floor( time() / 300 ) * 300, 'ig_es_monthly_interval', 'ig_es_list_cleanup_worker' );
+				}
 			}
 		}
 
