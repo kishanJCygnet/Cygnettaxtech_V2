@@ -24,7 +24,7 @@ $home_url  = home_url( '/' );
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title><?php echo esc_html( $site_name ); ?></title>
-		<meta http-equiv="refresh" content="10; url=<?php echo esc_url( $home_url ); ?>" charset="<?php echo esc_attr( get_option( 'blog_charset' ) ); ?>"/>
+		<meta1 http-equiv="refresh" content="10; url=<?php echo esc_url( $home_url ); ?>" charset="<?php echo esc_attr( get_option( 'blog_charset' ) ); ?>"/>
 		<?php do_action( 'es_message_head' ); ?>
 		<?php
 			wp_register_style( 'tailwind', ES_PLUGIN_URL . 'lite/admin/dist/main.css', array(), ES_PLUGIN_VERSION, 'all' );
@@ -35,10 +35,16 @@ $home_url  = home_url( '/' );
 	  <body class="min-h-screen mt-16 px-4 pt-10 pb-12 mx-auto max-w-7xl bg-gray-200 sm:px-6 lg:px-8">
 			<section class="bg-indigo-600 py-12 px-12 text-white shadow-md sm:rounded-lg mx-auto sm:w-2/3 xl:w-7/12" id="ig-es-unsubscribe-message">
 			  <div class="leading-6 tracking-wide">
-				<h3 class="font-medium text-base">
-				  <?php echo esc_html($main_message); ?>
-				</h3>
-				<p class="pt-4 font-thin text-lg">
+				<?php
+				if ( ! empty( $main_message ) ) {
+					?>
+					<h3 class="font-medium text-base pb-4">
+					<?php echo esc_html($main_message); ?>
+					</h3>
+					<?php
+				}
+				?>
+				<p class="font-thin text-lg">
 				  <?php echo wp_kses_post( $message ); ?>
 				</p>
 			  </div>

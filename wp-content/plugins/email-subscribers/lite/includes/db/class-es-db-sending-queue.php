@@ -837,7 +837,7 @@ class ES_DB_Sending_Queue {
 	 *
 	 * @since 4.3.7
 	 */
-	public static function get_emails_id_map_by_campaign( $campaign_id = 0, $emails = array() ) {
+	public static function get_emails_id_map_by_campaign( $campaign_id = 0, $message_id = 0, $emails = array() ) {
 		global $wpbd;
 
 		$emails      = esc_sql( $emails );
@@ -851,8 +851,9 @@ class ES_DB_Sending_Queue {
 
 		$results = $wpbd->get_results(
 			$wpbd->prepare(
-				"SELECT contact_id, email FROM {$wpbd->prefix}ig_sending_queue WHERE campaign_id = %d AND email IN($emails_str)",
-				$campaign_id
+				"SELECT contact_id, email FROM {$wpbd->prefix}ig_sending_queue WHERE campaign_id = %d AND mailing_queue_id = %d AND email IN($emails_str)",
+				$campaign_id,
+				$message_id
 			),
 			ARRAY_A
 		);

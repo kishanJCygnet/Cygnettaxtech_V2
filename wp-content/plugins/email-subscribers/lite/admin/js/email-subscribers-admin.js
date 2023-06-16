@@ -2899,7 +2899,7 @@
 					$('.es-import-option, .mailchimp_import_step_1').hide();
 					$('.step2-body').html(response.html).parent().show();
 					if( 'es-import-mailchimp-users' !== import_option ){
-						$('.step2-status, .step2-list').show();
+						$('.step2-status, .step2-list, .step2-update-existing-subscribers').show();
 					}
 					$('.wrapper-start-contacts-import').show();
 					importstatus.html('');
@@ -2912,7 +2912,7 @@
 					loader = $('#import-ajax-loading').css({
 						'display': 'inline-block'
 					});
-
+					
 				importprogress = $('#importing-progress'),
 				importprogressbar = importprogress.find('.bar'),
 				import_percentage = importprogress.find('.import_percentage')
@@ -2922,16 +2922,17 @@
 				$('.es-import-step1').slideUp();
 				$('.es-import-option').hide();
 				$('.step2-body').html('<br><br>').parent().show();
-				$('.step2-status,.step2-list, .step2-send-optin-emails, .es-import-processing, .wrapper-start-contacts-import').hide();
+				$('.step2-status,.step2-list, .step2-update-existing-subscribers, .step2-send-optin-emails, .es-import-processing, .wrapper-start-contacts-import').hide();
 
 				let import_data = {
 					id: 0,
 					options: {
-						identifier   		: data.identifier,
-						mapping_order		: data.mapping_order,
-						list_id      		: data.list_id,
-						status				: data.status,
-						send_optin_emails 	: data.send_optin_emails ? data.send_optin_emails : 'no',
+						identifier   		   : data.identifier,
+						mapping_order		   : data.mapping_order,
+						list_id      		   : data.list_id,
+						status				   : data.status,
+						send_optin_emails 	   : data.send_optin_emails ? data.send_optin_emails : 'no',
+						update_subscribers_data: data.update_subscribers_data
 					}
 				}
 				importstarttime = new Date();
@@ -3134,6 +3135,8 @@
 				let send_optin_emails_checkbox = $('#send_optin_emails');
 				let send_optin_emails = send_optin_emails_checkbox.is(':checked') ? 'yes' : 'no';
 
+				let update_subscribers_data = $('input[name="ig-es-update-subscriber-data"]:checked').val();
+
 				let status = $('#es_email_status').val();
 				if ( 'es-import-mailchimp-users' !== import_option && ('' === status || '0' === status) && ! is_subscriber_status_field_set  ) {
 					alert(ig_es_js_data.i18n_data.select_status);
@@ -3155,7 +3158,8 @@
 					list_id: list_id,
 					status: status,
 					mapping_order: mapping_order,
-					send_optin_emails: send_optin_emails
+					send_optin_emails: send_optin_emails,
+					update_subscribers_data: update_subscribers_data
 				}
 				$(document).trigger('ig_es_trigger_import', [import_data]);
 			});
@@ -4073,6 +4077,7 @@ function ig_es_add_dnd_rte_tags ( campaign_type ) {
 		<option value="">Select keyword</option>
 		${option_html}
 		</select>`,
+		title: 'Keyword',
 		// Bind the 'result' on 'change' listener
 		event: 'change',
 		result: (rte, action) => { rte.insertHTML(action.btn.firstChild.value);},
