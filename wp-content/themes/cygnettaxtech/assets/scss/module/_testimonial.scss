@@ -8,11 +8,29 @@
             padding-bottom: 16px;
             margin-bottom: 0;
             font-size: 48px;
+            @include bp(lg-max){
+                font-size: 42px;
+            }
+            @include bp(md-max){
+                font-size: 36px;
+            }
+            @include bp(sm-max){
+                font-size: 32px;
+            }
+            @include bp(xs-max){
+                font-size: 24px;
+            }
         }
         h3{
             font-size: 24px;
             font-weight: 500;
             color: #fff;
+            @include bp(sm-max){
+                font-size: 20px;
+            }
+            @include bp(xs-max){
+                font-size: 18px;
+            }
         }
     }
     .testimonial-slider{
@@ -60,6 +78,8 @@
                 font-size: 18px;  
                 font-weight: 500;      
                 width: 100%;   
+                line-height: 1.3;
+                margin-bottom: 10px;
               
             }
             .designation{
@@ -67,6 +87,7 @@
                 font-weight: 500;
                 font-size: 14px;
                 width: 100%;
+                line-height: 1.3;
             }
         }
         .slick-arrow{
@@ -83,8 +104,17 @@
             justify-content: center;
             color: #009999;
             font-size: 28px;
+            @include bp(sm-max){
+                width: 35px;
+              height: 35px;
+              top: -45px;
+              right: 8px;
+            }
             &:last-child{
                 right: 72px;
+                @include bp(sm-max){
+                    right: 54px;
+                }
             }
         }
     }

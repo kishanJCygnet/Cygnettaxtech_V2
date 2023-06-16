@@ -276,14 +276,14 @@ function testimonial_slider()
 											},
 											{  breakpoint: 768,
 											   settings : {
-													margin: 40,
-													slidesToShow:2,
+													margin: 20,
+													slidesToShow:1,
 												}
 											},
 											{  breakpoint: 992,
 											   settings : {
 													margin: 40,
-													slidesToShow:3,
+													slidesToShow:2,
 												}
 											},											
 									]             
