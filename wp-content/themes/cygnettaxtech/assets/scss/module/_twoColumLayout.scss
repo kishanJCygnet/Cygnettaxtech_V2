@@ -251,3 +251,24 @@
         }
     }
 }
+.architect-help{
+    .two-colum-content{
+       .col-left{
+            & > div{
+                & > div{
+                width: 100%;
+                }
+            }
+        }
+        .col-left{
+            @include bp(md-max){
+            width: 100%;
+            }
+        }
+        .col-right{
+            @include bp(md-max){
+                display: none;
+            }
+        }
+    }
+}

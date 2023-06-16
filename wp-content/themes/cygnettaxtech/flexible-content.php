@@ -502,6 +502,40 @@
 									]
 									
 								});
+
+								jQuery(<?php echo 'logo_slider_'.$logo_slider_cnt; ?>).length && jQuery(<?php echo 'logo_slider_'.$logo_slider_cnt; ?>).slick({
+										infinite: true,							
+										autoplay: true,
+										autoplaySpeed:3000,	
+										arrows: true,
+										dots: false,				
+										slidesToShow: 3,
+										prevArrow: "<i class='far fa-angle-right'></i>",
+										nextArrow: "<i class='far fa-angle-left'></i>",
+										responsive : [
+																	// breakpoint from 0 up
+																	{  breakpoint: 0,
+																	settings : {
+																		slidesToShow:1,
+																		margin: 20,
+																		}
+																	},
+																	{  breakpoint: 768,
+																	settings : {
+																			margin: 40,
+																			slidesToShow:2,
+																		}
+																	},
+																	{  breakpoint: 992,
+																	settings : {
+																			margin: 40,
+																			slidesToShow:2,
+																		}
+																	},											
+															]            
+										
+									})
+								
 							})
 							</script>
 					<?php endif; ?>
