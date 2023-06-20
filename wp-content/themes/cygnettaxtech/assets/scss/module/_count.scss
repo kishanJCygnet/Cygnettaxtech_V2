@@ -96,6 +96,7 @@
             @include bp(lg-max){
                 width: 60px;
                 height: 60px;
+                padding: 8px;
             }
             @include bp(md-max){
                 width: 50px;
@@ -160,6 +161,9 @@
                     font-size: 32px;
                     line-height: 1.3;
                 }
+                @include bp(xs-max){
+                    font-size: 24px;
+                }
                 span{
                     color: #60D6D6;
                 }
@@ -178,6 +182,9 @@
             .count-inner{
                 width:50%;
                 margin: 15px 0;
+                @include bp(xs-max){
+                    width:100%;
+                }
                 .count-inner-content{
                     position: relative;
                     padding: 30px;
@@ -188,12 +195,15 @@
                     border-radius: 8px;
                     @include bp(lg-max){
                         padding: 15px;
-                        padding-left: 75px;
+                        padding-left: 90px;
                     }
                   
                     .icon{
                         position: absolute;
                         left: 30px;
+                        @include bp(lg-max){
+                            left: 15px;
+                        }
                         @include bp(md-max){
                             left: 15px;
                         }
