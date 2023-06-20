@@ -97,7 +97,8 @@ function aboutheading(){
   jQuery('.we-are-proud .title-heading h2').css({'padding-left': addWidthLeft + 280});
   jQuery('.zick-zack-content .zick-zack-inner-content:nth-child(odd) .col-text .text-content h3').css({'margin-left': titleMargLeft, 'padding-left': addWidthLeft });
   jQuery('.zick-zack-content .zick-zack-inner-content:nth-child(even) .col-text .text-content h3, .easy-connectors').css({'margin-right': titleMargLeft, 'padding-right': addWidthLeft});
- 
+  jQuery('.tab-section .nav-tab-containt:not(.compliance-requirements-sec .nav-tab-containt)').css({'margin-left': titleMargLeft}); 
+  jQuery('.uninterrupted-compliance .uc-inner-content').css({'margin-right': titleMargLeft}); 
 }
 
 jQuery(document).ready(function(){
@@ -196,6 +197,21 @@ jQuery(document).ready(function(){
       });
   
   });
+
+
+ var htmlval = jQuery(".corporates-tab").each(function(){
+  jQuery(this).html()
+});
+jQuery(".corporates-tab").remove();
+jQuery(".eInvoicing-for-corporates").html(htmlval);
+
+
+ var msmetab = jQuery(".MSME-tab-cn").each(function(){
+  jQuery(this).html()
+});
+jQuery(".MSME-tab-cn").remove();
+jQuery(".eInvoicing-for-MSME").html(msmetab);
+
 
 });
 

@@ -147,10 +147,14 @@
         }
     }
     .two-colum-content {
+        @include bp(sm-max){
+            flex-direction: column !important;
+        }
         .col-left {
             width: auto;
             max-width: 165px;
             min-width: 165px;
+           
             .d-flex {
                 & > div {
                     height: 100%;
@@ -169,6 +173,9 @@
             width: 100%;
             padding-left: 0;
             padding-right: 50px;
+            @include bp(sm-max){
+                padding-right: 0;
+            }
             .two-inner-image-content {
                 width: 100%;
                 img {
@@ -183,6 +190,13 @@
                 width: auto;
                 max-width: 420px;
                 min-width: 420px;
+                @include bp(md-max){
+                    max-width: 250px;
+                    min-width: 250px;   
+                }
+                @include bp(sm-max){
+                    min-width: 100%;
+                 }
             }
             .blue-box {
                 .inner-content {
@@ -191,6 +205,9 @@
                     h2 {
                         color: #fff;
                         margin-bottom: 30px;
+                        @include bp(xs-max){
+                            font-size: 22px;
+                        }
                         span {
                             color: #60d6d6;
                         }
@@ -211,17 +228,29 @@
                 & > div {
                     display: flex;
                     width: 100%;
+                    @include bp(md-max){
+                        flex-wrap: wrap;
+                    }
                     .content-title-heading {
                         min-width: 360px;
                         width: 360px;
                         display: flex;
                         align-items: center;
+                            @include bp(md-max){
+                                min-width: 100%;
+                                width: 100%;
+                                text-align: center;
+                            }
+                       
                         h2 {
                             font-weight: 500;
                         }
                         & + div {
                             width: 100%;
                             padding-left: 30px;
+                            @include bp(md-max){
+                                padding-left: 0px;
+                            }
                         }
                     }
                 }
