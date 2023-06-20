@@ -637,7 +637,7 @@ if ( ! class_exists( 'ES_Mailer' ) ) {
 					$this->email_id_map = ES()->contacts_db->get_email_id_map( $emails );
 				} else {
 					// If the campaign isn't a sequence message, then we can fetch contact-email mapping data from sending_queue table
-					$this->email_id_map = ES_DB_Sending_Queue::get_emails_id_map_by_campaign( $campaign_id, $emails );
+					$this->email_id_map = ES_DB_Sending_Queue::get_emails_id_map_by_campaign( $campaign_id, $message_id, $emails );
 				}
 			}
 
@@ -1064,8 +1064,10 @@ if ( ! class_exists( 'ES_Mailer' ) ) {
 			// Format Templates.
 			$data['content']     = $content;
 			$campaign_id         = ! empty( $merge_tags['campaign_id'] ) ? $merge_tags['campaign_id'] : 0;
+			$message_id          = ! empty( $merge_tags['message_id'] ) ? $merge_tags['message_id'] : 0;
 			$data['tmpl_id']     = ! empty( $campaign_id ) ? ES()->campaigns_db->get_template_id_by_campaign( $campaign_id ) : 0;
 			$data['campaign_id'] = $campaign_id;
+			$data['message_id']  = $message_id;
 
 			$data = apply_filters( 'es_after_process_template_body', $data );
 
@@ -1862,6 +1864,10 @@ if ( ! class_exists( 'ES_Mailer' ) ) {
 
 			$phpmailer          = new PHPMailer( true );
 			$phpmailer->CharSet = 'UTF-8';
+
+			$phpmailer::$validator = static function ( $email ) {
+				return (bool) is_email( $email );
+			};
 
 			return $phpmailer;
 		}

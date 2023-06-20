@@ -222,7 +222,7 @@ class Email_Subscribers_Admin {
 				'no_windowclose'                  => esc_html__( 'Please do not close this window until it completes...', 'email-subscribers' ),
 				'prepare_import'                  => esc_html__( 'Preparing Import...', 'email-subscribers' ),
 				/* translators: 1. Imported contacts count 2. Total contacts count 3. Failed to import count 4. Memory usage */
-				'current_stats'                   => esc_html__( 'Currently %1$s of %2$s imported with %3$s errors. %4$s %5$s memory usage', 'email-subscribers' ),
+				'current_stats'                   => esc_html__( 'Currently %1$s of %2$s imported/updated with %3$s errors. %4$s %5$s memory usage', 'email-subscribers' ),
 				/* translators: 1 Duplicate found email message */
 				'duplicate_emails_found_message'  => __( '%1$s duplicate emails found.', 'email-subscribers' ),
 				/* translators: %s: Time left in minutes */

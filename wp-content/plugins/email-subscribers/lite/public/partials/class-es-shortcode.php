@@ -357,9 +357,9 @@ class ES_Shortcode {
 		// Form html
 		$form_html = '<input type="hidden" name="esfpx_form_id" value="' . $form_id . '" />';
 
-		$form_header_html = '<div class="emaillist" id="es_form_' . self::$form_identifier . '">';
-		$form_data_html = '';
-		$form_orig_html = '';
+		$form_header_html = '';
+		$form_data_html   = '';
+		$form_orig_html   = '';
 
 		$form_orig_html = $form_header_html;
 		// Don't show form if submission was successful.
@@ -419,7 +419,7 @@ class ES_Shortcode {
 				$form_body = '';
 				if ( ! empty( $data['settings']['dnd_editor_css'] ) ) {
 					$editor_css = $data['settings']['dnd_editor_css'];
-					// We are using attribute selector data-form-id to apply Form style and not form unique id since when using it, it overrides Grapejs custom style changes.
+					// We are using attribute selector data-form-id to apply Form style and not form unique id since when using it, it overrides GrapeJs custom style changes done through GrapeJS style editor.
 					$editor_css = str_replace( '.es-form-field-container', 'form[data-form-id="' . $form_id . '"] .es-form-field-container', $editor_css );
 					$form_body  = '<style type="text/css">' . $editor_css . '</style>';
 				}
@@ -433,7 +433,10 @@ class ES_Shortcode {
 		
 		}
 		
-		$form_data_html .= '<span class="es_subscription_message ' . $message_class . '" id="es_subscription_message_' . $unique_id . '">' . $message_text . '</span></div>';
+		$form_data_html .= '<span class="es_subscription_message ' . $message_class . '" id="es_subscription_message_' . $unique_id . '">' . $message_text . '</span>';
+
+		// Wrap form html inside a container.
+		$form_data_html = '<div class="emaillist" id="es_form_' . self::$form_identifier . '">' . $form_data_html . '</div>';
 
 		$form = $form_data_html;
 

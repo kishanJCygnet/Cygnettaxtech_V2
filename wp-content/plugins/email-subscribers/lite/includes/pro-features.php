@@ -178,6 +178,7 @@ function ig_es_mailers_promo( $mailers ) {
 				'name'       => 'Mailersend',
 				'logo'       => ES_PLUGIN_URL . 'lite/admin/images/mailersend.svg',
 				'is_premium' => true,
+				'plan'       => 'max',
 				'url'        => ES_Common::get_utm_tracking_url(
 					array(
 						'url'        => 'https://www.icegram.com/express/pricing/?utm_source=in_app&utm_medium=track_clicks&utm_campaign=es_upsell/',
