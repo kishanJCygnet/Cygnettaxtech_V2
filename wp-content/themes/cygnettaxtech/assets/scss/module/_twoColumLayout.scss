@@ -173,6 +173,9 @@
             width: 100%;
             padding-left: 0;
             padding-right: 50px;
+            @include bp(md-max){
+                padding-right: 20px;
+            }
             @include bp(sm-max){
                 padding-right: 0;
             }
@@ -270,11 +273,29 @@
     border-radius: 40px 0px 0px 40px;
     padding: 60px;
     padding-right: 20px;
+    @include bp(md-max){
+        padding-right: 20px !important;
+        padding-left: 20px;
+    }
+    
     h2{
         font-size: 48px;
         line-height: 60px;
         color: #0c3761;
         margin-bottom: 50px;
+        
+        @include bp(lg-max){
+            font-size: 42px;
+            line-height: 1.3;
+        }
+        @include bp(md-max){
+            padding-right: 0 !important;          
+            font-size: 32px;
+        }
+        @include bp(sm-max){
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
         span{
             color: #009999;
         }

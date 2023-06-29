@@ -2,6 +2,24 @@
     .title-heading{
         h2{
             font-size: 48px;
+            @include bp(xl-max){
+                font-size: 42px;
+            }
+            @include bp(lg-max){
+                font-size: 36px;
+            }
+            @include bp(md-max){
+                font-size: 32px;
+                line-height: 42px;
+            }
+            @include bp(sm-max){
+                font-size: 28px;
+                line-height: 42px;
+            }
+            @include bp(xs-max){
+                font-size: 24px;
+                line-height: 34px;
+            }
         }
     }
     .zick-zack-content{
@@ -9,9 +27,15 @@
             margin: 55px 0;
             display: inline-block;
              width: 100%;
+             @include bp(sm-max){
+                margin: 30px 0;
+            }
             .zig-zag-inner-div{
                 display: flex;
                 align-items: center;
+                @include bp(sm-max){
+                    flex-direction: column;
+                }
                
                 .col-img{
                     width: 656px;
@@ -19,6 +43,16 @@
                     background: #FFFFFF 0% 0% no-repeat padding-box;
                     border: 1px solid #F1F3F6;
                     border-radius: 8px;
+                    @include bp(lg-max){
+                        width: 400px;
+                    }
+                    @include bp(md-max){
+                        width: 300px;
+                    }
+                    @include bp(sm-max){
+                        width: 100%;
+                        margin-bottom: 20px;
+                    }
                     .img-content{
                         height: 100%;
                         width: 100%;
@@ -31,10 +65,23 @@
                 .col-text{
                     width: calc(100% - 656px);
                     padding-left: 30px;
+                    @include bp(lg-max){
+                        width: calc(100% - 400px);
+                    }
+                    @include bp(md-max){
+                        width: calc(100% - 300px);
+                    }
+                    @include bp(sm-max){
+                     width: 100%;
+                     padding-left: 0;
+                    }
                     h3{
                         font-size: 32px;
                         line-height: 40px;
                         margin-bottom: 30px;
+                        @include bp(sm-max){
+                            font-size: 24px;
+                        }
                     }
                 }
             }
@@ -42,9 +89,16 @@
                 
                 .zig-zag-inner-div{
                     flex-direction: row-reverse;
+                    @include bp(sm-max){
+                        flex-direction: column;
+                    }
                     .col-text{
                         padding-left: 0;
                         padding-right: 30px;
+                        @include bp(sm-max){
+                            padding-right: 0;
+
+                        }
                     }
                 }
             }
@@ -74,14 +128,24 @@
                             padding: 80px 50px 80px 0;
                             color: #fff;
                             text-align: right;
+                            @include bp(md-max){
+                                padding: 30px 50px 30px 0;
+                            }
                         }
                          & > div{
                             display: flex;
                             padding: 0;
                             align-items: center;
+                            @include bp(md-max){
+                                flex-wrap: wrap;
+                            }
                             & > .row{
                                 min-width: calc(100% - 400px);
                                 max-width: calc(100% - 400px);
+                                @include bp(md-max){
+                                    min-width: 100%;
+                                       max-width:100%;
+                                    }
                             }
                          }
                     }
