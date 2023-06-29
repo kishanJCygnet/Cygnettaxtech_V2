@@ -24,6 +24,35 @@
 				}
 			});
 
+			var clipboard = new ClipboardJS('.ig-es-merge-tag', {
+				text: function(trigger) {
+						let tag_text = $(trigger).data('tag-text');
+						if ( '' === tag_text ) {
+							tag_text = $(trigger).text();
+						}
+						return tag_text.trim();
+				}
+			});
+
+			clipboard.on('success', function(e) {
+				let sourceElem    = e.trigger;
+				let clipBoardText = e.text;
+				let targetID      = $(sourceElem).closest('.merge-tags-wrapper').data('target-elem-id');
+				var target        = document.getElementById(targetID);
+
+				if (target.setRangeText) {
+					target.focus();
+					//if setRangeText function is supported by current browser
+					target.setRangeText(clipBoardText);
+				} else {
+					target.focus()
+					document.execCommand('insertText', false /*no UI*/, clipBoardText);
+				}
+				if ( 'undefined' !== typeof tinymce.activeEditor ) {
+					tinymce.activeEditor.execCommand('mceInsertContent', false, clipBoardText);
+				}
+			});
+
 			var $newDiv = $("<div/>").addClass("pt-2 pb-2").html(`<div class="ig_es_process_message">Page <span id="ig_es_page_number">1</span> is processing <svg class="es-btn-loader animate-spin h-4 w-4 text-indigo inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
 			<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 			<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>

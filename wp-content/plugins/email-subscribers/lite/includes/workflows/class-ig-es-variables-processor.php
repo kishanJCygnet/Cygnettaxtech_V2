@@ -167,6 +167,13 @@ class IG_ES_Variables_Processor {
 	 * @return bool
 	 */
 	public static function is_excluded( $variable ) {
+
+		$is_subscriber_tag = false !== strpos( $variable, 'subscriber.' );
+		$is_site_tag       = false !== strpos( $variable, 'site.' );
+
+		if ( $is_subscriber_tag || $is_site_tag ) {
+			return true;
+		}
 		 
 		$excluded = apply_filters('ig_es_variables_processor_excluded', array(
 		   'EMAIL',
@@ -186,7 +193,7 @@ class IG_ES_Variables_Processor {
 		   'DATE',
 		));
 
-		return in_array( $variable, $excluded );
+		return in_array( $variable, $excluded, true );
 	}
 
 }
