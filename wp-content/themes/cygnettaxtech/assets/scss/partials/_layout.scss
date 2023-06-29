@@ -233,6 +233,10 @@ body {
                 font-size: 32px;
                 line-height: 42px;
             }
+            @include bp(sm-max){
+                font-size: 28px;
+                line-height: 42px;
+            }
             @include bp(xs-max){
                 font-size: 24px;
                 line-height: 34px;
@@ -825,13 +829,17 @@ p {
 }
 
 .bg-gd-green {
-    background: transparent linear-gradient(50deg, #0f3764 0%, #009999 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(50deg, #0f3764 0%, #009999 100%) 0% 0% no-repeat padding-box !important;
 }
 
 .taxtech-architect {
     position: relative;
     padding-top: 0;
     .container {
+        @include bp(sm-max){
+          width: 100%;
+          max-width: 100%;
+        } 
         & > div {
             padding-left: 450px;
             @include bp(lg-max){
@@ -847,6 +855,11 @@ p {
     }
     .title-heading {
         text-align: left;
+        @include bp(sm-max){
+            background: transparent linear-gradient(270deg, #0f3764 0%, #009999 100%) 0% 0% no-repeat padding-box;
+            margin-bottom: 49px;
+            margin-left: -15px !important;
+        }
         &::after {
             content: "";
             position: absolute;
@@ -861,6 +874,9 @@ p {
             @include bp(xs-max){
                 height: 110px;
             }
+            @include bp(sm-max){
+                display: none;
+            }    
         }
         h2 {
             margin-bottom: 40px;
@@ -875,7 +891,8 @@ p {
                 padding: 20px 0; 
             }
             @include bp(sm-max){
-                padding-left: 180px;
+                padding-left: 200px;
+                margin-bottom: 0;
             }
             @include bp(xs-max){
                 padding-left: 0;
@@ -894,6 +911,10 @@ p {
         @include bp(md-max){
             width: 230px;
             // top: auto;
+        }
+        @include bp(sm-max){
+            width: 215px;
+            top: -27px;
         }
       
          @include bp(xs-max){
@@ -923,8 +944,8 @@ p {
                     padding-left: 50px !important;
                 }
                 @include bp(sm-max){
-                    padding-left: 12px!important;
-                    padding-right: 15px !important;
+                    padding-left: 30px!important;
+                    padding-right: 40px !important;
                 }
             }
         }
@@ -974,16 +995,24 @@ p {
             }
             @include bp(sm-max){
               padding-left: 0;
+              padding-top: 80px;
              }
             & > div{
                 border-right: 1px solid rgba(255, 255, 255, 0.2);
+                @include bp(sm-max){
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                    border-right: 0px
+                   }
                 &:last-child{
                     border-right: 0;
+                    @include bp(sm-max){
+                        border-bottom: 0;
+                      }
                 }
                 @include bp(md-max){
                     width: 33.33%;
                 }
-                @include bp(md-max){
+                @include bp(sm-max){
                     width: 100%;
                 }
             }
@@ -1132,6 +1161,14 @@ p {
         background: #ffffff 0% 0% no-repeat padding-box;
         box-shadow: 0px 8px 32px #00000014;
         border: 1px solid #eceef1;
+    }
+    &.global-indirect-vd{
+        .brand-vid{
+            margin-top: 0px;
+            #sub-frame-error{
+                background-color: #fff !important;
+            }
+        }
     }
 }
 
@@ -1338,6 +1375,9 @@ p {
     border-radius: 8px;
     color: #fff;
     height: 100%;
+    @include bp(md-max){
+        padding: 15px;
+    }
     h2 {
         margin-bottom: 30px;
         span {
@@ -1418,7 +1458,7 @@ p {
     }
 }
 .pb-500 {
-    padding-bottom: 500px;
+    padding-bottom: 500px !important;
 }
 .pb-250{
     padding-bottom: 250px;
@@ -1519,6 +1559,10 @@ p {
         width: 264px !important;
         min-width: 264px !important;
         max-width: 264px !important;
+        @include bp(sm-max){
+            min-width: 100% !important;
+            max-width: 100% !important;
+        }
     }
     .aboutus-title-cn-bg{
         display: flex;
@@ -1527,6 +1571,15 @@ p {
         height: calc(100% + 115px);
         z-index: 1;
         position: relative;
+        @include bp(md-max){
+            height: calc(100% + 80px);
+        }
+        h2{
+            @include bp(md-max){
+                font-size: 22px;
+                line-height: 1.3;
+            }
+        }
        
     }
 }
@@ -1597,11 +1650,53 @@ p {
 
 }
 .enhance-your-business{
+    .title-heading{
+        h2{
+            @include bp(md-max){
+                padding-left: 300px !important;
+                padding-right: 34px !important;
+            }
+            
+        }
+    }
     h2{
         padding-top: 160px;
         padding-bottom: 40px;
         font-size: 48px;
         line-height: 60px;
+        @include bp(xl-max){
+            padding-top: 100px;
+          }
+        @include bp(lg-max){
+            font-size: 42px;
+            line-height: 1.4;
+          }
+        @include bp(md-max){       
+            font-size: 38px;
+          }
+        @include bp(sm-max){       
+            font-size: 32px;
+          }
+     
+    }
+    .ins-img{
+      @include bp(xl-max){
+        width: 335px;
+      }
+      @include bp(lg-max){
+        width: 275px;
+        top:-82px !important;
+      }
+      @include bp(md-max){
+        width: 204px;
+      }
+      @include bp(sm-max){
+       display: none;
+      }
+    }
+    p{
+        font-size: 22px;
+        color: #fff;
     }
 }
 .uninterrupted-compliance{
@@ -1837,6 +1932,309 @@ p {
         margin-bottom: 50px;
         h2{
             margin-bottom: 0;
+        }
+    }
+}
+.post-box{
+    background-image: url(../../images/topbg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    .title-heading{
+        margin-bottom: 50px;
+        @include bp(xs-max){
+            padding: 0;
+        }
+        h2{
+            @include bp(xs-max){
+                margin-bottom: 0;
+            }  
+        }
+        h2, h3{
+        color: #fff;
+        }
+    }
+    .icon-box-list{
+        & > div{
+            @include bp(md-max){
+                width: 50%;
+            }
+            @include bp(xs-max){
+                width: 100%;
+            }
+        }
+        .icon-box{
+            background: transparent linear-gradient(131deg, #60D6D652 0%, #00999952 100%) 0% 0% no-repeat padding-box;
+            box-shadow: 0px 8px 16px #00000029;
+            border: 2px solid #60D6D629;
+            border-radius: 8px;
+            padding: 0;
+            &:hover{
+                box-shadow: none;
+            }
+            .icon-box-inner{
+                color: #fff;
+                height: 100%;
+            }
+            .icon-box-title-content{
+               background: #60D6D629 0% 0% no-repeat padding-box;
+                border-radius: 8px 8px 0px 0px;
+                padding: 20px;
+                margin-bottom: 0;
+                @include bp(lg-max){
+                    padding: 8px;
+                }
+                @include bp(md-max){
+                    padding: 20px;
+                }
+                h3{
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: 500;
+                    @include bp(xl-max){
+                        font-size: 16px;
+                    }
+                    @include bp(lg-max){
+                        font-size: 14px;
+                    }
+
+                }
+            }
+            .iconbox-description{
+                margin-bottom: 0;
+                padding: 20px;
+                color: #fff;
+                font-size: 14px !important;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+                height: calc(100% - 68px);
+                @include bp(lg-max){
+                    padding: 8px;
+                    height: calc(100% - 44px);
+                }
+                @include bp(md-max){
+                    padding: 20px;
+                    height: calc(100% - 68px);
+                }
+                a{
+                    display: inline-block;
+                    margin-left: auto;
+                    color: #60D6D6;
+                }
+                .action{
+                    width: 100%;
+                    text-align: right;
+                    position: relative;
+                    margin-top: 20px;
+                    &::after{
+                        content: '';
+                        height: 1px;
+                        background: #60D6D629;
+                        position: absolute;
+                        left: 0;
+                        top: calc(50% - .5px);                    
+                        right: 87px;
+
+                    }
+                }
+            }
+        }
+    }
+}
+.easy-connectors-sec{
+    .col-right{
+        margin-bottom: 30px;
+    }
+}
+.tow-col-title-content{
+    .tow-col-inner-content{
+        display: flex;
+        align-items: center;
+        color: #fff;
+        @include bp(md-max){
+            flex-wrap: wrap;
+        }
+        .left{
+            width: 500px;
+            @include bp(md-max){
+               width: 100%;
+               text-align: center;
+            }
+            h2{
+                font-size: 48px;
+                line-height: 1.4;
+                @include bp(lg-max){
+                    font-size: 42px;
+                }
+                @include bp(md-max){
+                    font-size: 36px;
+                    line-height: 1.3;
+                    margin-bottom: 30px;
+                }
+                @include bp(sm-max){
+                    font-size: 32px;
+                }
+                @include bp(xs-max){
+                    font-size: 28px;
+                }
+            }
+        }
+        .right{
+            width: calc(100% - 500px);
+            padding-left: 30px;
+            @include bp(md-max){
+                width: 100%;
+                padding-left: 0px;
+             }
+        }
+        p{
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+    }
+}
+.AboutVAT-returns{
+    .features{
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        margin-bottom: 40px;
+        @include bp(sm-max){
+            padding: 15px;
+        }
+        h3{
+            text-align: center;
+            color: #009999;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        ul{
+            display: flex;
+            flex-wrap: wrap;
+            padding-left: 0;
+            align-items: center;
+            li{
+                width: 50%;
+                font-size: 16px;
+                color: #000;
+                font-weight: 500;
+                padding-left: 78px;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                padding-right: 30px;
+                @include bp(sm-max){
+                    width: 100%;
+                    padding-right: 0;
+                    padding-left: 45px;
+                }
+                &:after{
+                    width: 48px;
+                    height: 48px;
+                    background-color: #f1f3f6;
+                    color: #099;
+                    font-size: 22px;
+                    left: 0;
+                    top: 0;
+                    @include bp(sm-max){
+                        width: 30px;
+                        height: 30px;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }    
+    }
+    .desc{
+        background: transparent linear-gradient(277deg, #009999 0%, #0F3764 100%) 0% 0% no-repeat padding-box;
+        border-radius: 8px;
+        text-align: center;
+        padding: 30px 75px;
+        color: #fff;
+        line-height: 1.3;
+        @include bp(md-max){
+            font-size:16px;
+        }
+        @include bp(sm-max){
+            padding: 15px;
+        }
+    }
+}
+.case-study-business{
+    margin-top: 100px;
+    .title-heading{
+        h2{
+            @include bp(xl-max){
+                padding-left: 450px !important;
+            }
+            @include bp(md-max){
+                padding-left: 250px !important;
+            }
+        }
+    }
+   
+    p{
+        color: #fff;
+        font-size: 18px;
+        margin-top: 15px;
+    }
+    h2{
+        font-size: 32px;
+        padding-top: 80px;
+    }
+    .ins-img{
+        @include bp(sm-max){
+            display: none;
+        }
+    }
+}
+.about-vat-claim{
+  .desc{
+    padding: 50px;
+    color: #fff;
+    font-size: 42px;
+    border-radius: 8px;
+    @include bp(lg-max){
+        font-size: 38px;
+    }
+    @include bp(md-max){
+        font-size: 32px;
+    }
+    @include bp(sm-max){
+        font-size: 28px;
+        padding: 30px;
+    }
+    @include bp(xs-max){
+        font-size: 24px;
+        padding: 30px 15px;
+    }
+  }  
+}
+.features-muwafaq {
+    .check-point-list{
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 0;
+        li{
+            width: 50%;
+            padding-right: 30px;
+            font-size: 18px;
+            padding-left: 30px;
+            &::after{
+                left: 0;
+            }
+        }
+    }
+    .content-title-heading {
+        h2{
+            background: transparent linear-gradient(270deg, #009999 0%, #0F3764 100%) 0% 0% no-repeat padding-box;
+            border-radius: 90px 0px 0px 90px;
+            padding: 30px;
+            font-size: 48px;
+            color: #fff !important;
+            padding-left: 80px;
+            line-height: 1.5 !important;
         }
     }
 }
