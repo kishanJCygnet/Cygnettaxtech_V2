@@ -215,47 +215,6 @@ if ( ! class_exists( 'ES_Admin' ) ) {
 			return apply_filters( 'ig_es_site_tags', $site_tags );
 		}
 
-		public function show_merge_tags( $template_type ) {
-			$subscriber_tags = $this->get_subscriber_tags();
-			if ( ! empty( $subscriber_tags ) ) {
-				?>
-				<div id="ig-es-subscriber-tags">
-					<?php
-						$this->render_merge_tags( $subscriber_tags );
-					?>
-				</div>
-				<?php
-			}
-			$site_tags = $this->get_site_tags();
-			if ( ! empty( $site_tags ) ) {
-				?>
-				<div id="ig-es-site-tags">
-					<?php
-						$this->render_merge_tags( $site_tags );
-					?>
-				</div>
-				<?php
-			}
-			$template_tags = $this->get_campaign_tags();
-			if ( ! empty( $template_tags ) ) {
-				?>
-				<div id="ig-es-campaign-tags">
-				<?php foreach ($template_tags as $type => $tags ) : ?>
-					<?php
-						$class = $type !== $template_type ? 'hidden' : '';
-					?>
-					<div class="ig-es-campaign-tags <?php echo esc_attr( $type ); ?> <?php echo esc_attr( $class ); ?>">
-							<?php
-								
-								$this->render_merge_tags( $tags );
-							?>
-					</div>
-				<?php endforeach; ?>
-				</div>
-				<?php
-			}
-		}
-
 		public function render_merge_tags( $merge_tags = array() ) {
 			if ( empty( $merge_tags ) ) {
 				return;
