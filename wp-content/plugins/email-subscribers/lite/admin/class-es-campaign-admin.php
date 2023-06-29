@@ -256,7 +256,7 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 			$campaign_type = isset( $this->campaign_data['type'] ) ? $this->campaign_data['type'] : '';
 			?>
 
-			<div id="ig-es-add-tags-button" class="merge-tags-wrapper relative bg-white inline-block">
+			<div id="ig-es-add-tags-button" data-editor-id="<?php echo esc_attr( $editor_id ); ?>" class="relative bg-white inline-block">
 				<button type="button" class="button">
 					<span class="dashicons dashicons-tag"></span>
 					<?php echo esc_html__( 'Add Tags', 'email-subscribers' ); ?>
@@ -264,7 +264,7 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 				<div x-show="open" id="ig-es-tags-dropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
 				x-transition:leave-end="transform opacity-0 scale-95" class="absolute center-0 z-10 hidden w-56 origin-top-right rounded-md shadow-lg">
 					<div class="bg-white rounded-md shadow-xs">
-						<?php $this->show_merge_tags( $campaign_type ); ?>
+						<?php $this->show_merge_tags( $campaign_type, $editor_id ); ?>
 					</div>
 				  </div>
 		  </div>
@@ -443,8 +443,11 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 			return apply_filters( 'ig_es_dnd_site_tags', $site_tags );
 		}
 
-		public function show_merge_tags( $campaign_type ) {
+		public function show_merge_tags( $campaign_type, $target_elem_id ) {
 			$subscriber_tags = $this->get_subscriber_tags();
+			?>
+			<div class="merge-tags-wrapper" data-target-elem-id="<?php echo esc_attr( $target_elem_id ); ?>">
+			<?php
 			if ( ! empty( $subscriber_tags ) ) {
 				?>
 				<div id="ig-es-subscriber-tags" class="pt-2">
@@ -482,6 +485,9 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 				</div>
 				<?php
 			}
+			?>
+			</div>
+			<?php
 		}
 
 		public function render_merge_tags( $merge_tags = array() ) {
@@ -731,7 +737,8 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 														 x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 mt-2 z-10 hidden w-56 origin-top-right rounded-md shadow-lg">
 															<div class="bg-white rounded-md shadow-xs">
 																<?php
-																$this->show_merge_tags( $campaign_type );
+																$target_elem_id = 'ig_es_campaign_subject';
+																$this->show_merge_tags( $campaign_type, $target_elem_id );
 																?>
 															</div>
 														</div>
@@ -770,14 +777,6 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 													$this->show_avaialable_keywords();
 												} else {
 													?>
-													<div id="ig-es-dnd-merge-tags" class="hidden">
-														<div x-show="open" id="ig-es-dnd-tags-dropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
-														x-transition:leave-end="transform opacity-0 scale-95" class="absolute center-0 z-10 hidden w-56 origin-top-right rounded-md shadow-lg">
-															<div class="bg-white rounded-md shadow-xs">
-																<?php $this->show_merge_tags( $campaign_type ); ?>
-															</div>
-														</div>
-													</div>
 													<textarea id="campaign-dnd-editor-data" name="campaign_data[meta][dnd_editor_data]" style="display:none;">
 														<?php
 															$dnd_editor_data     = ! empty( $campaign_data['meta']['dnd_editor_data'] ) ? $campaign_data['meta']['dnd_editor_data'] : $this->get_campaign_default_content();
@@ -822,54 +821,18 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 											</div>
 											<script>
 												jQuery(document).ready(function($){
-													var clipboard = new ClipboardJS('.ig-es-merge-tag', {
-													text: function(trigger) {
-															let tag_text = $(trigger).data('tag-text');
-															if ( '' === tag_text ) {
-																tag_text = $(trigger).text();
-															}
-															return tag_text.trim();
-													}
-													});
+													
 
-													clipboard.on('success', function(e) {
-														let sourceElem    = e.trigger;
-														let sourceID	  = $(sourceElem).closest('.merge-tags-wrapper').attr('id');
-														let targetID      = 'ig-es-add-tag-icon' === sourceID ? 'ig_es_campaign_subject': 'edit-es-campaign-body';
-														let clipBoardText = e.text;
-														let editorType    = $('#editor_type').val();
-														if ( 'classic' === editorType || 'ig_es_campaign_subject' === targetID ) {
-															var target        = document.getElementById(targetID);
-											
-															if (target.setRangeText) {
-																target.focus();
-																//if setRangeText function is supported by current browser
-																target.setRangeText(clipBoardText);
-															} else {
-																target.focus()
-																document.execCommand('insertText', false /*no UI*/, clipBoardText);
-															}
-															if ( 'edit-es-campaign-body' === targetID && 'undefined' !== typeof tinymce.activeEditor ) {
-																tinymce.activeEditor.execCommand('mceInsertContent', false, clipBoardText);
-															}
-														} else {
-															// Insert placeholders into DND editor
-															// var canvasDoc = window.esVisualEditor.Canvas.getBody().ownerDocument;
-															// // Insert text at the current pointer position
-															// canvasDoc.execCommand("insertText", false, 'Test');
-															let selectedComponent = window.esVisualEditor.getSelected();
-															let selectedContent   = selectedComponent.get('content');
-															selectedComponent.set({
-																content: selectedContent + clipBoardText
-															});
-															$("#ig-es-dnd-merge-tags-wrapper #ig-es-dnd-tags-dropdown").hide();
+													<?php
+													if ( IG_ES_DRAG_AND_DROP_EDITOR === $editor_type ) {
+														?>
+														let campaign_type = '<?php echo esc_attr( $campaign_type ); ?>';
+														if ( 'newsletter' === campaign_type ) {
+															window.esVisualEditor.RichTextEditor.remove('es-tags');
 														}
-													});
-
-													let campaign_type = '<?php echo esc_attr( $campaign_type ); ?>';
-													if ( 'newsletter' === campaign_type ) {
-														window.esVisualEditor.RichTextEditor.remove('es-tags');
+														<?php
 													}
+													?>
 												});
 											</script>
 											<?php do_action( 'ig_es_after_campaign_left_pan_settings', $campaign_data ); ?>

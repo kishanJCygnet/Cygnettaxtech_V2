@@ -6,7 +6,7 @@ Tags: email marketing, subscription, autoresponder, post notification, welcome e
 Requires at least: 3.9
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 5.6.10
+Stable tag: 5.6.12
 License: GPLv3
 License URI: http://www.gnu.org/licenses
 
@@ -447,14 +447,22 @@ Refer [here](https://www.icegram.com/documentation/es-faq/).
 
 == Upgrade Notice ==
 
-= 5.6.10 =
+= 5.6.12 =
 
-* New: Option to update existing subscribers' data while importing
-* New: Option to add surveys in email campaigns using Drag and Drop builder [MAX]
-* Fix: Fatal error when sending emails through SMTP mailer in a few cases [PRO]
-* Improvements: SQL query optimization used for sending emails
+* Fix: Keywords not working for workflow and sequence emails
+* Fix: Content added through custom code block not displaying in email [MAX]
 
 == Changelog ==
+
+**5.6.12 (28.06.2023)**
+
+* Fix: Keywords not working for workflow and sequence emails
+* Fix: Content added through custom code block not displaying in email [MAX]
+
+**5.6.11 (21.06.2023)**
+
+* Fix: Issue with sidebar positioning after adding Express form widget
+* Fix: Keyword for post categories not working as expected in email subject line
 
 **5.6.10 (14.06.2023)**
 
