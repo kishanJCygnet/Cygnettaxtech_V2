@@ -213,7 +213,15 @@ jQuery(".eInvoicing-for-corporates").html(htmlval);
 jQuery(".MSME-tab-cn").remove();
 jQuery(".eInvoicing-for-MSME").html(msmetab);
 
-
+if(jQuery(window).width() > 991){ 
+jQuery('.mega-dropdown > .sub-menu > li:first-child').addClass('active-mg-menu');
+}
+  jQuery('.mega-dropdown > .sub-menu > li > a').click(function(){
+    if(jQuery(window).width() > 991){ 
+    jQuery('.mega-dropdown > .sub-menu > li').removeClass('active-mg-menu');
+    jQuery(this).parent('li').addClass('active-mg-menu');
+    }
+  });
 });
 
 
@@ -273,8 +281,9 @@ jQuery(document).ready(function(){
         jQuery(this).find("g").removeAttr("clip-path");
         jQuery(this).find("clipPath").remove();
       });
-      // End Remove Svg Clip path     
-      jQuery('.owl-crousal-rowTwo .client-logos .client-logo-slider .owl-nav').addClass('disabled');
+      // End Remove Svg Clip path   
+     
+        jQuery('.owl-crousal-rowTwo .client-logos .client-logo-slider .owl-nav').addClass('disabled');
 
       // Offersection add class for tab opening
 
@@ -306,7 +315,12 @@ jQuery(document).ready(function(){
        
       }); 
 
-      
+      jQuery('#primary-menu-list  .menu-item-has-children > a').click(function(){
+        if(jQuery(window).width() < 991){
+          jQuery(this).parent('.menu-item-has-children').toggleClass('mobile-show-menu');
+        }
+      });
+     
 
     });
 jQuery(window).resize(function(){
