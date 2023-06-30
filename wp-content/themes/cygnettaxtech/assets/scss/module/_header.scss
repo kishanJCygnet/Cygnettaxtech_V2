@@ -7,9 +7,9 @@ body{
     background-color: $PrussianBlue ;
 }
 .topBar {
-    padding-bottom: 0 !important;
-    padding-top: 0 !important;
-    background-color: #0c3761;
+    padding-bottom: 8px!important;
+    padding-top: 8px!important;
+    background-color: #0c376159;
     // display: none;
     .top-bar-content{
         display: flex;
@@ -306,19 +306,22 @@ input[type="checkbox"]:after {
 
 // header
 header {
-    position: static;
+    position: absolute;
     z-index: 999;
     top: 0;
     left: 0;
     right: 0;
-    background: #fff;
+    background: transparent;
     .top-msg{
         padding: 10px 15px;
         text-align: center;
         font-size: 14px;
     }
     .navbar {
-        border-bottom: 1px solid rgba(255, 255, 255,0.29);
+        // border-bottom: 1px solid rgba(255, 255, 255,0.29);
+        .container{
+            position: relative;
+        }
         -webkit-transition: all 0.3s;
         -moz-transition: all 0.3s;
         -ms-transition: all 0.3s;
@@ -330,8 +333,8 @@ header {
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ffffffeb;
-            border-bottom: 1px solid #ececec;
+            background-color: rgb(15 55 100);
+            border-bottom: 1px solid rgb(15 55 100);
             z-index: 99;
             @include bp(lg-max){
                 background-color: #ffffffeb;
@@ -396,7 +399,7 @@ header {
                 padding: 0;
             }
             img {
-                width: 180px;
+                width: 240px;
                 margin-bottom: 0px;
                 position: static;               
                 @include bp(sm-max){
@@ -481,13 +484,24 @@ header {
                     display: none;
                 }
                 a {
-                    font-size: 14px; 
-                    color: #504c4c;
+                    font-size: 16px; 
+                    color: #fff;
                     // text-transform: capitalize;
                     line-height: 28px; 
                     padding-top: 18px;  
                     padding-bottom: 18px; 
                     font-weight: 500;
+                
+                    @include bp(lg-max){
+                        font-size: 14px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                    }
+                    @include bp(md-max){
+                        color: #052d55 !important;
+                        padding-top: 10px;  
+                        padding-bottom: 10px; 
+                    }
                   
                     &:hover {
                         text-decoration: none;
@@ -679,8 +693,14 @@ header {
 
 // ************************** Menu Content *******************
 .primary-navigation {
+    @include bp(minmd-min){
+      position: static !important;
+    }
     & > div {
         & > .menu-wrapper {
+            @include bp(minmd-min){
+            position: static !important;
+            }
             & > li {
                 & > .sub-menu {
                     top: 120px;
@@ -811,20 +831,35 @@ header {
                                     top: 6px;
                                 }
                             }
-                            &.show-menu {
-                                & > .sub-menu {
-                                    display: block !important;
-                                    opacity: 1;
-                                    visibility: visible;
-                                    margin-left: 0;
-                                    box-shadow: none;
+                            // &.show-menu {
+                            //     & > .sub-menu {
+                            //            display: block !important;
+                            //         opacity: 1;
+                            //         visibility: visible;
+                            //         margin-left: 0;
+                            //         box-shadow: none;
+                            //     }
+                            //     & > a {
+                            //         &::after {
+                            //             content: "-";
+                            //             font-size: 44px;
+                            //             top:4px;
+                            //         }
+                            //     }
+                            // }
+                            &.show-menu{
+                                .sub-menu{
+                                    display: none !important;
                                 }
-                                & > a {
+                                & > .sub-menu{
+                                   display: block!important;
+    background-color: #0000000a;
+    border-radius: 0;
                                     &::after {
-                                        content: "-";
-                                        font-size: 44px;
-                                        top:4px;
-                                    }
+                                            content: "-";
+                                            font-size: 44px;
+                                            top:4px;
+                                        }
                                 }
                             }
                         }
@@ -834,6 +869,9 @@ header {
         }
     }
     .primary-menu-container {
+        @include bp(minmd-min){
+        position: static !important;
+        }
        
         ul {
             & > li {
@@ -852,7 +890,7 @@ header {
                     border-radius: 8px;
                     display: unset;
                     opacity: 1;
-                    top: 70px;
+                    top: 65px;
                     visibility: visible;
                     display: block;
                     @include bp(md-max) {
@@ -982,7 +1020,7 @@ header {
             box-shadow: none;
         }
         .navbar-toggler-icon {
-            background-color: #052d55;
+            background-color: #fff;
             height: 2px;
             border-radius: 6px;
             position: relative;
@@ -991,7 +1029,7 @@ header {
             &:before {
                 content: "";
                 height: 2px;
-                background-color: #052d55;
+                background-color: #fff;
                 left: 0;
                 right: 0;
                 top: -8px;
