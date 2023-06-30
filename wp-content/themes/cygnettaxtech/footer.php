@@ -19,7 +19,7 @@
 			//$post_slug != 'muwafaq-support-for-smes' &&
 			if($post_slug != 'muwafaq-support-for-smes' && $post_slug != 'thank-you-for-contacting-us' && $post_slug != 'thank-you-for-your-interest-in-muwafaq-support' && !is_404() && $post_slug != 'thank-you-ksa-phase-2' && $post_slug != 'thank-you' && $post_slug != 'thank-you-for-downloading' && !is_404()){  ?>				
 				<div class="title-heading">	
-					<h2>Get in touch
+					<h2>Connect now with our TaxTech Architects
 						<span class="heading-border"></span>
 					</h2>
 				</div>
@@ -41,9 +41,7 @@
 				</div>
 				<div class="form-content">
 					<?php echo do_shortcode('[contact-form-7 id="43625" title="R7VAT Landing Page API Form"]'); ?>
-				</div>
-				<div id="err-cf7-43625" style="display:none;margin: 2em 0.5em 1em;padding: 0.2em 1em;border:2px solid #dc3232;font-size: 14px;">
-					Your user details are already available for R7VAT tool, <a href="https://r7vatgcccompliance.cygnettaxtech.com/login" target="_blank" style="color: #009999;">Click here</a> to login.
+					<div id="err-cf7-43625" style="display:none;margin: 2em 0.5em 1em;padding: 0.2em 1em;border:2px solid #dc3232;font-size: 14px;">Your user details are already available for R7VAT tool, <a href="https://r7vatgcccompliance.cygnettaxtech.com/login" target="_blank" style="color: #009999;">Click here</a> to login.</div>
 				</div>
 			<?php } ?>			
 			<!-- <?php //if ( is_front_page() ) : ?>
@@ -77,7 +75,7 @@
 									<span class="footer-item">
 										<?php if (get_field('footer_inquiry_email', 'option')) : ?>
 											<span>
-											<span class=" textSecondry">Inquiry :</span> 
+											<span class="textSecondry">Inquiry :</span> 
 											<a href="mailto:<?php echo the_field('footer_inquiry_email', 'option'); ?>"><?php echo the_field('footer_inquiry_email', 'option'); ?></a>
 											</span>
 											<!-- <span class="v-divider mx-2"></span> -->
@@ -207,9 +205,11 @@
 			location = url + '/thank-you-for-downloading';
 		} else if(e.detail.contactFormId == 42061) {
 			location = url + '/download-brochures-uk';
+		} else if(e.detail.contactFormId == 43877) {
+			location = url + '/thank-you-for-registration';
 		} else if(e.detail.contactFormId == 43625 || e.detail.contactFormId == 43651) {
 			location = url + '/thank-you-for-your-interest-in-muwafaq-support';
-		} else if(e.detail.contactFormId == 40990){
+		} else if(e.detail.contactFormId == 40990 || e.detail.contactFormId == 45065){
 			<?php if($post_slug == 'ksa-e-invoicing-phase-2'){ ?>
 				location = url + '/thank-you-ksa-phase-2';
 			<?php } else { ?>
