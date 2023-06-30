@@ -39,7 +39,31 @@
         }
     }
     &.inner-banner{
+        height: 100vh;
+        min-height: 600px;
+        .banner-slider, 
+        .slick-slide,
+        .slick-track,
+        .slick-list {
+            height: 100%;
+        }
         .banner-inner-content{
+            height: 100%;
+            padding-top: 110px;
+            &:after{
+                content: '';
+                background-image: url(../../images/banneroverlay.svg);
+                background-size: cover;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;  
+            }
+            .container{
+                position: relative;
+                z-index: 1;
+            }
             .align-items-center{
                 justify-content: flex-start !important;
             }
@@ -124,8 +148,8 @@
         background-attachment: fixed;
         z-index: 1;
         position: relative;
-        background-color: rgb(0 24 51 / 80%);
-        background-blend-mode: multiply;
+        // background-color: rgb(0 24 51 / 80%);
+        // background-blend-mode: multiply;
 
         .d-flex {
             &.align-items-center {

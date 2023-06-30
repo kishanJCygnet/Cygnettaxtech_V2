@@ -120,6 +120,7 @@
     $md-max: "(max-width: 991px)";   
     $lg-max: "(max-width: 1200px)";    
     $xl-max: "(max-width: 1400px)";
+    $minmd-min: "(min-width: 992px)";
     $minxl-min: "(min-width: 1590px)";
     $minxxl-min: "(min-width: 1920px)";
 
@@ -144,6 +145,9 @@
   
     @else if $point == xl-max {
         @media #{$xl-max}  { @content; }
+    }
+    @else if $point == minmd-min {
+        @media #{$minmd-min}  { @content; }
     }
     @else if $point == minxl-min {
         @media #{$minxl-min}  { @content; }
