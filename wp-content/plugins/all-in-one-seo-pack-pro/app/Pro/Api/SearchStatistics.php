@@ -265,6 +265,9 @@ class SearchStatistics {
 				// Add post objects to rows.
 				$cachedData = aioseo()->searchStatistics->stats->posts->addPostData( $cachedData, 'statistics' );
 
+				// Add graph markers.
+				$cachedData = aioseo()->searchStatistics->markers->addTimelineMarkers( $cachedData );
+
 				// Add localized filters to paginated data.
 				$cachedData['pages']['paginated']['filters']           = aioseo()->searchStatistics->stats->posts->getFilters( $filter, $searchTerm );
 				$cachedData['pages']['paginated']['additionalFilters'] = aioseo()->searchStatistics->stats->posts->getAdditionalFilters();
@@ -309,6 +312,9 @@ class SearchStatistics {
 
 		// Add post objects to rows.
 		$data = aioseo()->searchStatistics->stats->posts->addPostData( $data, 'statistics' );
+
+		// Add graph markers.
+		$data = aioseo()->searchStatistics->markers->addTimelineMarkers( $data );
 
 		// Add localized filters to paginated data.
 		$data['pages']['paginated']['filters']           = aioseo()->searchStatistics->stats->posts->getFilters( $filter, $searchTerm );
@@ -850,6 +856,11 @@ class SearchStatistics {
 			$success    = false === $cachedData ? false : true;
 			$statusCode = false === $cachedData ? 400 : 200;
 
+			if ( $success ) {
+				// Add graph markers.
+				$cachedData = aioseo()->searchStatistics->markers->addTimelineMarkers( $cachedData, $postId );
+			}
+
 			return new \WP_REST_Response( [
 				'success' => $success,
 				'data'    => $cachedData,
@@ -869,11 +880,15 @@ class SearchStatistics {
 			], 400 );
 		}
 
+		$data = $response['data'];
 		aioseo()->core->cache->update( "aioseo_search_statistics_page_stats_{$cacheHash}", $response['data'], MONTH_IN_SECONDS );
+
+		// Add graph markers.
+		$data = aioseo()->searchStatistics->markers->addTimelineMarkers( $data, $postId );
 
 		return new \WP_REST_Response( [
 			'success' => true,
-			'data'    => $response['data']
+			'data'    => $data
 		], 200 );
 	}
 

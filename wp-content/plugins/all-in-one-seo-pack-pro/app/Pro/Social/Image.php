@@ -35,17 +35,18 @@ class Image extends CommonSocial\Image {
 	 * @return string|array                 The image data.
 	 */
 	public function getImage( $type, $imageSource, $object ) {
-		if ( ! is_category() && ! is_tag() && ! is_tax() ) {
+		if ( ! is_category() && ! is_tag() && ! is_tax() && ! $object instanceof \WP_Term ) {
 			return parent::getImage( $type, $imageSource, $object );
 		}
 
 		$this->type          = $type;
 		$this->term          = $object;
 		$this->thumbnailSize = apply_filters( 'aioseo_thumbnail_size', 'fullsize' );
+		$hash                = md5( $this->type . $imageSource );
 
 		static $images = [];
-		if ( isset( $images[ $this->type ] ) ) {
-			return $images[ $this->type ];
+		if ( isset( $images[ $hash ] ) ) {
+			return $images[ $hash ];
 		}
 
 		switch ( $imageSource ) {
@@ -71,18 +72,18 @@ class Image extends CommonSocial\Image {
 		}
 
 		if ( is_array( $image ) ) {
-			$images[ $type ] = $image;
+			$images[ $hash ] = $image;
 
-			return $images[ $type ];
+			return $images[ $hash ];
 		}
 
 		$imageWithoutDimensions = aioseo()->helpers->removeImageDimensions( $image );
 		$attachmentId           = aioseo()->helpers->attachmentUrlToPostId( $imageWithoutDimensions );
-		$images[ $type ]        = $attachmentId
+		$images[ $hash ]        = $attachmentId
 			? wp_get_attachment_image_src( $attachmentId, $this->thumbnailSize )
 			: $image;
 
-		return $images[ $type ];
+		return $images[ $hash ];
 	}
 
 	/**

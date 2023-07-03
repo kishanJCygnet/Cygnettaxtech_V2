@@ -116,6 +116,8 @@ trait Vue {
 			if ( ! $term->exists() ) {
 				$data['currentPost'] = array_merge( $data['currentPost'], aioseo()->migration->meta->getMigratedTermMeta( $termId ) );
 			}
+
+			$data['seoRevisions'] = aioseo()->seoRevisions->getVueDataEdit();
 		}
 
 		if ( 'post' === $page ) {

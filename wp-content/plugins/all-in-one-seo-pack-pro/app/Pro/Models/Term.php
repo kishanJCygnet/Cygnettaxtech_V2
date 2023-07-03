@@ -115,6 +115,9 @@ class Term extends CommonModels\Model {
 			return $lastError;
 		}
 
+		// Fires once an AIOSEO term has been saved.
+		do_action( 'aioseo_insert_term', $termId );
+
 		return true;
 	}
 
@@ -165,7 +168,7 @@ class Term extends CommonModels\Model {
 		$theTerm->canonical_url               = ! empty( $data['canonicalUrl'] ) ? esc_url_raw( $data['canonicalUrl'] ) : null;
 		$theTerm->keywords                    = ! empty( $data['keywords'] ) ? sanitize_text_field( $data['keywords'] ) : null;
 		// Sitemap
-		$theTerm->priority                    = ! empty( $data['priority'] ) ? sanitize_text_field( $data['priority'] ) : null;
+		$theTerm->priority                    = isset( $data['priority'] ) ? ( 'default' === sanitize_text_field( $data['priority'] ) ? null : (float) $data['priority'] ) : null;
 		$theTerm->frequency                   = ! empty( $data['frequency'] ) ? sanitize_text_field( $data['frequency'] ) : null;
 		// Robots Meta
 		$theTerm->robots_default              = isset( $data['default'] ) ? rest_sanitize_boolean( $data['default'] ) : 1;
