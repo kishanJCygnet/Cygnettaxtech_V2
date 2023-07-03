@@ -27,10 +27,11 @@ class InternalOptions extends CommonOptions\InternalOptions {
 	private $proDefaults = [
 		// phpcs:disable WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
 		'internal' => [
-			'activated'      => [ 'type' => 'number', 'default' => 0 ],
-			'firstActivated' => [ 'type' => 'number', 'default' => 0 ],
-			'installed'      => [ 'type' => 'number', 'default' => 0 ],
-			'license'        => [
+			'lastActiveProVersion' => [ 'type' => 'string', 'default' => '0.0' ],
+			'activated'            => [ 'type' => 'number', 'default' => 0 ],
+			'firstActivated'       => [ 'type' => 'number', 'default' => 0 ],
+			'installed'            => [ 'type' => 'number', 'default' => 0 ],
+			'license'              => [
 				'expires'          => [ 'type' => 'number', 'default' => 0 ],
 				'expired'          => [ 'type' => 'boolean', 'default' => false ],
 				'invalid'          => [ 'type' => 'boolean', 'default' => false ],
@@ -43,7 +44,7 @@ class InternalOptions extends CommonOptions\InternalOptions {
 				'addons'           => [ 'type' => 'string', 'default' => '' ],
 				'features'         => [ 'type' => 'string', 'default' => '' ]
 			],
-			'schema'         => [
+			'schema'               => [
 				'templates' => [ 'type' => 'array', 'default' => [] ]
 			]
 		]

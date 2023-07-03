@@ -60,6 +60,15 @@ class SearchStatistics extends CommonSearchStatistics\SearchStatistics {
 	public $pageSpeed;
 
 	/**
+	 * Holds the instance of the Markers class.
+	 *
+	 * @since 4.3.0
+	 *
+	 * @var Markers
+	 */
+	public $markers;
+
+	/**
 	 * Class constructor.
 	 *
 	 * @since 4.3.0
@@ -70,6 +79,7 @@ class SearchStatistics extends CommonSearchStatistics\SearchStatistics {
 		$this->helpers   = new Helpers();
 		$this->pageSpeed = new PageSpeed();
 		$this->objects   = new Objects();
+		$this->markers   = new Markers();
 	}
 
 	/**
@@ -133,6 +143,7 @@ class SearchStatistics extends CommonSearchStatistics\SearchStatistics {
 		if ( $cachedData ) {
 			if ( ! empty( $cachedData['pages']['paginated']['rows'] ) ) {
 				$cachedData = aioseo()->searchStatistics->stats->posts->addPostData( $cachedData, 'statistics' );
+				$cachedData = aioseo()->searchStatistics->markers->addTimelineMarkers( $cachedData );
 
 				$cachedData['pages']['paginated']['filters']           = aioseo()->searchStatistics->stats->posts->getFilters( 'all', '' );
 				$cachedData['pages']['paginated']['additionalFilters'] = aioseo()->searchStatistics->stats->posts->getAdditionalFilters();

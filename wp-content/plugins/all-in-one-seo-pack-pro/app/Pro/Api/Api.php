@@ -24,19 +24,21 @@ class Api extends CommonApi\Api {
 	protected $proRoutes = [
 		// phpcs:disable WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
 		'GET'    => [
-			'network-robots/(?P<siteId>[\d]+|network)'     => [ 'callback' => [ 'Network', 'fetchSiteRobots' ], 'access' => 'manage_network' ],
-			'schema/templates'                             => [ 'callback' => [ 'Schema', 'getTemplates' ], 'access' => 'aioseo_page_schema_settings' ],
-			'search-statistics/url/auth'                   => [ 'callback' => [ 'SearchStatistics', 'getAuthUrl' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/url/reauth'                 => [ 'callback' => [ 'SearchStatistics', 'getReauthUrl' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/stats/seo-statistics'       => [ 'callback' => [ 'SearchStatistics', 'getSeoStatistics' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/stats/keywords'             => [ 'callback' => [ 'SearchStatistics', 'getKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/stats/content-rankings'     => [ 'callback' => [ 'SearchStatistics', 'getContentRankings' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/post-detail'                => [ 'callback' => [ 'SearchStatistics', 'getPostDetail' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/post-detail/seo-statistics' => [ 'callback' => [ 'SearchStatistics', 'getPostDetailSeoStatistics' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/post-detail/keywords'       => [ 'callback' => [ 'SearchStatistics', 'getPostDetailKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/post-detail/focus-keyword'  => [ 'callback' => [ 'SearchStatistics', 'getPostDetailFocusKeywordTrend' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/pagespeed'                  => [ 'callback' => [ 'SearchStatistics', 'getPageSpeed' ], 'access' => 'aioseo_search_statistics_settings' ],
-			'search-statistics/seo-analysis'               => [ 'callback' => [ 'SearchStatistics', 'getSeoAnalysis' ], 'access' => 'aioseo_search_statistics_settings' ]
+			'network-robots/(?P<siteId>[\d]+|network)'           => [ 'callback' => [ 'Network', 'fetchSiteRobots' ], 'access' => 'manage_network' ],
+			'schema/templates'                                   => [ 'callback' => [ 'Schema', 'getTemplates' ], 'access' => 'aioseo_page_schema_settings' ],
+			'search-statistics/url/auth'                         => [ 'callback' => [ 'SearchStatistics', 'getAuthUrl' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/url/reauth'                       => [ 'callback' => [ 'SearchStatistics', 'getReauthUrl' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/stats/seo-statistics'             => [ 'callback' => [ 'SearchStatistics', 'getSeoStatistics' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/stats/keywords'                   => [ 'callback' => [ 'SearchStatistics', 'getKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/stats/content-rankings'           => [ 'callback' => [ 'SearchStatistics', 'getContentRankings' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/post-detail'                      => [ 'callback' => [ 'SearchStatistics', 'getPostDetail' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/post-detail/seo-statistics'       => [ 'callback' => [ 'SearchStatistics', 'getPostDetailSeoStatistics' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/post-detail/keywords'             => [ 'callback' => [ 'SearchStatistics', 'getPostDetailKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/post-detail/focus-keyword'        => [ 'callback' => [ 'SearchStatistics', 'getPostDetailFocusKeywordTrend' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/pagespeed'                        => [ 'callback' => [ 'SearchStatistics', 'getPageSpeed' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'search-statistics/seo-analysis'                     => [ 'callback' => [ 'SearchStatistics', 'getSeoAnalysis' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'seo-revisions/(?P<context>post|term)/(?P<id>[\d]+)' => [ 'callback' => [ 'SeoRevisions', 'getRevisions' ], 'access' => 'aioseo_page_seo_revisions_settings' ],
+			'seo-revisions/diff'                                 => [ 'callback' => [ 'SeoRevisions', 'getRevisionsDiff' ], 'access' => 'aioseo_page_seo_revisions_settings' ],
 		],
 		'POST'   => [
 			'ai/generate'                                               => [ 'callback' => [ 'Ai', 'generate' ], 'access' => 'aioseo_general_settings' ],
@@ -57,14 +59,17 @@ class Api extends CommonApi\Api {
 			'notification/import-local-business-currencies-reminder'    => [ 'callback' => [ 'Notifications', 'importLocalBusinessCurrenciesReminder' ], 'access' => 'any' ],
 			'schema/templates'                                          => [ 'callback' => [ 'Schema', 'addTemplate' ], 'access' => 'aioseo_page_schema_settings' ],
 			'schema/validator/output'                                   => [ 'callback' => [ 'Schema', 'getValidatorOutput' ], 'access' => 'aioseo_page_schema_settings' ],
-			'search-statistics/stats/keywords/posts'                    => [ 'callback' => [ 'SearchStatistics', 'getPagesByKeywords' ], 'access' => 'aioseo_search_statistics_settings' ]
+			'search-statistics/stats/keywords/posts'                    => [ 'callback' => [ 'SearchStatistics', 'getPagesByKeywords' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'seo-revisions/(?P<id>[\d]+)'                               => [ 'callback' => [ 'SeoRevisions', 'updateRevision' ], 'access' => 'aioseo_page_seo_revisions_settings' ],
+			'seo-revisions/restore/(?P<id>[\d]+)'                       => [ 'callback' => [ 'SeoRevisions', 'restoreRevision' ], 'access' => 'aioseo_page_seo_revisions_settings' ],
 		],
 		'PUT'    => [
 			'schema/templates' => [ 'callback' => [ 'Schema', 'updateTemplate' ], 'access' => 'aioseo_page_schema_settings' ]
 		],
 		'DELETE' => [
-			'schema/templates'       => [ 'callback' => [ 'Schema', 'deleteTemplate' ], 'access' => 'aioseo_page_schema_settings' ],
-			'search-statistics/auth' => [ 'callback' => [ 'SearchStatistics', 'deleteAuth' ], 'access' => 'aioseo_search_statistics_settings' ]
+			'schema/templates'            => [ 'callback' => [ 'Schema', 'deleteTemplate' ], 'access' => 'aioseo_page_schema_settings' ],
+			'search-statistics/auth'      => [ 'callback' => [ 'SearchStatistics', 'deleteAuth' ], 'access' => 'aioseo_search_statistics_settings' ],
+			'seo-revisions/(?P<id>[\d]+)' => [ 'callback' => [ 'SeoRevisions', 'deleteRevision' ], 'access' => 'aioseo_page_seo_revisions_settings' ],
 		]
 		// phpcs:enable WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
 	];
@@ -102,7 +107,7 @@ class Api extends CommonApi\Api {
 	 * @param  \WP_Response $response  An optional response.
 	 * @param  string       $apiClass  The class to call.
 	 * @param  string       $apiMethod The method to call on the class.
-	 * @return mixed                  Anything the addon needs to return.
+	 * @return mixed                   Anything the addon needs to return.
 	 */
 	public static function addonsApi( $request, $response, $apiClass, $apiMethod ) {
 		$loadedAddons = aioseo()->addons->getLoadedAddons();

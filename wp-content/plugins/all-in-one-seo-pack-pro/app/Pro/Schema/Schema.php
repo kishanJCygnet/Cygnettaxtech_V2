@@ -33,7 +33,7 @@ class Schema extends CommonSchema\Schema {
 	 *
 	 * @var Graphs\FAQPage
 	 */
-	private $faqPageInstance;
+	private $faqPageInstance = null;
 
 	/**
 	 * The user-defined FAQPage graph (if there is one).
@@ -42,7 +42,7 @@ class Schema extends CommonSchema\Schema {
 	 *
 	 * @var Object
 	 */
-	private $faqPageGraphData;
+	private $faqPageGraphData = null;
 
 	/**
 	 * Buffer to store FAQPage pairs before we output them under one main entity.
@@ -205,7 +205,7 @@ class Schema extends CommonSchema\Schema {
 		$graphs            = ! empty( $graphs ) ? $graphs : $metaData->schema->graphs;
 		$userDefinedGraphs = [];
 		foreach ( $graphs as $graphData ) {
-			$graphData = (object) $graphData;
+			$graphData = json_decode( wp_json_encode( $graphData ) );
 
 			if (
 				empty( $graphData->id ) ||
@@ -340,6 +340,65 @@ class Schema extends CommonSchema\Schema {
 	}
 
 	/**
+	 * Modifies the global $wp_query and $post objects, so schema markup can be generated per post ID.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param  \WP_Post $postObject The WP post object.
+	 * @return array                The necessary data, so the query can be correctly reset.
+	 */
+	private function maybeModifyWpQuery( $postObject ) {
+		global $wp_query, $post;
+		$originalQuery = is_object( $wp_query ) ? clone $wp_query : $wp_query;
+		$originalPost  = is_object( $post ) ? clone $post : $post;
+		$isNewPost     = ! empty( $originalPost ) && ! $originalPost->post_title && ! $originalPost->post_name && 'auto-draft' === $originalPost->post_status;
+
+		// Only modify the query if there is no post on it set yet.
+		// Otherwise, page builders like Divi and Elementor can't seem to load their visual builder.
+		if ( empty( $originalQuery->post ) ) {
+			$post                        = $postObject;
+			$wp_query->post              = $postObject;
+			$wp_query->posts             = [ $postObject ];
+			$wp_query->post_count        = 1;
+			$wp_query->queried_object    = $postObject;
+			$wp_query->queried_object_id = $postObject->ID;
+			$wp_query->is_single         = true;
+			$wp_query->is_singular       = true;
+		}
+
+		return [
+			'originalQuery' => $originalQuery,
+			'originalPost'  => $originalPost,
+			'isNewPost'     => $isNewPost,
+		];
+	}
+
+	/**
+	 * Modifies the global $wp_query and $post objects to their original states.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param object $originalQuery The $wp_query object before it was modified.
+	 * @param object $originalPost  The $post object before it was modified.
+	 * @param bool   $isNewPost     Whether the post is new or not.
+	 * @return void
+	 */
+	private function maybeRestoreWpQuery( $originalQuery, $originalPost, $isNewPost ) {
+		global $wp_query, $post;
+
+		// Reset the global objects.
+		if ( empty( $originalQuery->post ) ) {
+			$wp_query = $originalQuery;
+			$post     = $originalPost;
+		}
+
+		// We must reset the title for new posts because they will be given an "Auto Draft" one due to the schema class determining the schema output for the validator.
+		if ( $isNewPost ) {
+			$post->post_title = '';
+		}
+	}
+
+	/**
 	 * Determines the smart graphs that need to be build, as well as the current context for the breadcrumbs.
 	 *
 	 * This can't run in the constructor since the queried object needs to be available first.
@@ -442,39 +501,64 @@ class Schema extends CommonSchema\Schema {
 			return '';
 		}
 
-		global $wp_query, $post;
-		$originalQuery = is_object( $wp_query ) ? clone $wp_query : $wp_query;
-		$originalPost  = is_object( $post ) ? clone $post : $post;
-		$isNewPost     = ! empty( $originalPost ) && ! $originalPost->post_title && ! $originalPost->post_name && 'auto-draft' === $originalPost->post_status;
-
-		// Only modify the query if there is no post on it set yet.
-		// Otherwise page builders like Divi and Elementor can't seem to load their visual builder.
-		if ( empty( $originalQuery->post ) ) {
-			$post                        = $postObject;
-			$wp_query->post              = $postObject;
-			$wp_query->posts             = [ $postObject ];
-			$wp_query->post_count        = 1;
-			$wp_query->queried_object    = $postObject;
-			$wp_query->queried_object_id = $postId;
-			$wp_query->is_single         = true;
-			$wp_query->is_singular       = true;
-		}
+		$modWpQuery = $this->maybeModifyWpQuery( $postObject );
 
 		$this->determineSmartGraphsAndContext();
 
 		$output = $this->generateSchema( $graphs, $customGraphs, $default, true );
 
-		// Reset the global objects.
-		if ( empty( $originalQuery->post ) ) {
-			$wp_query = $originalQuery;
-			$post     = $originalPost;
-		}
-
-		// We must reset the title for new posts because they will be given a "Auto Draft" one due to the schema class determining the schema output for the validator.
-		if ( $isNewPost ) {
-			$post->post_title = '';
-		}
+		$this->maybeRestoreWpQuery( $modWpQuery['originalQuery'], $modWpQuery['originalPost'], $modWpQuery['isNewPost'] );
 
 		return $output;
+	}
+
+	/**
+	 * Returns a simulated schema output based on data manually set.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param  int    $postId     The post ID.
+	 * @param  array  $postSchema The whole schema field.
+	 * @return string             The JSON schema output.
+	 */
+	public function getUserDefinedSchemaOutput( $postId, $postSchema ) {
+		$postObject = aioseo()->helpers->getPost( $postId );
+		if ( ! is_a( $postObject, 'WP_Post' ) ) {
+			return '';
+		}
+
+		$modWpQuery = $this->maybeModifyWpQuery( $postObject );
+
+		$this->determineSmartGraphsAndContext();
+
+		$rawOutput = [
+			'@context' => 'https://schema.org',
+			'@graph'   => aioseo()->schema->getUserDefinedGraphs(
+				! empty( $postSchema['graphs'] ) ? $postSchema['graphs'] : [ [ 'id' => '' ] ],
+				! empty( $postSchema['customGraphs'] ) ? $postSchema['customGraphs'] : [ [ 'schema' => '' ] ],
+				! empty( $postSchema['default'] ) ? (object) $postSchema['default'] : (object) [ 'graphName' => '' ]
+			)
+		];
+
+		$this->maybeRestoreWpQuery( $modWpQuery['originalQuery'], $modWpQuery['originalPost'], $modWpQuery['isNewPost'] );
+
+		if ( empty( $rawOutput['@graph'] ) ) {
+			return '';
+		}
+
+		return aioseo()->schema->helpers->getOutput( $rawOutput, true, false );
+	}
+
+	/**
+	 * Resets the schema class after determining the output.
+	 * We have to flush buffer properties in order to ensure no data leaks over when we are
+	 * determining the schema output multiple times (e.g. SEO revisions).
+	 *
+	 * @since 4.4.0
+	 *
+	 * @return void
+	 */
+	public function reset() {
+		$this->faqPages = [];
 	}
 }

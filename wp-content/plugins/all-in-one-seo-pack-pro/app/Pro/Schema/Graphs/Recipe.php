@@ -65,7 +65,7 @@ class Recipe extends CommonGraphs\Graph {
 			$keywords = array_map( function ( $keywordObject ) {
 				return $keywordObject['value'];
 			}, $keywords );
-			$data['keywords'] = implode( ',', $keywords );
+			$data['keywords'] = implode( ', ', $keywords );
 		}
 
 		if ( ! empty( $graphData->properties->ingredients ) ) {
@@ -73,7 +73,7 @@ class Recipe extends CommonGraphs\Graph {
 			$ingredients = array_map( function ( $ingredientObject ) {
 				return $ingredientObject['value'];
 			}, $ingredients );
-			$data['recipeIngredient'] = implode( ',', $ingredients );
+			$data['recipeIngredient'] = $ingredients;
 		}
 
 		if ( ! empty( $graphData->properties->instructions ) ) {

@@ -36,7 +36,7 @@ class SoftwareApplication extends CommonGraphs\Graph {
 			$operatingSystems        = array_map( function ( $operatingSystemObject ) {
 				return $operatingSystemObject['value'];
 			}, $operatingSystems );
-			$data['operatingSystem'] = implode( ',', $operatingSystems );
+			$data['operatingSystem'] = implode( ', ', $operatingSystems );
 		}
 
 		if (

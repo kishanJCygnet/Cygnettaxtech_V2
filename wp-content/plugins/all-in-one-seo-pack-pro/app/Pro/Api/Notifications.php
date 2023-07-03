@@ -19,7 +19,6 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
 	 * @return \WP_REST_Response The response.
 	 */
 	public static function localBusinessOrganizationReminder() {
@@ -31,7 +30,6 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
 	 * @return \WP_REST_Response The response.
 	 */
 	public static function newsPublicationNameReminder() {
@@ -43,7 +41,6 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
 	 * @return \WP_REST_Response The response.
 	 */
 	public static function migrationLocalBusinessNumberReminder() {
@@ -55,7 +52,6 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
 	 * @return \WP_REST_Response The response.
 	 */
 	public static function migrationLocalBusinessCountryReminder() {
@@ -67,10 +63,9 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
 	 * @return \WP_REST_Response The response.
 	 */
-	public function importLocalBusinessCountryReminder() {
+	public static function importLocalBusinessCountryReminder() {
 		return self::reminder( 'import-local-business-country' );
 	}
 
@@ -79,10 +74,9 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
 	 * @return \WP_REST_Response The response.
 	 */
-	public function importLocalBusinessTypeReminder() {
+	public static function importLocalBusinessTypeReminder() {
 		return self::reminder( 'import-local-business-type' );
 	}
 
@@ -91,10 +85,9 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
 	 * @return \WP_REST_Response The response.
 	 */
-	public function importLocalBusinessNumberReminder() {
+	public static function importLocalBusinessNumberReminder() {
 		return self::reminder( 'import-local-business-number' );
 	}
 
@@ -103,10 +96,9 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
 	 * @return \WP_REST_Response The response.
 	 */
-	public function importLocalBusinessFaxReminder() {
+	public static function importLocalBusinessFaxReminder() {
 		return self::reminder( 'import-local-business-fax' );
 	}
 
@@ -115,10 +107,9 @@ class Notifications extends CommonApi\Notifications {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
-	 * @return \WP_REST_Response The response.
+	 * @return \WP_REST_Response          The response.
 	 */
-	public function importLocalBusinessCurrenciesReminder() {
+	public static function importLocalBusinessCurrenciesReminder() {
 		return self::reminder( 'import-local-business-currencies' );
 	}
 }

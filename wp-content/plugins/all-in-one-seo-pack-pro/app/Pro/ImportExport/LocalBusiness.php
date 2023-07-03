@@ -50,7 +50,7 @@ abstract class LocalBusiness {
 			'notification_name' => 'import-local-business-type',
 			'title'             => __( 'Re-Enter Business Type in Local Business', 'aioseo-pro' ),
 			'content'           => sprintf(
-				// Translators: 1 - The country.
+				// Translators: 1 - The business type.
 				__( 'For technical reasons, we were unable to migrate the business type you entered for your Local Business schema markup.
 				Please enter it (%1$s) again by using the dropdown menu.', 'aioseo-pro' ),
 				"<strong>$businessType</strong>"

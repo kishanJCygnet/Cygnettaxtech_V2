@@ -25,7 +25,7 @@ class Priority extends CommonSitemap\Priority {
 	 * @return float    $priority   The priority.
 	 */
 	public function priority( $pageType, $object = false, $objectType = null ) {
-		$priority = ! empty( $object->priority ) && 'default' !== $object->priority ? $object->priority : parent::priority( $pageType, $object, $objectType );
+		$priority = ! empty( $object->priority ) && null !== $object->priority ? $object->priority : parent::priority( $pageType, $object, $objectType );
 
 		return $priority;
 	}

@@ -46,7 +46,7 @@ class Dataset extends CommonGraphs\Graph {
 			$alternateNames = array_map( function ( $alternateNameObject ) {
 				return $alternateNameObject['value'];
 			}, $alternateNames );
-			$data['alternateName'] = implode( ',', $alternateNames );
+			$data['alternateName'] = implode( ', ', $alternateNames );
 		}
 
 		if ( ! empty( $graphData->properties->keywords ) ) {
@@ -54,7 +54,7 @@ class Dataset extends CommonGraphs\Graph {
 			$keywords = array_map( function ( $keywordObject ) {
 				return $keywordObject['value'];
 			}, $keywords );
-			$data['keywords'] = implode( ',', $keywords );
+			$data['keywords'] = implode( ', ', $keywords );
 		}
 
 		if ( ! empty( $graphData->properties->dataCatalog ) ) {

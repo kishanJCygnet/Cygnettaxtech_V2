@@ -684,16 +684,35 @@ class License {
 	public function hasCoreFeature( $sectionSlug, $feature = '' ) {
 		$coreFeatures = $this->getLicenseFeatures( 'core' );
 		foreach ( $coreFeatures as $section => $features ) {
-			if ( $sectionSlug === $section && empty( $feature ) ) {
+			if ( $sectionSlug !== $section ) {
+				continue;
+			}
+
+			if ( empty( $feature ) ) {
 				return true;
 			}
 
-			if ( $sectionSlug === $section && in_array( $feature, $features, true ) ) {
-				return true;
+			foreach ( $features as $featureName ) {
+				if ( $featureName === $feature || false !== stripos( $featureName, "$feature:" ) ) {
+					return true;
+				}
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Returns the value for a core feature.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param  string $sectionSlug The section name.
+	 * @param  string $feature     The feature name.
+	 * @return mixed               The feature value.
+	 */
+	public function getCoreFeatureValue( $sectionSlug, $feature ) {
+		return $this->getFeatureValue( 'core', $sectionSlug, $feature );
 	}
 
 	/**
@@ -714,6 +733,19 @@ class License {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Returns the value for an addon feature.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param  string $sectionSlug The section name.
+	 * @param  string $feature     The feature name.
+	 * @return mixed               The feature value.
+	 */
+	public function getAddonFeatureValue( $sectionSlug, $feature ) {
+		return $this->getFeatureValue( 'addons', $sectionSlug, $feature );
 	}
 
 	/**
@@ -810,5 +842,40 @@ class License {
 		}
 
 		return aioseo()->networkLicense->isActive();
+	}
+
+	/**
+	 * Returns the value for a feature.
+	 * Helper method form getCoreFeatureValue() and getAddonFeatureValue().
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param  string $type        The feature type.
+	 * @param  string $sectionSlug The section name.
+	 * @param  string $feature     The feature name.
+	 * @return mixed               The feature value.
+	 */
+	private function getFeatureValue( $type, $sectionSlug, $feature ) {
+		$licenseFeatures = $this->getLicenseFeatures( $type );
+		foreach ( $licenseFeatures as $section => $features ) {
+			if ( $sectionSlug !== $section ) {
+				continue;
+			}
+
+			foreach ( $features as $featureName ) {
+				if ( $featureName !== $feature && false === stripos( $featureName, "$feature:" ) ) {
+					continue;
+				}
+
+				$parts = explode( ':', $featureName );
+				if ( ! isset( $parts[1] ) ) {
+					continue;
+				}
+
+				return $parts[1];
+			}
+		}
+
+		return null;
 	}
 }

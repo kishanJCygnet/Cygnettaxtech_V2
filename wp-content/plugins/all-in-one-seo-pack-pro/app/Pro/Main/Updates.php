@@ -31,17 +31,45 @@ class Updates extends CommonMain\Updates {
 	}
 
 	/**
+	 * Run pre-addon updates/migrations.
+	 * This runs before our regular migrations, which run on "init".
+	 *
+	 * @since   4.1.7
+	 * @version 4.4.0
+	 *
+	 * @return void
+	 */
+	public function runPreAddonUpdates() {
+		$lastActiveProVersion = aioseo()->internalOptions->internal->lastActiveProVersion;
+
+		// If the last active version hasn't been set and the user has license data, set it to the current version.
+		// This ensures that we don't rerun the migrations for existing users.
+		if (
+			! $lastActiveProVersion &&
+			( aioseo()->internalOptions->internal->license->level || aioseo()->internalOptions->internal->license->expires )
+		) {
+			aioseo()->internalOptions->internal->lastActiveProVersion = AIOSEO_VERSION;
+		}
+
+		if ( version_compare( $lastActiveProVersion, AIOSEO_VERSION, '<' ) ) {
+			// Re-activate the license key before addons load each time the plugin is updated.
+			aioseo()->license->activate();
+		}
+	}
+
+	/**
 	 * Runs our migrations.
 	 *
-	 * @since 4.0.0
+	 * @since   4.0.0
+	 * @version 4.4.0
 	 *
 	 * @return void
 	 */
 	public function runUpdates() {
 		parent::runUpdates();
 
-		$lastActiveVersion = aioseo()->internalOptions->internal->lastActiveVersion;
-		if ( version_compare( $lastActiveVersion, '4.0.0', '>=' ) && version_compare( $lastActiveVersion, '4.0.5', '<' ) ) {
+		$lastActiveProVersion = aioseo()->internalOptions->internal->lastActiveProVersion;
+		if ( version_compare( $lastActiveProVersion, '4.0.0', '>=' ) && version_compare( $lastActiveProVersion, '4.0.5', '<' ) ) {
 			try {
 				aioseo()->core->cache->update( 'v4_migrate_post_og_image', time(), WEEK_IN_SECONDS );
 				aioseo()->core->cache->update( 'v4_migrate_term_og_image', time(), WEEK_IN_SECONDS );
@@ -53,33 +81,33 @@ class Updates extends CommonMain\Updates {
 			}
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.0.0', '>=' ) && version_compare( $lastActiveVersion, '4.0.6', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.0.0', '>=' ) && version_compare( $lastActiveProVersion, '4.0.6', '<' ) ) {
 			$this->migratedGoogleAnalyticsToDeprecated();
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.0.6', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.0.6', '<' ) ) {
 			$this->disableTwitterUseOgDefault();
 			$this->updateMaxImagePreviewDefault();
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.1.5', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.1.5', '<' ) ) {
 			$this->removeUnusedColumns();
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.1.8', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.1.8', '<' ) ) {
 			$this->migrateRemovedQaSchema();
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.1.9', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.1.9', '<' ) ) {
 			// Clear addons cache to fix the PHP warning/error with the version_compare where the minimum version key for the REST API addon didn't exist yet locally.
 			aioseo()->core->cache->delete( 'addons' );
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.2.4', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.2.4', '<' ) ) {
 			$this->migrateImageSeoOptions();
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.3.0', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.3.0', '<' ) ) {
 			$this->addSearchStatisticsTables();
 			aioseo()->access->addCapabilities();
 
@@ -87,28 +115,38 @@ class Updates extends CommonMain\Updates {
 			aioseo()->core->cache->delete( 'addons' );
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.3.2', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.3.2', '<' ) ) {
 			$this->addOpenAiColumns();
 		}
 
-		if ( version_compare( $lastActiveVersion, '4.3.3', '<' ) ) {
+		if ( version_compare( $lastActiveProVersion, '4.3.3', '<' ) ) {
 			aioseo()->actionScheduler->scheduleSingle( 'aioseo_v432_unschedule_objects_scan', 30 );
+		}
+
+		if ( version_compare( $lastActiveProVersion, '4.3.9.1', '<' ) ) {
+			$this->migratePriorityColumn();
+		}
+
+		if ( version_compare( $lastActiveProVersion, '4.4.0', '<' ) ) {
+			$this->addRevisionsTable();
 		}
 	}
 
 	/**
-	 * Run Pre-addon updates/migrations.
+	 * Updates the latest version after all migrations and updates have run.
 	 *
-	 * @since 4.1.7
+	 * @since 4.4.0
 	 *
 	 * @return void
 	 */
-	public function runPreAddonUpdates() {
-		$lastActiveVersion = aioseo()->internalOptions->internal->lastActiveVersion;
-		if ( version_compare( $lastActiveVersion, AIOSEO_VERSION, '<' ) ) {
-			// Re-activate the license key before addons load each time the plugin is updated.
-			aioseo()->license->activate();
+	public function updateLatestVersion() {
+		parent::updateLatestVersion();
+
+		if ( aioseo()->internalOptions->internal->lastActiveProVersion === aioseo()->version ) {
+			return;
 		}
+
+		aioseo()->internalOptions->internal->lastActiveProVersion = aioseo()->version;
 	}
 
 	/**
@@ -884,5 +922,61 @@ class Updates extends CommonMain\Updates {
 	 */
 	public function cancelDuplicateObjectsActions() {
 		as_unschedule_all_actions( 'aioseo_search_statistics_objects_scan' );
+	}
+
+	/**
+	 * Casts the priority column to a float.
+	 *
+	 * @since 4.3.9.1
+	 *
+	 * @return void
+	 */
+	private function migratePriorityColumn() {
+		if ( ! aioseo()->db->columnExists( 'aioseo_terms', 'priority' ) ) {
+			return;
+		}
+
+		$prefix           = aioseo()->db->prefix;
+		$aioseoTermsTable = $prefix . 'aioseo_terms';
+
+		// First, cast the default value to NULL since it's a string.
+		aioseo()->core->db->execute( "UPDATE {$aioseoTermsTable} SET priority = NULL WHERE priority = 'default'" );
+
+		// Then, alter the column to a float.
+		aioseo()->core->db->execute( "ALTER TABLE {$aioseoTermsTable} MODIFY priority float" );
+	}
+
+	/**
+	 * Create the SEO Revisions table.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @return void
+	 */
+	public function addRevisionsTable() {
+		$rawTableName = 'aioseo_revisions';
+
+		if ( aioseo()->core->db->tableExists( $rawTableName ) ) {
+			return;
+		}
+
+		$prefixedTableName = aioseo()->core->db->db->prefix . $rawTableName;
+		$charsetCollate    = aioseo()->core->db->db->get_charset_collate();
+		$sql               = "
+			CREATE TABLE $prefixedTableName (
+				id   		  BIGINT(20)   NOT NULL AUTO_INCREMENT,
+				object_id	  BIGINT(20)   NOT NULL,
+				object_type   varchar(20)  NOT NULL,
+				author_id     BIGINT(20)   NOT NULL,
+				note 		  varchar(255) DEFAULT NULL,
+				revision_data LONGTEXT     NOT NULL,
+				created    	  DATETIME     NOT NULL,
+				updated    	  DATETIME     NOT NULL,
+				PRIMARY KEY (id),
+				KEY object (object_id, object_type)
+			) $charsetCollate;
+		";
+
+		aioseo()->core->db->execute( $sql );
 	}
 }
