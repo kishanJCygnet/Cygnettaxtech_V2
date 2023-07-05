@@ -63,7 +63,8 @@ class Options extends CommonOptions\Options {
 				'pageLocalSeoSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'linkAssistantSettings'     => [ 'type' => 'boolean', 'default' => true ],
 				'pageLinkAssistantSettings' => [ 'type' => 'boolean', 'default' => true ],
-				'setupWizard'               => [ 'type' => 'boolean', 'default' => true ]
+				'setupWizard'               => [ 'type' => 'boolean', 'default' => true ],
+				'pageSeoRevisionsSettings'  => [ 'type' => 'boolean', 'default' => true ],
 			],
 			// Editor Access Controls.
 			'editor'        => [
@@ -89,7 +90,8 @@ class Options extends CommonOptions\Options {
 				'pageLocalSeoSettings'      => [ 'type' => 'boolean', 'default' => false ],
 				'linkAssistantSettings'     => [ 'type' => 'boolean', 'default' => false ],
 				'pageLinkAssistantSettings' => [ 'type' => 'boolean', 'default' => false ],
-				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ]
+				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ],
+				'pageSeoRevisionsSettings'  => [ 'type' => 'boolean', 'default' => true ],
 			],
 			// Author Access Controls.
 			'author'        => [
@@ -115,7 +117,8 @@ class Options extends CommonOptions\Options {
 				'pageLocalSeoSettings'      => [ 'type' => 'boolean', 'default' => false ],
 				'linkAssistantSettings'     => [ 'type' => 'boolean', 'default' => false ],
 				'pageLinkAssistantSettings' => [ 'type' => 'boolean', 'default' => false ],
-				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ]
+				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ],
+				'pageSeoRevisionsSettings'  => [ 'type' => 'boolean', 'default' => false ],
 			],
 			// Contributor Access Controls.
 			'contributor'   => [
@@ -141,7 +144,8 @@ class Options extends CommonOptions\Options {
 				'pageLocalSeoSettings'      => [ 'type' => 'boolean', 'default' => false ],
 				'linkAssistantSettings'     => [ 'type' => 'boolean', 'default' => false ],
 				'pageLinkAssistantSettings' => [ 'type' => 'boolean', 'default' => false ],
-				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ]
+				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ],
+				'pageSeoRevisionsSettings'  => [ 'type' => 'boolean', 'default' => false ],
 			],
 			// SEO Manager Access Controls.
 			'seoManager'    => [
@@ -167,7 +171,8 @@ class Options extends CommonOptions\Options {
 				'pageLocalSeoSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'linkAssistantSettings'     => [ 'type' => 'boolean', 'default' => true ],
 				'pageLinkAssistantSettings' => [ 'type' => 'boolean', 'default' => true ],
-				'setupWizard'               => [ 'type' => 'boolean', 'default' => true ]
+				'setupWizard'               => [ 'type' => 'boolean', 'default' => true ],
+				'pageSeoRevisionsSettings'  => [ 'type' => 'boolean', 'default' => true ],
 			],
 			// SEO Editor Access Controls.
 			'seoEditor'     => [
@@ -193,7 +198,8 @@ class Options extends CommonOptions\Options {
 				'pageLocalSeoSettings'      => [ 'type' => 'boolean', 'default' => true ],
 				'linkAssistantSettings'     => [ 'type' => 'boolean', 'default' => false ],
 				'pageLinkAssistantSettings' => [ 'type' => 'boolean', 'default' => true ],
-				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ]
+				'setupWizard'               => [ 'type' => 'boolean', 'default' => false ],
+				'pageSeoRevisionsSettings'  => [ 'type' => 'boolean', 'default' => true ],
 			]
 		],
 		'advanced'         => [

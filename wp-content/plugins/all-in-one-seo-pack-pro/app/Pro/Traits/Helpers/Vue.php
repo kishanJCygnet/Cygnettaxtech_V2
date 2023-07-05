@@ -116,6 +116,8 @@ trait Vue {
 			if ( ! $term->exists() ) {
 				$data['currentPost'] = array_merge( $data['currentPost'], aioseo()->migration->meta->getMigratedTermMeta( $termId ) );
 			}
+
+			$data['seoRevisions'] = aioseo()->seoRevisions->getVueDataEdit();
 		}
 
 		if ( 'post' === $page ) {
@@ -239,14 +241,7 @@ trait Vue {
 
 		$this->maybeCheckForPluginUpdates( $page );
 
-		$loadedAddons = aioseo()->addons->getLoadedAddons();
-		if ( ! empty( $loadedAddons ) ) {
-			foreach ( $loadedAddons as $addon ) {
-				if ( isset( $addon->helpers ) && method_exists( $addon->helpers, 'getVueData' ) ) {
-					$data = $addon->helpers->getVueData( $data, $page );
-				}
-			}
-		}
+		$data = aioseo()->addons->getVueData( $data, $page );
 
 		return $data;
 	}

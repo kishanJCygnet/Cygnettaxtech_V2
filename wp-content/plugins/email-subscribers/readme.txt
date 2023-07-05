@@ -6,7 +6,7 @@ Tags: email marketing, subscription, autoresponder, post notification, welcome e
 Requires at least: 3.9
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 5.6.12
+Stable tag: 5.6.13
 License: GPLv3
 License URI: http://www.gnu.org/licenses
 
@@ -447,12 +447,19 @@ Refer [here](https://www.icegram.com/documentation/es-faq/).
 
 == Upgrade Notice ==
 
-= 5.6.12 =
+= 5.6.13 =
 
-* Fix: Keywords not working for workflow and sequence emails
-* Fix: Content added through custom code block not displaying in email [MAX]
+* Improvements: Include custom fields data in CSV while exporting contacts [MAX]
+* Fix: Issue with Access Control setting for campaigns [PRO]
+* Fix: Issue with Dran-n-Drop editor while editing templates
 
 == Changelog ==
+
+**5.6.13 (05.07.2023)**
+
+* Improvements: Include custom fields data in CSV while exporting contacts [MAX]
+* Fix: Issue with Access Control setting for campaigns [PRO]
+* Fix: Issue with Dran-n-Drop editor while editing templates
 
 **5.6.12 (28.06.2023)**
 

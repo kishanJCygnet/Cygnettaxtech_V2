@@ -114,13 +114,13 @@ class Translations {
 					return $value;
 				}
 
-				if ( ! isset( $value->translations ) ) {
+				if ( ! isset( $value->translations ) || ! is_array( $value->translations ) ) {
 					$value->translations = [];
 				}
 
 				$translations = $this->getTranslations( $this->type, $this->slug, $this->apiUrl );
 
-				if ( ! isset( $translations->{ $this->slug }['translations'] ) ) {
+				if ( ! isset( $translations[ $this->slug ]['translations'] ) ) {
 					return $value;
 				}
 
@@ -132,7 +132,7 @@ class Translations {
 					self::$availableLanguages = get_available_languages();
 				}
 
-				foreach ( (array) $translations->{ $this->slug }['translations'] as $translation ) {
+				foreach ( (array) $translations[ $this->slug ]['translations'] as $translation ) {
 					if ( in_array( $translation['language'], self::$availableLanguages, true ) ) {
 						if ( isset( self::$installedTranslations[ $this->slug ][ $translation['language'] ] ) && $translation['updated'] ) {
 							$local  = new DateTime( self::$installedTranslations[ $this->slug ][ $translation['language'] ]['PO-Revision-Date'] );
@@ -190,14 +190,14 @@ class Translations {
 		$transientKey = 'translations_' . $this->slug . '_' . $type;
 		$translations = aioseo()->core->networkCache->get( $transientKey );
 
-		if ( ! is_object( $translations ) ) {
+		if ( ! is_array( $translations ) ) {
 			return;
 		}
 
 		// Don't delete the cache if the transient gets changed multiple times
 		// during a single request. Set cache lifetime to maximum 15 seconds.
 		$cacheLifespan  = 15;
-		$timeNotChanged = isset( $translations->_last_checked ) && ( time() - $translations->_last_checked ) > $cacheLifespan;
+		$timeNotChanged = isset( $translations['_last_checked'] ) && ( time() - $translations['_last_checked'] ) > $cacheLifespan;
 
 		if ( ! $timeNotChanged ) {
 			return;
@@ -220,16 +220,16 @@ class Translations {
 		$transientKey = 'translations_' . $slug . '_' . $type;
 		$translations = aioseo()->core->networkCache->get( $transientKey );
 
-		if ( null !== $translations ) {
+		if ( null !== $translations && is_array( $translations ) ) {
 			return $translations;
 		}
 
-		if ( ! is_object( $translations ) ) {
-			$translations = new \stdClass();
+		if ( ! is_array( $translations ) ) {
+			$translations = [];
 		}
 
-		if ( isset( $translations->{ $slug } ) && is_array( $translations->{ $slug } ) ) {
-			return $translations->{ $slug };
+		if ( isset( $translations[ $slug ] ) && is_array( $translations[ $slug ] ) ) {
+			return $translations[ $slug ];
 		}
 
 		$result = json_decode( wp_remote_retrieve_body( wp_remote_get( $url, [ 'timeout' => 2 ] ) ), true );
@@ -237,8 +237,8 @@ class Translations {
 			$result = [];
 		}
 
-		$translations->{ $slug }     = $result;
-		$translations->_last_checked = time();
+		$translations[ $slug ]         = $result;
+		$translations['_last_checked'] = time();
 
 		aioseo()->core->networkCache->update( $transientKey, $translations, 0 );
 

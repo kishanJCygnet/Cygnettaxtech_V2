@@ -187,22 +187,6 @@ class WooCommerceProduct extends Product {
 			];
 		}
 
-		if ( $this->product instanceof \WC_Product_Variable && method_exists( $this->product, 'get_variation_price' ) ) {
-			$offer = [
-				'@type' => 'AggregateOffer',
-				'url'   => ! empty( $this->graphData->properties->id )
-				? aioseo()->schema->context['url'] . '#wooCommerceAggregrateOffer-' . $this->graphData->id
-				: aioseo()->schema->context['url'] . '#wooCommerceAggregrateOffer',
-			];
-
-			$dataFunctions = [
-				'lowPrice'      => 'getLowPrice',
-				'highPrice'     => 'getHighPrice',
-				'offerCount'    => 'getOfferCount',
-				'priceCurrency' => 'getPriceCurrency'
-			];
-		}
-
 		return $this->getData( $offer, $dataFunctions );
 	}
 
@@ -483,7 +467,7 @@ class WooCommerceProduct extends Product {
 	 * @return array The graph data.
 	 */
 	protected function getWooCommerceAggregateRating() {
-		if ( ! method_exists( $this->product, 'get_average_rating' ) || ! $this->product->get_average_rating() ) {
+		if ( ! method_exists( $this->product, 'get_average_rating' ) || false === $this->product->get_average_rating() ) {
 			return [];
 		}
 

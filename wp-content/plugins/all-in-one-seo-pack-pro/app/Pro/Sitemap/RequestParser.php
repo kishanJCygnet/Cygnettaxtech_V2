@@ -31,11 +31,7 @@ class RequestParser extends CommonSitemap\RequestParser {
 		// Check if we need to remove the trailing slash or redirect another sitemap URL like "wp-sitemap.xml".
 		$this->maybeRedirect();
 
-		foreach ( aioseo()->addons->getLoadedAddons() as $loadedAddon ) {
-			if ( ! empty( $loadedAddon->requestParser ) && method_exists( $loadedAddon->requestParser, 'checkRequest' ) ) {
-				$loadedAddon->requestParser->checkRequest();
-			}
-		}
+		aioseo()->addons->doAddonFunction( 'requestParser', 'checkRequest' );
 
 		// The addons need to run before Core does, since the Video and News Sitemap will otherwise be mistaken for the regular one.
 		parent::checkRequest( $wp );

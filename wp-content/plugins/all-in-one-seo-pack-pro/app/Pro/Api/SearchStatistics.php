@@ -232,8 +232,8 @@ class SearchStatistics {
 		}
 
 		$postData = [];
-		if ( $searchTerm ) {
-			$postData = aioseo()->searchStatistics->stats->posts->getPostData( $searchTerm );
+		if ( $searchTerm || in_array( $orderBy, [ 'postTitle', 'lastUpdated' ], true ) ) {
+			$postData = aioseo()->searchStatistics->stats->posts->getPostData( [ 'searchTerm' => $searchTerm ] );
 		}
 
 		// Set the date range and rolling value.
@@ -264,6 +264,9 @@ class SearchStatistics {
 			if ( $success ) {
 				// Add post objects to rows.
 				$cachedData = aioseo()->searchStatistics->stats->posts->addPostData( $cachedData, 'statistics' );
+
+				// Add graph markers.
+				$cachedData = aioseo()->searchStatistics->markers->addTimelineMarkers( $cachedData );
 
 				// Add localized filters to paginated data.
 				$cachedData['pages']['paginated']['filters']           = aioseo()->searchStatistics->stats->posts->getFilters( $filter, $searchTerm );
@@ -309,6 +312,9 @@ class SearchStatistics {
 
 		// Add post objects to rows.
 		$data = aioseo()->searchStatistics->stats->posts->addPostData( $data, 'statistics' );
+
+		// Add graph markers.
+		$data = aioseo()->searchStatistics->markers->addTimelineMarkers( $data );
 
 		// Add localized filters to paginated data.
 		$data['pages']['paginated']['filters']           = aioseo()->searchStatistics->stats->posts->getFilters( $filter, $searchTerm );
@@ -539,6 +545,11 @@ class SearchStatistics {
 
 		$postType = ! empty( $additionalFilters['postType'] ) ? $additionalFilters['postType'] : '';
 
+		$postData = [];
+		if ( $searchTerm || in_array( $orderBy, [ 'postTitle', 'lastUpdated' ], true ) ) {
+			$postData = aioseo()->searchStatistics->stats->posts->getPostData( [ 'searchTerm' => $searchTerm ] );
+		}
+
 		$cacheArgs = [
 			aioseo()->searchStatistics->api->auth->getAuthedSite(),
 			$startDate,
@@ -580,7 +591,7 @@ class SearchStatistics {
 				'searchTerm' => $searchTerm,
 				'orderDir'   => $orderDir,
 				'orderBy'    => $orderBy,
-				'postData'   => $searchTerm ? aioseo()->searchStatistics->stats->posts->getPostData( $searchTerm ) : [],
+				'postData'   => $postData,
 				'objects'    => aioseo()->searchStatistics->stats->posts->getPostObjectPaths( $postType )
 			]
 		];
@@ -850,6 +861,11 @@ class SearchStatistics {
 			$success    = false === $cachedData ? false : true;
 			$statusCode = false === $cachedData ? 400 : 200;
 
+			if ( $success ) {
+				// Add graph markers.
+				$cachedData = aioseo()->searchStatistics->markers->addTimelineMarkers( $cachedData, $postId );
+			}
+
 			return new \WP_REST_Response( [
 				'success' => $success,
 				'data'    => $cachedData,
@@ -869,11 +885,15 @@ class SearchStatistics {
 			], 400 );
 		}
 
+		$data = $response['data'];
 		aioseo()->core->cache->update( "aioseo_search_statistics_page_stats_{$cacheHash}", $response['data'], MONTH_IN_SECONDS );
+
+		// Add graph markers.
+		$data = aioseo()->searchStatistics->markers->addTimelineMarkers( $data, $postId );
 
 		return new \WP_REST_Response( [
 			'success' => true,
-			'data'    => $response['data']
+			'data'    => $data
 		], 200 );
 	}
 
