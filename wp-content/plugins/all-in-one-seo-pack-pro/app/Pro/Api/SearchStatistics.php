@@ -232,8 +232,8 @@ class SearchStatistics {
 		}
 
 		$postData = [];
-		if ( $searchTerm ) {
-			$postData = aioseo()->searchStatistics->stats->posts->getPostData( $searchTerm );
+		if ( $searchTerm || in_array( $orderBy, [ 'postTitle', 'lastUpdated' ], true ) ) {
+			$postData = aioseo()->searchStatistics->stats->posts->getPostData( [ 'searchTerm' => $searchTerm ] );
 		}
 
 		// Set the date range and rolling value.
@@ -545,6 +545,11 @@ class SearchStatistics {
 
 		$postType = ! empty( $additionalFilters['postType'] ) ? $additionalFilters['postType'] : '';
 
+		$postData = [];
+		if ( $searchTerm || in_array( $orderBy, [ 'postTitle', 'lastUpdated' ], true ) ) {
+			$postData = aioseo()->searchStatistics->stats->posts->getPostData( [ 'searchTerm' => $searchTerm ] );
+		}
+
 		$cacheArgs = [
 			aioseo()->searchStatistics->api->auth->getAuthedSite(),
 			$startDate,
@@ -586,7 +591,7 @@ class SearchStatistics {
 				'searchTerm' => $searchTerm,
 				'orderDir'   => $orderDir,
 				'orderBy'    => $orderBy,
-				'postData'   => $searchTerm ? aioseo()->searchStatistics->stats->posts->getPostData( $searchTerm ) : [],
+				'postData'   => $postData,
 				'objects'    => aioseo()->searchStatistics->stats->posts->getPostObjectPaths( $postType )
 			]
 		];

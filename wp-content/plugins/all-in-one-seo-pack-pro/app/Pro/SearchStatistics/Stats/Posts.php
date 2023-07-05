@@ -208,35 +208,36 @@ class Posts {
 	/**
 	 * Returns a list of posts with their slugs, based on a given search term.
 	 *
-	 * @since 4.3.0
+	 * @since   4.3.0
+	 * @version 4.4.1 Changed the string param $searchTerm to an array $args.
 	 *
-	 * @param  string $searchTerm The current search term.
-	 * @return array              The post data.
+	 * @param  array $args The args to get post data.
+	 * @return array       The post data.
 	 */
-	public function getPostData( $searchTerm = '' ) {
-		$searchTerm = esc_sql( aioseo()->core->db->db->esc_like( strtolower( $searchTerm ) ) );
-		if ( strlen( $searchTerm ) < 3 ) {
-			return [];
-		}
-
-		$cachedData = aioseo()->core->cache->get( "aioseo_search_statistics_post_data_{$searchTerm}" );
+	public function getPostData( $args = [] ) {
+		$cacheHash  = sha1( implode( ',', $args ) );
+		$cachedData = aioseo()->core->cache->get( "aioseo_search_statistics_post_data_{$cacheHash}" );
 		if ( $cachedData ) {
 			return $cachedData;
 		}
 
-		$postData = aioseo()->db->start( 'aioseo_search_statistics_objects as asso' )
-			->select( 'p.ID', 'p.post_title', 'asso.object_path' )
+		// Start the query.
+		$postData = aioseo()->core->db->start( 'aioseo_search_statistics_objects as asso' )
+			->select( 'p.ID', 'p.post_title', 'p.post_modified', 'asso.object_path' )
 			->join( 'posts as p', 'asso.object_id = p.ID' )
-			->where( 'asso.object_type', 'post' )
-			->whereRaw(
-				"asso.object_path LIKE '%{$searchTerm}%' OR p.post_title LIKE '%{$searchTerm}%'"
-			)
-			->run()
-			->result();
+			->where( 'asso.object_type', 'post' );
 
+		// Add the search term to the query.
+		if ( ! empty( $args['searchTerm'] ) && strlen( $args['searchTerm'] ) > 2 ) {
+			$searchTerm = esc_sql( aioseo()->core->db->db->esc_like( strtolower( $args['searchTerm'] ) ) );
+			$postData   = $postData->whereRaw( "asso.object_path LIKE '%{$searchTerm}%' OR p.post_title LIKE '%{$searchTerm}%'" );
+		}
+
+		// Run the query.
+		$postData = $postData->run()->result();
 		$postData = aioseo()->searchStatistics->helpers->setRowKey( $postData, 'object_path' );
 
-		aioseo()->core->cache->update( "aioseo_search_statistics_post_data_{$searchTerm}", $postData, 15 * MINUTE_IN_SECONDS );
+		aioseo()->core->cache->update( "aioseo_search_statistics_post_data_{$cacheHash}", $postData, 15 * MINUTE_IN_SECONDS );
 
 		return $postData;
 	}

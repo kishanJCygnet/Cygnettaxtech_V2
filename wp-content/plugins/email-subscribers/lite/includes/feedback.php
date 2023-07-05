@@ -474,4 +474,4 @@ if ( ! function_exists( 'ig_es_show_feature_survey' ) ) {
 	}
 }
 
-add_action( 'admin_notices', 'ig_es_show_feature_survey' );
+//add_action( 'admin_notices', 'ig_es_show_feature_survey' );

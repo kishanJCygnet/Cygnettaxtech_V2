@@ -429,53 +429,6 @@ if ( ! class_exists( 'ES_Admin' ) ) {
 												}
 												?>
 											</div>
-											<script>
-												jQuery(document).ready(function($){
-													var clipboard = new ClipboardJS('.ig-es-merge-tag', {
-													text: function(trigger) {
-															let tag_text = $(trigger).data('tag-text');
-															if ( '' === tag_text ) {
-																tag_text = $(trigger).text();
-															}
-															return tag_text.trim();
-													}
-													});
-
-													clipboard.on('success', function(e) {
-														let sourceElem    = e.trigger;
-														let sourceID	  = $(sourceElem).closest('.merge-tags-wrapper').attr('id');
-														let targetID      = 'ig-es-add-tag-icon' === sourceID ? 'ig_es_campaign_subject': 'edit-es-campaign-body';
-														let clipBoardText = e.text;
-														let editorType    = $('#editor_type').val();
-														if ( 'classic' === editorType || 'ig_es_campaign_subject' === targetID ) {
-															var target        = document.getElementById(targetID);
-											
-															if (target.setRangeText) {
-																target.focus();
-																//if setRangeText function is supported by current browser
-																target.setRangeText(clipBoardText);
-															} else {
-																target.focus()
-																document.execCommand('insertText', false /*no UI*/, clipBoardText);
-															}
-															if ( 'edit-es-campaign-body' === targetID && 'undefined' !== typeof tinymce.activeEditor ) {
-																tinymce.activeEditor.execCommand('mceInsertContent', false, clipBoardText);
-															}
-														} else {
-															// Insert placeholders into DND editor
-															// var canvasDoc = window.esVisualEditor.Canvas.getBody().ownerDocument;
-															// // Insert text at the current pointer position
-															// canvasDoc.execCommand("insertText", false, 'Test');
-															let selectedComponent = window.esVisualEditor.getSelected();
-															let selectedContent   = selectedComponent.get('content');
-															selectedComponent.set({
-																content: selectedContent + clipBoardText
-															});
-															$("#ig-es-dnd-merge-tags-wrapper #ig-es-dnd-tags-dropdown").hide();
-														}
-													});
-												});
-											</script>
 											<?php do_action( 'ig_es_after_template_left_pan_settings', $template_data ); ?>
 										</div>
 										<div class="campaign_side_content ml-2 bg-gray-100 rounded-r-lg">

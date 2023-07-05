@@ -3637,6 +3637,7 @@
 			$('#edit-campaign-form-container').attr('data-campaign-type', template_type);
 			ig_es_add_dnd_rte_tags(template_type);
 		});
+		$('#es_template_type').trigger('change');
 
 		$('#es-dashboard-stats #filter_by_list').on('change',function() {
 			let list_id     = $(this).val();

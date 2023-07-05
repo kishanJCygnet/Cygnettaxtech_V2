@@ -212,12 +212,17 @@ class EddProduct extends Product {
 	 * @return array The graph data.
 	 */
 	protected function getEddAggregateRating() {
+		$averageRating = get_post_meta( $this->download->get_id(), 'edd_reviews_average_rating', true );
+		if ( false === $averageRating ) {
+			return [];
+		}
+
 		return [
 			'@type'       => 'AggregateRating',
 			'@id'         => aioseo()->schema->context['url'] . '#aggregrateRating',
 			'worstRating' => 1,
 			'bestRating'  => 5,
-			'ratingValue' => (float) get_post_meta( $this->download->get_id(), 'edd_reviews_average_rating', true ),
+			'ratingValue' => (float) $averageRating,
 			'reviewCount' => get_comments_number( $this->download->get_id() )
 		];
 	}

@@ -53,7 +53,7 @@ class NewsSitemap {
 	 * @return void
 	 */
 	private function migratePostTypes() {
-		$postTypes = $this->options['seopress_news_name_post_types_list'];
+		$postTypes = ! empty( $this->options['seopress_news_name_post_types_list'] ) ? $this->options['seopress_news_name_post_types_list'] : '';
 		if ( empty( $postTypes ) ) {
 			return;
 		}

@@ -56,7 +56,7 @@ class Book extends CommonGraphs\Graph {
 					'author'        => '',
 					'isbn'          => ! empty( $editionData->isbn ) ? $editionData->isbn : '',
 					'bookFormat'    => ! empty( $editionData->format ) ? $editionData->format : '',
-					'datePublished' => ! empty( $editionData->dataPublished ) ? $editionData->dataPublished : ''
+					'datePublished' => ! empty( $editionData->datePublished ) ? mysql2date( DATE_W3C, $editionData->datePublished, false ) : ''
 				];
 
 				if ( ! empty( $editionData->author ) ) {

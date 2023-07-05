@@ -16,6 +16,41 @@ use AIOSEO\Plugin\Common\Models as CommonModels;
  */
 class PrimaryTerm extends CommonPrimaryTerm {
 	/**
+	 * Class constructor.
+	 *
+	 * @since 4.4.1
+	 */
+	public function __construct() {
+		parent::__construct();
+
+		add_filter( 'post_link_category', [ $this, 'postLinkCategory' ], 10, 3 );
+	}
+
+	/**
+	 * Filters the post link category to change the category to the primary one.
+	 *
+	 * @since 4.4.1
+	 *
+	 * @param  \WP_Term|null $category   The category.
+	 * @param  array         $categories The categories.
+	 * @param  \WP_Post      $post       The post.
+	 * @return \WP_Term|null             The category.
+	 */
+	public function postLinkCategory( $category, $categories = null, $post = null ) {
+		$post = get_post( $post );
+		if ( ! is_a( $post, 'WP_Post' ) ) {
+			return $category;
+		}
+
+		$primaryTerm = $this->getPrimaryTerm( $post->ID, 'category' );
+		if ( ! is_a( $primaryTerm, 'WP_Term' ) ) {
+			return $category;
+		}
+
+		return $primaryTerm;
+	}
+
+	/**
 	 * Returns the primary post term for the given taxonomy name.
 	 *
 	 * @since 4.3.6

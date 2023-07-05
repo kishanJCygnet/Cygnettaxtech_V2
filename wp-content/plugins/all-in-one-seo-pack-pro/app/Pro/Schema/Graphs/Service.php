@@ -29,6 +29,7 @@ class Service extends CommonGraphs\Graph {
 			'name'        => ! empty( $graphData->properties->name ) ? $graphData->properties->name : get_the_title(),
 			'description' => ! empty( $graphData->properties->description ) ? $graphData->properties->description : '',
 			'serviceType' => ! empty( $graphData->properties->serviceType ) ? $graphData->properties->serviceType : '',
+			'image'       => ! empty( $graphData->properties->image ) ? $this->image( $graphData->properties->image ) : '',
 			'provider'    => [
 				'@type'  => 'Organization',
 				'name'   => ! empty( $graphData->properties->provider->name ) ? $graphData->properties->provider->name : '',
