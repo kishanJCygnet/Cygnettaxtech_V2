@@ -138,8 +138,16 @@
 	
 	<!-- Start Breadcrumb with link section -->
 	<?php $childpages = '';
+	$childpages_sub_flag = 0;
 	if ( is_page() && $post->post_parent ) {
 		$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->post_parent . '&echo=0&exclude='.$post->ID );
+		if($childpages == ''){
+			$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->post_parent . '&echo=0' );
+			$childpages_sub_flag = 0;
+			if($childpages){
+				$childpages_sub_flag = 1;
+			}
+		}
 	} else {
 		$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->ID . '&echo=0' );
 	}
@@ -152,13 +160,14 @@
 				<?php } ?>
 				<?php echo $post->post_title; ?>
 			</div>
-			<div class="sticky-right-cls dropup">			
-			<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				Solutions
-				<span class="caret"></span></button>
-				<?php echo $string = '<ul class="dropdown-menu">'. $childpages . '</ul>';	?>
-			</div>
-			
+			<?php if($childpages_sub_flag == 0){ ?>
+				<div class="sticky-right-cls dropup">			
+				<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					Solutions
+					<span class="caret"></span></button>
+					<?php echo $string = '<ul class="dropdown-menu">'. $childpages . '</ul>';	?>
+				</div>
+			<?php } ?>
 		</div>
 	<?php } ?>
 	<!-- End Breadcrumb with link section -->

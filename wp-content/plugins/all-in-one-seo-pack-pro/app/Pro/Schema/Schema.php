@@ -411,16 +411,10 @@ class Schema extends CommonSchema\Schema {
 	protected function determineSmartGraphsAndContext( $isValidator = false ) {
 		parent::determineSmartGraphsAndContext( $isValidator );
 
-		$loadedAddons = aioseo()->addons->getLoadedAddons();
-		if ( empty( $loadedAddons ) ) {
-			return;
-		}
-
 		// Check if our addons need to register graphs.
-		foreach ( $loadedAddons as $loadedAddon ) {
-			if ( ! empty( $loadedAddon->schema ) && method_exists( $loadedAddon->schema, 'determineGraphsAndContext' ) ) {
-				$this->graphs = array_values( array_merge( $this->graphs, $loadedAddon->schema->determineGraphsAndContext() ) );
-			}
+		$addonsGraphs = array_filter( aioseo()->addons->doAddonFunction( 'schema', 'determineGraphsAndContext' ) );
+		foreach ( $addonsGraphs as $addonGraphs ) {
+			$this->graphs = array_values( array_merge( $this->graphs, $addonGraphs ) );
 		}
 	}
 
@@ -467,17 +461,11 @@ class Schema extends CommonSchema\Schema {
 	 * @return array             The graph data.
 	 */
 	public function getAddonGraphData( $graphName ) {
-		$loadedAddons = aioseo()->addons->getLoadedAddons();
-		if ( empty( $loadedAddons ) ) {
-			return [];
-		}
+		$addonsGraphData = aioseo()->addons->doAddonFunction( 'schema', 'get', [ $graphName ] );
 
-		foreach ( $loadedAddons as $loadedAddon ) {
-			if ( ! empty( $loadedAddon->schema ) && method_exists( $loadedAddon->schema, 'get' ) ) {
-				$graphData = $loadedAddon->schema->get( $graphName );
-				if ( ! empty( $graphData ) ) {
-					return $graphData;
-				}
+		foreach ( $addonsGraphData as $addonGraphData ) {
+			if ( ! empty( $addonGraphData ) ) {
+				return $addonGraphData;
 			}
 		}
 

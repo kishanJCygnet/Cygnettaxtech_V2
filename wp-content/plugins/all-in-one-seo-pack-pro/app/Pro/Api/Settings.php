@@ -178,22 +178,14 @@ class Settings extends CommonApi\Settings {
 	 *
 	 * @since 4.1.6
 	 *
-	 * @param  \WP_REST_Request  $request The REST Request
+	 * @param  \WP_REST_Request  $request The REST Request.
 	 * @return \WP_REST_Response          The response.
 	 */
 	public static function doTask( $request ) {
-		$body   = $request->get_json_params();
-		$action = ! empty( $body['action'] ) ? $body['action'] : '';
-
-		$actionFound = false;
-		if ( ! $actionFound ) {
-			$loadedAddons = aioseo()->addons->getLoadedAddons();
-			foreach ( $loadedAddons as $addon ) {
-				if ( isset( $addon->helpers ) && method_exists( $addon->helpers, 'doTask' ) ) {
-					$actionFound = $addon->helpers->doTask( $action );
-				}
-			}
-		}
+		$body        = $request->get_json_params();
+		$action      = ! empty( $body['action'] ) ? $body['action'] : '';
+		$actionFound = array_filter( aioseo()->addons->doAddonFunction( 'helpers', 'doTask', [ $action ] ) );
+		$actionFound = end( $actionFound );
 
 		if ( $actionFound ) {
 			return new \WP_REST_Response( [

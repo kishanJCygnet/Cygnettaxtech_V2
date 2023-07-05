@@ -317,7 +317,22 @@ class Export_Subscribers {
 
 			$contact_ids_str = implode( ',', $contact_ids );
 
-			$query = "SELECT `id`, `first_name`, `last_name`, `email`, `created_at` FROM {$wpbd->prefix}ig_contacts WHERE id IN ({$contact_ids_str})";
+			$select_columns = array(
+				'id',
+				'first_name',
+				'last_name',
+				'email',
+				'created_at',
+			);
+
+			$custom_fields = ES()->custom_fields_db->get_custom_fields();
+			if ( ! empty( $custom_fields ) ) {
+				foreach ( $custom_fields as $field ) {
+					$select_columns[] = $field['slug'];
+				}
+			}
+
+			$query = "SELECT " . implode( ',', $select_columns ) . " FROM {$wpbd->prefix}ig_contacts WHERE id IN ({$contact_ids_str})";
 
 			$subscribers = $wpbd->get_results( $query, ARRAY_A );
 		}
@@ -334,6 +349,12 @@ class Export_Subscribers {
 				__( 'Opt-In Type', 'email-subscribers' ),
 				__( 'Created On', 'email-subscribers' ),
 			);
+
+			if ( ! empty( $custom_fields ) ) {
+				foreach ( $custom_fields as $field ) {
+					$headers[] = $field['label'];
+				}
+			}
 
 			$lists_id_name_map = ES()->lists_db->get_list_id_name_map();
 			$csv_output       .= implode( ',', $headers );
@@ -352,6 +373,12 @@ class Export_Subscribers {
 						$data['status']     = ucfirst( $list_details['status'] );
 						$data['optin_type'] = ( 1 == $list_details['optin_type'] ) ? 'Single Opt-In' : 'Double Opt-In';
 						$data['created_at'] = $subscriber['created_at'];
+						if ( ! empty( $custom_fields ) ) {
+							foreach ( $custom_fields as $field ) {
+								$column_name = $field['slug'];
+								$data[ $column_name ] = $subscriber[ $column_name ];
+							}
+						}
 						$csv_output        .= "\n";
 						$csv_output        .= '"' . implode( '","', $data ) . '"';
 					}

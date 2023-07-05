@@ -328,11 +328,7 @@ class Access extends CommonUtils\Access {
 		}
 
 		// Let addons add their own Access Control.
-		foreach ( aioseo()->addons->getLoadedAddons() as $addon ) {
-			if ( isset( $addon->access ) && method_exists( $addon->access, 'addCapabilities' ) ) {
-				$addon->access->addCapabilities();
-			}
-		}
+		aioseo()->addons->doAddonFunction( 'access', 'addCapabilities' );
 	}
 
 	/**

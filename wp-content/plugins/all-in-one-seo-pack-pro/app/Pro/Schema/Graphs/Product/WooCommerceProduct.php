@@ -467,7 +467,7 @@ class WooCommerceProduct extends Product {
 	 * @return array The graph data.
 	 */
 	protected function getWooCommerceAggregateRating() {
-		if ( ! method_exists( $this->product, 'get_average_rating' ) || ! $this->product->get_average_rating() ) {
+		if ( ! method_exists( $this->product, 'get_average_rating' ) || false === $this->product->get_average_rating() ) {
 			return [];
 		}
 

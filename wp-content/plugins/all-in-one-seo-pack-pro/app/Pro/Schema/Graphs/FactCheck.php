@@ -32,7 +32,7 @@ class FactCheck extends CommonGraphs\Graph {
 			'reviewRating'  => [],
 			'author'        => [],
 			'itemReviewed'  => [],
-			'datePublished' => ! empty( $graphData->properties->datePublished ) ? $graphData->properties->datePublished : ''
+			'datePublished' => ! empty( $graphData->properties->datePublished ) ? mysql2date( DATE_W3C, $graphData->properties->datePublished, false ) : ''
 		];
 
 		if ( ! empty( $graphData->properties->claimRating ) ) {

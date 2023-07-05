@@ -122,6 +122,12 @@ class Product extends CommonGraphs\Graph {
 		$ratings = array_map( function( $reviewData ) {
 			return $reviewData->rating;
 		}, $this->graphData->properties->reviews );
+
+		$ratings = array_filter( $ratings );
+		if ( empty( $ratings ) ) {
+			return [];
+		}
+
 		$averageRating = array_sum( $ratings ) / count( $ratings );
 
 		return [

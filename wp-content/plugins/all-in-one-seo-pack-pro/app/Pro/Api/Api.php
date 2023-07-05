@@ -83,16 +83,13 @@ class Api extends CommonApi\Api {
 	 */
 	protected function getRoutes() {
 		$routes       = array_merge_recursive( parent::getRoutes(), $this->proRoutes );
-		$loadedAddons = aioseo()->addons->getLoadedAddons();
-		if ( ! empty( $loadedAddons ) ) {
-			foreach ( $loadedAddons as $addon ) {
-				if ( isset( $addon->api ) && method_exists( $addon->api, 'getRoutes' ) ) {
-					$routes = array_replace_recursive(
-						$addon->api->getRoutes(),
-						$routes
-					);
-				}
-			}
+		$addonsRoutes = array_filter( aioseo()->addons->doAddonFunction( 'api', 'getRoutes' ) );
+
+		foreach ( $addonsRoutes as $addonRoute ) {
+			$routes = array_replace_recursive(
+				$addonRoute,
+				$routes
+			);
 		}
 
 		return $routes;
