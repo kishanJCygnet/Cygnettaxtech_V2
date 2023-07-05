@@ -239,6 +239,7 @@
 .our-solution-cls {
     position: relative;
     overflow: hidden;
+  
     .container {
         position: relative;
         .nav-action {
@@ -247,6 +248,7 @@
             font-size: 30px;
             z-index: 8;
             top: 0;
+          
             @include bp(sm-max){
                 right: 11px;
                 z-index: 8;
@@ -262,6 +264,37 @@
                 color: #009999;
                 position: relative;
                 border-radius: 50%;
+                cursor: pointer;
+                &:hover{
+                    background-color: #009999;
+                    color: #ECEEF1;
+                }
+            }
+            &.left-disable{
+                &:after{
+                    content: '';
+                    height: 48px;
+                    width: 48px;
+                    position: absolute;
+                    left: 0;
+                }
+                span.left-nav {
+                    cursor: auto;
+                    opacity: 0.2;
+                }
+            }
+            &.right-disable{
+                &:after{
+                    content: '';
+                    height: 48px;
+                    width: 48px;
+                    position: absolute;
+                    right: 0;
+                }
+                span.right-nav {
+                    cursor: auto;
+                    opacity: 0.2;
+                }
             }
         }
     }
