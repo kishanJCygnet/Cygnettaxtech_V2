@@ -109,7 +109,7 @@
 							<div class="footer-links footer-bottom d-flex flex-wrap flex-column flex-md-row">
 								<address
 									class="copyright-text d-inline-flex mb-2 mb-md-0 justify-content-center justify-content-md-end fw-medium">
-									Copyright &copy; <?php echo date('Y'); ?> <?php echo the_field('copyright_text', 'option'); ?> </address>
+									&copy; Copyright <?php echo date('Y'); ?> <?php echo the_field('copyright_text', 'option'); ?> </address>
 								<div class="menu-footer-links-container" style="display:none;">
 								<?php wp_nav_menu(array(
 									'theme_location'  => 'footer_menu',
