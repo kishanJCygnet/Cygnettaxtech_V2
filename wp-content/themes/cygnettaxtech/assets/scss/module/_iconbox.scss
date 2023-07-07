@@ -350,6 +350,17 @@
             }
         }
     }
+    &.bussiness-accounts-payable{
+        .container{
+            .title-heading{
+                min-width: 550px;
+                top: 10%;
+            }
+        }
+        .icon-box-list{
+            width: calc(100% - 550px);
+        }
+    }
 }
 
 .person-circle-points {

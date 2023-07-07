@@ -158,7 +158,8 @@
 					</div>
 				<?php endwhile;	 ?>
 			</div>
-		</div>		
+		</div>
+		
 		
 		<div class="modal fade" id="toptabModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="toptabModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
@@ -175,7 +176,8 @@
 			</div>
 		  </div>
 		</div>
-		<script>			
+		<script>
+			
 		  jQuery(document).ready(function() {
 			autoPlaytoptabModal();
 		  });
@@ -1193,57 +1195,57 @@
 					</div>
 				</div>
 				<script>
-				// jQuery( document ).ready(function() {					
-				// 	var actWidth = jQuery("#click-tab-section").find(".active").parent("li").width();
-				// 	var actPosition = jQuery("#click-tab-section li a.active").position();
-				// 	jQuery("#click-tab-section .slider-nav").css({"left":+ actPosition.left,"width": actWidth});				
-				// });	
-				// var sectionIds = jQuery('#click-tab-section li a');
-				// 	jQuery(document).scroll(function(){
-				// 	  sectionIds.each(function(){
-				// 		  var container = jQuery(this).attr('href');
-				// 		  var containerOffset = jQuery(container).offset().top;
-				// 		  var containerHeight = jQuery(container).outerHeight();
-				// 		  var containerBottom = containerOffset + containerHeight;
-				// 		  var scrollPosition = jQuery(document).scrollTop() + 180;
+				jQuery( document ).ready(function() {					
+					var actWidth = jQuery("#click-tab-section").find(".active").parent("li").width();
+					var actPosition = jQuery("#click-tab-section li a.active").position();
+					jQuery("#click-tab-section .slider-nav").css({"left":+ actPosition.left,"width": actWidth});				
+				});	
+				var sectionIds = jQuery('#click-tab-section li a');
+					jQuery(document).scroll(function(){
+					  sectionIds.each(function(){
+						  var container = jQuery(this).attr('href');
+						  var containerOffset = jQuery(container).offset().top;
+						  var containerHeight = jQuery(container).outerHeight();
+						  var containerBottom = containerOffset + containerHeight;
+						  var scrollPosition = jQuery(document).scrollTop() + 180;
 
-				// 		  if(scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20){
-				// 			  jQuery(this).addClass('active');
-				// 			  var position = jQuery(this).position();
-				// 			  var width = jQuery(this).width();
-				// 				jQuery("#click-tab-section .slider-nav").css({"left":+ position.left,"width":width});
-				// 		  } else{
-				// 			  jQuery(this).removeClass('active');
-				// 		  }
-				// 	  });
-				// 	}); 
+						  if(scrollPosition < containerBottom - 20 && scrollPosition >= containerOffset - 20){
+							  jQuery(this).addClass('active');
+							  var position = jQuery(this).position();
+							  var width = jQuery(this).width();
+								jQuery("#click-tab-section .slider-nav").css({"left":+ position.left,"width":width});
+						  } else{
+							  jQuery(this).removeClass('active');
+						  }
+					  });
+					}); 
 				
-				// jQuery(function() {
-				// 	jQuery('a[href*=\\#]:not([href=\\#])').click(function() {
-				// 	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
-				// && location.hostname == this.hostname) {
+				jQuery(function() {
+					jQuery('a[href*=\\#]:not([href=\\#])').click(function() {
+					if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+				&& location.hostname == this.hostname) {
 				
-				// 		var target = jQuery(this.hash);
-				// 		target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
-				// 		if (target.length) {
-				// 		jQuery('html,body').animate({
-				// 			scrollTop: target.offset().top - 185 //offsets for fixed header
-				// 		}, 300);
-				// 		return false;
-				// 		}
-				// 	}
-				// 	});
-				// 	//Executed on page load with URL containing an anchor tag.
-				// 	if(jQuery(location.href.split("#")[1])) {
-				// 		var target = jQuery('#'+location.href.split("#")[1]);
-				// 		if (target.length) {
-				// 		jQuery('html,body').animate({
-				// 			scrollTop: target.offset().top - 185 //offset height of header here too.
-				// 		},300 );
-				// 		return false;
-				// 		}
-				// 	}
-				// });
+						var target = jQuery(this.hash);
+						target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
+						if (target.length) {
+						jQuery('html,body').animate({
+							scrollTop: target.offset().top - 185 //offsets for fixed header
+						}, 300);
+						return false;
+						}
+					}
+					});
+					//Executed on page load with URL containing an anchor tag.
+					if(jQuery(location.href.split("#")[1])) {
+						var target = jQuery('#'+location.href.split("#")[1]);
+						if (target.length) {
+						jQuery('html,body').animate({
+							scrollTop: target.offset().top - 185 //offset height of header here too.
+						},300 );
+						return false;
+						}
+					}
+				});
 				</script>
 			</section>
 			<?php endif;  
