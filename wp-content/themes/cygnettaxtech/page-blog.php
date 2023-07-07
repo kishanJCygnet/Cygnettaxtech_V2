@@ -103,7 +103,7 @@
 							<select class="form-select select-category filter-by-category" name="filter-by-category">
 								<option value=""></option>
 								<?php
-								$categories = get_terms(['taxonomy' => 'category', 'hide_empty' => true]);
+								$categories = get_terms(['taxonomy' => 'category', 'hide_empty' => true, 'exclude'=>1]);
 								foreach ($categories as $category) {?>
 									<option value="<?php echo $category->term_id;?>"><?php echo $category->name;?></option>
 								<?php }?>
