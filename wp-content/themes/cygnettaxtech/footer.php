@@ -43,12 +43,7 @@
 					<?php echo do_shortcode('[contact-form-7 id="43625" title="R7VAT Landing Page API Form"]'); ?>
 					<div id="err-cf7-43625" style="display:none;margin: 2em 0.5em 1em;padding: 0.2em 1em;border:2px solid #dc3232;font-size: 14px;">Your user details are already available for R7VAT tool, <a href="https://r7vatgcccompliance.cygnettaxtech.com/login" target="_blank" style="color: #009999;">Click here</a> to login.</div>
 				</div>
-			<?php } ?>			
-			<!-- <?php //if ( is_front_page() ) : ?>
-				<div class="technology-move">
-					<div class="text-center"> <img src="<?php echo THEME_PATH; ?>images/phraise.png" alt="" /></div>
-				</div>
-			<?php //endif; ?> -->
+			<?php } ?>
 			</div>
 			</div>
 		</div>
@@ -249,106 +244,11 @@
 		jQuery(".top-tab-main-section div a").click(function() {  
 			jQuery('.top-tab-main-section div').removeClass('tab-active');
 			jQuery(this).parent().addClass("tab-active");
-		});
-		
-		/*function top_tab_click(varid){
-			jQuery('.top-tab-main-section a').removeClass('tab-active');
-			jQuery('#top_tab_'+varid).addClass('tab-active');
-		}*/
-		
-		/* jquery for home page form */
-		jQuery(document).ready(function(){
-			jQuery("#customize > span:first-child input").click(function() { 
-				var checkbox_val = jQuery("input[type=checkbox][name=customize]:checked").val();				
-				jQuery('html, body').animate({
-					scrollTop: jQuery("#taxtech-home-form").offset().top-100
-				  }, 800);
-			});			
-			jQuery("#customize > span:last-child input").click(function() { 
-				var checkbox_val = jQuery("input[type=checkbox][name=customize]:checked").val();
-				jQuery('html, body').animate({
-					scrollTop: jQuery("#taxtech-terms-cond").offset().top-100
-				  }, 800);
-			});
-		});
-		/* end jquery for home page form */
-		
+		});		
 	</script>
 	
 	
-	<!-- Download functinality -->
-	<style>		
-		.otp-input{
-			display: flex;
-			flex-wrap: wrap;
-		}
-		.otp-input > button{
-			width: 100%;
-		}
-		.otp-input input[type=number]::-webkit-inner-spin-button, 
-		.otp-input input[type=number]::-webkit-outer-spin-button { 
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			appearance: none;
-			margin: 0; 
-		}
-		.resend{
-			font-size:14px;
-		}
-		.text-center{
-			text-align:center;
-		}
-		.ui-widget-content a{
-		 color: #3f77f5 !important;
-		}
-		#verify_email_send{
-			background-color: #002a54;
-			color: #fff;
-			padding: 5px 10px;
-			display: flex;
-			font-size: 14px;
-			align-items: center;	
-			margin-left:auto;					
-		}
-		#verify_email_send:hover{
-			opacity:0.8;
-			text-decoration:none
-		}
-		#verify_email_send[disabled=disabled]{
-			background-color: #cfcfcf;
-			color: #918c8c;
-			border-color:#cfcfcf;				
-		}
-		#billing_email_field{
-			display:flex;
-			flex-wrap:wrap;	
-			position:relative;
-		}
-		#billing_email_field .woocommerce-input-wrapper{
-			width: calc(100% - 68px);
-		}
-		#billing_email_field i{
-			display:none;
-			color: #409d11;
-			position: absolute;
-			top: 47px;
-			right: 77px;
-			font-size: 18px;
-		}
-		#billing_email_field input{
-			padding-right:28px;
-		}
-		.note{
-			font-size:13px;
-			color:#9d9d9d;
-			margin-top:5px;
-			display:inline-block;
-		}
-		.download-otp-form{
-			display:none;
-		}
-	</style>
-	
+	<!-- Download functinality -->	
 	<div class="modal fade" id="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-lg">
 		<div class="modal-content">
