@@ -79,8 +79,7 @@
                 font-weight: 500;      
                 width: 100%;   
                 line-height: 1.3;
-                margin-bottom: 10px;
-              
+                margin-top: 10px;              
             }
             .designation{
                 color: #414042;
@@ -104,6 +103,11 @@
             justify-content: center;
             color: #009999;
             font-size: 28px;
+            cursor: pointer;
+            &:hover{
+                color: #fff;
+                background-color: #0f3764;
+            }
             @include bp(sm-max){
                 width: 35px;
               height: 35px;

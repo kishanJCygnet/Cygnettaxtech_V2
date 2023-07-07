@@ -158,7 +158,8 @@
 					</div>
 				<?php endwhile;	 ?>
 			</div>
-		</div>		
+		</div>
+		
 		
 		<div class="modal fade" id="toptabModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="toptabModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
@@ -175,7 +176,8 @@
 			</div>
 		  </div>
 		</div>
-		<script>			
+		<script>
+			
 		  jQuery(document).ready(function() {
 			autoPlaytoptabModal();
 		  });

@@ -87,7 +87,7 @@
 .single-post header,
 .page-id-22561 header,
 .single-webinars header  {
-    background-color: #ffffff;
+    background-color: #0C3761;
 }
 .single-webinars div > section:last-child{
     padding-bottom: 250px;
@@ -172,6 +172,7 @@
 }
 .blog-contents p{
     margin-bottom: 15px;
+    font-size: 18px;
 }
 .blog-contents h2{
     font-size: 24px;
@@ -582,6 +583,7 @@ p{
     font-weight: 500;
 }
 .blog-single-page{
+
     .bg-light{
         background-color: #F1F3F6 !important;
     }
@@ -860,5 +862,25 @@ h3{
 .podcasts-page-listing{
     @include bp(sm-max){
      padding: 0 20px;
+    }
+}
+
+.page-id-25258,
+.page-id-668,
+.page-id-670,
+.post-type-archive-case_studies {
+    .contact-form-content {
+        .contact-form {
+            .contact-form-inner-content{
+                margin-top: 50px;
+            }
+        }
+    }
+}
+.page-id-41119,
+.page-id-690,
+.page-id-690{
+    .contact-form-content{
+        display: none;
     }
 }

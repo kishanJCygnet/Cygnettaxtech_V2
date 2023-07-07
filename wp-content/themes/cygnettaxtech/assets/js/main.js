@@ -179,7 +179,7 @@ jQuery(document).ready(function () {
       .addClass("active show");
     itemNo++;
 
-    if (itemNo > 4) {
+    if (itemNo > 5) {
       jQuery(".solution-tab-content .nav").animate(
         {
           marginLeft: "-=296px",
@@ -202,7 +202,7 @@ jQuery(document).ready(function () {
       .prev()
       .addClass("active show");
     itemNo--;
-    if (itemNo > 3) {
+    if (itemNo > 4) {
       jQuery(".solution-tab-content .nav").animate(
         {
           marginLeft: "+=296px",
@@ -211,6 +211,15 @@ jQuery(document).ready(function () {
       );
     }
   });
+  jQuery('.solution-tab-content .nav-pills .nav-link:not(.solution-tab-content .nav-pills .nav-link:first-child):not(.solution-tab-content .nav-pills .nav-link:nth-child(2)):not(.solution-tab-content .nav-pills .nav-link:nth-child(3)):not(.solution-tab-content .nav-pills .nav-link:nth-child(4))').click(function(){
+    jQuery(".solution-tab-content .nav").animate(
+      {
+        marginLeft: "-=296px",
+      },
+      "slow"
+    );
+  });
+ 
 
   var sectionIds = jQuery(".product-feature-tab a");
 
