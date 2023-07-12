@@ -156,7 +156,7 @@ function get_casestudy_listing_data()
 
               <?php if (get_field('pdf_link')) : ?>
                 <div class="card-footer bg-transparent border-top-0">
-                  <a href="<?php echo the_field('pdf_link'); ?>" class="read-more-link" title="Read Full Story" target="_blank">Read Full Story <img src="<?php echo THEME_PATH; ?>/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
+                  <a href="<?php echo the_field('pdf_link'); ?>" class="read-more-link" title="Read Full Story" target="_blank">Read Full Story <img src="<?php echo THEME_PATH; ?>assets/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
                 </div>
               <?php endif; ?>
             </div>
@@ -194,7 +194,7 @@ function get_casestudy_listing_data()
                 <?php endif; ?>
               </div>
               <div class="card-footer bg-transparent border-top-0">
-                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Know More">Read More <img src="<?php echo THEME_PATH; ?>/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
+                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Know More">Read More <img src="<?php echo THEME_PATH; ?>assets/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
               </div>
             </div>
           </div>
@@ -227,7 +227,7 @@ function get_casestudy_listing_data()
                 <?php endif; ?>
               </div>
               <div class="card-footer bg-transparent border-top-0 text-end">
-                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Know More">Know More<img src="<?php echo THEME_PATH; ?>/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
+                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Know More">Know More<img src="<?php echo THEME_PATH; ?>assets/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
               </div>
             </div>
           </div>
@@ -266,7 +266,7 @@ function get_casestudy_listing_data()
                 <?php endif; ?>
               </div>
               <div class="card-footer bg-transparent border-top-0 text-end">
-                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Know More">Know More<img src="<?php echo THEME_PATH; ?>/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
+                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Know More">Know More<img src="<?php echo THEME_PATH; ?>assets/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
               </div>
             </div>
           </div>
@@ -317,7 +317,7 @@ function get_casestudy_listing_data()
                 <?php endif; ?>
               </div>
               <div class="card-footer bg-transparent border-top-0">
-                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Watch Now">Watch Now <img src="<?php echo THEME_PATH; ?>/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
+                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Watch Now">Watch Now <img src="<?php echo THEME_PATH; ?>assets/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
               </div>
             </div>
           </div>
@@ -374,7 +374,7 @@ function get_casestudy_listing_data()
               </div>
               <?php if (get_field('news_url', $post->ID)) : ?>
                 <div class="card-footer bg-transparent border-top-0 text-end">
-                  <a href="<?php echo the_field('news_url', $post->ID); ?>" class="read-more-link" title="Read More" target="_blank">Read More<img src="<?php echo THEME_PATH; ?>/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
+                  <a href="<?php echo the_field('news_url', $post->ID); ?>" class="read-more-link" title="Read More" target="_blank">Read More<img src="<?php echo THEME_PATH; ?>assets/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
                 </div>
               <?php endif; ?>
             </div>
@@ -391,7 +391,7 @@ $s = $s + 0.2;
     $total = $listingObj->found_posts;
 
     if ($current_page > 1) :
-      $output .= '<a href="javascript:void(0);" title="Previous" class="pagination-link prev-link" data-page_num = ' . ($current_page - 1) . '><span aria-hidden="true"><i class="bi bi-chevron-left"></i></span></a>';
+      $output .= '<a href="javascript:void(0);" title="Previous" class="pagination-link prev-link" data-page_num = ' . ($current_page - 1) . '><span aria-hidden="true"><i class="far fa-angle-left"></i></span></a>';
 
     endif;
 
@@ -464,7 +464,7 @@ $s = $s + 0.2;
     endif;
 
     if (($current_page < ceil($total / $items_per_page)) && ($current_page != ceil($total / $items_per_page))) :
-      $output .= '<a href="javascript:void(0);" title="Next" class="pagination-link next-link" data-page_num = ' . ($current_page + 1) . '><span aria-hidden="true"><i class="bi bi-chevron-right"></i></span></a>';
+      $output .= '<a href="javascript:void(0);" title="Next" class="pagination-link next-link" data-page_num = ' . ($current_page + 1) . '><span aria-hidden="true"><i class="far fa-angle-right"></i></span></a>';
     endif;
 
     echo $output;
@@ -525,7 +525,7 @@ function get_press_release_listing()
               </div>
 
               <div class="card-footer bg-transparent border-top-0 text-end">
-                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Read More">Read More<img src="<?php echo THEME_PATH; ?>/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
+                <a href="<?php the_permalink(); ?>" class="read-more-link" title="Read More">Read More<img src="<?php echo THEME_PATH; ?>assets/images/Iconfeather-arrow-right.svg" alt="navigation right" /></a>
               </div>
             </div>
           </div>

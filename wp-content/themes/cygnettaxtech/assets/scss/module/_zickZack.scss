@@ -24,6 +24,9 @@
     }
     .zick-zack-content{
         .zick-zack-inner-content{
+            &:first-child{
+                margin-top: 0;
+            }
             margin: 55px 0;
             display: inline-block;
              width: 100%;

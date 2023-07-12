@@ -404,8 +404,9 @@ header {
                 position: static;               
                 @include bp(sm-max){
                     position: static;  
-                    width: 105px;
+                    width: 175px;
                     margin-bottom: 0;
+                    padding: 10px 0px;
                 }             
             }
         }
@@ -1313,5 +1314,15 @@ header {
               left: calc(100% - 16px);
             }
         }     
+    }
+}
+.search{
+    header{
+        .topBar{
+                background-color: rgb(5 45 85 / 87%) !important;
+         }
+        .navbar {
+            background-color: #052d55 !important;
+        }
     }
 }

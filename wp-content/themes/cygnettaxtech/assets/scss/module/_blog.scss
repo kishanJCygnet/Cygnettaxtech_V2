@@ -1,7 +1,16 @@
 .blog-container .card .card-image-box {
     height: 300px;
     .card-image-tag{
-        display: none;
+        /* display: none; */
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        .btn{
+            font-size: 12px;
+            padding: 2px 20px;
+            background-color: rgb(0 153 153 / 83%);
+
+        }
     }
 }
 .blog-container .card {
@@ -51,6 +60,9 @@
     font-size: 14px;
  }
 }
+.blog-detail{
+    margin-top: 80px;
+}
 .blog-container  .card-footer{
  margin-bottom: 30px;
  padding: 0px 20px;
@@ -65,7 +77,7 @@
     color: rgba(61, 61, 62, 0.5)
 }
 .blog-container  .card-footer a:hover{
-    color: #969;
+    color: #009999;
 }
 .blog-container  .card-footer a img{
     margin-left: 5px;
@@ -550,6 +562,12 @@ p{
     color: #fff !important;
     border-radius: 5px;
 }
+.case-study .check-custom-box .wpcf7-list-item-label{
+    height: 0;
+    overflow: hidden;
+    width: 0;
+    display: inline-block;
+}
 .case-study .check-custom-box{
     font-size: 14px;
     line-height: 1.4;
@@ -730,17 +748,17 @@ h3{
             // background-image: url('https://www.cygnetdes.com/wp-content/uploads/2023/02/prodcast-banner-jpg.webp') !important;    
             background-color: transparent !important;
             background-size: cover;
-            height: 60vh;
+            // height: 60vh;
             background-repeat: no-repeat;
             background-attachment: scroll;
-            @include bp(xl-max){
+            // @include bp(xl-max){
                 
-                height: 54vh;
-            }
-            @include bp(lg-max){
+            //     height: 54vh;
+            // }
+            // @include bp(lg-max){
                 
-                height: 40vh;
-            }
+            //     height: 40vh;
+            // }
             @include bp(md-max){
                 background-size: contain;
                 height: auto;
@@ -879,7 +897,8 @@ h3{
 }
 .page-id-41119,
 .page-id-690,
-.page-id-690{
+.page-id-690,
+.search {
     .contact-form-content{
         display: none;
     }

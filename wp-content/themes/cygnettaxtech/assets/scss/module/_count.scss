@@ -77,6 +77,9 @@
             border-radius: 8px;
             padding: 0px 60px 18px;
             height: 100%;
+            @include bp(xl-max){
+                padding: 0px 45px 18px;
+            }
             @include bp(lg-max){
                 padding: 0px 15px 18px;
             }

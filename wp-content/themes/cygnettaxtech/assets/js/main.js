@@ -106,8 +106,7 @@ function aboutheading() {
   );
   if (jQuery(window).width() > 1200) {
     jQuery(".about-pill-section .container .title-heading").css(
-      "min-width",
-      titleMarg
+      "min-width", titleMarg
     );
   }
   jQuery(".wholesome-solutions .title-heading").css({
@@ -178,14 +177,27 @@ jQuery(document).ready(function () {
       .next()
       .addClass("active show");
     itemNo++;
-
-    if (itemNo > 5) {
-      jQuery(".solution-tab-content .nav").animate(
-        {
-          marginLeft: "-=296px",
-        },
-        "slow"
-      );
+    if(jQuery(window).width() > 1400){
+      alert('1401');
+      if (itemNo > 5) {
+        jQuery(".solution-tab-content .nav").animate(
+          {
+            marginLeft: "-=296px",
+          },
+          "slow"
+        );
+      }
+    }
+    else if((jQuery(window).width() > 1200) && (jQuery(window).width() < 1400)){
+      alert('1201 to 1399');
+      if (itemNo > 4) {
+        jQuery(".solution-tab-content .nav").animate(
+          {
+            marginLeft: "-=296px",
+          },
+          "slow"
+        );
+      }
     }
   });
   jQuery(".nav-action > .left-nav").click(function () {
@@ -211,14 +223,14 @@ jQuery(document).ready(function () {
       );
     }
   });
-  jQuery('.solution-tab-content .nav-pills .nav-link:not(.solution-tab-content .nav-pills .nav-link:first-child):not(.solution-tab-content .nav-pills .nav-link:nth-child(2)):not(.solution-tab-content .nav-pills .nav-link:nth-child(3)):not(.solution-tab-content .nav-pills .nav-link:nth-child(4))').click(function(){
-    jQuery(".solution-tab-content .nav").animate(
-      {
-        marginLeft: "-=296px",
-      },
-      "slow"
-    );
-  });
+  // jQuery('.solution-tab-content .nav-pills .nav-link:not(.solution-tab-content .nav-pills .nav-link:first-child):not(.solution-tab-content .nav-pills .nav-link:nth-child(2)):not(.solution-tab-content .nav-pills .nav-link:nth-child(3)):not(.solution-tab-content .nav-pills .nav-link:nth-child(4)):not(.solution-tab-content .nav-pills .nav-link:nth-child(5))').click(function(){
+  //   jQuery(".solution-tab-content .nav").animate(
+  //     {
+  //       marginLeft: "-=296px",
+  //     },
+  //     "slow"
+  //   );
+  // });
  
 
   var sectionIds = jQuery(".product-feature-tab a");
@@ -420,6 +432,60 @@ jQuery(document).ready(function () {
     tabRightDisable();
    });
 
+  //  
+   jQuery('.first-level-menu > li').mouseenter(function(){ 
+     if(jQuery(this).children('ul').hasClass('secound-level-menu')){
+         jQuery('.first-level-menu > li').removeClass('active-sec-menu');
+        jQuery(this).addClass('active-sec-menu');
+     }
+   });
+   jQuery('.first-level-menu > li').mouseleave(function(){  
+     jQuery('.first-level-menu > li').removeClass('active-sec-menu');
+   });
+
+   jQuery('.secound-level-menu > li').mouseenter(function(){ 
+     if(jQuery(this).children('ul').hasClass('third-level-menu')){
+        jQuery('.secound-level-menu > li').removeClass('active-th-menu');
+        jQuery(this).addClass('active-th-menu');
+     }
+   });
+   jQuery('.secound-level-menu > li').mouseleave(function(){  
+      jQuery('.secound-level-menu > li').removeClass('active-sec-menu');
+  });
+
+   jQuery('#UK-tab').click(function(){
+    jQuery('.eu-menu > li').removeClass('active-sec-menu');
+    jQuery('.eu-sub-menu > li').removeClass('active-th-menu');
+     jQuery('.eu-menu > li:first-child').addClass('active-sec-menu');
+     jQuery('.eu-sub-menu > li:first-child').addClass('active-th-menu');
+   });
+   jQuery('#India-tab').click(function(){
+     jQuery('.india-menu > li').removeClass('active-sec-menu');
+     jQuery('.india-sub-menu > li').removeClass('active-th-menu');
+     jQuery('.india-menu > li:first-child').addClass('active-sec-menu');
+     jQuery('.india-menu > li:first-child .india-sub-menu > li:nth-child(3)').addClass('active-th-menu');
+   });
+   jQuery('#Middle-tab').click(function(){
+    jQuery('.middle-menu  > li').removeClass('active-sec-menu');
+    jQuery('.md-sub-menu  > li').removeClass('active-th-menu');
+    jQuery('.middle-menu  > li:first-child').addClass('active-sec-menu');
+    jQuery('.md-sub-menu  > li:first-child').addClass('active-th-menu');
+  });
+
+  jQuery('.sh-cs-stdy').mouseenter(function(){
+    jQuery('.first-level-menu  > li').removeClass('active-sec-menu');
+    jQuery('.secound-level-menu  > li').removeClass('active-th-menu');
+    jQuery('.case-st-list').show();
+  });
+  jQuery('.sh-cs-stdy').mouseleave(function(){
+     jQuery('.case-st-list').hide();
+  });
+  jQuery('.menu-case-study').mouseenter(function(){
+     jQuery('.case-st-list').show();
+  });
+  jQuery('.menu-case-study').mouseleave(function(){
+     jQuery('.case-st-list').hide();
+  });
 
 });
 

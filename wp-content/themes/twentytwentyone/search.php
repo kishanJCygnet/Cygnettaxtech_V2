@@ -13,6 +13,7 @@ get_header();
 
 if ( have_posts() ) {
 	?>
+	<div class="container">
 	<header class="page-header alignwide">
 		<h1 class="page-title">
 			<?php
@@ -41,6 +42,7 @@ if ( have_posts() ) {
 		);
 		?>
 	</div><!-- .search-result-count -->
+	</div>
 	<?php
 	// Start the Loop.
 	while ( have_posts() ) {
