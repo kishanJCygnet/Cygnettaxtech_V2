@@ -1,7 +1,7 @@
 <?php get_header(); 
 
 /* banner content */ ?>
-	<section class="banner-content inner-page-banner resources-banner half-banner">   
+	<section class="banner-content inner-page-banner resources-banner half-banner inner-banner">   
 		<span class="bottom-arrow"></span> 
 		<div class="banner-inner-content w-100" <?php if (get_field('blog_listing_banner_image', 'option')) : ?> style="background-image: url('<?php echo the_field('blog_listing_banner_image', 'option'); ?>')" <?php endif; ?>>  
 			<div class="container">  
