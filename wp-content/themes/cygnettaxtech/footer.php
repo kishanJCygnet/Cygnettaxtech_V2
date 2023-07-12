@@ -13,38 +13,40 @@
 ?>
 	<section class="contact-form-content">
 		<div class="contact-form">
-			<div class="container" id="contactus">			
-			<div class="contact-form-inner-content">
+			<div class="container" id="contactus">
 			<?php $post_slug = $post->post_name;
 			//$post_slug != 'muwafaq-support-for-smes' &&
 			if($post_slug != 'muwafaq-support-for-smes' && $post_slug != 'thank-you-for-contacting-us' && $post_slug != 'thank-you-for-your-interest-in-muwafaq-support' && !is_404() && $post_slug != 'thank-you-ksa-phase-2' && $post_slug != 'thank-you' && $post_slug != 'thank-you-for-downloading'){  ?>				
-				<div class="title-heading">	
-					<h2>Connect now with our TaxTech Architects
-						<span class="heading-border"></span>
-					</h2>
-				</div>
-				<div class="form-content">
-					<?php /*if(is_front_page()){ 
-						echo do_shortcode('[contact-form-7 id="39050" title="Contact Us Home"]'); 
-					} else {*/
-						echo do_shortcode('[contact-form-7 id="172" title="Contact Us"]'); 
-					//}						
-					?>
-					<input type="hidden" value="contact_us" id="hd_type">
+				<div class="contact-form-inner-content">
+					<div class="title-heading">	
+						<h2>Connect now with our TaxTech Architects
+							<span class="heading-border"></span>
+						</h2>
+					</div>
+					<div class="form-content">
+						<?php /*if(is_front_page()){ 
+							echo do_shortcode('[contact-form-7 id="39050" title="Contact Us Home"]'); 
+						} else {*/
+							echo do_shortcode('[contact-form-7 id="172" title="Contact Us"]'); 
+						//}						
+						?>
+						<input type="hidden" value="contact_us" id="hd_type">
+					</div>
 				</div>
 			<?php } ?>
 			<?php if($post_slug == 'muwafaq-support-for-smes'){ ?>
-				<div class="title-heading">	
-					<h2>Register with us
-						<span class="heading-border"></span>
-					</h2>
+				<div class="contact-form-inner-content">
+					<div class="title-heading">	
+						<h2>Register with us
+							<span class="heading-border"></span>
+						</h2>
+					</div>
+					<div class="form-content">
+						<?php echo do_shortcode('[contact-form-7 id="43625" title="R7VAT Landing Page API Form"]'); ?>
+						<div id="err-cf7-43625" style="display:none;margin: 2em 0.5em 1em;padding: 0.2em 1em;border:2px solid #dc3232;font-size: 14px;">Your user details are already available for R7VAT tool, <a href="https://r7vatgcccompliance.cygnettaxtech.com/login" target="_blank" style="color: #009999;">Click here</a> to login.</div>
+					</div>
 				</div>
-				<div class="form-content">
-					<?php echo do_shortcode('[contact-form-7 id="43625" title="R7VAT Landing Page API Form"]'); ?>
-					<div id="err-cf7-43625" style="display:none;margin: 2em 0.5em 1em;padding: 0.2em 1em;border:2px solid #dc3232;font-size: 14px;">Your user details are already available for R7VAT tool, <a href="https://r7vatgcccompliance.cygnettaxtech.com/login" target="_blank" style="color: #009999;">Click here</a> to login.</div>
-				</div>
-			<?php } ?>
-			</div>
+			<?php } ?>			
 			</div>
 		</div>
 	</section>
