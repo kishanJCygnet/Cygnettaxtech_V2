@@ -177,7 +177,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	</header>
 	<!-- End Header -->
 	<!-- Taxtech Menu -->
-	<div class="mega-menu taxtech-menu">
+	<div class="mega-menu taxtech-menu d-none">
 		<div class="mega-menu-inner">
 			<ul class="nav nav-tabs" id="megamenu" role="tablist">
 				<li class="nav-item" role="presentation">
