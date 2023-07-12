@@ -163,7 +163,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 						<?php $post_slug = $post->post_name;
-						if ($post_slug != '15-days-free-trial' && $post_slug != 'sign-up' && $post_slug != 'thank-you-for-contacting-us' && $post_slug != 'thank-you-for-signing-up' && $post_slug != 'thank-you-for-your-interest') { ?>
+						if ($post_slug != 'muwafaq-support-for-smes' && $post_slug != 'thank-you-for-contacting-us' && $post_slug != 'thank-you-for-your-interest-in-muwafaq-support' && !is_404() && $post_slug != 'thank-you-ksa-phase-2' && $post_slug != 'thank-you' && $post_slug != 'thank-you-for-downloading') { ?>
 							<a id="contact_us" href="#contactus" class="btn ms-5">Get In Touch</a>
 						<?php } ?>
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">

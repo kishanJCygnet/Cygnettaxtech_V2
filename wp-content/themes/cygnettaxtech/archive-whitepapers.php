@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <!-- Banner Slider start -->
-<section class="banner-content half-banner inner-page-banner">    
+<section class="banner-content half-banner inner-page-banner inner-banner">    
 	<div class="banner-inner-content w-100" <?php if (get_field('white_papers_listing_banner_image', 'option')) : ?> style="background-image: url('<?php echo the_field('white_papers_listing_banner_image', 'option'); ?>')" <?php endif; ?>>  
 		<div class="d-md-flex flex-wrap slide-content-main align-items-center w-100">
 			<div class="banner-caption">
