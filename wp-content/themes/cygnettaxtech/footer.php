@@ -147,7 +147,7 @@
 		$childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->ID . '&echo=0' );
 	}
 	
-	if ( $childpages && !is_404()) { ?>
+	if ( $childpages && !is_404() && !is_search()) { ?>
 		<div class="sticky-main-cls">
 			<div class="sticky-left-cls">
 				<?php if ( $post->post_parent ) { ?>
