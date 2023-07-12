@@ -9,7 +9,7 @@ get_header();
 		<div class="row">
 			<div class="col-md-6">
 				<div class="p-4">
-					<img src="<?php echo get_theme_file_uri(); ?>/images/404-image.svg" />
+					<img src="<?php echo get_theme_file_uri(); ?>/assets/images/404-image.svg" />
 				</div>
 			</div>
 			<div class="col-md-6">

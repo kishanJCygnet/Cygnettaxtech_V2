@@ -649,9 +649,9 @@ body {
     }
 }
 
-.thankyou-banner {
-    display: none;
-}
+// .thankyou-banner {
+//     display: none;
+// }
 
 .thankyou-banner .banner-inner-content .row {
     flex-wrap: wrap;
@@ -672,6 +672,12 @@ body {
 
 .thankyou-banner.banner-content .banner-inner-content {
     background-position: 0 50px;
+}
+.page-id-43632,
+.page-id-41734{ 
+    .contact-form-content{
+        display: none;
+    }
 }
 
 .error404 {
@@ -835,6 +841,25 @@ video {
     .not-found-page {
         padding-top: 40px;
         padding-bottom: 0;
+        height: calc(100vh - 163px);
+        min-height: 700px;
+        display: flex;
+        align-items: center;
+        @include bp(sm-max){
+            height: auto;
+            padding-bottom: 30px;
+        }
+        .p-4{
+            @include bp(sm-max){
+                text-align: center;
+            }
+            img{
+                @include bp(sm-max){
+                    width: 200px;
+                   
+                } 
+            }
+        }
     }
     .footer {
         .footer-container {
@@ -2031,14 +2056,15 @@ p {
                 display: flex;
                 flex-wrap: wrap;
                 align-content: space-between;
-                height: calc(100% - 68px);
+                padding-bottom: 50px;
+                // height: calc(100% - 68px);
                 @include bp(lg-max){
                     padding: 8px;
-                    height: calc(100% - 44px);
+                    // height: calc(100% - 44px);
                 }
                 @include bp(md-max){
                     padding: 20px;
-                    height: calc(100% - 68px);
+                    // height: calc(100% - 68px);
                 }
                 a{
                     display: inline-block;
@@ -2046,10 +2072,13 @@ p {
                     color: #60D6D6;
                 }
                 .action{
-                    width: 100%;
+                    width: auto;
                     text-align: right;
-                    position: relative;
-                    margin-top: 20px;
+                    position: absolute;
+                    /* margin-top: 20px; */
+                    bottom: 15px;
+                    left: 20px;
+                    right: 20px;
                     &::after{
                         content: '';
                         height: 1px;
@@ -2342,6 +2371,10 @@ p {
         width: 230px;
     }
 }
-
-
-
+.wpcf7-spinner{
+ &:before{
+    content: '';
+    left: calc(50% - 8px) !important;
+    top: calc(50% - 8px) !important;
+ }
+}

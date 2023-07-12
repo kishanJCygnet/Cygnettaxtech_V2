@@ -923,6 +923,33 @@
             }
         }
     }
+    &.document-process{
+        .icon-box-list{
+            .icon-box{
+                &:after{
+                    @include bp(lg-max){
+                        left: 132px;
+                        width: 192px;
+                    }
+                }
+            }
+            &>div:nth-child(even) {
+                .icon-box{
+                    margin-top: 35px;
+                    &:after{
+                        top: -11px;
+                        @include bp(xl-max){
+                            left: 151px;
+                        }
+                        @include bp(lg-max){
+                            left: 132px;
+                            width: 192px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .Invoice-Digitization {

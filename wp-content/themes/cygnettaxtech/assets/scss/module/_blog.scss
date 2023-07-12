@@ -886,7 +886,8 @@ h3{
 .page-id-25258,
 .page-id-668,
 .page-id-670,
-.post-type-archive-case_studies {
+.post-type-archive-case_studies,
+.single-whitepapers  {
     .contact-form-content {
         .contact-form {
             .contact-form-inner-content{
@@ -902,4 +903,19 @@ h3{
     .contact-form-content{
         display: none;
     }
+}
+.sidebar{
+.submit-btn{
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    input{
+        width: 100%;
+    }
+    .wpcf7-spinner{
+        position: absolute;
+        left: calc(50% - 35px);
+        top: calc(50% - 10px);
+    }
+}
 }

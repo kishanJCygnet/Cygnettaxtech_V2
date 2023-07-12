@@ -11,7 +11,7 @@ if (have_posts()) :
 		<?php
 			$featured_img_url = get_the_post_thumbnail_url(get_the_ID(), '1920w');
 		?>
-		<section class="banner-content half-banner overlay-banner overlay-bg">    
+		<section class="banner-content half-banner inner-banner">    
 			<div class="banner-inner-content w-100" <?php if ($featured_img_url) : ?> style="background-image: url('<?php echo $featured_img_url; ?>')" <?php endif; ?>>  
 				<div class="d-md-flex flex-wrap slide-content-main align-items-center w-100">
 					 <div class="banner-caption text-white">
@@ -21,7 +21,7 @@ if (have_posts()) :
                         <?php if (get_field('we_banner_content', $post->ID)) : echo the_field('we_banner_content', $post->ID);
                         endif; ?>
                         <div class="mt-4">
-                            <a href="#download_my_copy" class="btn btn-orange page-scroll-link"><span class="text">Download my copy</span><span class="effect"></span></a>
+                            <a href="#download_my_copy" class="btn btn-orange page-scroll-link">Download my copy</a>
                         </div>
                     </div>
 				</div>

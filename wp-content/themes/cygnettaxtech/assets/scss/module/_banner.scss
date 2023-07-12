@@ -136,6 +136,11 @@
         .slick-dots{
             display: none;
         }
+        .slide-content-main{
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
     }
     &.half-banner{
         height: 500px;
