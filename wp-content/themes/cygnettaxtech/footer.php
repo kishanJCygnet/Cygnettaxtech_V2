@@ -17,7 +17,7 @@
 			<div class="contact-form-inner-content">
 			<?php $post_slug = $post->post_name;
 			//$post_slug != 'muwafaq-support-for-smes' &&
-			if($post_slug != 'muwafaq-support-for-smes' && $post_slug != 'thank-you-for-contacting-us' && $post_slug != 'thank-you-for-your-interest-in-muwafaq-support' && !is_404() && $post_slug != 'thank-you-ksa-phase-2' && $post_slug != 'thank-you' && $post_slug != 'thank-you-for-downloading' && !is_404()){  ?>				
+			if($post_slug != 'muwafaq-support-for-smes' && $post_slug != 'thank-you-for-contacting-us' && $post_slug != 'thank-you-for-your-interest-in-muwafaq-support' && !is_404() && $post_slug != 'thank-you-ksa-phase-2' && $post_slug != 'thank-you' && $post_slug != 'thank-you-for-downloading'){  ?>				
 				<div class="title-heading">	
 					<h2>Connect now with our TaxTech Architects
 						<span class="heading-border"></span>
