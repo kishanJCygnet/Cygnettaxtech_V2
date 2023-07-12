@@ -52,6 +52,15 @@
 .search.search-no-results .page-header{
     padding-bottom: 0;
     border-bottom: 3px solid rgba(0, 0, 0, 0.039);
+    padding-top: 30px;
+    @include bp(xl-max){
+        margin-top: 50px;
+    }
+    @include bp(md-max){
+        margin-top: 0px;
+        padding-top: 0px !important;
+        
+    }
 }
 .search.search-results .default-max-width{
     margin-left: 0;
@@ -71,9 +80,10 @@
     font-size: 16px;
     color: #989898;
     font-style: italic;
+    word-break: break-all;
 }
 .search.search-results .search-url a:hover{
-    color: #969;
+    color: #009999
 }
 .search.search-results  article p{
     min-width: 100%;
@@ -117,9 +127,9 @@
     border-radius: 50%;
     justify-content: center;
     align-items: center;
-    color: #0d3862;
+    color: #ffffff;
     font-size: 22px;
-    background-color: rgba(142, 191, 105, 0.24);
+    background-color: rgb(0 153 153);
     margin-top: 0;
     margin-right: 0;
     text-decoration: none;
@@ -151,7 +161,7 @@
 }
 
 .search.search-no-results .search-submit{
-    background-color: #D471AD !important;
+    background-color: #009999 !important;
     color: #fff !important;
     border-radius: 46px;
 }
@@ -187,7 +197,7 @@
     margin: 20px auto 20px !important;
 }
 .search.search-results h2 a:hover{
-    color: #D471AD;
+    color: #009999;
 }
 /* .asl_keyword{ display: none;} */
 /* .search.search-results .testimonials {
@@ -206,6 +216,15 @@
     margin-bottom: 20px;
 }
 .search.search-results navbar{
-// background-color: #1f476d !important;
-border-bottom: 1px solid rgb(211 211 211 / 29%)
+    // background-color: #1f476d !important;
+    border-bottom: 1px solid rgb(211 211 211 / 29%)
+ }
+ .search{
+     section{
+        padding: 80px 30px;
+        @include bp(md-max){
+            padding-top: 0;
+            padding-bottom: 30px;
+        }
+     }
  }
