@@ -164,14 +164,18 @@ class Simba_Two_Factor_Authentication_1 {
 	 * @return void
 	 */
 	public function enqueue_gutenberg_block_scripts() {
-		$script_ver = (defined('WP_DEBUG') && WP_DEBUG) ? time() : filemtime($this->includes_dir() . '/gutenberg-blocks.js');
-		wp_enqueue_script('twofactor-gutenberg-blocks', $this->includes_url() . '/gutenberg-blocks.js', array('wp-blocks', 'wp-element', 'wp-server-side-render'), $script_ver);
-
-		wp_localize_script('twofactor-gutenberg-blocks', 'tfa_trans',
-			array(
-				'block_title' => __('Two Factor Authentication Settings', 'two-factor-authentication'),
-			)
-		);
+		global $pagenow;
+		
+		if ($pagenow == 'post.php' || has_block('twofactor/user-settings')) {
+			$script_ver = (defined('WP_DEBUG') && WP_DEBUG) ? time() : filemtime($this->includes_dir() . '/gutenberg-blocks.js');
+			wp_enqueue_script('twofactor-gutenberg-blocks', $this->includes_url() . '/gutenberg-blocks.js', array('wp-blocks', 'wp-element', 'wp-server-side-render'), $script_ver);
+	
+			wp_localize_script('twofactor-gutenberg-blocks', 'tfa_trans',
+				array(
+					'block_title' => __('Two Factor Authentication Settings', 'two-factor-authentication'),
+				)
+			);
+		}
 	}
 
 	/**

@@ -6,7 +6,7 @@ Tags: email marketing, subscription, autoresponder, post notification, welcome e
 Requires at least: 3.9
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 5.6.13
+Stable tag: 5.6.14
 License: GPLv3
 License URI: http://www.gnu.org/licenses
 
@@ -447,13 +447,21 @@ Refer [here](https://www.icegram.com/documentation/es-faq/).
 
 == Upgrade Notice ==
 
-= 5.6.13 =
+= 5.6.14 =
 
-* Improvements: Include custom fields data in CSV while exporting contacts [MAX]
-* Fix: Issue with Access Control setting for campaigns [PRO]
-* Fix: Issue with Dran-n-Drop editor while editing templates
+* Update: Updated Action Scheduler Library to 5.4.0
+* Improvements: Improve post notification sending flow
+* Fix: Last name data missing in BuddyBoss importer [MAX]
+* Fix: Welcome email content getting overridden with new subscriber admin notification in few cases
 
 == Changelog ==
+
+**5.6.14 (12.07.2023)**
+
+* Update: Updated Action Scheduler Library to 5.4.0
+* Improvements: Improve post notification sending flow
+* Fix: Last name data missing in BuddyBoss importer [MAX]
+* Fix: Welcome email content getting overridden with new subscriber admin notification in few cases
 
 **5.6.13 (05.07.2023)**
 
