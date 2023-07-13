@@ -72,7 +72,6 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 			add_action( 'wp_ajax_ig_es_get_campaign_preview', array( $this, 'get_campaign_preview' ) );
 			add_action( 'wp_ajax_ig_es_save_as_template', array( $this, 'save_as_template' ) );
 
-			add_action( 'admin_notices', array( $this, 'show_new_keyword_notice' ) );
 			add_action( 'media_buttons', array( $this, 'add_tag_button' ) );
 		}
 
@@ -1686,38 +1685,6 @@ if ( ! class_exists( 'ES_Campaign_Admin' ) ) {
 			}
 
 			return $response;
-		}
-
-		public function show_new_keyword_notice() {
-			$notice_pages   = array( 'es_notifications', 'es_templates', 'es_newsletters', 'es_sequence' );
-			$current_page   = ig_es_get_request_data( 'page' );
-			$is_notice_page = in_array( $current_page, $notice_pages, true );
-			if ( ! $is_notice_page ) {
-				return;
-			}
-
-			$action           = ig_es_get_request_data( 'action' );
-			$campaign_actions = array( 'new', 'edit' );
-			$allowed_action   = in_array( $action, $campaign_actions, true );
-			if ( ! $allowed_action ) {
-				return;
-			}
-
-			$new_keyword_notice_shown = get_option( 'ig_es_new_keyword_notice_shown', 'no' );
-			if ( 'no' === $new_keyword_notice_shown ) {
-				$new_keyword_doc_url = 'https://www.icegram.com/documentation/what-keywords-can-be-used-while-designing-the-campaign/?utm_source=es&utm_medium=in_app&utm_campaign=new_keyword_notice';
-				?>
-				<div class="notice notice-success is-dismissible">
-					<p>
-					<?php
-						/* translators: %s: link to new keyword doc */
-						echo sprintf( esc_html__( '%1$s[Update]%2$s: Improved keyword structure. Made it easy to use in campaign. Checkout %3$shere%4$s.', 'email-subscribers' ), '<strong>', '</strong>', '<a href="' . esc_url( $new_keyword_doc_url ) . '" target="_blank">', '</a>');
-					?>
-					</p>
-				</div>
-				<?php
-				update_option( 'ig_es_new_keyword_notice_shown', 'yes', false );
-			}
 		}
 	}
 

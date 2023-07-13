@@ -171,6 +171,17 @@ class Loader {
 		});
 		
 		// Manually include needed files
+		$classes_dir = dirname(AIOWPS_FIREWALL_DIR);
+
+		$manual_files = array(
+			$classes_dir.'/wp-security-helper.php',
+		);
+
+		foreach ($manual_files as $file) {
+			clearstatcache();
+			if (file_exists($file)) include_once $file;
+		}
+
 		if (Context::wordpress_safe()) {
 			include_once(dirname(AIOWPS_FIREWALL_DIR).'/wp-security-utility-file.php');
 		}

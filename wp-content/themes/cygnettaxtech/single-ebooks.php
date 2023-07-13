@@ -13,34 +13,26 @@ if (have_posts()) :
 		<?php
             $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), '1920w');
         ?>
-        <div class="case-study">
-			<div class="banner-content h-75 w-100" <?php if ($featured_img_url) : ?> style="background-image: url('<?php echo $featured_img_url; ?>')" <?php endif; ?>>  
-				
-                    <div class="banner-caption text-white">
+		<section class="banner-content half-banner overlay-banner overlay-bg">    
+			<div class="banner-inner-content w-100" <?php if ($featured_img_url) : ?> style="background-image: url('<?php echo $featured_img_url; ?>')" <?php endif; ?>>  
+				<div class="d-md-flex flex-wrap slide-content-main align-items-center w-100">
+					 <div class="banner-caption text-white">
                         <h1 class="banner-title text-white">
                             <?php the_title(); ?>
                         </h1>
                         <?php if (get_field('we_banner_content', $post->ID)) : echo the_field('we_banner_content', $post->ID);
                         endif; ?>
                         <div class="mt-4">
-                            <a href="#download_my_copy" class="btn btn-orange page-scroll-link">Download my copy</a>
+                            <a href="#download_my_copy" class="btn btn-orange page-scroll-link"><span class="text">Download my copy</span><span class="effect"></span></a>
                         </div>
                     </div>
-              
+				</div>
 			</div>    
+		</section>
 		<!-- Banner Slider end -->
         <div>
-            <section class="bg-light no-min-height pt-0">
-             
-                    <div class="blog-detail">
-                        <!--<div class="blog-share-social d-none d-xl-block">
-                            <div class="sidebar-social">
-                                <div class="share-social-box">
-                                    <a href="javascript:void(0)" title="Share" class="share-btn"><i class="bi bi-share" aria-hidden="true"></i></a>
-                                    <?php echo sharethis_inline_buttons(); ?>
-                                </div>
-                            </div>
-                        </div>-->
+            <section class="bg-white no-min-height pt-0">             
+                    <div class="blog-detail case-study">
                         <div class="container section-container-padding pt-0 pb-0">
                             <div class="single-container">
                                 <div class="article-container">
@@ -80,7 +72,6 @@ if (have_posts()) :
                     </div>               
             </section>
         </div>
-    </div>
 <?php endwhile;
 endif; ?>
 

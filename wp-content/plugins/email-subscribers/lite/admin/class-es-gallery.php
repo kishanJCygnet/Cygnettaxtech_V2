@@ -2,8 +2,6 @@
 
 // Exit if accessed directly
 
-use BaconQrCode\Common\ReedSolomonCodec;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

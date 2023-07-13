@@ -1,22 +1,25 @@
 <?php get_header(); ?>
 <!-- Banner Slider start -->
-<section class="banner-content">    
+<section class="banner-content inner-page-banner resources-banner half-banner inner-banner">
+	<span class="bottom-arrow"></span> 
 	<div class="banner-inner-content w-100" <?php if (get_field('ebook_listing_banner_image', 'option')) : ?> style="background-image: url('<?php echo the_field('ebook_listing_banner_image', 'option'); ?>')" <?php endif; ?>>  
+		<div class="container"> 
 		<div class="d-md-flex flex-wrap slide-content-main align-items-center w-100">
 			<div class="banner-caption">
 				<?php if (get_field('ebook_listing_banner_title', 'option')) : ?>
-					<h1 class="banner-title text-white">
+					<h1 class="banner-title text-white wow fadeInUp">
 						<?php the_field('ebook_listing_banner_title', 'option'); ?>
 					</h1>
 				<?php endif; ?>
 			</div>
 		</div>
+	</div>
 	</div>    
 </section>
 <!-- Banner Slider end -->
 <div>
 	<!-- Featured eBooks section start -->
-	<section>
+	<!--<section>
 		<div class="container section-container-padding">
 			<div class="section-top-bar d-flex">
 				<div class="section-top-bar-container">
@@ -79,22 +82,21 @@
 				wp_reset_postdata(); ?>
 			</div>
 		</div>
-	</section>
+	</section>-->
 	<!-- Featured eBooks section end -->
 	<!-- More eBooks section start -->
 	<section class="curved-section">
 		<div class="container section-container-padding ebook-page-listing">
-			<div class="section-top-bar d-flex">
+			<!--<div class="section-top-bar d-flex">
 				<div class="section-top-bar-container">
 					<h2 class="section-title">More <span>eBooks</span></h2>
 				</div>
-			</div>
+			</div>-->
 			<!-- eBooks start -->
-			<div class="row mb-n4 ebook-container"></div>
+			<div class="ebook-container blog-container"></div>
 			<!-- eBooks end -->
 		</div>
 	</section>
 	<!-- More eBooks section end -->
-	<?php //echo do_shortcode('[testimonials category=""]'); ?>
 </div>
 <?php get_footer(); ?>

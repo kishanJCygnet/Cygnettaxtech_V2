@@ -332,7 +332,7 @@ class Export_Subscribers {
 				}
 			}
 
-			$query = "SELECT " . implode( ',', $select_columns ) . " FROM {$wpbd->prefix}ig_contacts WHERE id IN ({$contact_ids_str})";
+			$query = 'SELECT ' . implode( ',', $select_columns ) . " FROM {$wpbd->prefix}ig_contacts WHERE id IN ({$contact_ids_str})";
 
 			$subscribers = $wpbd->get_results( $query, ARRAY_A );
 		}

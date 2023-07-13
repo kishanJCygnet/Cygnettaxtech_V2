@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 $es_wp_styles = wp_styles();
 ?>
 <html>
